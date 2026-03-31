@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andi - Bienestar Sexual</title>
+
+  <!-- Tailwind CSS por CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración básica de Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#f43f5e', // rose-500
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Import maps: Define desde dónde descargar los módulos cuando usamos import -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.2.0",
+      "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+      "lucide-react": "https://esm.sh/lucide-react@0.292.0"
+    }
+  }
+  </script>
+
+  <!-- Babel Standalone para transpilar el JSX e interpretar los módulos en el navegador -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-[#0a0f1d] text-slate-200 antialiased min-h-screen selection:bg-rose-500/30">
+
+  <!-- Punto de montaje para React -->
+  <div id="root"></div>
+
+  <!-- Cargamos tu aplicación y dejamos que Babel la compile en tiempo real -->
+  <script type="text/babel" data-type="module" src="./webdev_try1/app.jsx"></script>
+
+</body>
+</html>

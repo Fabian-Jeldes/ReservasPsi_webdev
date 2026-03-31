@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
 import { 
   User, 
   Mail, 
@@ -582,4 +583,11 @@ export default function App() {
       </footer>
     </div>
   );
+}
+
+// Inicializar la aplicación React
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(<App />);
 }
