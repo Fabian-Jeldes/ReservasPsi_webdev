@@ -37,6 +37,208 @@ export const REVIEWS_DATA: Review[] = [
     content: 'La psicoeducación es clave. Andi explica todo de forma clara y profesional.',
     rating: 5,
   },
+  {
+    id: 5,
+    author: 'Andrés F.',
+    content:
+      'Excelente profesional, con enfoque humanista y muy claro en su forma de comunicar. Totalmente recomendado.',
+    rating: 5,
+  },
+  {
+    id: 6,
+    author: "A. S.",
+    content: "Llegué con muchas dudas e inseguridades, ya que no es fácil hablar de estos temas; sin embargo, Andrei me generó de inmediato confianza. Ya estoy como enla 5ta sesión y su diagnóstico fue súper certero, me ha ayudado mucho con mi situación actual y espero que siga mejorando.",
+    rating: 5,
+  },
+  {
+    id: 7,
+    author: "C. B.",
+    content: "Es muy empático y dedicado. Le gusta mucho su trabajo.",
+    rating: 5,
+  },
+  {
+    id: 8,
+    author: "F.",
+    content: "Andrei es una persona muy asertiva y receptiva. Recomiendo 100%.",
+    rating: 5,
+  },
+  {
+    id: 9,
+    author: "C. V. V.",
+    content: "Gran profesional. Hizo que la sesión fuera muy amena, en un ambiente de confianza donde uno siente seguridad de hablar los temas que le afectan.",
+    rating: 5,
+  },
+  {
+    id: 10,
+    author: "A. T. F.",
+    content: "Excelente profesional. Su atención se realizó en un ambiente muy ameno, pero totalmente abocado al tema. Me sirvió y me gustó su sesión.",
+    rating: 5,
+  },
+  {
+    id: 11,
+    author: "L. S.",
+    content: "Muy comprometido y con mucho entusiasmo en ayudarte y ser un equipo durante el proceso terapéutico.",
+    rating: 5,
+  },
+  {
+    id: 12,
+    author: "L. D.",
+    content: "Excelente como siempre, muy dedicado. Excelente profesional.",
+    rating: 5,
+  },
+  {
+    id: 13,
+    author: "L. V. R.",
+    content: "Me gustó mucho cómo Andrei trató mi problema; fue cercano y se dio el tiempo de responder todas las preguntas que me fueron surgiendo en la sesión. Me hizo sentir cómodo y que mi problema era algo que iba a poder sacar adelante, dándome esperanza.",
+    rating: 5,
+  },
+  {
+    id: 14,
+    author: "D.",
+    content: "Súper atento y escuchando activamente, atendiendo las inquietudes y preocupaciones. Se da tiempo de explicar y orientar, da herramientas para trabajar con una ruta de trabajo.",
+    rating: 5,
+  },
+  {
+    id: 15,
+    author: "F. A.",
+    content: "Andrei siempre se toma el tiempo que necesites para apoyarte, orientarte y no dejarte a la deriva. Han sido sesiones de visibilizar temas profundos y complejos pero, a pesar de todo, Andrei siempre genera un espacio seguro y de confianza. He pasado por muchos profesionales y es la primera vez que puedo expresarme y sentirme comprendido.",
+    rating: 5
+  },
+  {
+    id: 16,
+    author: "J. A.",
+    content: "Todo súper bien y avanzando de buena manera en mi tratamiento.",
+    rating: 5,
+  },
+  {
+    id: 17,
+    author: "R. A. G.",
+    content: "Excelente profesional, brinda una atención cercana y afectiva que ayuda a sentirse muy cómodo y poder avanzar en el proceso con confianza. 100% recomendable.",
+    rating: 5,
+  },
+  {
+    id: 18,
+    author: "E. P.",
+    content: "Terapia bien enfocada. Buena comunicación y confianza.",
+    rating: 5,
+  },
+  {
+    id: 19,
+    author: "S. M.",
+    content: "Excelente profesional, siempre aclarando las dudas.",
+    rating: 5
+  },
+  {
+    id: 20,
+    author: "D. C. I.",
+    content: "La experiencia hasta ahora ha sido genial; la empatía, la honestidad y lo genuino han sido la clave en mi proceso. Estoy muy agradecido.",
+    rating: 5
+  },
+  {
+    id: 21,
+    author: "F. R.",
+    content: "Muy profesional. Fue una experiencia muy reconfortante al hacerme entender cosas que no había comprendido de mi problema y verlo de manera diferente. 100% recomendado al mezclar sus conocimientos profesionales con un trato muy casual y ameno.",
+    rating: 5
+  },
+  {
+    id: 22,
+    author: "O.",
+    content: "Recomiendo al profesional; es simpático, agradable, resolutivo y competente.",
+    rating: 5
+  },
+  {
+    id: 23,
+    author: "L. A.",
+    content: "Muy eficaz en el tratamiento. Muy amable y dedicado en cada sesión. Agradecido de las herramientas entregadas y del trabajo realizado.",
+    rating: 5
+  },
+  {
+    id: 24,
+    author: "R. Z.",
+    content: "Llevo 4 sesiones con él y me ha hecho sentir muy cómodo. Me ha explicado las posibles causas de mi situación y planteado técnicas para su solución. Excelente profesional.",
+    rating: 5
+  },
+  {
+    id: 25,
+    author: "O. F.",
+    content: "Excelente profesional, buena atención, puntual, muy cercano y empático.",
+    rating: 5
+  },
+  {
+    id: 26,
+    author: "L. A.",
+    content: "Recomiendo al profesional; es simpático, agradable, resolutivo y competente.",
+    rating: 5
+  },
+  {
+    id: 27,
+    author: "R. Z.",
+    content: "Muy eficaz en el tratamiento. Muy amable y dedicado en cada sesión. Agradecido de las herramientas entregadas y del trabajo realizado.",
+    rating: 5
+  },
+
+  {
+    id: 28,
+    author: "L. V. R.",
+    content: "Me gustó mucho cómo Andrei trató mi problema; fue cercano y se dio el tiempo de responder todas las preguntas que me fueron surgiendo en la sesión. Me hizo sentir cómodo y que mi problema era algo que iba a poder sacar adelante, dándome esperanza.",
+    rating: 5
+  },
+
+  {
+    id: 29,
+    author: "J. M.",
+    content: "Buena experiencia con Andrei, muy dedicado y enfocado en el paciente.",
+    rating: 5
+  },
+
+  {
+    id: 30,
+    author: "H.",
+    content: "Explicación clara y una orientación hacia el objetivo de mejorar mi conducta errónea.",
+    rating: 5
+  },
+
+  {
+    id: 31,
+    author: "S. C.",
+    content: "Muy atento y puntual, genera buen lazo en la atención dando espacios para una comunicación fluida entre el paciente y el profesional. El tratamiento ha sido eficaz mediante las herramientas entregadas.",
+    rating: 5
+  },
+
+  {
+    id: 32,
+    author: "Anónimo",
+    content: "Excelente especialista. Confianza y puntualidad. Lo recomiendo.",
+    rating: 5
+  },
+
+  {
+    id: 33,
+    author: "F. N.",
+    content: "Encuentro que presenta un interés genuino por el paciente, disposición y adaptabilidad a sus necesidades, y una empatía tal que te invita a abrirte y a expresar de una forma más simple todo lo que estás pensando o sintiendo.En mi caso particular, siendo yo una persona muy compleja de llevar, puedo decir que Andrei genera el espacio y la confianza necesaria para poder verbalizar de mejor manera y expresar lo que estoy viviendo y sintiendo.Creo que es un excelente profesional.",
+    rating: 5
+  },
+
+  {
+    id: 34,
+    author: "D.",
+    content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
+    rating: 5
+  },
+
+  {
+    id: 35,
+    author: "F. N.",
+    content: "Encuentro que presenta un interés genuino por el paciente, disposición y adaptabilidad a sus necesidades, y una empatía tal que te invita a abrirte y a expresar de una forma más simple todo lo que estás pensando o sintiendo. En mi caso particular, siendo yo una persona muy compleja de llevar, puedo decir que Andrei genera el espacio y la confianza necesaria para poder verbalizar de mejor manera y expresar lo que estoy viviendo y sintiendo. Creo que es un excelente profesional.",
+    rating: 5
+  },
+
+  {
+    id: 36,
+    author: "D.",
+    content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
+    rating: 5
+  },
 ]
 
 export const SPECIALIZATIONS: Specialization[] = [
@@ -101,7 +303,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: 1,
     slug: 'mito-rendimiento-masculino',
     title: 'El mito del rendimiento masculino',
-    date: '12 Mar 2024',
+    date: '12 Mar 2026',
     category: 'Psicoeducación',
     content:
       'Durante décadas, la cultura popular ha vendido la idea de que el hombre debe ser una máquina de placer inagotable. En este artículo exploramos cómo esta presión social es el principal enemigo de una vida sexual plena. La vulnerabilidad no es debilidad, es el camino hacia la conexión real...',
@@ -110,7 +312,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: 2,
     slug: 'ansiedad-y-deseo',
     title: 'Ansiedad y deseo: ¿Cómo se relacionan?',
-    date: '05 Mar 2024',
+    date: '05 Mar 2026',
     category: 'Tratamiento',
     content:
       "La ansiedad activa el sistema nervioso simpático, el mismo que prepara al cuerpo para huir o pelear. Es fisiológicamente imposible estar en modo 'alerta' y en modo 'placer' al mismo tiempo. Aquí te explicamos cómo desprogramar esa respuesta...",
@@ -119,7 +321,7 @@ export const BLOG_POSTS: BlogPost[] = [
     id: 3,
     slug: 'hablar-de-sexo-con-tu-pareja',
     title: 'Hablar de sexo con tu pareja',
-    date: '28 Feb 2024',
+    date: '28 Feb 2026',
     category: 'Comunicación',
     content:
       'El silencio es el muro donde mueren los deseos. Aprender a comunicar lo que nos gusta y lo que nos asusta no debería ser un tabú. Te damos herramientas prácticas para abrir el diálogo sin sentirte juzgado ni atacar al otro...',

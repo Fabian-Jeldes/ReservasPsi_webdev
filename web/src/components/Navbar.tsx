@@ -5,7 +5,15 @@ type Props = {
 
 export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   return (
-    <nav className="fixed z-50 w-full border-b border-slate-800/50 bg-[#0a0f1d]/80 backdrop-blur-md">
+    <nav
+      className="fixed z-50 w-full border-b"
+      style={{
+        backgroundColor: 'var(--bg-nav)',
+        borderColor: 'var(--border-primary)',
+        backdropFilter: 'var(--nav-backdrop)',
+        WebkitBackdropFilter: 'var(--nav-backdrop)',
+      }}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <button
           type="button"
@@ -13,25 +21,63 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           onClick={onLogoClick}
           aria-label="Ir al inicio"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-500 font-bold text-white shadow-[0_0_15px_rgba(244,63,94,0.4)]">
+          <div
+            className="flex h-8 w-8 items-center justify-center rounded-lg font-bold shadow-lg"
+            style={{
+              backgroundColor: 'var(--accent)',
+              color: 'var(--text-inverse)',
+              boxShadow: 'var(--shadow-accent)',
+            }}
+          >
             A
           </div>
-          <span className="text-xl font-bold tracking-tight text-white">Andi</span>
+          <span
+            className="text-xl font-bold tracking-tight"
+            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+          >
+            Andi
+          </span>
         </button>
         <div className="hidden items-center gap-8 text-sm font-medium md:flex">
-          <a href="#especialidades" className="transition-colors hover:text-rose-400">
+          <a
+            href="#especialidades"
+            className="transition-colors"
+            style={{ color: 'var(--text-secondary)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+          >
             Especialidades
           </a>
-          <a href="#reviews" className="transition-colors hover:text-rose-400">
+          <a
+            href="#reviews"
+            className="transition-colors"
+            style={{ color: 'var(--text-secondary)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+          >
             Reseñas
           </a>
-          <a href="#blog" className="transition-colors hover:text-rose-400">
+          <a
+            href="#blog"
+            className="transition-colors"
+            style={{ color: 'var(--text-secondary)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+          >
             Psicoeducación
           </a>
           <button
             type="button"
             onClick={onAgendarClick}
-            className="rounded-full bg-rose-500 px-5 py-2 text-white shadow-lg shadow-rose-500/20 transition-all hover:bg-rose-600 active:scale-95"
+            className="rounded-full px-5 py-2 font-bold shadow-lg transition-all active:scale-95"
+            style={{
+              backgroundColor: 'var(--accent)',
+              color: 'var(--text-inverse)',
+              boxShadow: 'var(--shadow-accent)',
+              borderRadius: 'var(--radius-btn)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--accent-hover)')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--accent)')}
           >
             Agendar Cita
           </button>

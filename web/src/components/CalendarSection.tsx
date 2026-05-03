@@ -14,27 +14,69 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
   return (
     <section id="calendario-section" className="mx-auto max-w-6xl px-6 py-20">
       <div className="mb-12 text-center">
-        <div className="mb-4 flex items-center justify-center gap-3 font-bold text-rose-500">
+        <div
+          className="mb-4 flex items-center justify-center gap-3 font-bold"
+          style={{ color: 'var(--accent)' }}
+        >
           <Calendar size={20} aria-hidden />
           <span className="text-xs uppercase tracking-widest">Paso 2: Agendamiento</span>
         </div>
-        <h2 className="text-4xl font-bold text-white">Disponibilidad de Sesiones</h2>
+        <h2
+          className="text-4xl"
+          style={{
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 'var(--heading-weight)',
+            textTransform: 'var(--heading-transform)' as any,
+            letterSpacing: 'var(--heading-spacing)',
+          }}
+        >
+          Disponibilidad de Sesiones
+        </h2>
       </div>
 
       <div className="relative">
         {!isRegistered && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center rounded-[3rem] border border-slate-700/30 bg-slate-900/40 backdrop-blur-md">
-            <div className="max-w-sm rounded-3xl border border-slate-800 bg-slate-900 p-10 text-center shadow-2xl">
-              <AlertCircle size={48} className="mx-auto mb-6 text-rose-500" aria-hidden />
-              <h3 className="mb-3 text-xl font-bold text-white">Acceso Restringido</h3>
-              <p className="mb-6 text-sm text-slate-500">
+          <div
+            className="absolute inset-0 z-10 flex items-center justify-center border backdrop-blur-md"
+            style={{
+              borderRadius: 'var(--radius-card-lg)',
+              borderColor: 'var(--border-primary)',
+              backgroundColor: 'var(--bg-card)',
+            }}
+          >
+            <div
+              className="max-w-sm border p-10 text-center shadow-2xl"
+              style={{
+                borderRadius: 'var(--radius-card)',
+                borderColor: 'var(--border-card)',
+                backgroundColor: 'var(--bg-card-solid)',
+              }}
+            >
+              <AlertCircle
+                size={48}
+                className="mx-auto mb-6"
+                style={{ color: 'var(--accent)' }}
+                aria-hidden
+              />
+              <h3
+                className="mb-3 text-xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Acceso Restringido
+              </h3>
+              <p
+                className="mb-6 text-sm"
+                style={{ color: 'var(--text-muted)' }}
+              >
                 Debes completar el registro KYC arriba para desbloquear el calendario y ver las horas
                 disponibles.
               </p>
               <button
                 type="button"
                 onClick={onGoToKyc}
-                className="mx-auto flex items-center gap-2 font-bold text-rose-400 transition-all hover:gap-3"
+                className="mx-auto flex items-center gap-2 font-bold transition-all hover:gap-3"
+                style={{ color: 'var(--accent-text)' }}
               >
                 Ir al registro <ArrowRight size={18} aria-hidden />
               </button>
@@ -43,27 +85,55 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
         )}
 
         <div
-          className={`rounded-[3rem] border border-slate-800 bg-slate-900/20 p-8 ${
+          className={`border p-8 ${
             !isRegistered ? 'pointer-events-none opacity-20' : 'opacity-100'
           }`}
+          style={{
+            borderRadius: 'var(--radius-card-lg)',
+            borderColor: 'var(--border-card)',
+            borderWidth: 'var(--card-border-width)',
+            backgroundColor: 'var(--bg-section-alt)',
+            boxShadow: 'var(--shadow-card)',
+          }}
         >
           <div className="mb-8 flex items-center justify-between">
-            <h4 className="text-lg font-bold text-white">Marzo 2024</h4>
+            <h4
+              className="text-lg font-bold"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Marzo 2026
+            </h4>
             <div className="flex gap-6 text-xs font-bold uppercase tracking-widest">
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full border border-rose-500/40 bg-rose-500/20" />
-                <span className="text-slate-500">Ocupado</span>
+                <div
+                  className="h-3 w-3 rounded-full border"
+                  style={{
+                    borderColor: 'var(--border-accent)',
+                    backgroundColor: 'var(--accent-soft)',
+                  }}
+                />
+                <span style={{ color: 'var(--text-muted)' }}>Ocupado</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
-                <span className="text-slate-300">Disponible</span>
+                <div
+                  className="h-3 w-3 rounded-full"
+                  style={{
+                    backgroundColor: 'var(--accent)',
+                    boxShadow: 'var(--shadow-accent)',
+                  }}
+                />
+                <span style={{ color: 'var(--text-secondary)' }}>Disponible</span>
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-7 gap-3">
             {WEEKDAYS.map((d) => (
-              <div key={d} className="pb-2 text-center text-[10px] font-black text-slate-700">
+              <div
+                key={d}
+                className="pb-2 text-center text-[10px] font-black"
+                style={{ color: 'var(--text-muted)' }}
+              >
                 {d}
               </div>
             ))}
@@ -73,11 +143,36 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
                 type="button"
                 onClick={() => onDayClick?.(day.day)}
                 disabled={day.status === 'Ocupado'}
-                className={`flex aspect-square items-center justify-center rounded-2xl border text-sm font-bold transition-all ${
-                  day.status === 'Disponible'
-                    ? 'border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500 hover:text-white hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]'
-                    : 'cursor-not-allowed border-slate-800 bg-slate-800/10 text-slate-700'
-                }`}
+                className="flex aspect-square items-center justify-center rounded-2xl border text-sm font-bold transition-all"
+                style={{
+                  borderColor:
+                    day.status === 'Disponible'
+                      ? 'var(--border-accent)'
+                      : 'var(--border-card)',
+                  backgroundColor:
+                    day.status === 'Disponible'
+                      ? 'var(--accent-soft)'
+                      : 'transparent',
+                  color:
+                    day.status === 'Disponible'
+                      ? 'var(--accent-text)'
+                      : 'var(--text-muted)',
+                  cursor: day.status === 'Ocupado' ? 'not-allowed' : 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  if (day.status === 'Disponible') {
+                    e.currentTarget.style.backgroundColor = 'var(--accent)'
+                    e.currentTarget.style.color = 'var(--text-inverse)'
+                    e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (day.status === 'Disponible') {
+                    e.currentTarget.style.backgroundColor = 'var(--accent-soft)'
+                    e.currentTarget.style.color = 'var(--accent-text)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }
+                }}
               >
                 {day.day}
               </button>

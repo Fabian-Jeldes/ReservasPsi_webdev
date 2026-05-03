@@ -127,7 +127,14 @@ export function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0f1d] font-sans text-slate-200 selection:bg-rose-500/30">
+    <div
+      className="min-h-screen font-sans"
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-secondary)',
+        fontFamily: 'var(--font-body)',
+      }}
+    >
       <Navbar onLogoClick={scrollToTop} onAgendarClick={scrollToKyc} />
       <HeroSection calendarUpdate={calendarUpdate} onContactClick={scrollToKyc} />
       <SpecializationsSection items={SPECIALIZATIONS} onSelectSpec={setSelectedSpec} />

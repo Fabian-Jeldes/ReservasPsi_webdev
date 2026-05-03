@@ -1,0 +1,333 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  SISTEMA DE TEMAS — Proyecto Andi
+ *  4 variantes visuales controladas por data-theme en <html>
+ *  Solo para desarrollo; en producción se usa el estándar.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ── Tema 1: Standar (dark / rose / neon glow) ── default ──
+ *  Cyberpunk-inspired. Very rounded pills, neon glow borders,
+ *  gradient accents, dark deep blue base.
+ * ─────────────────────────────────────────────────────────── */
+:root,
+html[data-theme="standard"] {
+  --bg-primary: #0a0f1d;
+  --bg-secondary: #020617;
+  --bg-card: rgba(15, 23, 42, 0.4);
+  --bg-card-solid: #0f172a;
+  --bg-nav: rgba(10, 15, 29, 0.8);
+  --bg-input: rgba(2, 6, 23, 0.5);
+  --bg-section-alt: rgba(15, 23, 42, 0.2);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+
+  --accent: #f43f5e;
+  --accent-hover: #e11d48;
+  --accent-glow: rgba(244, 63, 94, 0.3);
+  --accent-soft: rgba(244, 63, 94, 0.1);
+  --accent-text: #fb7185;
+  --accent-text-strong: #f43f5e;
+
+  --border-primary: rgba(30, 41, 59, 0.5);
+  --border-card: #1e293b;
+  --border-accent: rgba(244, 63, 94, 0.3);
+
+  --shadow-accent: 0 0 20px rgba(244, 63, 94, 0.3);
+  --shadow-accent-lg: 0 0 35px rgba(244, 63, 94, 0.5);
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
+
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 2.5rem;
+  --radius-card-lg: 3rem;
+  --radius-btn: 9999px;
+  --radius-input: 1rem;
+
+  --heading-weight: 800;
+  --heading-transform: none;
+  --heading-spacing: -0.02em;
+  --body-size: 1rem;
+  --body-line-height: 1.7;
+
+  /* Decoration */
+  --divider-style: linear-gradient(to right, transparent, var(--accent), transparent);
+  --divider-height: 1px;
+  --card-border-width: 1px;
+  --nav-backdrop: blur(12px);
+
+  --selection-bg: rgba(244, 63, 94, 0.3);
+
+  --bg-footer: rgba(2, 6, 23, 0.2);
+  --border-footer: rgba(30, 41, 59, 0.5);
+
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.1);
+  --success-glow: rgba(34, 197, 94, 0.4);
+
+  /* Article-specific */
+  --article-max-width: 48rem;
+  --article-heading-size: clamp(2rem, 5vw, 3.5rem);
+  --article-body-size: 1.125rem;
+  --article-quote-size: 1.5rem;
+  --article-section-gap: 4rem;
+}
+
+
+/* ── Tema 2: Bold Darkness (artículo 1 — black / red / angular) ──
+ *  High-contrast editorial. Sharp corners, heavy uppercase headings,
+ *  minimal decoration, compact typography. Magazine/clinical journal feel.
+ * ──────────────────────────────────────────────────────────────────── */
+html[data-theme="bold-dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: rgba(20, 20, 20, 0.7);
+  --bg-card-solid: #141414;
+  --bg-nav: rgba(10, 10, 10, 0.95);
+  --bg-input: rgba(5, 5, 5, 0.6);
+  --bg-section-alt: rgba(18, 18, 18, 0.5);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #666666;
+  --text-inverse: #0a0a0a;
+
+  --accent: #c41e2a;
+  --accent-hover: #a01820;
+  --accent-glow: rgba(196, 30, 42, 0.35);
+  --accent-soft: rgba(196, 30, 42, 0.08);
+  --accent-text: #e85d6a;
+  --accent-text-strong: #c41e2a;
+
+  --border-primary: rgba(60, 60, 60, 0.5);
+  --border-card: #2a2a2a;
+  --border-accent: rgba(196, 30, 42, 0.4);
+
+  --shadow-accent: 0 0 20px rgba(196, 30, 42, 0.3);
+  --shadow-accent-lg: 0 0 35px rgba(196, 30, 42, 0.45);
+  --shadow-card: 0 2px 0 rgba(196, 30, 42, 0.15); /* Hard offset shadow */
+
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 0.75rem;
+  --radius-card-lg: 1rem;
+  --radius-btn: 0.5rem;
+  --radius-input: 0.5rem;
+
+  --heading-weight: 900;
+  --heading-transform: uppercase;
+  --heading-spacing: 0.04em;
+  --body-size: 0.95rem;
+  --body-line-height: 1.65;
+
+  --divider-style: linear-gradient(to right, var(--accent), transparent);
+  --divider-height: 2px;
+  --card-border-width: 1px;
+  --nav-backdrop: blur(4px);
+
+  --selection-bg: rgba(196, 30, 42, 0.3);
+
+  --bg-footer: #080808;
+  --border-footer: rgba(60, 60, 60, 0.3);
+
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.1);
+  --success-glow: rgba(34, 197, 94, 0.4);
+
+  --article-max-width: 44rem;
+  --article-heading-size: clamp(1.8rem, 4.5vw, 3rem);
+  --article-body-size: 1rem;
+  --article-quote-size: 1.35rem;
+  --article-section-gap: 3rem;
+}
+
+
+/* ── Tema 3: Warm Delight (artículo 2 — cream / amber / organic) ──
+ *  Warm organic editorial. Generous whitespace, serif headings,
+ *  natural paper textures via subtle gradients, soft rounded corners,
+ *  teal accents in footer. Artisanal/author blog feel.
+ * ─────────────────────────────────────────────────────────────────── */
+html[data-theme="warm-editorial"] {
+  --bg-primary: #f5eede;
+  --bg-secondary: #efe5d0;
+  --bg-card: #faf7f0;
+  --bg-card-solid: #f8f3e8;
+  --bg-nav: rgba(245, 238, 222, 0.92);
+  --bg-input: #ffffff;
+  --bg-section-alt: #f0e8d8;
+
+  --text-primary: #2c1810;
+  --text-secondary: #5a4a3a;
+  --text-muted: #8a7a6a;
+  --text-inverse: #faf7f0;
+
+  --accent: #c47628;
+  --accent-hover: #a86020;
+  --accent-glow: rgba(196, 118, 40, 0.25);
+  --accent-soft: rgba(196, 118, 40, 0.08);
+  --accent-text: #b06820;
+  --accent-text-strong: #c47628;
+
+  --border-primary: rgba(180, 160, 130, 0.25);
+  --border-card: rgba(180, 160, 130, 0.2);
+  --border-accent: rgba(196, 118, 40, 0.4);
+
+  --shadow-accent: 0 0 20px rgba(196, 118, 40, 0.15);
+  --shadow-accent-lg: 0 0 35px rgba(196, 118, 40, 0.25);
+  --shadow-card: 0 8px 32px rgba(140, 120, 80, 0.08); /* Warm diffused shadow */
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-card-lg: 1.5rem;
+  --radius-btn: 9999px;
+  --radius-input: 0.75rem;
+
+  --heading-weight: 700;
+  --heading-transform: none;
+  --heading-spacing: -0.03em;
+  --body-size: 1.05rem;
+  --body-line-height: 1.85;
+
+  --divider-style: linear-gradient(to right, transparent 10%, var(--border-primary) 50%, transparent 90%);
+  --divider-height: 1px;
+  --card-border-width: 0px; /* No borders — relies on shadows */
+  --nav-backdrop: blur(8px);
+
+  --selection-bg: rgba(196, 118, 40, 0.2);
+
+  --bg-footer: #1a5c5c;
+  --border-footer: rgba(255, 255, 255, 0.1);
+
+  --success: #16a34a;
+  --success-soft: rgba(22, 163, 74, 0.1);
+  --success-glow: rgba(22, 163, 74, 0.3);
+
+  --article-max-width: 42rem;
+  --article-heading-size: clamp(2rem, 5vw, 3.5rem);
+  --article-body-size: 1.15rem;
+  --article-quote-size: 1.6rem;
+  --article-section-gap: 5rem;
+}
+
+
+/* ── Tema 4: Lavender Light (artículo 3 — cream / purple / airy) ──
+ *  Minimal wellness app. Maximum whitespace, no visible borders,
+ *  barely-there shadows, pill buttons, soft lavender gradients.
+ *  Zen/mindfulness feel.
+ * ─────────────────────────────────────────────────────────────────── */
+html[data-theme="lavender"] {
+  --bg-primary: #faf5ef;
+  --bg-secondary: #f3e8f9;
+  --bg-card: #ffffff;
+  --bg-card-solid: #fefcfa;
+  --bg-nav: rgba(250, 245, 239, 0.85);
+  --bg-input: #ffffff;
+  --bg-section-alt: #f5f0ea;
+
+  --text-primary: #3d2952;
+  --text-secondary: #6b5a7a;
+  --text-muted: #9b8aaa;
+  --text-inverse: #faf5ef;
+
+  --accent: #9b7bb8;
+  --accent-hover: #7d5fa0;
+  --accent-glow: rgba(155, 123, 184, 0.2);
+  --accent-soft: rgba(155, 123, 184, 0.08);
+  --accent-text: #8a68a8;
+  --accent-text-strong: #9b7bb8;
+
+  --border-primary: rgba(200, 180, 220, 0.15);
+  --border-card: rgba(200, 180, 220, 0.12);
+  --border-accent: rgba(155, 123, 184, 0.25);
+
+  --shadow-accent: 0 0 30px rgba(155, 123, 184, 0.12);
+  --shadow-accent-lg: 0 0 50px rgba(155, 123, 184, 0.18);
+  --shadow-card: 0 4px 20px rgba(155, 123, 184, 0.06); /* Almost invisible */
+
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 2rem;
+  --radius-card-lg: 2.5rem;
+  --radius-btn: 9999px;
+  --radius-input: 1rem;
+
+  --heading-weight: 400;
+  --heading-transform: none;
+  --heading-spacing: 0;
+  --body-size: 1rem;
+  --body-line-height: 1.8;
+
+  --divider-style: linear-gradient(to right, transparent, var(--accent-soft), transparent);
+  --divider-height: 1px;
+  --card-border-width: 0px; /* Borderless — zen/clean */
+  --nav-backdrop: blur(16px) saturate(1.2);
+
+  --selection-bg: rgba(155, 123, 184, 0.2);
+
+  --bg-footer: #f3e8f9;
+  --border-footer: rgba(200, 180, 220, 0.15);
+
+  --success: #16a34a;
+  --success-soft: rgba(22, 163, 74, 0.1);
+  --success-glow: rgba(22, 163, 74, 0.3);
+
+  --article-max-width: 40rem;
+  --article-heading-size: clamp(1.8rem, 4.5vw, 3rem);
+  --article-body-size: 1.1rem;
+  --article-quote-size: 1.5rem;
+  --article-section-gap: 5rem;
+}
+
+
+/*
+ * ── Utility classes ──
+ */
+
+.theme-bg { background-color: var(--bg-primary); }
+.theme-bg-secondary { background-color: var(--bg-secondary); }
+.theme-bg-card { background-color: var(--bg-card); }
+.theme-bg-card-solid { background-color: var(--bg-card-solid); }
+.theme-bg-nav { background-color: var(--bg-nav); }
+.theme-bg-input { background-color: var(--bg-input); }
+.theme-bg-section-alt { background-color: var(--bg-section-alt); }
+.theme-bg-accent { background-color: var(--accent); }
+.theme-bg-accent-soft { background-color: var(--accent-soft); }
+.theme-bg-footer { background-color: var(--bg-footer); }
+
+.theme-text { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-muted { color: var(--text-muted); }
+.theme-text-inverse { color: var(--text-inverse); }
+.theme-text-accent { color: var(--accent-text); }
+.theme-text-accent-strong { color: var(--accent-text-strong); }
+
+.theme-border { border-color: var(--border-primary); }
+.theme-border-card { border-color: var(--border-card); }
+.theme-border-accent { border-color: var(--border-accent); }
+
+.theme-font-heading { font-family: var(--font-heading); }
+.theme-font-body { font-family: var(--font-body); }
+
+/* Hero accent gradient */
+.theme-hero-accent {
+  background-image: linear-gradient(to right, var(--accent), var(--accent-text));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Theme-aware divider */
+.theme-divider {
+  height: var(--divider-height);
+  background: var(--divider-style);
+  border: none;
+  margin: 0;
+}

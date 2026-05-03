@@ -8,10 +8,25 @@ type Props = {
 
 export function SpecializationsSection({ items, onSelectSpec }: Props) {
   return (
-    <section id="especialidades" className="bg-slate-900/20 py-32">
+    <section
+      id="especialidades"
+      className="py-32"
+      style={{ backgroundColor: 'var(--bg-section-alt)' }}
+    >
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="mb-4 text-4xl font-bold text-white">Áreas de Especialización</h2>
-        <p className="mx-auto mb-16 max-w-xl text-slate-500">
+        <h2
+          className="mb-4 text-4xl"
+          style={{
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 'var(--heading-weight)',
+            textTransform: 'var(--heading-transform)' as any,
+            letterSpacing: 'var(--heading-spacing)',
+          }}
+        >
+          Áreas de Especialización
+        </h2>
+        <p className="mx-auto mb-16 max-w-xl" style={{ color: 'var(--text-muted)' }}>
           Un enfoque humano para desarmar la ansiedad y reconectar con el placer genuino.
         </p>
 
@@ -28,20 +43,62 @@ export function SpecializationsSection({ items, onSelectSpec }: Props) {
                   onSelectSpec(spec)
                 }
               }}
-              className="group relative cursor-pointer rounded-[2.5rem] border border-slate-800 bg-slate-800/20 p-8 text-left transition-all duration-500 hover:-translate-y-2 hover:border-rose-500/30 hover:bg-slate-800/40 hover:shadow-[0_0_40px_-10px_rgba(244,63,94,0.25)]"
+              className="group relative cursor-pointer border p-8 text-left transition-all duration-500 hover:-translate-y-2"
+              style={{
+                borderRadius: 'var(--radius-card)',
+                borderColor: 'var(--border-card)',
+                borderWidth: 'var(--card-border-width)',
+                backgroundColor: 'var(--bg-card)',
+                boxShadow: 'var(--shadow-card)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-accent)'
+                e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-card)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
             >
-              <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-500/5 text-rose-500 shadow-inner transition-all duration-500 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white">
+              <div
+                className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner transition-all duration-500 group-hover:scale-110"
+                style={{
+                  backgroundColor: 'var(--accent-soft)',
+                  color: 'var(--accent)',
+                }}
+              >
                 <Heart size={28} aria-hidden />
               </div>
-              <h3 className="mb-3 text-xl font-bold text-white">{spec.title}</h3>
-              <p className="mb-5 text-xs font-bold uppercase tracking-widest text-rose-400/80">
+              <h3
+                className="mb-3 text-xl"
+                style={{
+                  color: 'var(--text-primary)',
+                  fontWeight: 'var(--heading-weight)',
+                  textTransform: 'var(--heading-transform)' as any,
+                }}
+              >
+                {spec.title}
+              </h3>
+              <p
+                className="mb-5 text-xs font-bold uppercase tracking-widest"
+                style={{ color: 'var(--accent-text)' }}
+              >
                 {spec.subtitle}
               </p>
-              <p className="text-sm leading-relaxed text-slate-400">{spec.description}</p>
-              <div className="mt-8 flex items-center justify-between border-t border-slate-700/30 pt-6">
-                <span className="text-xs font-medium text-slate-600" />
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {spec.description}
+              </p>
+              <div
+                className="mt-8 flex items-center justify-between border-t pt-6"
+                style={{ borderColor: 'var(--border-primary)' }}
+              >
+                <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }} />
                 <span
-                  className="text-rose-500 transition-transform group-hover:translate-x-2"
+                  className="transition-transform group-hover:translate-x-2"
+                  style={{ color: 'var(--accent)' }}
                   aria-hidden
                 >
                   <ArrowRight size={20} />
