@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Base alineada al prototipo webdev_try1 (fondo oscuro, texto slate) */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  @apply bg-[#0a0f1d] text-slate-200 antialiased font-sans selection:bg-rose-500/30;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* Gradiente del hero: permite variante “rojo más profundo” solo con data-dev-accent */
+.andi-hero-accent {
+  background-image: linear-gradient(to right, #f43f5e, #fb923c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*
+ * Prueba de color (solo desarrollo): botón DevAccentToggle pone data-dev-accent="deep" en <html>.
+ * Rojo más profundo (~ #8f1428 / #9f1c30); no usar en producción final.
+ */
+html[data-dev-accent="deep"] .bg-rose-500 {
+  background-color: #8f1428 !important;
+}
+html[data-dev-accent="deep"] .hover\:bg-rose-600:hover {
+  background-color: #6b1020 !important;
+}
+html[data-dev-accent="deep"] .bg-rose-500\/10 {
+  background-color: rgb(143 20 40 / 0.1) !important;
+}
+html[data-dev-accent="deep"] .bg-rose-500\/5 {
+  background-color: rgb(143 20 40 / 0.05) !important;
+}
+html[data-dev-accent="deep"] .border-rose-500\/20 {
+  border-color: rgb(143 20 40 / 0.2) !important;
+}
+html[data-dev-accent="deep"] .border-rose-500\/30 {
+  border-color: rgb(143 20 40 / 0.3) !important;
+}
+html[data-dev-accent="deep"] .border-rose-500\/40 {
+  border-color: rgb(143 20 40 / 0.4) !important;
+}
+html[data-dev-accent="deep"] .text-rose-400 {
+  color: #fda4af !important;
+}
+html[data-dev-accent="deep"] .text-rose-500 {
+  color: #e85d75 !important;
+}
+html[data-dev-accent="deep"] .text-rose-400\/80 {
+  color: rgb(253 164 175 / 0.8) !important;
+}
+html[data-dev-accent="deep"] .text-rose-500\/20 {
+  color: rgb(232 93 117 / 0.2) !important;
+}
+html[data-dev-accent="deep"] .from-rose-500 {
+  --tw-gradient-from: #8f1428 var(--tw-gradient-from-position) !important;
+}
+html[data-dev-accent="deep"] .via-rose-500 {
+  --tw-gradient-via: #8f1428 var(--tw-gradient-via-position) !important;
+}
+html[data-dev-accent="deep"] .to-rose-500 {
+  --tw-gradient-to: #8f1428 var(--tw-gradient-to-position) !important;
+}
+html[data-dev-accent="deep"] .accent-rose-500 {
+  accent-color: #8f1428;
+}
+html[data-dev-accent="deep"] .shadow-rose-500\/20 {
+  --tw-shadow-color: rgb(143 20 40 / 0.2) !important;
+}
+html[data-dev-accent="deep"] .shadow-rose-500\/30 {
+  --tw-shadow-color: rgb(143 20 40 / 0.3) !important;
+}
+html[data-dev-accent="deep"] .andi-hero-accent {
+  background-image: linear-gradient(to right, #8f1428, #ea580c);
+}

@@ -1,3 +1,8 @@
 /fotoandi.jpeg
 /how_proyectoAndi.txt
 /informaciondecardsproyectoAndi.txt
+.env
+node_modules
+.dev.vars
+dist/
+.wrangler/

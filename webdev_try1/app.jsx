@@ -4,17 +4,14 @@ import {
   User, 
   Mail, 
   Calendar, 
-  FileText, 
   ShieldCheck, 
   Heart, 
-  MessageSquare, 
   ChevronRight, 
   MapPin, 
   Phone, 
   BookOpen,
   Lock,
   ArrowRight,
-  X,
   CheckCircle2,
   AlertCircle
 } from 'lucide-react';
@@ -70,6 +67,7 @@ const SPECIALIZATIONS = [
 const BLOG_POSTS = [
   { 
     id: 1,
+    slug: 'mito-rendimiento-masculino',
     title: "El mito del rendimiento masculino", 
     date: "12 Mar 2024", 
     category: "Psicoeducación",
@@ -77,6 +75,7 @@ const BLOG_POSTS = [
   },
   { 
     id: 2,
+    slug: 'ansiedad-y-deseo',
     title: "Ansiedad y deseo: ¿Cómo se relacionan?", 
     date: "05 Mar 2024", 
     category: "Tratamiento",
@@ -84,11 +83,22 @@ const BLOG_POSTS = [
   },
   { 
     id: 3,
+    slug: 'hablar-de-sexo-con-tu-pareja',
     title: "Hablar de sexo con tu pareja", 
     date: "28 Feb 2024", 
     category: "Comunicación",
     content: "El silencio es el muro donde mueren los deseos. Aprender a comunicar lo que nos gusta y lo que nos asusta no debería ser un tabú. Te damos herramientas prácticas para abrir el diálogo sin sentirte juzgado ni atacar al otro..."
   }
+];
+
+const ARTICLE_IMAGE_PARTS = [
+  '/fotos_articulo/articulo_parte1.png',
+  '/fotos_articulo/articulo_parte2.png',
+  '/fotos_articulo/articulo_parte3.png',
+  '/fotos_articulo/articulo_parte4.png',
+  '/fotos_articulo/articulo_parte5.png',
+  '/fotos_articulo/articulo_parte6.png',
+  '/fotos_articulo/articulo_parte7.png',
 ];
 
 // Generador de días del mes para el calendario
@@ -110,7 +120,7 @@ export default function App() {
   const [calendarUpdate, setCalendarUpdate] = useState(new Date().toLocaleTimeString());
   const [consentSigned, setConsentSigned] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [calendarDays] = useState(generateCalendarDays());
   
   const [kycData, setKycData] = useState({
@@ -139,6 +149,12 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const onPopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
   const handleKycChange = (e) => {
     setKycData({...kycData, [e.target.name]: e.target.value});
   };
@@ -157,6 +173,99 @@ export default function App() {
       }, 100);
     }
   };
+
+  const navigateToPath = (path) => {
+    if (window.location.pathname === path) return;
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToArticle = (slug) => {
+    navigateToPath(`/articulos/${slug}`);
+  };
+
+  const navigateHome = () => {
+    navigateToPath('/');
+  };
+
+  const articleSlug = currentPath.startsWith('/articulos/')
+    ? decodeURIComponent(currentPath.replace('/articulos/', ''))
+    : null;
+  const selectedArticle = articleSlug
+    ? BLOG_POSTS.find((post) => post.slug === articleSlug)
+    : null;
+
+  if (articleSlug) {
+    return (
+      <div className="min-h-screen bg-[#0a0f1d] text-slate-200 font-sans selection:bg-rose-500/30">
+        <nav className="fixed w-full z-50 bg-[#0a0f1d]/80 backdrop-blur-md border-b border-slate-800/50">
+          <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <button
+              type="button"
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={navigateHome}
+            >
+              <div className="w-8 h-8 bg-rose-500 rounded-lg flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(244,63,94,0.4)]">A</div>
+              <span className="text-xl font-bold tracking-tight text-white">Andi</span>
+            </button>
+            <button
+              type="button"
+              onClick={navigateHome}
+              className="text-sm font-bold text-rose-400 hover:text-rose-300 transition-colors"
+            >
+              ← Volver a inicio
+            </button>
+          </div>
+        </nav>
+
+        <main className="max-w-4xl mx-auto px-6 pt-28 pb-20">
+          {!selectedArticle ? (
+            <div className="rounded-[3rem] border border-slate-800 bg-slate-900/40 p-10 text-center">
+              <h1 className="text-3xl font-black text-white">Artículo no encontrado</h1>
+              <p className="mt-4 text-slate-400">Este enlace puede estar desactualizado.</p>
+              <button
+                type="button"
+                onClick={navigateHome}
+                className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-rose-500 px-6 py-3 font-bold text-white hover:bg-rose-600 transition-colors"
+              >
+                Volver al blog
+              </button>
+            </div>
+          ) : (
+            <article>
+              <div className="mb-8">
+                <span className="inline-flex rounded-full border border-rose-500/40 bg-rose-500/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-rose-400">
+                  {selectedArticle.category}
+                </span>
+                <h1 className="mt-5 text-4xl md:text-5xl font-black text-white leading-tight">
+                  {selectedArticle.title}
+                </h1>
+                <p className="mt-3 text-sm text-slate-500">{selectedArticle.date}</p>
+              </div>
+
+              <div className="space-y-8 rounded-[3rem] border border-slate-800 bg-slate-900/35 p-4 md:p-6 shadow-[0_30px_80px_-40px_rgba(244,63,94,0.35)]">
+                {ARTICLE_IMAGE_PARTS.map((part, index) => (
+                  <div
+                    key={part}
+                    className="overflow-hidden rounded-[2rem] border border-slate-700/70 bg-[#0a0f1d]"
+                  >
+                    <img
+                      src={part}
+                      alt={`Artículo ${selectedArticle.title} - parte ${index + 1}`}
+                      className="w-full h-auto"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </div>
+            </article>
+          )}
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0f1d] text-slate-200 font-sans selection:bg-rose-500/30">
@@ -468,7 +577,7 @@ export default function App() {
           {BLOG_POSTS.map((post) => (
             <article 
               key={post.id} 
-              onClick={() => setSelectedPost(post)}
+              onClick={() => navigateToArticle(post.slug)}
               className="group cursor-pointer bg-slate-900/50 p-4 rounded-[2.5rem] border border-transparent hover:border-rose-500/30 transition-all duration-500"
             >
               <div className="aspect-[4/5] bg-slate-800 rounded-[2rem] mb-6 overflow-hidden relative">
@@ -493,53 +602,6 @@ export default function App() {
           ))}
         </div>
       </section>
-
-      {/* MODAL DEL BLOG (VERSION EXTENDIDA) */}
-      {selectedPost && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-[3rem] shadow-2xl relative">
-            <button 
-              onClick={() => setSelectedPost(null)}
-              className="sticky top-6 float-right mr-6 p-2 bg-slate-800 text-white rounded-full hover:bg-rose-500 transition-colors"
-            >
-              <X size={20} />
-            </button>
-            <div className="p-10 md:p-16">
-              <span className="text-rose-500 text-xs font-bold uppercase tracking-[0.2em]">{selectedPost.category}</span>
-              <h3 className="text-4xl font-black text-white mt-4 mb-8 leading-tight">{selectedPost.title}</h3>
-              <div className="prose prose-invert prose-rose max-w-none">
-                <p className="text-slate-400 text-lg leading-relaxed mb-6">
-                  {selectedPost.content}
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <div className="p-6 bg-rose-500/10 border-l-4 border-rose-500 rounded-r-2xl italic text-rose-200 mb-6">
-                  "El mayor obstáculo para el placer no es el cuerpo, sino la exigencia mental que le imponemos."
-                </div>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  "Don't push it man. JUST DON'T PUSH IT aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-              </div>
-              <div className="mt-12 pt-8 border-t border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img src="https://s3.sa-east-1.amazonaws.com/doctoralia.cl/doctor/9673f9/9673f974edf112f24dc6a4a14a1e5c18_large.jpg" className="w-10 h-10 rounded-full grayscale" alt="Andi" />
-                  <div>
-                    <p className="text-white text-sm font-bold">Escrito por Andi</p>
-                    <p className="text-slate-500 text-xs">Especialista en Salud Sexual</p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setSelectedPost(null)}
-                  className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold rounded-xl transition-all"
-                >
-                  Cerrar Lectura
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* FOOTER */}
       <footer className="py-20 px-6 border-t border-slate-800/50 bg-slate-950/20">

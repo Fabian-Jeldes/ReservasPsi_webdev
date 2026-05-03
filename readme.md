@@ -1,25 +1,57 @@
 # FrontEnd Andi
 
-Este es el repositorio para el FrontEnd del proyecto de **Andi**, una plataforma o sitio web orientado a servicios de psicología clínica y especialización.
+Repositorio del front-end del proyecto **Andi**: plataforma web orientada a servicios de **psicologï¿½a clï¿½nica y especializaciï¿½n**.
 
-## ?? Características Principales
-- **Perfil de Profesional**: Sección inicial con fotografía y presentación.
-- **Consentimiento Informado**: Sistema de firma o aceptación ('I agree') para el consentimiento informado, con almacenamiento en base de datos y resumen en PDF.
-- **Agenda Interactiva**: Calendarización en tiempo real (actualización cada 10s).
-- **Tarjetas de Especializaciones**: Acercamientos clínicos y tratamientos (cards).
-- **Autenticación y KYC (Conoce a tu paciente)**: Identificación completa de clientes (Nombre, RUT, Teléfono, Dirección, Ciudad, Región y Código Postal) con Auth token.
-- **Blog de Psicoeducación**: Entradas, artículos y blogs enfocados en educación sobre problemas sexuales y clínicos.
-- **Gestión de Reseñas / Testimonios**: Integración con API de Doctoralia para extraer evaluaciones, mostradas de forma aleatoria con transiciones CSS (fading), sin revelar el total.
-- **Analítica Web**: Integración de telemetría y mapas de calor utilizando **PostHog.
+**Stack acordado:** **React**, **TypeScript**, **Vite**, desplegado en **Cloudflare Pages** (carpeta de build: `web/`).
 
-## ?? Tecnologías Planeadas
-* *(A definir: React, Angular, Vue, HTML/CSS/JS nativo, etc.)*
-* Integración de APIs (Doctoralia, Firma digital)
-* PostHog (Analíticas)
+## CaracterÃ­sticas principales
 
-## ?? Estructura del Proyecto
-- \webdev_try1/\: Primeros prototipos de layouts (ej. layout.html).
-- \how_proyectoAndi.txt\: Notas iniciales y requerimientos del proyecto.
+- **Perfil de profesional**: secciÃ³n inicial con fotografÃ­a y presentaciÃ³n.
+- **Consentimiento informado**: firma o aceptaciÃ³n (I agree), almacenamiento en base de datos y resumen en PDF.
+- **Agenda interactiva**: calendarizaciÃ³n con actualizaciÃ³n frecuente (referencia: cada ~10 s). IntegraciÃ³n con la **API de Google Calendar** para que los pacientes puedan **agendar** previa validaciÃ³n de pago, y el/los eventos queden en el calendario del psicÃ³logo. *OAuth y credenciales: backend o Worker, no en el navegador.*
+- **Tarjetas de especializaciones**: acercamientos clÃ­nicos y tratamientos (cards).
+- **AutenticaciÃ³n y KYC (conoce a tu paciente)**: identificaciÃ³n de clientes (nombre, RUT, telÃ©fono, direcciÃ³n, ciudad, regiÃ³n, cÃ³digo postal) con token de sesiÃ³n.
+- **Blog de psicoeducaciÃ³n**: entradas y artÃ­culos (p. ej. educaciÃ³n sobre problemas sexuales y clÃ­nicos).
+- **ReseÃ±as / testimonios**: integraciÃ³n con la API de **Doctoralia**; visualizaciÃ³n aleatoria con transiciones CSS (p. ej. fading), sin mostrar el total de reseÃ±as.
+- **AnalÃ­tica**: telemetrÃ­a y mapas de calor con **PostHog**.
 
-## ?? Configuración y Desarrollo
-1. Clona el repositorio: \git clone <url-del-repo>\`n2. *(Instrucciones en construcción según el framework elegido)*
+## TecnologÃ­as en `web/`
+
+| Paquete / servicio | Rol |
+|--------------------|-----|
+| **Vite** + **React 19** + **TypeScript** | App y build |
+| **Tailwind CSS v4** (`@tailwindcss/vite`) | Estilos (alineados a `webdev_try1/app.jsx`) |
+| **react-router-dom** | Rutas SPA |
+| **@tanstack/react-query** | Datos de APIs (Strapi, backend/worker, Doctoralia, etc.) |
+| **zod** | ValidaciÃ³n (KYC, formularios) |
+| **lucide-react** | Iconos |
+| **posthog-js** | AnalÃ­tica (opcional; ver `web/.env.example`) |
+| **Cloudflare Pages** | Hosting del `dist` |
+| **Google Calendar API** | Citas (vÃ­a servidor / Worker) |
+| **Strapi** | CMS headless para blog y manejo de usuarios (ver `agents.md`) |
+| **MercadoPago** | Pasarela de pagos para el cobro de consultas |
+| **Doctoralia** | Reseï¿½as (segï¿½n API / polï¿½ticas) |
+
+Plan de trabajo y despliegue: [`docs/plan-despliegue-8-semanas.md`](docs/plan-despliegue-8-semanas.md).
+
+## Estructura del proyecto
+
+- `web/` ï¿½ aplicaciï¿½n **Vite + React + TS** (comandos: `cd web` ? `npm install` / `npm run dev` / `npm run build`).
+- `web/.env.example` ï¿½ variables pï¿½blicas (`VITE_*`) de ejemplo.
+- `webdev_try1/app.jsx` ï¿½ prototipo visual de referencia (Tailwind + Lucide).
+- `how_proyectoAndi.txt` ï¿½ notas iniciales y requerimientos.
+- `docs/plan-despliegue-8-semanas.md` ï¿½ calendario de 8 semanas hasta producciï¿½n.
+
+## Configuraciï¿½n y desarrollo
+
+1. Clonar: `git clone <url-del-repo>`
+2. `cd web` ? `npm install` ? `npm run dev` (desarrollo) o `npm run build` (artefacto en `web/dist`).
+3. Copiar `web/.env.example` a `web/.env` y rellenar solo lo necesario.
+4. **Cloudflare Pages:** conectar el repo y fijar **Root directory** = `web`, **Build command** = `npm run build`, **Output** = `dist`.
+5. Contexto para agentes: `agents.md`.
+
+
+
+# Ejemplos de cada artÃ­culo
+## https://gemini.google.com/share/3abf1ec10f51 
+## https://gemini.google.com/share/4f2617e8d0b4 

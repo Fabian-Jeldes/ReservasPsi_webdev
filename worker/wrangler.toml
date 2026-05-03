@@ -1,0 +1,12 @@
+name = "andi-worker"
+main = "src/index.ts"
+compatibility_date = "2024-10-22"
+compatibility_flags = ["nodejs_compat"]
+
+# Estas variables serán definidas en el dashboard de Cloudflare o en el archivo .dev.vars para desarrollo local
+# [vars]
+# GOOGLE_CALENDAR_ID = "..."
+# MERCADOPAGO_ACCESS_TOKEN = "..."
+
+# Las credenciales de la Service Account de Google deben ir como un Secret
+# Usar: wrangler secret put GOOGLE_SERVICE_ACCOUNT_KEY
