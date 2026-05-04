@@ -168,7 +168,7 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
               <button
                 key={day.day}
                 type="button"
-                onClick={() => onDayClick?.(day.day)}
+                onClick={() => onDayClick?.(day.day.toString())}
                 disabled={day.status === 'Ocupado'}
                 className="flex aspect-square items-center justify-center rounded-2xl border text-sm font-bold transition-all"
                 style={{

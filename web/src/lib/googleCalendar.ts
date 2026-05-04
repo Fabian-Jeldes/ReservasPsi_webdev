@@ -1,5 +1,3 @@
-import { generateCalendarDays } from '../data/site'
-import type { CalendarDay } from '../types/site'
 
 /**
  * Obtiene disponibilidad para la UI del calendario.

@@ -8,7 +8,6 @@ const THEMES = [
   { id: 'lavender', label: 'Lavender light', dot: '#9b7bb8' },
 ] as const
 
-type ThemeId = (typeof THEMES)[number]['id']
 
 const STORAGE_KEY = 'andi-dev-theme'
 

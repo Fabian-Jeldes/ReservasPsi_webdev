@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Calendar, Clock, Lock, ArrowLeft, X, MessageCircle } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, X, MessageCircle } from 'lucide-react'
 
 type Props = {
   day: string

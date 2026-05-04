@@ -67,10 +67,6 @@ export type CalendarDay = {
 
 import { z } from 'zod'
 
-// Validar y limpiar el RUT. 
-// Aceptamos cualquier formato, pero al parsear eliminamos puntos y el guión.
-const rutCleaner = z.string().transform(val => val.replace(/[\.\-]/g, '').toUpperCase())
-
 export const kycSchema = z.object({
   nombre: z.string().min(2, "El nombre es obligatorio"),
   rut: z.string().min(8, "RUT inválido. Ej: 12345678-9").transform(val => val.replace(/[\.\-]/g, '').toUpperCase()),
