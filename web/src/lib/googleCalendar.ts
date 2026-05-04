@@ -11,7 +11,8 @@ import type { CalendarDay } from '../types/site'
  * Contrato sugerido de respuesta: `{ "days": CalendarDay[] }`
  */
 export async function fetchCalendarBusySlots(): Promise<{ start: string, end: string }[]> {
-  const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/availability' : '/api/calendar/availability'
+  const baseUrl = import.meta.env.VITE_CALENDAR_API_BASE_URL || '';
+  const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/availability' : `${baseUrl}/api/calendar/availability`
   
   try {
     const res = await fetch(workerUrl, { method: 'GET' })

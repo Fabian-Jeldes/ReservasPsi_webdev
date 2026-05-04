@@ -106,7 +106,8 @@ export function HomePage() {
     
     try {
       // 1. Crear evento en Google Calendar a través del Worker
-      const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/book' : '/api/calendar/book'
+      const baseUrl = import.meta.env.VITE_CALENDAR_API_BASE_URL || '';
+      const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/book' : `${baseUrl}/api/calendar/book`;
       
       const res = await fetch(workerUrl, {
         method: 'POST',
