@@ -32,7 +32,7 @@ export function DevAccentToggle() {
   const current = THEMES[themeIndex]
 
   useEffect(() => {
-    if (!import.meta.env.DEV) return
+
     document.documentElement.dataset.theme = current.id
     localStorage.setItem(STORAGE_KEY, current.id)
 
@@ -46,7 +46,7 @@ export function DevAccentToggle() {
     }
   }, [current.id])
 
-  if (!import.meta.env.DEV) return null
+
 
   const selectTheme = (idx: number) => {
     setThemeIndex(idx)
