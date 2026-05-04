@@ -24,7 +24,7 @@ export default function App() {
         <Route path="/articulos/ansiedad-y-deseo" element={<Article2 />} />
         <Route path="/articulos/hablar-de-sexo-con-tu-pareja" element={<Article3 />} />
       </Routes>
-      {import.meta.env.DEV ? <DevAccentToggle /> : null}
+      <DevAccentToggle />
     </>
   )
 }
