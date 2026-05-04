@@ -11,6 +11,31 @@ type Props = {
 }
 
 export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayClick }: Props) {
+  const formatter = new Intl.DateTimeFormat('es-CL', { month: 'long', year: 'numeric', timeZone: 'America/Santiago' });
+  const now = new Date();
+  const currentMonthYear = formatter.format(now);
+  const headerText = currentMonthYear.charAt(0).toUpperCase() + currentMonthYear.slice(1);
+
+  // Calcular en qué día de la semana empieza el mes actual y cuántos días tiene
+  const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Santiago', year: 'numeric', month: 'numeric' }).formatToParts(now);
+  const yearStr = parts.find(p => p.type === 'year')?.value || now.getFullYear().toString();
+  const monthStr = parts.find(p => p.type === 'month')?.value || (now.getMonth() + 1).toString();
+
+  const firstDayDate = new Date(`${yearStr}-${monthStr.padStart(2, '0')}-01T12:00:00`);
+  const jsDay = firstDayDate.getDay();
+  const emptyCells = jsDay === 0 ? 6 : jsDay - 1;
+  const emptyCellsArray = Array.from({ length: emptyCells }, (_, i) => i);
+
+  const daysInMonth = new Date(parseInt(yearStr), parseInt(monthStr), 0).getDate();
+  const actualCalendarDays = calendarDays.slice(0, daysInMonth).map((day, idx) => {
+    const cellIndex = (emptyCells + idx) % 7;
+    const isWeekend = cellIndex === 5 || cellIndex === 6; // 5=Sábado, 6=Domingo
+    if (isWeekend) {
+      return { ...day, status: 'Ocupado' as const };
+    }
+    return day;
+  });
+
   return (
     <section id="calendario-section" className="mx-auto max-w-6xl px-6 py-20">
       <div className="mb-12 text-center">
@@ -85,9 +110,8 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
         )}
 
         <div
-          className={`border p-8 ${
-            !isRegistered ? 'pointer-events-none opacity-20' : 'opacity-100'
-          }`}
+          className={`border p-8 ${!isRegistered ? 'pointer-events-none opacity-20' : 'opacity-100'
+            }`}
           style={{
             borderRadius: 'var(--radius-card-lg)',
             borderColor: 'var(--border-card)',
@@ -101,7 +125,7 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
               className="text-lg font-bold"
               style={{ color: 'var(--text-primary)' }}
             >
-              Marzo 2026
+              {headerText}
             </h4>
             <div className="flex gap-6 text-xs font-bold uppercase tracking-widest">
               <div className="flex items-center gap-2">
@@ -137,7 +161,10 @@ export function CalendarSection({ isRegistered, calendarDays, onGoToKyc, onDayCl
                 {d}
               </div>
             ))}
-            {calendarDays.map((day) => (
+            {emptyCellsArray.map((i) => (
+              <div key={`empty-${i}`} />
+            ))}
+            {actualCalendarDays.map((day) => (
               <button
                 key={day.day}
                 type="button"

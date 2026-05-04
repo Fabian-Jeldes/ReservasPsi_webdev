@@ -23,6 +23,7 @@ export type BlogPost = {
   date: string
   category: string
   content: string
+  imageUrl?: string
 }
 
 export type ArticleSection = {

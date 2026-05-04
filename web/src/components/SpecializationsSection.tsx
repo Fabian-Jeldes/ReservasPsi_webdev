@@ -1,9 +1,18 @@
-import { ArrowRight, Heart } from 'lucide-react'
+import { ArrowRight, Heart, Brain, Timer, Infinity, Flame, BrainCircuit, HeartHandshake } from 'lucide-react'
 import type { Specialization } from '../types/site'
 
 type Props = {
   items: Specialization[]
   onSelectSpec: (spec: Specialization) => void
+}
+
+const iconMap: Record<number, any> = {
+  1: Brain,
+  2: Timer,
+  3: Infinity,
+  4: Flame,
+  5: BrainCircuit,
+  6: HeartHandshake,
 }
 
 export function SpecializationsSection({ items, onSelectSpec }: Props) {
@@ -67,7 +76,10 @@ export function SpecializationsSection({ items, onSelectSpec }: Props) {
                   color: 'var(--accent)',
                 }}
               >
-                <Heart size={28} aria-hidden />
+                {(() => {
+                  const IconComponent = iconMap[spec.id] || Heart
+                  return <IconComponent size={28} aria-hidden />
+                })()}
               </div>
               <h3
                 className="mb-3 text-xl"

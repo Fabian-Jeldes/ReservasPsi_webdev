@@ -1,5 +1,5 @@
 import type {
-  ArticlePageData,
+
   BlogPost,
   CalendarDay,
   KycFormState,
@@ -88,153 +88,138 @@ export const REVIEWS_DATA: Review[] = [
   },
   {
     id: 13,
-    author: "L. V. R.",
-    content: "Me gustó mucho cómo Andrei trató mi problema; fue cercano y se dio el tiempo de responder todas las preguntas que me fueron surgiendo en la sesión. Me hizo sentir cómodo y que mi problema era algo que iba a poder sacar adelante, dándome esperanza.",
-    rating: 5,
-  },
-  {
-    id: 14,
     author: "D.",
     content: "Súper atento y escuchando activamente, atendiendo las inquietudes y preocupaciones. Se da tiempo de explicar y orientar, da herramientas para trabajar con una ruta de trabajo.",
     rating: 5,
   },
   {
-    id: 15,
+    id: 14,
     author: "F. A.",
     content: "Andrei siempre se toma el tiempo que necesites para apoyarte, orientarte y no dejarte a la deriva. Han sido sesiones de visibilizar temas profundos y complejos pero, a pesar de todo, Andrei siempre genera un espacio seguro y de confianza. He pasado por muchos profesionales y es la primera vez que puedo expresarme y sentirme comprendido.",
     rating: 5
   },
   {
-    id: 16,
+    id: 15,
     author: "J. A.",
     content: "Todo súper bien y avanzando de buena manera en mi tratamiento.",
     rating: 5,
   },
   {
-    id: 17,
+    id: 16,
     author: "R. A. G.",
     content: "Excelente profesional, brinda una atención cercana y afectiva que ayuda a sentirse muy cómodo y poder avanzar en el proceso con confianza. 100% recomendable.",
     rating: 5,
   },
   {
-    id: 18,
+    id: 17,
     author: "E. P.",
     content: "Terapia bien enfocada. Buena comunicación y confianza.",
     rating: 5,
   },
   {
-    id: 19,
+    id: 18,
     author: "S. M.",
     content: "Excelente profesional, siempre aclarando las dudas.",
     rating: 5
   },
   {
-    id: 20,
+    id: 19,
     author: "D. C. I.",
     content: "La experiencia hasta ahora ha sido genial; la empatía, la honestidad y lo genuino han sido la clave en mi proceso. Estoy muy agradecido.",
     rating: 5
   },
   {
-    id: 21,
+    id: 20,
     author: "F. R.",
     content: "Muy profesional. Fue una experiencia muy reconfortante al hacerme entender cosas que no había comprendido de mi problema y verlo de manera diferente. 100% recomendado al mezclar sus conocimientos profesionales con un trato muy casual y ameno.",
     rating: 5
   },
   {
-    id: 22,
+    id: 21,
     author: "O.",
     content: "Recomiendo al profesional; es simpático, agradable, resolutivo y competente.",
     rating: 5
   },
   {
-    id: 23,
+    id: 22,
     author: "L. A.",
     content: "Muy eficaz en el tratamiento. Muy amable y dedicado en cada sesión. Agradecido de las herramientas entregadas y del trabajo realizado.",
     rating: 5
   },
   {
-    id: 24,
+    id: 23,
     author: "R. Z.",
     content: "Llevo 4 sesiones con él y me ha hecho sentir muy cómodo. Me ha explicado las posibles causas de mi situación y planteado técnicas para su solución. Excelente profesional.",
     rating: 5
   },
   {
-    id: 25,
+    id: 24,
     author: "O. F.",
     content: "Excelente profesional, buena atención, puntual, muy cercano y empático.",
     rating: 5
   },
   {
-    id: 26,
+    id: 25,
     author: "L. A.",
     content: "Recomiendo al profesional; es simpático, agradable, resolutivo y competente.",
     rating: 5
   },
   {
-    id: 27,
+    id: 26,
     author: "R. Z.",
     content: "Muy eficaz en el tratamiento. Muy amable y dedicado en cada sesión. Agradecido de las herramientas entregadas y del trabajo realizado.",
     rating: 5
   },
 
   {
-    id: 28,
+    id: 27,
     author: "L. V. R.",
     content: "Me gustó mucho cómo Andrei trató mi problema; fue cercano y se dio el tiempo de responder todas las preguntas que me fueron surgiendo en la sesión. Me hizo sentir cómodo y que mi problema era algo que iba a poder sacar adelante, dándome esperanza.",
     rating: 5
   },
 
   {
-    id: 29,
+    id: 28,
     author: "J. M.",
     content: "Buena experiencia con Andrei, muy dedicado y enfocado en el paciente.",
     rating: 5
   },
 
   {
-    id: 30,
+    id: 29,
     author: "H.",
     content: "Explicación clara y una orientación hacia el objetivo de mejorar mi conducta errónea.",
     rating: 5
   },
 
   {
-    id: 31,
+    id: 30,
     author: "S. C.",
     content: "Muy atento y puntual, genera buen lazo en la atención dando espacios para una comunicación fluida entre el paciente y el profesional. El tratamiento ha sido eficaz mediante las herramientas entregadas.",
     rating: 5
   },
 
   {
-    id: 32,
+    id: 31,
     author: "Anónimo",
     content: "Excelente especialista. Confianza y puntualidad. Lo recomiendo.",
     rating: 5
   },
-
   {
-    id: 33,
-    author: "F. N.",
-    content: "Encuentro que presenta un interés genuino por el paciente, disposición y adaptabilidad a sus necesidades, y una empatía tal que te invita a abrirte y a expresar de una forma más simple todo lo que estás pensando o sintiendo.En mi caso particular, siendo yo una persona muy compleja de llevar, puedo decir que Andrei genera el espacio y la confianza necesaria para poder verbalizar de mejor manera y expresar lo que estoy viviendo y sintiendo.Creo que es un excelente profesional.",
-    rating: 5
-  },
-
-  {
-    id: 34,
+    id: 32,
     author: "D.",
     content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
     rating: 5
   },
 
   {
-    id: 35,
+    id: 33,
     author: "F. N.",
     content: "Encuentro que presenta un interés genuino por el paciente, disposición y adaptabilidad a sus necesidades, y una empatía tal que te invita a abrirte y a expresar de una forma más simple todo lo que estás pensando o sintiendo. En mi caso particular, siendo yo una persona muy compleja de llevar, puedo decir que Andrei genera el espacio y la confianza necesaria para poder verbalizar de mejor manera y expresar lo que estoy viviendo y sintiendo. Creo que es un excelente profesional.",
     rating: 5
   },
-
   {
-    id: 36,
+    id: 34,
     author: "D.",
     content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
     rating: 5
@@ -302,193 +287,32 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 1,
     slug: 'mito-rendimiento-masculino',
-    title: 'El mito del rendimiento masculino',
+    title: 'Más allá del rendimiento',
     date: '12 Mar 2026',
     category: 'Psicoeducación',
     content:
       'Durante décadas, la cultura popular ha vendido la idea de que el hombre debe ser una máquina de placer inagotable. En este artículo exploramos cómo esta presión social es el principal enemigo de una vida sexual plena. La vulnerabilidad no es debilidad, es el camino hacia la conexión real...',
+    imageUrl: '/fotos_articulo/cover1.png',
   },
   {
     id: 2,
     slug: 'ansiedad-y-deseo',
-    title: 'Ansiedad y deseo: ¿Cómo se relacionan?',
+    title: 'Ansiedad y deseo',
     date: '05 Mar 2026',
     category: 'Tratamiento',
     content:
       "La ansiedad activa el sistema nervioso simpático, el mismo que prepara al cuerpo para huir o pelear. Es fisiológicamente imposible estar en modo 'alerta' y en modo 'placer' al mismo tiempo. Aquí te explicamos cómo desprogramar esa respuesta...",
+    imageUrl: '/fotos_articulo/cover2.png',
   },
   {
     id: 3,
     slug: 'hablar-de-sexo-con-tu-pareja',
-    title: 'Hablar de sexo con tu pareja',
+    title: 'La Pornografía y tu Salud Sexual',
     date: '28 Feb 2026',
     category: 'Comunicación',
     content:
       'El silencio es el muro donde mueren los deseos. Aprender a comunicar lo que nos gusta y lo que nos asusta no debería ser un tabú. Te damos herramientas prácticas para abrir el diálogo sin sentirte juzgado ni atacar al otro...',
-  },
-]
-
-export const ARTICLE_PAGES: ArticlePageData[] = [
-  {
-    slug: 'mito-rendimiento-masculino',
-    heroEyebrow: 'Psicología sexual clínica',
-    heroTitle: 'Más allá del',
-    heroAccent: 'rendimiento',
-    heroSummary:
-      'Por qué la exigencia de estar siempre listo te está apagando. Un espacio para hombres que buscan entender su sexualidad desde la humanidad, no desde la máquina.',
-    introKicker: 'Consulta especializada',
-    introTitle: 'Por qué no eres una máquina (y por qué entenderlo cambiará tu vida sexual)',
-    introQuote:
-      'Como psicólogo y sexólogo clínico, paso gran parte de mi día escuchando a hombres que, quizás como tú, sienten que cargan con un peso invisible...',
-    introParagraph:
-      'Hoy quiero que hablemos de esto con calma, de corazón a corazón. Quiero contarte por qué esa idea de ser un hombre máquina no solo es un mito, sino que es la trampa que muchas veces nos apaga y nos aleja de lo que realmente somos: seres humanos con derecho a fallar, a sentir y a conectar de verdad.',
-    sections: [
-      {
-        title: 'El peso invisible de la caja y el mito de la máquina',
-        paragraphs: [
-          'A menudo, en la consulta, veo que los problemas de erección o de deseo no empiezan en el cuerpo, sino en una educación que nos encierra en lo que los investigadores llaman la caja de la masculinidad. Esta especie de jaula invisible nos impone reglas rígidas desde niños: no llores, no pidas ayuda, sé autosuficiente y, sobre todo, ten siempre el control.',
-          'Uno de los pilares más pesados de esta trampa es el mito del hombre máquina. Se nos ha enseñado que nuestro deseo es como un botón de encendido automático: siempre listo, siempre reactivo.',
-        ],
-      },
-      {
-        title: 'El modo evaluación',
-        paragraphs: [
-          'Esta exigencia es peligrosa porque nos convierte en jueces de nuestro propio cuerpo. En psicología llamamos a esto espectadorismo: en lugar de estar presente y disfrutando del momento, estás fuera de ti mismo, evaluando si tu erección es lo suficientemente firme o preocupado por cuánto vas a durar.',
-          'Quiero que te quedes con algo importante: el deseo no siempre es espontáneo, y eso es completamente normal. La sexología ha demostrado que muchos hombres experimentamos lo que se conoce como deseo responsivo. Esto significa que las ganas de intimidad pueden surgir después de empezar a conectar, del contacto físico o de sentirnos emocionalmente seguros.',
-        ],
-        clinicalNote: {
-          title: 'Dato clínico',
-          content:
-            'La ansiedad por rendir activa el sistema nervioso simpático, el cual, irónicamente, bloquea la respuesta sexual física como mecanismo de defensa ante el estrés.',
-        },
-      },
-    ],
-    boxedReflection: {
-      title: 'El silencio que nos aísla',
-      content:
-        'Muchos hombres sufren lo que clínicamente llamamos alexitimia masculina normativa. Como nos prohibieron expresar vulnerabilidad, nos cuesta ponerle palabras a lo que sentimos. El cuerpo termina hablando a través del síntoma sexual.',
-    },
-    closingMessage:
-      'Abrirse, compartir lo que te pasa con tu pareja o dar el paso hacia un espacio terapéutico no es una señal de derrota. Al contrario, es un acto de profunda valentía.',
-    references: [
-      'Bacete, R. (2017). Nuevos hombres buenos: La masculinidad en la era del feminismo. Península.',
-      'Barlow, D. H. (1986). Causes of sexual dysfunction: The role of anxiety and cognitive interference. Journal of Consulting and Clinical Psychology, 54(2), 140-148.',
-      'Basson, R. (2000). The female sexual response: A different model. Journal of Sex & Marital Therapy, 26(1), 51-65.',
-      'Heilman, B., Barker, G., & Harrison, A. (2017). The Man Box: A Study on Being a Young Man in the US, UK, and Mexico. Promundo-US and Unilever.',
-      'Levant, R. F. (1992). Toward the reconstruction of masculinity. Journal of Family Psychology, 5(3-4), 379-402.',
-      'McCabe, M. P. (2005). The role of performance anxiety in the development and maintenance of sexual dysfunction in men and women. Journal of Sex & Marital Therapy, 31(5), 379-389.',
-      'Sanmartín Ortí, A., Kuric Kardelis, S., & Gómez Miguel, A. (2022). La caja de la masculinidad: construcción, actitudes e impacto en la juventud española. Centro Reina Sofía sobre Adolescencia y Juventud.',
-    ],
-    ctaTitle: '¿Damos el primer paso?',
-    ctaSummary:
-      'Recuerda: la verdadera fortaleza no está en no tener problemas, sino en tener el coraje de dejar de cargarlos a solas.',
-    ctaLabel: 'Contactar para consulta',
-  },
-  {
-    slug: 'ansiedad-y-deseo',
-    heroEyebrow: 'Psicoeducación clínica',
-    heroTitle: 'Ansiedad y',
-    heroAccent: 'deseo',
-    heroSummary:
-      'Cuando la mente entra en modo alerta, el placer se apaga. Entiende qué pasa en tu sistema nervioso y cómo recuperar seguridad corporal.',
-    introKicker: 'Regulación emocional',
-    introTitle: 'Ansiedad y deseo: cuando sobrevivir compite con disfrutar',
-    introQuote:
-      'Si tu cabeza está en la amenaza, tu cuerpo no puede entregarse al placer. No es falla tuya: es neurobiología.',
-    introParagraph:
-      'La ansiedad no es solo un estado mental. Es una señal corporal de peligro. Cuando aparece, el organismo prioriza defenderse y no vincularse. Por eso muchas personas notan que su deseo baja justo en etapas de estrés intenso, presión laboral o conflictos de pareja.',
-    sections: [
-      {
-        title: 'El cuerpo no distingue entre examen y encuentro íntimo',
-        paragraphs: [
-          'El sistema nervioso simpático se activa frente a amenazas reales o percibidas: acelera el corazón, sube la tensión muscular y mantiene tu atención en el control. Ese estado es incompatible con la respuesta erótica, que necesita seguridad, presencia y disponibilidad emocional.',
-          'Dicho simple: no puedes estar al mismo tiempo en modo alerta y modo conexión profunda. Cuando te exiges rendir, tu cuerpo interpreta evaluación, no intimidad.',
-        ],
-        clinicalNote: {
-          title: 'Dato clínico',
-          content:
-            'La respiración superficial y el automonitoreo constante aumentan el círculo ansiedad-rendimiento-frustración. Interrumpir ese ciclo es parte central del tratamiento.',
-        },
-      },
-      {
-        title: 'Cómo vuelve el deseo',
-        paragraphs: [
-          'El deseo no siempre aparece antes del contacto. Muchas veces emerge durante la cercanía, la confianza y la reducción de presión. A esto se le llama deseo responsivo: primero hay condiciones de seguridad, luego llega la motivación erótica.',
-          'Por eso trabajamos en terapia con regulación fisiológica, lenguaje interno menos castigador y acuerdos concretos con la pareja para sacar el foco del rendimiento y devolverlo a la experiencia compartida.',
-        ],
-      },
-    ],
-    boxedReflection: {
-      title: 'Una clave práctica',
-      content:
-        'No pelees contra la ansiedad como si fuera enemiga: léela como una señal. Cuando aprendes a regularla, dejas de sentirte roto y vuelves a habitar tu cuerpo con menos miedo.',
-    },
-    closingMessage:
-      'Recuperar deseo no significa forzarte, sino construir un contexto donde tu cuerpo ya no tenga que defenderse todo el tiempo.',
-    references: [
-      'Bancroft, J. (2009). Human Sexuality and Its Problems. Churchill Livingstone.',
-      'Basson, R. (2000). The female sexual response: A different model. Journal of Sex & Marital Therapy, 26(1), 51-65.',
-      'Levine, S. B. (2003). The nature of sexual desire: A clinician perspective. Archives of Sexual Behavior, 32(3), 279-285.',
-      'McCabe, M. P. (2005). The role of performance anxiety in sexual dysfunction. Journal of Sex & Marital Therapy, 31(5), 379-389.',
-      'Nobre, P., & Pinto-Gouveia, J. (2006). Dysfunctional sexual beliefs and cognitive schemas. Journal of Sex Research, 43(1), 68-75.',
-    ],
-    ctaTitle: '¿Te pasa seguido?',
-    ctaSummary:
-      'Podemos trabajar estrategias claras para salir del modo alerta y recuperar conexión contigo y con tu pareja.',
-    ctaLabel: 'Agendar acompañamiento',
-  },
-  {
-    slug: 'hablar-de-sexo-con-tu-pareja',
-    heroEyebrow: 'Comunicación íntima',
-    heroTitle: 'Hablar de sexo con',
-    heroAccent: 'tu pareja',
-    heroSummary:
-      'El silencio protege del conflicto inmediato, pero a largo plazo desconecta. Poner palabras puede ser incómodo, pero también profundamente reparador.',
-    introKicker: 'Vínculo y confianza',
-    introTitle: 'Cómo conversar de intimidad sin herir ni cerrarte',
-    introQuote:
-      'No necesitas hablar perfecto: necesitas hablar honesto. La intimidad crece cuando la conversación deja de ser una pelea y se vuelve un puente.',
-    introParagraph:
-      'Muchas parejas se quieren, pero no saben cómo conversar sobre deseo, límites o frustraciones. Entonces aparecen suposiciones, evitación y distancia. Lo importante no es ganar una discusión, sino crear un espacio seguro para escucharse sin humillación ni defensa automática.',
-    sections: [
-      {
-        title: 'Por qué cuesta tanto decir lo que siento',
-        paragraphs: [
-          'A muchos hombres nos educaron para resolver, no para expresar. Cuando algo duele en la sexualidad, reaccionamos con silencio, ironía o retirada. El problema no desaparece: se cronifica y se vuelve tema tabú.',
-          'Hablar de sexo no debería empezar en la cama ni en medio de un conflicto. Conviene elegir momentos neutros, usar frases en primera persona y explicar necesidades concretas en vez de acusaciones globales.',
-        ],
-        clinicalNote: {
-          title: 'Herramienta breve',
-          content:
-            'Prueba esta estructura: “Me está pasando..., me gustaría..., ¿podemos intentar...?”. Es simple, pero reduce culpa y abre cooperación.',
-        },
-      },
-      {
-        title: 'Conversar para reconectar, no para rendir cuentas',
-        paragraphs: [
-          'Cuando una conversación íntima se vuelve tribunal, ambos se cierran. En cambio, cuando se valida la experiencia emocional del otro, baja la defensividad y aumenta la posibilidad de acuerdos.',
-          'La meta no es que dos personas sientan exactamente lo mismo, sino que puedan construir un lenguaje común para cuidarse. Ese lenguaje también es erotismo: pertenencia, respeto y presencia.',
-        ],
-      },
-    ],
-    boxedReflection: {
-      title: 'Señal de avance',
-      content:
-        'Si después de conversar no se resuelve todo, pero ambos se sienten más comprendidos, ya avanzaron. La intimidad se construye por continuidad, no por perfección.',
-    },
-    closingMessage:
-      'Hablar de sexo con tu pareja no es admitir fracaso. Es elegir madurez emocional y responsabilidad afectiva.',
-    references: [
-      'Gottman, J., & Silver, N. (2015). The Seven Principles for Making Marriage Work. Harmony.',
-      'Johnson, S. (2019). Attachment Theory in Practice. Guilford Press.',
-      'Mark, K. P., & Jozkowski, K. N. (2013). The impact of sexual communication on sexual satisfaction. Journal of Sex Research, 50(5), 447-455.',
-      'Schnarch, D. (2009). Intimacy & Desire. Beaufort Books.',
-      'Wheeler, M. J., & Kerpelman, J. L. (2018). Couple communication and sexual well-being. Couple and Family Psychology, 7(3), 149-165.',
-    ],
-    ctaTitle: '¿Les cuesta hablar de esto?',
-    ctaSummary:
-      'En terapia puedes aprender una forma de conversar que disminuya la culpa y aumente la conexión real.',
-    ctaLabel: 'Quiero orientación',
+    imageUrl: '/fotos_articulo/cover3.png',
   },
 ]
 
@@ -496,9 +320,6 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug)
 }
 
-export function getArticlePageBySlug(slug: string): ArticlePageData | undefined {
-  return ARTICLE_PAGES.find((article) => article.slug === slug)
-}
 
 export function generateCalendarDays(): CalendarDay[] {
   const days: CalendarDay[] = []

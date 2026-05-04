@@ -6,7 +6,8 @@ import { paymentsRouter } from './payments';
 // Definición de tipos para las variables de entorno inyectadas por Cloudflare
 export type Bindings = {
   GOOGLE_CALENDAR_ID: string;
-  GOOGLE_SERVICE_ACCOUNT_KEY: string;
+  GOOGLE_CLIENT_EMAIL: string;
+  GOOGLE_PRIVATE_KEY: string;
   MERCADOPAGO_ACCESS_TOKEN: string;
 };
 

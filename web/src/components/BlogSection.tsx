@@ -64,12 +64,20 @@ export function BlogSection({ posts }: Props) {
                 }}
               />
               <div className="absolute inset-0 flex items-center justify-center p-8">
-                <BookOpen
-                  size={48}
-                  className="transition-all duration-700 group-hover:scale-110"
-                  style={{ color: 'var(--accent-soft)' }}
-                  aria-hidden
-                />
+                {post.imageUrl ? (
+                  <img 
+                    src={post.imageUrl} 
+                    alt={post.title} 
+                    className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
+                  />
+                ) : (
+                  <BookOpen
+                    size={48}
+                    className="transition-all duration-700 group-hover:scale-110"
+                    style={{ color: 'var(--accent-soft)' }}
+                    aria-hidden
+                  />
+                )}
               </div>
               <div className="absolute bottom-6 left-6 right-6">
                 <div

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Calendar, Clock, CreditCard, Lock, ArrowLeft, X } from 'lucide-react'
+import { Calendar, Clock, Lock, ArrowLeft, X, MessageCircle } from 'lucide-react'
 
 type Props = {
   day: string
@@ -7,6 +7,7 @@ type Props = {
   onClose: () => void
   onConfirm: (time: string) => void
   isProcessing: boolean
+  busySlots?: { start: string; end: string }[]
 }
 
 // Generamos los bloques de horas de 08:00 a 19:00
@@ -15,7 +16,7 @@ const TIME_BLOCKS = Array.from({ length: 12 }, (_, i) => {
   return `${hour.toString().padStart(2, '0')}:00`
 })
 
-export function BookingModal({ day, pacienteNombre, onClose, onConfirm, isProcessing }: Props) {
+export function BookingModal({ day, pacienteNombre, onClose, onConfirm, isProcessing, busySlots = [] }: Props) {
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
 
   return (
@@ -91,30 +92,61 @@ export function BookingModal({ day, pacienteNombre, onClose, onConfirm, isProces
             </p>
 
             <div className="grid grid-cols-3 gap-3">
-              {TIME_BLOCKS.map((time) => (
-                <button
-                  key={time}
-                  onClick={() => setSelectedTime(time)}
-                  className="rounded-xl border py-3 text-sm font-bold transition-all active:scale-95"
-                  style={{
-                    borderColor: 'var(--border-card)',
-                    backgroundColor: 'var(--bg-input)',
-                    color: 'var(--text-secondary)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border-accent)'
-                    e.currentTarget.style.backgroundColor = 'var(--accent-soft)'
-                    e.currentTarget.style.color = 'var(--accent-text)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border-card)'
-                    e.currentTarget.style.backgroundColor = 'var(--bg-input)'
-                    e.currentTarget.style.color = 'var(--text-secondary)'
-                  }}
-                >
-                  {time}
-                </button>
-              ))}
+              {TIME_BLOCKS.map((time) => {
+                // Generar el timestamp del bloque para compararlo con los busy slots
+                const now = new Date();
+                const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Santiago', year: 'numeric', month: '2-digit' }).formatToParts(now);
+                const year = parts.find(p => p.type === 'year')?.value || now.getFullYear().toString();
+                const month = parts.find(p => p.type === 'month')?.value || (now.getMonth() + 1).toString().padStart(2, '0');
+                const [horas, mins] = time.split(':');
+                
+                const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const santiagoTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Santiago"})).getTime();
+                const diffMins = Math.round((santiagoTime - utcTime) / 60000);
+                const sign = diffMins >= 0 ? "+" : "-";
+                const absMins = Math.abs(diffMins);
+                const offsetStr = `${sign}${Math.floor(absMins / 60).toString().padStart(2, '0')}:${(absMins % 60).toString().padStart(2, '0')}`;
+                
+                const blockStart = new Date(`${year}-${month}-${day.toString().padStart(2, '0')}T${horas}:${mins}:00${offsetStr}`).getTime();
+                
+                const isBusy = busySlots.some(slot => {
+                  const slotStart = new Date(slot.start).getTime();
+                  const slotEnd = new Date(slot.end).getTime();
+                  // Si el bloque inicia exactamente a la misma hora o está dentro del rango ocupado
+                  return blockStart >= slotStart && blockStart < slotEnd;
+                });
+
+                return (
+                  <button
+                    key={time}
+                    onClick={() => !isBusy && setSelectedTime(time)}
+                    disabled={isBusy}
+                    className="rounded-xl border py-3 text-sm font-bold transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+                    style={{
+                      borderColor: 'var(--border-card)',
+                      backgroundColor: 'var(--bg-input)',
+                      color: isBusy ? 'var(--text-muted)' : 'var(--text-secondary)',
+                      textDecoration: isBusy ? 'line-through' : 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isBusy) {
+                        e.currentTarget.style.borderColor = 'var(--border-accent)'
+                        e.currentTarget.style.backgroundColor = 'var(--accent-soft)'
+                        e.currentTarget.style.color = 'var(--accent-text)'
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isBusy) {
+                        e.currentTarget.style.borderColor = 'var(--border-card)'
+                        e.currentTarget.style.backgroundColor = 'var(--bg-input)'
+                        e.currentTarget.style.color = 'var(--text-secondary)'
+                      }
+                    }}
+                  >
+                    {time}
+                  </button>
+                )
+              })}
             </div>
           </div>
         ) : (
@@ -195,14 +227,13 @@ export function BookingModal({ day, pacienteNombre, onClose, onConfirm, isProces
             <div
               className="mb-8 flex items-start gap-3 rounded-xl p-4 border"
               style={{
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                borderColor: 'rgba(59, 130, 246, 0.2)',
+                backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                borderColor: 'rgba(34, 197, 94, 0.2)',
               }}
             >
-              <Lock size={16} className="mt-0.5 shrink-0" style={{ color: '#60a5fa' }} />
+              <MessageCircle size={16} className="mt-0.5 shrink-0" style={{ color: '#22c55e' }} />
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                El pago se procesa de forma segura mediante <strong>MercadoPago</strong>. 
-                El enlace para tu sesión (Google Meet) será enviado automáticamente a tu correo tras el pago.
+                Al confirmar, serás redirigido a <strong>WhatsApp</strong> para completar la reserva y recibir el enlace de tu sesión (Google Meet).
               </p>
             </div>
 
@@ -233,8 +264,8 @@ export function BookingModal({ day, pacienteNombre, onClose, onConfirm, isProces
                 <span className="animate-pulse">Procesando...</span>
               ) : (
                 <>
-                  <CreditCard size={20} />
-                  Proceder al Pago
+                  <MessageCircle size={20} />
+                  Confirmar por WhatsApp
                 </>
               )}
             </button>

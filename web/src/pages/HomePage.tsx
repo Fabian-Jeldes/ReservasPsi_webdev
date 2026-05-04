@@ -1,5 +1,5 @@
 import type { ChangeEvent, FormEvent } from 'react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
 import {
   BLOG_POSTS,
   EMPTY_KYC,
@@ -9,7 +9,7 @@ import {
 } from '../data/site'
 import type { KycFormState, Specialization } from '../types/site'
 import { kycSchema } from '../types/site'
-import { fetchCalendarAvailability } from '../lib/googleCalendar'
+import { fetchCalendarBusySlots } from '../lib/googleCalendar'
 import { Navbar } from '../components/Navbar'
 import { HeroSection } from '../components/HeroSection'
 import { SpecializationsSection } from '../components/SpecializationsSection'
@@ -24,12 +24,17 @@ import { useCalendarClock } from '../hooks/useCalendarClock'
 import { useReviewRotation } from '../hooks/useReviewRotation'
 
 export function HomePage() {
-  const { currentIndex: currentReview, fade } = useReviewRotation(REVIEWS_DATA.length)
+  const DISPLAY_REVIEWS = useMemo(() => {
+    const shuffled = [...REVIEWS_DATA].sort(() => 0.5 - Math.random())
+    return shuffled.slice(0, 15)
+  }, [])
+  const { currentIndex: currentReview, fade } = useReviewRotation(DISPLAY_REVIEWS.length)
   const calendarUpdate = useCalendarClock(10_000)
   const [consentSigned, setConsentSigned] = useState(false)
   const [isRegistered, setIsRegistered] = useState(false)
   const [selectedSpec, setSelectedSpec] = useState<Specialization | null>(null)
-  const [calendarDays, setCalendarDays] = useState(() => generateCalendarDays())
+  const [calendarDays] = useState(() => generateCalendarDays().map(d => ({...d, status: 'Disponible' as const})))
+  const [busySlots, setBusySlots] = useState<{ start: string, end: string }[]>([])
   const [kycData, setKycData] = useState<KycFormState>(EMPTY_KYC)
   const [kycErrors, setKycErrors] = useState<Partial<Record<keyof KycFormState, string>>>({})
   const [selectedBookingDay, setSelectedBookingDay] = useState<string | null>(null)
@@ -41,8 +46,8 @@ export function HomePage() {
     let cancelled = false
 
     const load = async () => {
-      const days = await fetchCalendarAvailability()
-      if (!cancelled) setCalendarDays(days)
+      const slots = await fetchCalendarBusySlots()
+      if (!cancelled) setBusySlots(slots)
     }
 
     void load()
@@ -95,34 +100,38 @@ export function HomePage() {
     [consentSigned, kycData],
   )
 
-  const handlePayment = async (selectedTime: string) => {
+  const handleConfirmBooking = async (selectedTime: string) => {
     if (!selectedBookingDay) return
     setIsProcessingPayment(true)
+    
     try {
-      const res = await fetch("http://localhost:8787/api/payments/create-preference", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      // 1. Crear evento en Google Calendar a través del Worker
+      const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/book' : '/api/calendar/book'
+      
+      const res = await fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          paciente: kycData,
+          pacienteNombre: kycData.nombre,
           dia: selectedBookingDay,
-          hora: selectedTime,
-          precio: 35000
+          hora: selectedTime
         })
-      })
-      const data = await res.json()
-      if (data.init_point) {
-        window.location.href = data.init_point
-      } else {
-        console.error("Detalles del error MP:", data)
-        const errorMsg = data.details?.message || "Error desconocido"
-        const causes = data.details?.cause?.map((c: any) => c.description).join(", ") || ""
-        alert(`Error de MercadoPago: ${errorMsg}\n\n${causes}\n\n(Revisa que el correo y RUT del KYC tengan un formato válido)`)
-        setIsProcessingPayment(false)
+      });
+      
+      if (!res.ok) {
+        console.error("Error al agendar en el calendario", await res.text())
+        // Continuamos igual al WhatsApp aunque falle el calendario
       }
     } catch (e) {
-      console.error(e)
-      alert("Error de conexión. ¿Está corriendo el Worker (npm run dev en carpeta worker)?")
+      console.error("Fetch error", e)
+    } finally {
       setIsProcessingPayment(false)
+      const formatter = new Intl.DateTimeFormat('es-CL', { month: 'long', timeZone: 'America/Santiago' });
+      const currentMonth = formatter.format(new Date());
+      const text = `Hola Andi, soy ${kycData.nombre}. Quisiera confirmar mi sesión para el ${selectedBookingDay} de ${currentMonth} a las ${selectedTime} hrs.`
+      const waUrl = `https://wa.me/56991997276?text=${encodeURIComponent(text)}`
+      window.open(waUrl, '_blank')
+      setSelectedBookingDay(null)
     }
   }
 
@@ -138,7 +147,7 @@ export function HomePage() {
       <Navbar onLogoClick={scrollToTop} onAgendarClick={scrollToKyc} />
       <HeroSection calendarUpdate={calendarUpdate} onContactClick={scrollToKyc} />
       <SpecializationsSection items={SPECIALIZATIONS} onSelectSpec={setSelectedSpec} />
-      <ReviewsSection reviews={REVIEWS_DATA} currentIndex={currentReview} fade={fade} />
+      <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
       <KycSection
         sectionRef={kycRef}
         kycData={kycData}
@@ -167,8 +176,9 @@ export function HomePage() {
           day={selectedBookingDay}
           pacienteNombre={kycData.nombre}
           isProcessing={isProcessingPayment}
+          busySlots={busySlots}
           onClose={() => setSelectedBookingDay(null)}
-          onConfirm={handlePayment}
+          onConfirm={handleConfirmBooking}
         />
       ) : null}
     </div>

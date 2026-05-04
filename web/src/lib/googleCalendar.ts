@@ -10,29 +10,15 @@ import type { CalendarDay } from '../types/site'
  *
  * Contrato sugerido de respuesta: `{ "days": CalendarDay[] }`
  */
-export async function fetchCalendarAvailability(): Promise<CalendarDay[]> {
-  const base = import.meta.env.VITE_CALENDAR_API_BASE_URL?.replace(/\/$/, '')
-  if (!base) {
-    return generateCalendarDays()
-  }
-
+export async function fetchCalendarBusySlots(): Promise<{ start: string, end: string }[]> {
+  const workerUrl = import.meta.env.DEV ? 'http://localhost:8787/api/calendar/availability' : '/api/calendar/availability'
+  
   try {
-    const res = await fetch(`${base}/availability`, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-    })
-    if (!res.ok) throw new Error(`Calendar API ${res.status}`)
-    const data: unknown = await res.json()
-    if (
-      data &&
-      typeof data === 'object' &&
-      'days' in data &&
-      Array.isArray((data as { days: unknown }).days)
-    ) {
-      return (data as { days: CalendarDay[] }).days
-    }
-    throw new Error('Invalid calendar response shape')
+    const res = await fetch(workerUrl, { method: 'GET' })
+    if (!res.ok) return []
+    const data = await res.json() as any
+    return data.busy || []
   } catch {
-    return generateCalendarDays()
+    return []
   }
 }

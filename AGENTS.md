@@ -31,7 +31,7 @@ Plataforma / sitio web orientado a **servicios de psicología clínica y especia
 | Front-end público | **Cloudflare Pages** | Bajo volumen de tráfico; CDN global, SSL y buen coste fijo/cero en muchos casos. |
 | Telemetría | **PostHog** (cloud o self-host según presupuesto y cumplimiento) | Configurar mascarado de datos sensibles y políticas; evitar PII clínica en eventos. |
 | CMS / Backend | **Strapi** | Headless CMS para manejar el contenido del blog y también cuentas de usuario/pacientes. |
-| Pasarela de Pagos | **MercadoPago** | Cobro mandatorio de las sesiones antes de poder agendar en el Google Calendar del psicólogo. |
+| Pasarela de Pagos | **WhatsApp Directo** | Redirección manual a WhatsApp para coordinar pago y enlace de sesión. Se descartó MercadoPago. |
 
 ## CMS: Strapi y Arquitectura de Reservas
 
@@ -39,8 +39,8 @@ Plataforma / sitio web orientado a **servicios de psicología clínica y especia
 
 El **Flujo de Reserva** queda estructurado de la siguiente forma:
 1. **KYC / Autenticación:** El paciente ingresa sus datos y se autentica (idealmente manejado vía Strapi o un proveedor de Auth).
-2. **Pago:** El paciente es redirigido a **MercadoPago** para pagar la sesión por adelantado.
-3. **Agendamiento:** Una vez que MercadoPago confirma el pago (vía webhook), nuestro backend intermedio (**Cloudflare Worker**) usa una *Service Account* de Google Cloud para insertar el evento en el **Google Calendar** del psicólogo.
+2. **Agendamiento:** El frontend llama al Worker, el cual lee la disponibilidad real usando la **Google FreeBusy API** y genera el evento en el **Google Calendar** del psicólogo mediante Service Account, todo sincronizado en la zona horaria `America/Santiago`.
+3. **Pago:** El paciente es redirigido a **WhatsApp** de forma directa para pagar y recibir el enlace de la sesión de Google Meet.
 
 Recomendación práctica: mantener la lógica de validación de pagos y generación de tokens de Google Calendar estrictamente en el **Cloudflare Worker** (`worker/`) para no exponer credenciales.
 
@@ -124,4 +124,4 @@ Al implementar el app definitivo: replicar tokens (colores, tipografía sans, so
 
 ## Estado
 
-App en **`web/`**: **React + TS + Vite + Tailwind + CSS Custom Properties + Cloudflare Pages**. Sistema de 4 temas visuales con diferenciación geométrica implementado. +30 reseñas reales con shuffle aleatorio. Artículos con diseño editorial orgánico. Roadmap: `docs/plan-despliegue-8-semanas.md`. Variables: `web/.env.example`.
+App en **`web/`**: **React + TS + Vite + Tailwind + CSS Custom Properties + Cloudflare Pages**. Sistema de 4 temas visuales con diferenciación geométrica. +30 reseñas reales. Artículos con diseño orgánico y fotografías simbólicas/humanísticas. Integración de FreeBusy y creación de eventos activa en Cloudflare Workers (`worker/`). Roadmap: `docs/plan-despliegue-8-semanas.md`.

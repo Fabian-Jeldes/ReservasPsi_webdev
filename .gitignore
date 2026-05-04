@@ -2,7 +2,11 @@
 /how_proyectoAndi.txt
 /informaciondecardsproyectoAndi.txt
 .env
-node_modules
+.env.*
+node_modules/
 .dev.vars
 dist/
 .wrangler/
+*.pem
+*.key
+*.log

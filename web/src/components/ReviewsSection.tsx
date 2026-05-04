@@ -114,7 +114,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                     &quot;
                   </div>
                   <p
-                    className="relative z-10 text-xl italic leading-relaxed"
+                    className="relative z-10 text-xl italic leading-relaxed line-clamp-6"
                     style={{ color: 'var(--text-secondary)' }}
                   >
                     {current.content}

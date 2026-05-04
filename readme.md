@@ -8,7 +8,7 @@ Repositorio del front-end del proyecto **Andi**: plataforma web orientada a serv
 
 - **Perfil de profesional**: sección inicial con fotografía y presentación.
 - **Consentimiento informado**: firma o aceptación (I agree), almacenamiento en base de datos y resumen en PDF.
-- **Agenda interactiva**: calendarización con actualización frecuente (referencia: cada ~10 s). Integración con la **API de Google Calendar** para que los pacientes puedan **agendar** previa validación de pago, y el/los eventos queden en el calendario del psicólogo. *OAuth y credenciales: backend o Worker, no en el navegador.*
+- **Agenda interactiva**: calendarización bloqueando multas y fines de semana. Integración con la **API de Google Calendar (FreeBusy)** vía **Cloudflare Worker** para que los pacientes puedan **agendar**, con creación automática de eventos usando Service Accounts.
 - **Tarjetas de especializaciones**: acercamientos clínicos y tratamientos (cards con geometría y sombras temáticas).
 - **Autenticación y KYC (conoce a tu paciente)**: identificación de clientes (nombre, RUT, teléfono, dirección, ciudad, región, código postal) con token de sesión.
 - **Blog de psicoeducación**: entradas y artículos (p. ej. educación sobre problemas sexuales y clínicos). Cada artículo tiene su propia página con **diseño editorial orgánico** (sin efecto de cards apiladas — flujo de lectura continuo con dividers temáticos, blockquotes, notas clínicas inline y referencias colapsables).
@@ -30,9 +30,9 @@ Repositorio del front-end del proyecto **Andi**: plataforma web orientada a serv
 | **lucide-react** | Iconos |
 | **posthog-js** | Analítica (opcional; ver `web/.env.example`) |
 | **Cloudflare Pages** | Hosting del `dist` |
-| **Google Calendar API** | Citas (vía servidor / Worker) |
+| **Cloudflare Worker** | Integraciones backend seguras (Google Calendar API, Service Accounts) |
 | **Strapi** | CMS headless para blog y manejo de usuarios (ver `AGENTS.md`) |
-| **MercadoPago** | Pasarela de pagos para el cobro de consultas |
+| **WhatsApp Directo** | Redirección manual a WhatsApp para coordinar pago y enlace de sesión |
 | **Doctoralia** | Reseñas (según API / políticas) |
 
 Plan de trabajo y despliegue: [`docs/plan-despliegue-8-semanas.md`](docs/plan-despliegue-8-semanas.md).
@@ -44,7 +44,7 @@ Plan de trabajo y despliegue: [`docs/plan-despliegue-8-semanas.md`](docs/plan-de
 - `web/src/data/site.ts` — **fuente única de todos los strings editables** (reseñas, especialidades, blog posts, artículos, KYC).
 - `web/src/dev/DevAccentToggle.tsx` — toggle de temas (solo desarrollo).
 - `web/.env.example` — variables públicas (`VITE_*`) de ejemplo.
-- `worker/` — Cloudflare Worker para integraciones backend (MercadoPago, Google Calendar).
+- `worker/` — Cloudflare Worker para integraciones backend seguras (Google Calendar FreeBusy, Service Account OAuth).
 - `webdev_try1/app.jsx` — prototipo visual de referencia (Tailwind + Lucide).
 - `fotos_articulo/` — capturas de diseño por artículo (artículo 1, 2, 3) usadas como referencia para los temas.
 - `how_proyectoAndi.txt` — notas iniciales y requerimientos.

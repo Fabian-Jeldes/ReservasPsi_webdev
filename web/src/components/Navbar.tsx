@@ -40,7 +40,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         </button>
         <div className="hidden items-center gap-8 text-sm font-medium md:flex">
           <a
-            href="#especialidades"
+            href="/#especialidades"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
@@ -49,7 +49,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             Especialidades
           </a>
           <a
-            href="#reviews"
+            href="/#reviews"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
@@ -58,7 +58,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             Reseñas
           </a>
           <a
-            href="#blog"
+            href="/#blog"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
