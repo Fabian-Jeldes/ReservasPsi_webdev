@@ -101,9 +101,16 @@ export function ArticlePage() {
             {idx > 0 && <hr className="theme-divider mb-16" />}
 
             {section.title && (
-              <h3 className="text-3xl mb-8" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as any, letterSpacing: 'var(--heading-spacing)' }}>
-                {section.title}
-              </h3>
+              <h3 
+                className="text-3xl mb-8" 
+                style={{ 
+                  fontFamily: 'var(--font-heading)', 
+                  fontWeight: 'var(--heading-weight)', 
+                  textTransform: 'var(--heading-transform)' as any, 
+                  letterSpacing: 'var(--heading-spacing)' 
+                }}
+                dangerouslySetInnerHTML={{ __html: section.title || '' }}
+              />
             )}
 
             <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
