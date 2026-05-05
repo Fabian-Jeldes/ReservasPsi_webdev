@@ -12,7 +12,7 @@ Repositorio del front-end del proyecto **Andi**: plataforma web orientada a serv
 - **Tarjetas de especializaciones**: acercamientos clínicos y tratamientos (cards con geometría y sombras temáticas).
 - **Autenticación y KYC (conoce a tu paciente)**: identificación de clientes (nombre, RUT, teléfono, dirección, ciudad, región, código postal) con token de sesión.
 - **Blog de psicoeducación**: entradas y artículos (p. ej. educación sobre problemas sexuales y clínicos). Cada artículo tiene su propia página con **diseño editorial orgánico** (sin efecto de cards apiladas — flujo de lectura continuo con dividers temáticos, blockquotes, notas clínicas inline y referencias colapsables).
-- **Reseñas / testimonios (+30 reseñas reales)**: carrusel interactivo con transiciones suaves (slide + fade), controles prev/next y dot indicators; orden aleatorio via Fisher-Yates shuffle que recorre todas las reseñas antes de re-barajar; integración prevista con API de **Doctoralia**.
+- **Reseñas / testimonios (+30 reseñas reales)**: carrusel interactivo con transiciones suaves (slide + fade), controles prev/next y dot indicators; orden aleatorio via Fisher-Yates shuffle que recorre todas las reseñas únicas antes de re-barajar; integración prevista con API de **Doctoralia**.
 - **Analítica**: telemetría y mapas de calor con **PostHog**.
 - **Sistema de temas (dev)**: toggle de 4 variantes visuales diferenciadas no solo en color sino en **geometría, tipografía, sombras y decoraciones**.
 

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 type Props = {
   onLogoClick: () => void
   onAgendarClick: () => void
@@ -35,7 +37,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             className="text-xl font-bold tracking-tight"
             style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
           >
-            Andi
+            Andrei Andrusco Fidalgo
           </span>
         </button>
         <div className="hidden items-center gap-8 text-sm font-medium md:flex">
@@ -57,15 +59,15 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           >
             Reseñas
           </a>
-          <a
-            href="/#blog"
+          <Link
+            to="/articulos"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             Psicoeducación
-          </a>
+          </Link>
           <button
             type="button"
             onClick={onAgendarClick}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Review } from '../types/site'
 
@@ -9,12 +9,17 @@ type Props = {
 }
 
 export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
-  const [manualIndex, setManualIndex] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState(currentIndex)
   const [direction, setDirection] = useState<'left' | 'right'>('right')
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // If user has manually navigated, use that; otherwise use auto-rotation
-  const activeIndex = manualIndex ?? currentIndex
+  // Sync with auto-rotation whenever the parent advances the index
+  useEffect(() => {
+    if (!isAnimating) {
+      setActiveIndex(currentIndex)
+    }
+  }, [currentIndex])
+
   const current = reviews[activeIndex]
   if (!current) return null
 
@@ -25,7 +30,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
 
     // Brief fade-out, switch, fade-in
     setTimeout(() => {
-      setManualIndex(idx)
+      setActiveIndex(idx)
       setIsAnimating(false)
     }, 350)
   }
@@ -39,9 +44,6 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
     const next = (activeIndex + 1) % reviews.length
     goTo(next, 'right')
   }
-
-  // Auto-rotation: sync manual back to auto when it changes
-  const displayIndex = manualIndex ?? currentIndex
 
   return (
     <section id="reviews" className="overflow-hidden px-6 py-20">
@@ -97,7 +99,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
             {/* Carousel content area */}
             <div className="relative flex-1">
               <div
-                className="flex min-h-[160px] items-center"
+                className="flex min-h-[180px] items-start"
                 style={{
                   transition: 'opacity 0.5s ease, transform 0.5s ease',
                   opacity: isAnimating ? 0 : (fade ? 1 : 0),
@@ -106,7 +108,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                     : (fade ? 'translateX(0)' : `translateX(${direction === 'right' ? '30px' : '-30px'})`),
                 }}
               >
-                <div className="relative">
+                <div className="relative w-full">
                   <div
                     className="absolute -left-6 -top-6 scale-[4]"
                     style={{ color: 'var(--accent-soft)' }}
@@ -114,7 +116,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                     &quot;
                   </div>
                   <p
-                    className="relative z-10 text-xl italic leading-relaxed line-clamp-6"
+                    className="relative z-10 text-xl italic leading-relaxed"
                     style={{ color: 'var(--text-secondary)' }}
                   >
                     {current.content}
@@ -128,12 +130,12 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                 </div>
               </div>
 
-              {/* Navigation arrows */}
-              <div className="mt-6 flex items-center justify-between">
+              {/* Navigation arrows + progress bar */}
+              <div className="mt-6 flex items-center gap-4">
                 <button
                   type="button"
                   onClick={goPrev}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border transition-all hover:scale-110"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110"
                   style={{
                     borderColor: 'var(--border-card)',
                     backgroundColor: 'var(--bg-card)',
@@ -152,28 +154,33 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                   <ChevronLeft size={18} />
                 </button>
 
-                {/* Dot indicators */}
-                <div className="flex gap-2">
-                  {reviews.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => goTo(i, i > activeIndex ? 'right' : 'left')}
-                      className="h-2 rounded-full transition-all duration-300"
+                {/* Progress bar with counter */}
+                <div className="flex flex-1 items-center gap-3">
+                  <div
+                    className="relative h-1.5 flex-1 overflow-hidden rounded-full"
+                    style={{ backgroundColor: 'var(--border-card)' }}
+                  >
+                    <div
+                      className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
                       style={{
-                        width: i === displayIndex ? '1.5rem' : '0.5rem',
-                        backgroundColor:
-                          i === displayIndex ? 'var(--accent)' : 'var(--border-card)',
+                        width: `${((activeIndex + 1) / reviews.length) * 100}%`,
+                        backgroundColor: 'var(--accent)',
+                        boxShadow: '0 0 6px var(--accent)',
                       }}
-                      aria-label={`Ir a reseña ${i + 1}`}
                     />
-                  ))}
+                  </div>
+                  <span
+                    className="shrink-0 text-xs font-bold tabular-nums"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {activeIndex + 1} / {reviews.length}
+                  </span>
                 </div>
 
                 <button
                   type="button"
                   onClick={goNext}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border transition-all hover:scale-110"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110"
                   style={{
                     borderColor: 'var(--border-card)',
                     backgroundColor: 'var(--bg-card)',

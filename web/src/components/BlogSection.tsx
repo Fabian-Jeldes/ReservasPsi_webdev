@@ -21,21 +21,22 @@ export function BlogSection({ posts }: Props) {
               letterSpacing: 'var(--heading-spacing)',
             }}
           >
-            Psicoeducación Sexual
+            Psicoeducación y Bienestar:
           </h2>
-          <p style={{ color: 'var(--text-muted)' }}>
-            Herramientas y artículos para entender nuestra propia humanidad.
+          <p className="max-w-2xl text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            Entender cómo funcionamos es el primer paso para disfrutar plenamente. Aquí encontrarás recursos clave para resolver dudas, derribar mitos y fortalecer tu salud sexual desde una mirada profesional.
           </p>
         </div>
-        <span
-          className="hidden items-center gap-2 font-bold md:flex"
+        <Link
+          to="/articulos"
+          className="hidden items-center gap-2 font-bold transition-colors hover:text-accent md:flex"
           style={{ color: 'var(--accent)' }}
         >
           Explorar Biblioteca <ChevronRight size={18} aria-hidden />
-        </span>
+        </Link>
       </div>
 
-      <div className="grid gap-10 md:grid-cols-3">
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         {posts.map((post) => (
           <Link
             key={post.id}
@@ -65,9 +66,9 @@ export function BlogSection({ posts }: Props) {
               />
               <div className="absolute inset-0 flex items-center justify-center p-8">
                 {post.imageUrl ? (
-                  <img 
-                    src={post.imageUrl} 
-                    alt={post.title} 
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
                     className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
                   />
                 ) : (

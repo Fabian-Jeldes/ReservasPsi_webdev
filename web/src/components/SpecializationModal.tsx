@@ -59,18 +59,33 @@ export function SpecializationModal({ spec, onClose }: Props) {
             {spec.title}
           </h2>
           <div className="max-w-none">
-            <p
-              className="mb-6 text-lg leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              {spec.description}
-            </p>
-            <p
-              className="text-lg leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              {spec.moreContent}
-            </p>
+            {spec.detailedContent ? (
+              <div className="space-y-6">
+                {spec.detailedContent.map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    className="text-lg leading-relaxed"
+                    style={{ color: 'var(--text-secondary)' }}
+                    dangerouslySetInnerHTML={{ __html: paragraph }}
+                  />
+                ))}
+              </div>
+            ) : (
+              <>
+                <p
+                  className="mb-6 text-lg leading-relaxed"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  {spec.description}
+                </p>
+                <p
+                  className="text-lg leading-relaxed"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  {spec.moreContent}
+                </p>
+              </>
+            )}
           </div>
           <div
             className="mt-12 flex justify-end border-t pt-8"

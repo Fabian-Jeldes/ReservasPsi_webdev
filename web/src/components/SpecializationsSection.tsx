@@ -33,11 +33,11 @@ export function SpecializationsSection({ items, onSelectSpec }: Props) {
             letterSpacing: 'var(--heading-spacing)',
           }}
         >
-          Áreas de Especialización
+          <p className='andi-hero-accent'>Áreas de atención:</p>
         </h2>
         <p className="mx-auto mb-16 max-w-xl" style={{ color: 'var(--text-muted)' }}>
-          Un enfoque humano para desarmar la ansiedad y reconectar con el placer genuino.
-        </p>
+          Un enfoque humano para y especializado para que vuelvas a conectar contigo mismo de una
+          forma auténtica desde el placer</p>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {items.map((spec) => (

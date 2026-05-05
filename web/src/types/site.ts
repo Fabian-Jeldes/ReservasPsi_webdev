@@ -13,6 +13,8 @@ export type Specialization = {
   description: string
   /** Texto extra en el modal (enfoque clínico, detalle) */
   moreContent: string
+  /** Contenido detallado para el modal extendido */
+  detailedContent?: string[]
 }
 
 export type BlogPost = {
@@ -27,8 +29,16 @@ export type BlogPost = {
 }
 
 export type ArticleSection = {
-  title: string
+  title?: string
   paragraphs: string[]
+  lists?: {
+    title?: string
+    items: string[]
+  }[]
+  images?: {
+    url: string
+    caption?: string
+  }[]
   clinicalNote?: {
     title: string
     content: string
@@ -41,6 +51,7 @@ export type ArticlePageData = {
   heroTitle: string
   heroAccent: string
   heroSummary: string
+  heroImage?: string
   introKicker: string
   introTitle: string
   introQuote: string
@@ -68,13 +79,9 @@ export type CalendarDay = {
 import { z } from 'zod'
 
 export const kycSchema = z.object({
-  nombre: z.string().min(2, "El nombre es obligatorio"),
-  rut: z.string().min(8, "RUT inválido. Ej: 12345678-9").transform(val => val.replace(/[\.\-]/g, '').toUpperCase()),
+  nombre: z.string().min(2, "El nombre completo es obligatorio"),
   correo: z.string().email("Correo electrónico inválido"),
   telefono: z.string().min(8, "Teléfono inválido"),
-  direccion: z.string().min(5, "Dirección es obligatoria"),
-  ciudad: z.string().min(2, "Ciudad es obligatoria"),
-  region: z.string().min(2, "Región es obligatoria"),
 })
 
 export type KycFormState = z.infer<typeof kycSchema>

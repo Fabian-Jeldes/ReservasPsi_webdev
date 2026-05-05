@@ -1,12 +1,11 @@
-import { ArrowRight, ShieldCheck } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { PROFILE_IMAGE_URL } from '../data/site'
 
 type Props = {
-  calendarUpdate: string
   onContactClick: () => void
 }
 
-export function HeroSection({ calendarUpdate, onContactClick }: Props) {
+export function HeroSection({ onContactClick }: Props) {
   return (
     <header className="mx-auto flex max-w-6xl flex-col items-center gap-16 px-6 pb-20 pt-40 md:flex-row">
       <div className="flex-1 text-center md:text-left">
@@ -31,7 +30,7 @@ export function HeroSection({ calendarUpdate, onContactClick }: Props) {
           Consultas Disponibles
         </div>
         <h1
-          className="text-5xl leading-tight md:text-7xl"
+          className="text-5xl leading-tight md:text-7xl md:leading-[1.1]"
           style={{
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-heading)',
@@ -40,19 +39,24 @@ export function HeroSection({ calendarUpdate, onContactClick }: Props) {
             letterSpacing: 'var(--heading-spacing)',
           }}
         >
-          Redescubre tu <br />
-          <span className="andi-hero-accent">bienestar sexual</span>
+          Terapia enfocada en<br />
+          tu <span className="andi-hero-accent">bienestar sexual</span>
         </h1>
         <p
           className="mt-6 max-w-2xl text-xl leading-relaxed"
           style={{ color: 'var(--text-secondary)' }}
         >
-          Hola, soy{' '}
-          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-            Andi
-          </span>
-          . Psicólogo clínico. Te acompaño a entender tu cuerpo y mente sin juicios ni
-          presiones.
+          Soy{' '}
+          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>
+            Andrei Andrusco Fidalgo
+          </strong>
+          , psicólogo y sexólogo clínico. Te invito a que juntos entendamos tu{' '}
+          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>cuerpo</strong>{' '}
+          y tu <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>sexualidad</strong>{' '}
+          desde una mirada distinta: más libre, sin juicios ni presiones. Busquemos una
+          forma que te funcione y, sobre todo, que te haga{' '}
+          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>feliz</strong>{' '}
+          a ti.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 md:justify-start">
           <button
@@ -71,26 +75,6 @@ export function HeroSection({ calendarUpdate, onContactClick }: Props) {
             Contactar ahora{' '}
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </button>
-          <div
-            className="flex items-center gap-4 rounded-2xl border px-5 py-3 backdrop-blur-sm"
-            style={{
-              borderColor: 'var(--border-primary)',
-              backgroundColor: 'var(--bg-card)',
-            }}
-          >
-            <span
-              className="text-xs font-bold uppercase tracking-widest"
-              style={{ color: 'var(--accent-text)' }}
-            >
-              Sincronizado:
-            </span>
-            <span
-              className="font-mono text-sm"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              {calendarUpdate}
-            </span>
-          </div>
         </div>
       </div>
       <div className="group relative">
@@ -108,40 +92,10 @@ export function HeroSection({ calendarUpdate, onContactClick }: Props) {
         >
           <img
             src={PROFILE_IMAGE_URL}
-            alt="Andi, psicólogo clínico"
+            alt="Andrei Andrusco Fidalgo, psicólogo clínico"
             className="h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
             style={{ borderRadius: 'var(--radius-card)' }}
           />
-        </div>
-        <div
-          className="absolute -bottom-6 -left-6 rounded-3xl border p-5 shadow-2xl backdrop-blur-md"
-          style={{
-            borderColor: 'var(--border-card)',
-            backgroundColor: 'var(--bg-card-solid)',
-          }}
-        >
-          <div className="flex items-center gap-3">
-            <div
-              className="rounded-xl p-2"
-              style={{ backgroundColor: 'var(--success-soft)', color: 'var(--success)' }}
-            >
-              <ShieldCheck size={24} aria-hidden />
-            </div>
-            <div>
-              <p
-                className="text-xs font-bold uppercase"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Validación
-              </p>
-              <p
-                className="text-sm font-bold"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                Certificado Clínico
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </header>

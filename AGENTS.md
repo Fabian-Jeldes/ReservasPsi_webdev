@@ -124,4 +124,4 @@ Al implementar el app definitivo: replicar tokens (colores, tipografía sans, so
 
 ## Estado
 
-App en **`web/`**: **React + TS + Vite + Tailwind + CSS Custom Properties + Cloudflare Pages**. Sistema de 4 temas visuales con diferenciación geométrica. +30 reseñas reales. Artículos con diseño orgánico y fotografías simbólicas/humanísticas. Integración de FreeBusy y creación de eventos activa en Cloudflare Workers (`worker/`). Roadmap: `docs/plan-despliegue-8-semanas.md`.
+App en **`web/`**: **React + TS + Vite + Tailwind + CSS Custom Properties + Cloudflare Pages**. Sistema de 4 temas visuales con diferenciación geométrica. +30 reseñas reales con rotación aleatoria Fisher-Yates. Biblioteca de 4 artículos clínicos migrados íntegramente desde PDFs con diseño orgánico y fotografías simbólicas/humanísticas. Integración de FreeBusy y creación de eventos activa en Cloudflare Workers (`worker/`). Roadmap: `docs/plan-despliegue-8-semanas.md`.

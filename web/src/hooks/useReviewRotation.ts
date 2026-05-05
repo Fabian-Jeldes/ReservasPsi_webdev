@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 type Options = {
-  /** Tiempo entre cambios de reseña (ms). Por defecto 6000. */
+  /** Tiempo entre cambios de reseña (ms). Por defecto 10000. */
   intervalMs?: number
-  /** Duración del fade antes de cambiar el índice (ms). Por defecto 400. */
+  /** Duración del fade antes de cambiar el índice (ms). Por defecto 600. */
   fadeMs?: number
 }
 
@@ -12,7 +12,7 @@ function shuffle<T>(array: T[]): T[] {
   const a = [...array]
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
+      ;[a[i], a[j]] = [a[j], a[i]]
   }
   return a
 }
@@ -23,8 +23,8 @@ function shuffle<T>(array: T[]): T[] {
  * la última reseña al inicio del nuevo ciclo.
  */
 export function useReviewRotation(total: number, options?: Options) {
-  const intervalMs = options?.intervalMs ?? 6000
-  const fadeMs = options?.fadeMs ?? 400
+  const intervalMs = options?.intervalMs ?? 10000
+  const fadeMs = options?.fadeMs ?? 600
 
   const [order, setOrder] = useState<number[]>(() => {
     if (total <= 0) return []
@@ -49,7 +49,7 @@ export function useReviewRotation(total: number, options?: Options) {
       // If the new first element is the same as the last shown, swap it
       if (newOrder[0] === lastShown && newOrder.length > 1) {
         const swapIdx = 1 + Math.floor(Math.random() * (newOrder.length - 1))
-        ;[newOrder[0], newOrder[swapIdx]] = [newOrder[swapIdx], newOrder[0]]
+          ;[newOrder[0], newOrder[swapIdx]] = [newOrder[swapIdx], newOrder[0]]
       }
       setOrder(newOrder)
       setPosition(0)

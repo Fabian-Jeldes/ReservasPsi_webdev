@@ -1,4 +1,4 @@
-import { Lock, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react'
+import { Lock, ShieldCheck } from 'lucide-react'
 
 export function SiteFooter() {
   return (
@@ -10,7 +10,7 @@ export function SiteFooter() {
       }}
     >
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-4">
-        <div className="md:col-span-2">
+        <div className="md:col-span-3">
           <div className="mb-6 flex items-center gap-2">
             <div
               className="flex h-8 w-8 items-center justify-center rounded text-sm font-bold shadow-lg"
@@ -26,41 +26,15 @@ export function SiteFooter() {
               className="text-xl font-bold tracking-tight"
               style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
             >
-              Andi
+              Andrei Andrusco Fidalgo
             </span>
           </div>
           <p
-            className="max-w-sm leading-relaxed"
+            className="max-w-2xl leading-relaxed"
             style={{ color: 'var(--text-muted)' }}
           >
-            Terapia sexual clínica con un enfoque humanista. Recupera tu vida sexual sin presiones ni
-            juicios sociales.
+            Hacia una salud sexual más humana, libre y auténtica. Recupera el placer de ser tú mismo, sin las etiquetas ni las presiones del entorno.
           </p>
-        </div>
-
-        <div>
-          <h5
-            className="mb-6 font-bold"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            Contacto
-          </h5>
-          <ul className="space-y-4 text-sm" style={{ color: 'var(--text-muted)' }}>
-            {[
-              { Icon: Mail, text: 'hola@andi.cl' },
-              { Icon: Phone, text: '+56 9 1234 5678' },
-              { Icon: MapPin, text: 'Santiago, Chile' },
-            ].map(({ Icon, text }) => (
-              <li
-                key={text}
-                className="flex cursor-pointer items-center gap-2 transition-colors"
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-              >
-                <Icon size={16} aria-hidden /> {text}
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div>
