@@ -83,19 +83,21 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
             boxShadow: 'var(--shadow-card)',
           }}
         >
-          {/* Badge */}
-          <div
-            className="absolute right-8 top-0 z-10 translate-y-[-50%] rounded-full px-6 py-2 text-sm font-bold shadow-xl"
-            style={{
-              backgroundColor: 'var(--accent)',
-              color: 'var(--text-inverse)',
-            }}
-          >
-            Doctoralia Verified
-          </div>
-
           {/* Inner content — padded so nothing overflows */}
           <div className="p-8 md:p-12">
+            {/* Badge — inside card, top-right */}
+            <div className="mb-6 flex justify-end">
+              <span
+                className="rounded-full px-5 py-1.5 text-xs font-bold shadow-lg"
+                style={{
+                  backgroundColor: 'var(--accent)',
+                  color: 'var(--text-inverse)',
+                }}
+              >
+                Doctoralia Verified
+              </span>
+            </div>
+
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
               {/* Left column: title */}
               <div className="shrink-0 text-center md:text-left">
