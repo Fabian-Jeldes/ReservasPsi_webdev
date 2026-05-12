@@ -11,23 +11,38 @@ export function SiteFooter() {
     >
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-4">
         <div className="md:col-span-3">
-          <div className="mb-6 flex items-center gap-2">
-            <div
-              className="flex h-8 w-8 items-center justify-center rounded text-sm font-bold shadow-lg"
+          <div className="mb-6 flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div
+                className="flex h-8 w-8 items-center justify-center rounded text-sm font-bold shadow-lg"
+                style={{
+                  backgroundColor: 'var(--accent)',
+                  color: 'var(--text-inverse)',
+                  boxShadow: 'var(--shadow-accent)',
+                }}
+              >
+                A
+              </div>
+              <span
+                className="text-xl font-bold tracking-tight"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                <span className="brand-text">
+                  <span className="brand-initial">A</span>ndrei <span className="brand-initial">A</span>ndrusco <span className="brand-initial">F</span>idalgo
+                </span>
+              </span>
+            </div>
+            <a
+              href="#reserva"
+              className="rounded-full px-4 py-2 text-xs font-bold transition-all hover:scale-105"
               style={{
                 backgroundColor: 'var(--accent)',
                 color: 'var(--text-inverse)',
                 boxShadow: 'var(--shadow-accent)',
               }}
             >
-              A
-            </div>
-            <span
-              className="text-xl font-bold tracking-tight"
-              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
-            >
-              Andrei Andrusco Fidalgo
-            </span>
+              Ver horas disponibles
+            </a>
           </div>
           <p
             className="max-w-2xl leading-relaxed"
@@ -71,6 +86,7 @@ export function SiteFooter() {
           className="text-[10px] font-black uppercase italic tracking-widest"
           style={{ color: 'var(--text-muted)' }}
         >
+          © 2026 Andrei Andrusco Fidalgo — Psicología Clínica
         </p>
         <div
           className="flex gap-8 text-[10px] font-bold uppercase tracking-widest"

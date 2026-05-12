@@ -7,7 +7,7 @@ type Props = {
 
 export function HeroSection({ onContactClick }: Props) {
   return (
-    <header className="mx-auto flex max-w-6xl flex-col items-center gap-16 px-6 pb-20 pt-40 md:flex-row">
+    <header id="sobre-mi" className="mx-auto flex max-w-6xl flex-col items-center gap-16 px-6 pb-20 pt-40 md:flex-row">
       <div className="flex-1 text-center md:text-left">
         <div
           className="mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-widest"
@@ -44,18 +44,18 @@ export function HeroSection({ onContactClick }: Props) {
         </h1>
         <p
           className="mt-6 max-w-2xl text-xl leading-relaxed"
-          style={{ color: 'var(--text-secondary)' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           Soy{' '}
-          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>
-            Andrei Andrusco Fidalgo
-          </strong>
+          <span className="font-bold brand-text">
+            <span className="brand-initial">A</span>ndrei <span className="brand-initial">A</span>ndrusco <span className="brand-initial">F</span>idalgo
+          </span>
           , psicólogo y sexólogo clínico. Te invito a que juntos entendamos tu{' '}
-          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>cuerpo</strong>{' '}
-          y tu <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>sexualidad</strong>{' '}
+          <strong className="font-bold text-white">cuerpo</strong>{' '}
+          y tu <strong className="font-bold text-white">sexualidad</strong>{' '}
           desde una mirada distinta: más libre, sin juicios ni presiones. Busquemos una
           forma que te funcione y, sobre todo, que te haga{' '}
-          <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>feliz</strong>{' '}
+          <strong className="font-bold" style={{ color: 'var(--accent)' }}>feliz</strong>{' '}
           a ti.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 md:justify-start">
@@ -72,7 +72,7 @@ export function HeroSection({ onContactClick }: Props) {
             onMouseEnter={(e) => (e.currentTarget.style.boxShadow = 'var(--shadow-accent-lg)')}
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = 'var(--shadow-accent)')}
           >
-            Contactar ahora{' '}
+            Ver horas disponibles{' '}
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>

@@ -70,7 +70,7 @@ export function HomePage() {
               fontWeight: 'var(--heading-weight)'
             }}
           >
-            ¿Te gustaría que conversemos?
+            ¿Te gustaría que <span style={{ color: 'var(--accent)' }}>conversemos</span>?
           </h2>
           <p 
             className="text-xl mb-10 relative z-10 max-w-2xl mx-auto"
@@ -89,7 +89,7 @@ export function HomePage() {
               boxShadow: 'var(--shadow-accent)',
             }}
           >
-            Agenda tu hora aquí
+            Ver horas disponibles
           </button>
         </div>
       </section>
