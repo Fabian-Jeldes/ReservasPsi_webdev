@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { DevAccentToggle } from './dev/DevAccentToggle'
 import { HomePage } from './pages/HomePage'
+import { AboutPage } from './pages/AboutPage'
 import { ArticlePage } from './pages/ArticlePage'
 import { ArticlesPage } from './pages/ArticlesPage'
 
@@ -19,6 +20,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/sobre-mi" element={<AboutPage />} />
         <Route path="/articulos" element={<ArticlesPage />} />
         <Route path="/articulos/:slug" element={<ArticlePage />} />
       </Routes>
@@ -26,3 +28,4 @@ export default function App() {
     </>
   )
 }
+

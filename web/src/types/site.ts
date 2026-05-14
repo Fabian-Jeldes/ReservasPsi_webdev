@@ -85,3 +85,40 @@ export const kycSchema = z.object({
 })
 
 export type KycFormState = z.infer<typeof kycSchema>
+
+export type AboutWorkplace = {
+  name: string
+  modality: string
+  since: string
+  description: string
+}
+
+export type AboutPageData = {
+  /** Intro — primer párrafo de saludo */
+  intro: string
+  /** Imagen hero de la página */
+  imageUrl: string
+  /** Sección "Mi enfoque" */
+  enfoque: {
+    title: string
+    paragraphs: string[]
+  }
+  /** Sección "La ciencia detrás de la sesión" */
+  formacion: {
+    title: string
+    paragraphs: string[]
+  }
+  /** Sección "¿Dónde me encuentras?" */
+  donde: {
+    title: string
+    intro: string
+    workplaces: AboutWorkplace[]
+  }
+  /** Sección "¿Qué te ofrezco?" */
+  ofrezco: {
+    title: string
+    paragraphs: string[]
+  }
+  /** Cierre motivacional */
+  cierre: string[]
+}

@@ -43,15 +43,15 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           </span>
         </button>
         <div className="hidden items-center gap-8 text-sm font-medium md:flex">
-          <a
-            href="/#sobre-mi"
+          <Link
+            to="/sobre-mi"
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             Sobre Mí
-          </a>
+          </Link>
           <a
             href="/#especialidades"
             className="transition-colors"
