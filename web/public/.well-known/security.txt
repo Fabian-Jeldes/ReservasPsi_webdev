@@ -1,0 +1,12 @@
+# security.txt - RFC 9116 configuration for psandrei.com
+# For security vulnerability reports, please contact:
+Contact: mailto:contacto@psandrei.com
+
+# Expiry date (typically 1 year from creation)
+Expires: 2027-06-25T12:00:00.000Z
+
+# Languages supported
+Preferred-Languages: es, en
+
+# Canonical URL
+Canonical: https://psandrei.com/.well-known/security.txt
