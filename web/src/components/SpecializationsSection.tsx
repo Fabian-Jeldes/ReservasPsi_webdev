@@ -1,9 +1,9 @@
 import { ArrowRight, Heart, Brain, Timer, Infinity, Flame, BrainCircuit, HeartHandshake } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import type { Specialization } from '../types/site'
 
 type Props = {
   items: Specialization[]
-  onSelectSpec: (spec: Specialization) => void
 }
 
 const iconMap: Record<number, any> = {
@@ -15,7 +15,9 @@ const iconMap: Record<number, any> = {
   6: HeartHandshake,
 }
 
-export function SpecializationsSection({ items, onSelectSpec }: Props) {
+export function SpecializationsSection({ items }: Props) {
+  const navigate = useNavigate()
+
   return (
     <section
       id="especialidades"
@@ -53,19 +55,23 @@ export function SpecializationsSection({ items, onSelectSpec }: Props) {
             const keyword = highlightMap[spec.id]
             const titleParts = keyword ? spec.title.split(keyword) : [spec.title]
 
+            const handleCardClick = () => {
+              navigate(`/especialidades/${spec.slug}`)
+            }
+
             return (
               <div
                 key={spec.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => onSelectSpec(spec)}
+                onClick={handleCardClick}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault()
-                    onSelectSpec(spec)
+                    handleCardClick()
                   }
                 }}
-                className="group relative cursor-pointer border p-8 text-left transition-all duration-500 hover:-translate-y-2"
+                className="group relative cursor-pointer border p-8 text-left transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
                 style={{
                   borderRadius: 'var(--radius-card)',
                   borderColor: 'var(--border-card)',
@@ -82,48 +88,49 @@ export function SpecializationsSection({ items, onSelectSpec }: Props) {
                   e.currentTarget.style.boxShadow = 'none'
                 }}
               >
-                <div
-                  className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner transition-all duration-500 group-hover:scale-110"
-                  style={{
-                    backgroundColor: 'var(--accent-soft)',
-                    color: 'var(--accent)',
-                  }}
-                >
-                  {(() => {
-                    const IconComponent = iconMap[spec.id] || Heart
-                    return <IconComponent size={28} aria-hidden />
-                  })()}
+                <div>
+                  <div
+                    className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner transition-all duration-500 group-hover:scale-110"
+                    style={{
+                      backgroundColor: 'var(--accent-soft)',
+                      color: 'var(--accent)',
+                    }}
+                  >
+                    {(() => {
+                      const IconComponent = iconMap[spec.id] || Heart
+                      return <IconComponent size={28} aria-hidden />
+                    })()}
+                  </div>
+                  <h3
+                    className="mb-3 text-xl font-bold"
+                    style={{
+                      color: 'var(--text-primary)',
+                      fontFamily: 'var(--font-heading)',
+                    }}
+                  >
+                    {keyword && titleParts.length > 1 ? (
+                      <>
+                        {titleParts[0]}
+                        <span style={{ color: 'var(--accent)' }}>{keyword}</span>
+                        {titleParts[1]}
+                      </>
+                    ) : (
+                      spec.title
+                    )}
+                  </h3>
+                  <p
+                    className="mb-5 text-xs font-bold uppercase tracking-widest"
+                    style={{ color: 'var(--accent-text)' }}
+                  >
+                    {spec.subtitle}
+                  </p>
+                  <p
+                    className="text-sm leading-relaxed line-clamp-1 md:line-clamp-none"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {spec.description}
+                  </p>
                 </div>
-                <h3
-                  className="mb-3 text-xl"
-                  style={{
-                    color: 'var(--text-primary)',
-                    fontWeight: 'var(--heading-weight)',
-                    textTransform: 'var(--heading-transform)' as any,
-                  }}
-                >
-                  {keyword && titleParts.length > 1 ? (
-                    <>
-                      {titleParts[0]}
-                      <span style={{ color: 'var(--accent)' }}>{keyword}</span>
-                      {titleParts[1]}
-                    </>
-                  ) : (
-                    spec.title
-                  )}
-                </h3>
-                <p
-                  className="mb-5 text-xs font-bold uppercase tracking-widest"
-                  style={{ color: 'var(--accent-text)' }}
-                >
-                  {spec.subtitle}
-                </p>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  {spec.description}
-                </p>
                 <div
                   className="mt-8 flex items-center justify-between border-t pt-6"
                   style={{ borderColor: 'var(--border-primary)' }}

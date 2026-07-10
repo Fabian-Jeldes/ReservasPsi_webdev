@@ -4,16 +4,16 @@ import {
   REVIEWS_DATA,
   SPECIALIZATIONS,
 } from '../data/site'
-import type { Specialization } from '../types/site'
 import { Navbar } from '../components/Navbar'
 import { HeroSection } from '../components/HeroSection'
 import { SpecializationsSection } from '../components/SpecializationsSection'
 import { ReviewsSection } from '../components/ReviewsSection'
 import { BlogSection } from '../components/BlogSection'
 import { SiteFooter } from '../components/SiteFooter'
-import { SpecializationModal } from '../components/SpecializationModal'
 import { AppointmentModal } from '../components/AppointmentModal'
 import { useReviewRotation } from '../hooks/useReviewRotation'
+import { SEO } from '../components/SEO'
+import { FaqSection } from '../components/FaqSection'
 
 export function HomePage() {
   const DISPLAY_REVIEWS = useMemo(() => {
@@ -21,12 +21,35 @@ export function HomePage() {
     return [...REVIEWS_DATA]
   }, [])
   const { currentIndex: currentReview, fade } = useReviewRotation(DISPLAY_REVIEWS.length)
-  const [selectedSpec, setSelectedSpec] = useState<Specialization | null>(null)
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false)
 
   const openBooking = useCallback(() => {
     setIsAppointmentModalOpen(true)
   }, [])
+
+  const homeSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    'name': 'Ps. Andrei Andrusco Fidalgo',
+    'image': `${window.location.origin}/portada-andi.png`,
+    'description': 'Psicólogo Clínico y Sexólogo especializado en disfunciones sexuales psicógenas y acompañamiento terapéutico individual y de pareja.',
+    'medicalSpecialty': ['Psychiatry', 'SexualMedicine'],
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Santiago',
+      'addressRegion': 'Región Metropolitana',
+      'addressCountry': 'CL'
+    },
+    'url': `${window.location.origin}/`,
+    'openingHoursSpecification': [
+      {
+        '@type': 'OpeningHoursSpecification',
+        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        'opens': '09:00',
+        'closes': '19:00'
+      }
+    ]
+  }), [])
 
   return (
     <div
@@ -37,12 +60,18 @@ export function HomePage() {
         fontFamily: 'var(--font-body)',
       }}
     >
+      <SEO
+        title="Ps. Andrei Andrusco | Psicólogo y Sexólogo Clínico en Santiago"
+        description="Consulta especializada en sexología clínica y terapia sexual en Santiago de Chile. Tratamiento humano para disfunción eréctil, eyaculación precoz y ansiedad de desempeño."
+        keywords="psicólogo clínico Santiago, sexólogo Santiago, terapia sexual Chile, disfunción eréctil psicógena, eyaculación precoz, ansiedad de desempeño, Andrei Andrusco"
+        jsonLd={homeSchema}
+      />
       <Navbar onLogoClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} onAgendarClick={openBooking} />
       <HeroSection onContactClick={() => {
         const section = document.getElementById('reserva');
         section?.scrollIntoView({ behavior: 'smooth' });
       }} />
-      <SpecializationsSection items={SPECIALIZATIONS} onSelectSpec={setSelectedSpec} />
+      <SpecializationsSection items={SPECIALIZATIONS} />
       <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
       
       {/* CTA Agendamiento Bajo Demanda */}
@@ -95,11 +124,8 @@ export function HomePage() {
       </section>
 
       <BlogSection posts={BLOG_POSTS} />
+      <FaqSection />
       <SiteFooter />
-
-      {selectedSpec ? (
-        <SpecializationModal spec={selectedSpec} onClose={() => setSelectedSpec(null)} />
-      ) : null}
 
       <AppointmentModal 
         isOpen={isAppointmentModalOpen} 

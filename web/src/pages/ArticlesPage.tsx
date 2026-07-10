@@ -1,16 +1,31 @@
+import { useMemo } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { ArrowRight, Calendar, Tag } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { BLOG_POSTS } from '../data/site'
+import { SEO } from '../components/SEO'
 
 export function ArticlesPage() {
   const navigate = useNavigate()
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
 
+  const articlesSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    'name': 'Biblioteca de Psicoeducación y Salud Sexual',
+    'description': 'Biblioteca con artículos clínicos de psicoeducación sobre sexualidad, relaciones y terapia de pareja.'
+  }), [])
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
+      <SEO
+        title="Biblioteca de Psicoeducación y Salud Sexual | Ps. Andrei Andrusco"
+        description="Recursos y artículos clínicos sobre sexualidad masculina, disfunción eréctil, eyaculación precoz, desmitificación de la pornografía y comunicación de pareja."
+        keywords="psicoeducación sexual, salud sexual digital, blog de sexología, educación sexual masculina"
+        jsonLd={articlesSchema}
+      />
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
       
       {/* Header Section */}

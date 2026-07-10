@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight } from 'lucide-react'
 import { ABOUT_PAGE_DATA } from '../data/site'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
+import { SEO } from '../components/SEO'
 
 export function AboutPage() {
   const data = ABOUT_PAGE_DATA
@@ -12,6 +13,22 @@ export function AboutPage() {
   const openBooking = useCallback(() => {
     setIsAppointmentModalOpen(true)
   }, [])
+
+  const aboutSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    'mainEntity': {
+      '@type': 'Person',
+      'name': 'Andrei Andrusco Fidalgo',
+      'jobTitle': 'Psicólogo Clínico y Sexólogo',
+      'alumniOf': {
+        '@type': 'EducationalOrganization',
+        'name': 'Universidad Adolfo Ibáñez'
+      },
+      'description': 'Psicólogo Clínico y Sexólogo con Magíster en Psicología Clínica y diplomados en Sexología Clínica, especializado en disfunciones sexuales psicógenas.',
+      'image': `${window.location.origin}/sobre-mi-andi.jpg`
+    }
+  }), [])
 
   return (
     <div
@@ -22,6 +39,12 @@ export function AboutPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
+      <SEO
+        title="Sobre mí | Ps. Andrei Andrusco - Formación y Enfoque Clínico"
+        description="Conoce la trayectoria y formación del Ps. Andrei Andrusco, Psicólogo Clínico y Sexólogo. Especialista con Magíster en Psicología y diplomados en Sexología Clínica."
+        keywords="Andrei Andrusco Fidalgo, sexólogo clínico Chile, psicólogo online Chile, terapia sexología clínica, formación UAI"
+        jsonLd={aboutSchema}
+      />
       <Navbar onLogoClick={() => window.location.href = '/'} onAgendarClick={openBooking} />
 
       {/* ── Hero Section ── */}

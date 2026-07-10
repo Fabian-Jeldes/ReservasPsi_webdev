@@ -7,6 +7,7 @@ export type Review = {
 
 export type Specialization = {
   id: number
+  slug: string
   title: string
   subtitle: string
   /** Texto en la card */
@@ -15,6 +16,8 @@ export type Specialization = {
   moreContent: string
   /** Contenido detallado para el modal extendido */
   detailedContent?: string[]
+  /** Referencias científicas opcionales */
+  references?: string[]
 }
 
 export type BlogPost = {
@@ -121,4 +124,15 @@ export type AboutPageData = {
   }
   /** Cierre motivacional */
   cierre: string[]
+}
+
+export type FaqItem = {
+  question: string
+  answer: string
+}
+
+export type FaqCategory = {
+  id: string
+  title: string
+  items: FaqItem[]
 }

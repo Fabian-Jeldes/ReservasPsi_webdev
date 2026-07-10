@@ -5,6 +5,7 @@ import type {
   Specialization,
   ArticlePageData,
   AboutPageData,
+  FaqCategory,
 } from '../types/site'
 
 export const PROFILE_IMAGE_URL = '/portada-andi.png'
@@ -229,6 +230,7 @@ export const REVIEWS_DATA: Review[] = [
 export const SPECIALIZATIONS: Specialization[] = [
   {
     id: 1,
+    slug: 'disfuncion-erectil-psicogena',
     title: 'Disfunción Eréctil Psicógena',
     subtitle: 'Reconceptualizando la erección',
     description:
@@ -236,16 +238,22 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Aprenderemos a soltar la exigencia y el miedo a fallar, permitiéndote disfrutar sin que un contratiempo se sienta como una fatalidad, sino solo como un momento pasajero.',
     detailedContent: [
-      "Es muy común que cuando un hombre pierde la erección, o le empieza a pasar de forma recurrente, sienta que algo se \"rompió\" dentro de él. Nos han hecho creer que el cuerpo masculino tiene que estar siempre listo, como si fuera un interruptor que simplemente se enciende a voluntad. Pero la realidad humana es mucho más compleja y, a la vez, mucho más lógica.",
-      "Para que una erección ocurra y se mantenga, tu cuerpo necesita sentirse en un <strong class=\"text-white\">espacio de confianza, disfrute y relajación</strong>. Sin embargo, ¿qué pasa cuando entras a la intimidad pensando \"ojalá no me falle hoy\", \"tengo que cumplir\" o \"¿y si me vuelve a pasar?\"? En ese momento, tu cerebro detecta una amenaza. Se encienden las alarmas, el <strong class=\"text-white\">miedo al fracaso toma el control</strong> y tu sistema nervioso reacciona preparándote para \"huir o pelear\" ante ese peligro.",
-      "En ese estado de alerta máxima, la <strong class=\"text-white\">excitación es biológicamente imposible</strong>. Tu cuerpo, literalmente, desconecta la respuesta sexual porque toda su energía está puesta en defenderte de esa angustia mental.",
-      "Por eso es tan importante entender que <strong class=\"text-white\">no estás enfermo ni defectuoso</strong>. ¡Al contrario! Tu cuerpo está funcionando a la perfección, respondiendo de manera completamente congruente a las señales de estrés intenso que tu mente le está enviando. Estás reaccionando a una <strong class=\"text-white\">falsa alarma creada por la autoexigencia</strong>.",
-      "En nuestro trabajo en terapia no buscaremos \"soluciones mágicas\" para obligar a tu cuerpo a rendir, porque <strong class=\"text-white\">intentar forzar una erección es justamente lo que más la aleja</strong>. Lo que haremos será desarmar esa presión asfixiante. Te ayudaré a entender cómo operan tus propios bloqueos, a aceptar que somos falibles y a perderle el miedo a que la respuesta física fluctúe. Cuando dejamos de tratar a la intimidad como un examen que hay que aprobar, la ansiedad baja, el bloqueo simplemente pasa y tu cuerpo <strong class=\"text-white\">vuelve a conectarse con el placer de forma natural</strong>.",
-      "<strong class=\"text-white font-bold\">\"La erección no es un interruptor que se enciende a voluntad, sino una respuesta natural que florece cuando apagamos el miedo a fallar.\"</strong>"
+      'Es muy común que cuando un hombre pierde la erección, o le empieza a pasar de forma recurrente, sienta que algo se "rompió" dentro de él. Nos han hecho creer que el cuerpo masculino tiene que estar siempre listo, como si fuera un interruptor que simplemente se enciende a voluntad. Pero la realidad humana es mucho más compleja y, a la vez, mucho más lógica.',
+      'Para que una erección ocurra y se mantenga, tu cuerpo necesita sentirse en un <strong class="text-white">espacio de confianza, disfrute y relajación</strong>. Sin embargo, ¿qué pasa cuando entras a la intimidad pensando "ojalá no me falle hoy", "tengo que cumplir" o "¿y si me vuelve a pasar?"? En ese momento, tu cerebro detecta una amenaza. Se encienden las alarmas, el <strong class="text-white">miedo al fracaso toma el control</strong> y tu sistema nervioso reacciona preparándote para "huir o pelear" ante ese peligro.',
+      'En ese estado de alerta máxima, la <strong class="text-white">excitación es biológicamente imposible</strong>. Tu cuerpo, literalmente, desconecta la respuesta sexual porque toda su energía está puesta en defenderte de esa angustia mental.',
+      'Por eso es tan importante entender que <strong class="text-white">no estás enfermo ni defectuoso</strong>. ¡Al contrario! Tu cuerpo está funcionando a la perfección, respondiendo de manera completamente congruente a las señales de estrés intenso que tu mente le está enviando. Estás reaccionando a una <strong class="text-white">falsa alarma creada por la autoexigencia</strong>.',
+      'En nuestro trabajo en terapia no buscaremos "soluciones mágicas" para obligar a tu cuerpo a rendir, porque <strong class="text-white">intentar forzar una erección es justamente lo que más la aleja</strong>. Lo que haremos será desarmar esa presión asfixiante. Te ayudaré a entender cómo operan tus propios bloqueos, a aceptar que somos falibles y a perderle el miedo a que la respuesta física fluctúe. Cuando dejamos de tratar a la intimidad como un examen que hay que aprobar, la ansiedad baja, el bloqueo simplemente pasa y tu cuerpo <strong class="text-white">vuelve a conectarse con el placer de forma natural</strong>.',
+      '<strong class="text-white font-bold">"La erección no es un interruptor que se enciende a voluntad, sino una respuesta natural que florece cuando apagamos el miedo a fallar."</strong>'
+    ],
+    references: [
+      'Barlow, D. H. (1986). Causes of sexual dysfunction: The role of anxiety and cognitive interference. <a href="https://pubmed.ncbi.nlm.nih.gov/3700804/" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Consulting and Clinical Psychology</a>.',
+      'American Psychological Association (APA). (2020). <a href="https://www.apa.org/topics/sexual-health" target="_blank" rel="noopener noreferrer" class="editorial-link">Understanding sexual health and erectile dysfunction</a>.',
+      'Bancroft, J. (2009). Human Sexuality and Its Problems. Elsevier Health Sciences.'
     ]
   },
   {
     id: 2,
+    slug: 'control-eyaculatorio',
     title: 'Control Eyaculatorio (Precoz y Retardado)',
     subtitle: 'Tu sexualidad, a tu propio ritmo',
     description:
@@ -253,17 +261,23 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Desarmaremos la trampa del automonitoreo y la obligación, explorando tus propios mecanismos para que puedas reconectar con el placer genuino y dejar que tu respuesta sexual fluya naturalmente a tu propio ritmo.',
     detailedContent: [
-      "A los hombres se les ha enseñado a ver su cuerpo como un reloj que debe estar perfectamente sincronizado. Si terminas muy rápido, sientes que fallaste. Si te demoras demasiado o simplemente no logras llegar, también sientes que fallaste. Esta exigencia constante de tener que \"durar lo exacto\" o \"llegar a la meta\" convierte un espacio que debería ser de conexión y disfrute en un <strong class=\"text-white\">agotador examen de rendimiento</strong>.",
-      "Aunque parezcan problemas opuestos, llegar antes de tiempo o no poder llegar por más que te esfuerces comparten exactamente la misma raíz: <strong class=\"text-white\">la ansiedad, la presión por el \"deber ser\" y el automonitoreo constante</strong>.",
-      "Cuando entras a la intimidad hipervigilante, pensando cosas como \"tengo que aguantar\", \"ojalá no me pase de nuevo\" o \"¿por qué no estoy terminando?\", tu mente deja de estar en el momento presente y <strong class=\"text-white\">se convierte en un juez</strong>. Este exceso de control mental y angustia hace que tu sistema nervioso entre en estado de alerta.",
-      "En algunos hombres, esta alarma producida por la ansiedad acelera drásticamente el proceso... En otros, produce el efecto de <strong class=\"text-white\">\"espectador\"</strong>: la sobre-observación te desconecta tanto de las sensaciones físicas que tu cuerpo se bloquea, impidiendo alcanzar el clímax a pesar del esfuerzo.",
-      "En ninguno de los dos casos tu cuerpo está dañado o enfermo. Tu cuerpo está sano y está respondiendo de manera completamente lógica a la <strong class=\"text-white\">presión de una obligación irreal</strong>.",
-      "En nuestro espacio de terapia no vamos a buscar \"trucos\" mecánicos para que te distraigas o intentes forzar a tu cuerpo a comportarse como una máquina. Eso solo aumenta la desconexión. Lo que haremos será <strong class=\"text-white\">desarmar esa autoexigencia asfixiante</strong>. Te acompañaré a entender cómo funcionan tus propios mecanismos de alerta, a perdonarte la exigencia de ser infalible y a dejar de evaluar tu desempeño. Cuando le quitamos a la intimidad el carácter de obligación, puedes <strong class=\"text-white\">volver a habitar tu cuerpo</strong>, reconectar con el placer genuino y dejar que tu respuesta sexual, finalmente, fluya a su propio ritmo.",
-      "<strong class=\"text-white font-bold\">\"Tu cuerpo no es un cronómetro; el placer solo encuentra su verdadero ritmo cuando dejas de evaluar tu rendimiento.\"</strong>"
+      'A los hombres se les ha enseñado a ver su cuerpo como un reloj que debe estar perfectamente sincronizado. Si terminas muy rápido, sientes que fallaste. Si te demoras demasiado o simplemente no logras llegar, también sientes que fallaste. Esta exigencia constante de tener que "durar lo exacto" o "llegar a la meta" convierte un espacio que debería ser de conexión y disfrute en un <strong class="text-white">agotador examen de rendimiento</strong>.',
+      'Aunque parezcan problemas opuestos, llegar antes de tiempo o no poder llegar por más que te esfuerces comparten exactamente la misma raíz: <strong class="text-white">la ansiedad, la presión por el "deber ser" y el automonitoreo constante</strong>.',
+      'Cuando entras a la intimidad hipervigilante, pensando cosas como "tengo que aguantar", "ojalá no me pase de nuevo" o "¿por qué no estoy terminando?", tu mente deja de estar en el momento presente y <strong class="text-white">se convierte en un juez</strong>. Este exceso de control mental y angustia hace que tu sistema nervioso entre en estado de alerta.',
+      'En algunos hombres, esta alarma producida por la ansiedad acelera drásticamente el proceso... En otros, produce el efecto de <strong class="text-white">"espectador"</strong> (estudiado clínicamente por el <a href="https://pubmed.ncbi.nlm.nih.gov/3700804/" target="_blank" rel="noopener noreferrer" class="editorial-link">Dr. David Barlow</a>): la sobre-observación te desconecta tanto de las sensaciones físicas que tu cuerpo se bloquea, impidiendo alcanzar el clímax a pesar del esfuerzo.',
+      'En ninguno de los dos casos tu cuerpo está dañado o enfermo. Tu cuerpo está sano y está respondiendo de manera completamente lógica a la <strong class="text-white">presión de una obligación irreal</strong>.',
+      'En nuestro espacio de terapia no vamos a buscar "trucos" mecánicos para que te distraigas o intentes forzar a tu cuerpo a comportarse como una máquina. Eso solo aumenta la desconexión. Lo que haremos será <strong class="text-white">desarmar esa autoexigencia asfixiante</strong>. Te acompañaré a entender cómo funcionan tus propios mecanismos de alerta, a perdonarte la exigencia de ser infalible y a dejar de evaluar tu desempeño. Cuando le quitamos a la intimidad el carácter de obligación, puedes "volver a habitar tu cuerpo", reconectar con el placer genuino y dejar que tu respuesta sexual, finalmente, fluya a su propio ritmo.',
+      '<strong class="text-white font-bold">"Tu cuerpo no es un cronómetro; el placer solo encuentra su verdadero ritmo cuando dejas de evaluar tu rendimiento."</strong>'
+    ],
+    references: [
+      'Althof, S. E. (2016). Treatment of rapid ejaculation: Psychotherapy, pharmacotherapy, and combined therapy. <a href="https://pubmed.ncbi.nlm.nih.gov/27045952/" target="_blank" rel="noopener noreferrer" class="editorial-link">The Journal of Sexual Medicine</a>.',
+      'International Society for Sexual Medicine (ISSM). (2018). <a href="https://www.issm.info/" target="_blank" rel="noopener noreferrer" class="editorial-link">Clinical Practice Guidelines for Premature and Delayed Ejaculation</a>.',
+      'Rowland, D. L., & Cooper, S. E. (2011). Understanding and treating premature ejaculation. <a href="https://pubmed.ncbi.nlm.nih.gov/21834947/" target="_blank" rel="noopener noreferrer" class="editorial-link">Postgraduate Medicine</a>.'
     ]
   },
   {
     id: 3,
+    slug: 'cambios-deseo-sexual',
     title: 'Cambios en el Deseo Sexual',
     subtitle: 'Normalizando tu experiencia',
     description:
@@ -271,16 +285,22 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Te acompaño a entender que estas fluctuaciones son reacciones normales y no una enfermedad, para reincorporar la sexualidad a tu vida de forma más amable y compasiva.',
     detailedContent: [
-      "Existe un mito cultural muy pesado y silencioso: la idea tóxica de que el hombre debe estar \"siempre listo\" y con ganas, como si el deseo masculino fuera un motor inagotable que no se apaga jamás. Por eso, cuando notas que tu interés por la intimidad disminuye o simplemente desaparece, es muy fácil caer en la culpa, sentir que estás perdiendo tu masculinidad o pensar que algo dentro de ti se \"rompió\".",
-      "Pero la realidad humana es muy distinta. El deseo sexual no es un interruptor automático, sino un <strong class=\"text-white\">sistema altamente sensible a tu entorno, a tus emociones y a tus niveles de energía</strong>. Imagina que tu respuesta sexual tiene un acelerador y un freno. Las presiones del trabajo, el cansancio crónico o las tensiones no resueltas actúan como un <strong class=\"text-white\">freno de mano puesto a fondo</strong>.",
-      "Fisiológicamente, cuando estás sobrecargado por la rutina o las preocupaciones, tu cerebro interpreta que estás en <strong class=\"text-white\">modo de \"supervivencia\"</strong>. Y biológicamente, cuando el sistema nervioso está intentando sobrevivir al estrés diario, <strong class=\"text-white\">la reproducción y el placer pasan a ser la última prioridad</strong>. Tu cuerpo, literalmente, apaga el deseo para ahorrar energía.",
-      "Por lo tanto, una baja en tu libido no significa que estés enfermo, que seas defectuoso o que tu relación esté arruinada. Al contrario, tu cuerpo está teniendo una <strong class=\"text-white\">reacción completamente normal, lógica y sana</strong> frente a un nivel de agotamiento o presión que tu mente ya no puede procesar.",
-      "En nuestra terapia no vamos a juzgarte, ni mucho menos a forzarte a \"tener ganas\"... Obligarse a desear solo genera más riesgo y frustración. Lo que haremos será <strong class=\"text-white\">quitarle a la intimidad el peso de ser \"otra obligación más\"</strong> en tu lista de tareas, para que puedas reencontrarte con tu sexualidad de una forma mucho más <strong class=\"text-white\">amable, compasiva y humana</strong>.",
-      "<strong class=\"text-white font-bold\">\"No existe el deber de 'estar siempre listo'; tu deseo no se apagó, solo está reaccionando al peso y al estrés de tu rutina.\"</strong>"
+      'Existe un mito cultural muy pesado y silencioso: la idea tóxica de que el hombre debe estar "siempre listo" y con ganas, como si el deseo masculino fuera un motor inagotable que no se apaga jamás. Por eso, cuando notas que tu interés por la intimidad disminuye o simplemente desaparece, es muy fácil caer en la culpa, sentir que estás perdiendo tu masculinidad o pensar que algo dentro de ti se "rompió".',
+      'Pero la reality humana es muy distinta. El deseo sexual no es un interruptor automático, sino un <strong class="text-white">sistema altamente sensible a tu entorno, a tus emociones y a tus niveles de energía</strong> (explicado mediante el modelo circular de <a href="https://pubmed.ncbi.nlm.nih.gov/11107297/" target="_blank" rel="noopener noreferrer" class="editorial-link">Rosemary Basson</a>). Imagina que tu respuesta sexual tiene un acelerador y un freno. Las presiones del trabajo, el cansancio crónico o las tensiones no resueltas actúan como un <strong class="text-white">freno de mano puesto a fondo</strong>.',
+      'Fisiológicamente, cuando estás sobrecargado por la rutina o las preocupaciones, tu cerebro interpreta que estás en <strong class="text-white">modo de "supervivencia"</strong>. Y biológicamente, cuando el sistema nervioso está intentando sobrevivir al estrés diario, <strong class="text-white">la reproducción y el placer pasan a ser la última prioridad</strong>. Tu cuerpo, literalmente, apaga el deseo para ahorrar energía.',
+      'Por lo tanto, una baja en tu libido no significa que estés enfermo, que seas defectuoso o que tu relación esté arruinada. Al contrario, tu cuerpo está teniendo una <strong class="text-white">reacción completamente normal, lógica y sana</strong> frente a un nivel de agotamiento o presión que tu mente ya no puede procesar.',
+      'En nuestra terapia no vamos a juzgarte, ni mucho menos a forzarte a "tener ganas"... Obligarse a desear solo genera más riesgo y frustración. Lo que haremos será <strong class="text-white">quitarle a la intimidad el peso de ser "otra obligación más"</strong> en tu lista de tareas, para que puedas reencontrarte con tu sexualidad de una forma mucho más <strong class="text-white">amable, compasiva y humana</strong>.',
+      '<strong class="text-white font-bold">"No existe el deber de \'estar siempre listo\'; tu deseo no se apagó, solo está reaccionando al peso y al estrés de tu rutina."</strong>'
+    ],
+    references: [
+      'Basson, R. (2000). The female sexual response: A different model. <a href="https://pubmed.ncbi.nlm.nih.gov/11107297/" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Sex & Marital Therapy</a>.',
+      'McCarthy, B., & McCarthy, E. (2003). Rekindling Desire: A Step-by-Step Program to Help Low-Sex and No-Sex Marriages. Brunner-Routledge.',
+      'Brotto, L. A. (2018). Mindfulness-based treatment for low sexual desire. <a href="https://pubmed.ncbi.nlm.nih.gov/29088656/" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Sexual Medicine</a>.'
     ]
   },
   {
     id: 4,
+    slug: 'ansiedad-desempeno',
     title: 'Ansiedad de Desempeño y Miedo a Fallar',
     subtitle: 'Rompiendo la trampa mental',
     description:
@@ -288,16 +308,22 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Aprenderemos a aceptar nuestra falibilidad como algo absolutamente humano, soltando las consecuencias catastróficas imaginarias para que el bloqueo simplemente pase y vuelvas al placer.',
     detailedContent: [
-      "La mente tiene una capacidad asombrosa para arruinar un buen momento, especialmente cuando asume el rol de un juez crítico. Cuando un encuentro íntimo deja de ser un espacio de disfrute y se transforma en un <strong class=\"text-white\">examen que sientes que \"debes aprobar\"</strong>, el miedo toma el control. Empiezan los ecos anticipatorios: \"¿Y si me vuelve a pasar?\", \"hoy no puedo fallar\", \"tengo que demostrar que todo está bien\".",
-      "Esa es exactamente la trampa mental. Tratarte a ti mismo como \"el problema\" o convencerte de que estás dañado es el <strong class=\"text-white\">combustible principal de la ansiedad</strong>. Al entrar a la intimidad con una lupa, vigilando cada una de tus reacciones y evaluando tu rendimiento en tiempo real, tu cerebro deja de registrar el placer y comienza a registrar una amenaza.",
-      "Ante una amenaza, tu sistema nervioso reacciona. Tu cuerpo, en un intento por protegerte de esa enorme angustia psicológica, entra en estado de alerta y <strong class=\"text-white\">simplemente bloquea la respuesta sexual</strong>. No es que tu cuerpo haya olvidado cómo funcionar; es que está literalmente <strong class=\"text-white\">paralizado por el miedo a equivocarse</strong>.",
-      "Es vital que entiendas que este bloqueo no te hace menos hombre ni significa que estés enfermo. Eres una persona sana atrapada en un <strong class=\"text-white\">ciclo de autoexigencia asfixiante</strong>. Tu cuerpo está reaccionando perfectamente al terror que le provoca imaginar las consecuencias catastróficas de \"no rendir\" bajo ese estándar irreal.",
-      "En nuestro espacio de terapia, el objetivo no será darte herramientas para que te conviertas en una máquina infalible, porque eso es una fantasía inhumana. Lo que haremos será desarmar ese ciclo. Te acompañaré a mirar de frente ese temor al fracaso y a quitarle su poder destructivo. Aprenderemos que <strong class=\"text-white\">aceptar nuestra propia falibilidad no es una derrota</strong>, sino el único camino real para liberar la presión. Cuando dejamos de castigarnos por la posibilidad de fallar, la ansiedad se queda sin argumentos y tú puedes volver a entregarte al placer sin el peso del mundo sobre tus hombros. <strong class=\"text-white\">Eres falible y eso está bien</strong>. ¡Todos lo somos, bienvenido al club!",
-      "<strong class=\"text-white font-bold\">\"El mayor obstáculo para el placer no es el cuerpo, sino la exigencia mental que le imponemos.\"</strong>"
+      'La mente tiene una capacidad asombrosa para arruinar un buen momento, especialmente cuando asume el rol de un juez crítico. Cuando un encuentro íntimo deja de ser un espacio de disfrute y se transforma en un <strong class="text-white">examen que sientes que "debes aprobar"</strong>, el miedo toma el control. Empiezan los ecos anticipatorios: "¿Y si me vuelve a pasar?", "hoy no puedo fallar", "tengo que demostrar que todo está bien".',
+      'Esa es exactamente la trampa mental. Tratarte a ti mismo como "el problema" o convencerte de que estás dañado es el <strong class="text-white">combustible principal de la ansiedad</strong>. Al entrar a la intimidad con una lupa, vigilando cada una de tus reacciones y evaluando tu rendimiento en tiempo real, tu cerebro deja de registrar el placer y comienza a registrar una amenaza.',
+      'Ante una amenaza, tu sistema nervioso reacciona. Tu cuerpo, en un intento por protegerte de esa enorme angustia psicológica, entra en estado de alerta y <strong class="text-white">simplemente bloquea la respuesta sexual</strong> (mecanismo cognitivo-conductual analizado por <a href="https://pubmed.ncbi.nlm.nih.gov/16912384/" target="_blank" rel="noopener noreferrer" class="editorial-link">Nobre & Pinto-Gouveia, 2006</a>). No es que tu cuerpo haya olvidado cómo funcionar; es que está literalmente <strong class="text-white">paralizado por el miedo a equivocarse</strong>.',
+      'Es vital que entiendas que este bloqueo no te hace menos hombre ni significa que estés enfermo. Eres una persona sana atrapada en un <strong class="text-white">ciclo de autoexigencia asfixiante</strong>. Tu cuerpo está reaccionando perfectamente al terror que le provoca imaginar las consecuencias catastróficas de "no rendir" bajo ese estándar irreal.',
+      'En nuestro espacio de terapia, el objetivo no será darte herramientas para que te conviertas en una máquina infalible, porque eso es una fantasía inhumana. Lo que haremos será desarmar ese ciclo. Te acompañaré a mirar de frente ese temor al fracaso y a quitarle su poder destructivo. Aprenderemos que <strong class="text-white">aceptar nuestra propia falibilidad no es una derrota</strong>, sino el único camino real para liberar la presión. Cuando dejamos de castigarnos por la posibilidad de fallar, la ansiedad se queda sin argumentos y tú puedes volver a entregarte al placer sin el peso del mundo sobre tus hombros. <strong class="text-white">Eres falible y eso está bien</strong>. ¡Todos lo somos, bienvenido al club!',
+      '<strong class="text-white font-bold">"El mayor obstáculo para el placer no es el cuerpo, sino la exigencia mental que le imponemos."</strong>'
+    ],
+    references: [
+      'Nobre, P. J., & Pinto-Gouveia, J. (2006). Cognitive processes associated with sexual dysfunction. <a href="https://pubmed.ncbi.nlm.nih.gov/16912384/" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Sex Research</a>.',
+      'Mayo Clinic. (2022). <a href="https://www.mayoclinic.org/diseases-conditions/erectile-dysfunction/symptoms-causes/syc-20355776" target="_blank" rel="noopener noreferrer" class="editorial-link">Erectile dysfunction: Psychological causes and performance anxiety</a>.',
+      'Metz, M. E., & McCarthy, B. W. (2004). Coping with Erectile Dysfunction: How to Regain Confidence and Enjoy Great Sex. New Harbinger Publications.'
     ]
   },
   {
     id: 5,
+    slug: 'comunicacion-sexual',
     title: 'Comunicación Sexual',
     subtitle: 'Conexión desde nuestra humanidad',
     description:
@@ -305,15 +331,21 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Fomentamos un lugar seguro para hablar de lo que te pasa sin culpas. Entender y compartir que somos sanos pero falibles alivia la presión y fortalece la conexión real; al compartirlo, el peso se hace más ligero.',
     detailedContent: [
-      "Uno de los pesos más grandes que cargan los hombres cuando enfrentan una dificultad sexual es el silencio. Culturalmente nos han enseñado que hablar de nuestras inseguridades es un signo de debilidad. Por eso, la reacción automática suele ser aislarse y <strong class=\"text-white\">levantar un muro invisible de vergüenza</strong> y distancia con la pareja.",
-      "El problema de este silencio es que transforma la sexualidad en un escenario solitario. Dejas de estar verdaderamente con la otra persona para quedarte encerrado en tu propia cabeza. El sexo deja de ser un espacio para compartir y se convierte en una <strong class=\"text-white\">fría prueba de rendimiento donde toda la responsabilidad recae sobre tus hombros</strong>.",
-      "En nuestra terapia, el objetivo es construir un lugar seguro donde sea posible hablar sin tener que sostener esa <strong class=\"text-white\">pesada armadura de \"hombre infalible\"</strong>. Aprenderemos que mostrarte vulnerable y expresar lo que sientes no te hace menos hombre, sino simplemente humano.",
-      "Cuando logramos verbalizar nuestros miedos, ocurre algo tremendamente liberador: <strong class=\"text-white\">la presión se desinfla casi de inmediato</strong>. Al soltar el secreto y dejar de intentar resolverlo todo en soledad, el encuentro íntimo vuelve a ser lo que siempre debió ser: un <strong class=\"text-white\">espacio de exploración, empatía y conexión real</strong>, donde el peso, al compartirse, se hace muchísimo más ligero.",
-      "<strong class=\"text-white font-bold\">\"El silencio alimenta la ansiedad; compartir nuestra vulnerabilidad es lo que verdaderamente fortalece la conexión.\"</strong>"
+      'Uno de los pesos más grandes que cargan los hombres cuando enfrentan una dificultad sexual es el silencio. Culturalmente nos han enseñado que hablar de nuestras inseguridades es un signo de debilidad. Por eso, la reacción automática suele ser aislarse y <strong class="text-white">levantar un muro invisible de vergüenza</strong> y distancia con la pareja.',
+      'El problema de este silencio es que transforma la sexualidad en un escenario solitario. Dejas de estar verdaderamente con la otra persona para quedarte encerrado en tu propia cabeza. El sexo deja de ser un espacio para compartir y se convierte en una <strong class="text-white">fría prueba de rendimiento donde toda la responsabilidad recae sobre tus hombros</strong>.',
+      'En nuestra terapia, el objetivo es construir un lugar seguro donde sea posible hablar sin tener que sostener esa <strong class="text-white">pesada armadura de "hombre infalible"</strong>. Aprenderemos que mostrarte vulnerable y expresar lo que sientes no te hace menos hombre, sino simplemente humano.',
+      'Cuando logramos verbalizar nuestros miedos, ocurre algo tremendamente liberador: <strong class="text-white">la presión se desinfla casi de inmediato</strong>. Al soltar el secreto y dejar de intentar resolverlo todo en soledad, el encuentro íntimo vuelve a ser lo que siempre debió ser: un <strong class="text-white">espacio de exploración, empatía y conexión real</strong>, donde el peso, al compartirse, se hace muchísimo más ligero.',
+      '<strong class="text-white font-bold">"El silencio alimenta la ansiedad; compartir nuestra vulnerabilidad es lo que verdaderamente fortalece la conexión."</strong>'
+    ],
+    references: [
+      'Gottman, J. M., & Silver, N. (2015). The Seven Principles for Making Marriage Work. Harmony. <a href="https://www.gottman.com/" target="_blank" rel="noopener noreferrer" class="editorial-link">The Gottman Institute</a>.',
+      'Byers, E. S. (2005). Relationship satisfaction and sexual satisfaction: A longitudinal study of couples. <a href="https://journals.sagepub.com/doi/10.1177/0265407505052441" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Social and Personal Relationships</a>.',
+      'Schnarch, D. (1997). Passionate Marriage: Love, Sex, and Intimacy in Emotionally Committed Relationships. Henry Holt and Co.'
     ]
   },
   {
     id: 6,
+    slug: 'impacto-pornografia',
     title: 'Impacto de la Pornografía',
     subtitle: 'Una adicción silenciosa',
     description:
@@ -321,15 +353,23 @@ export const SPECIALIZATIONS: Specialization[] = [
     moreContent:
       'Especialmente cuando el consumo comienza a temprana edad, este hábito puede mutar tus expectativas y desconectarte de tu deseo real, operando como un factor de riesgo silencioso para problemas de erección y ansiedad. Sin juicios morales, exploraremos cómo desarmar esta dependencia para que puedas "reiniciar" tus sentidos y reconectar con una sexualidad auténtica, humana y libre de ficción.',
     detailedContent: [
-      "Es muy común que, en el silencio y la privacidad, muchos hombres noten que el sexo en la vida real ya no les genera la misma respuesta física ni el mismo entusiasmo que lo que ven en una pantalla. Cuando tu cuerpo no responde frente a una pareja, pero sí frente al teléfono, <strong class=\"text-white\">la confusión y la culpa suelen ser abrumadoras</strong>.",
-      "Para entender esto sin juzgarte, debemos mirar cómo funciona el cerebro frente a la <strong class=\"text-white\">hiperestimulación</strong>. Cuando la exposición a la pornografía comienza a temprana edad, esta actúa como una \"escuela\" distorsionada que nos enseña a asociar la excitación con una novedad infinita y un rendimiento irreal, <strong class=\"text-white\">sin la vulnerabilidad emocional que exige el contacto humano</strong>.",
-      "Con el tiempo, este consumo sostenido provoca una <strong class=\"text-white\">profunda desconexión con el deseo real</strong>. Al enfrentarte a la intimidad humana —que es naturalmente más pausada e imperfecta— tu sistema nervioso puede sentirse desorientado, porque no encuentra ese nivel extremo de estímulo al que está acostumbrado.",
-      "Es justamente por esta descalibración que suelen aparecer los bloqueos: pérdidas de erección inexplicables, dificultad para llegar al clímax, o una <strong class=\"text-white\">ansiedad asfixiante por sentir que tienes que \"actuar\"</strong> imitando lo que has visto en la pantalla. No es que tu cuerpo esté dañado; es simplemente que se ha <strong class=\"text-white\">acostumbrado a un estímulo artificial</strong>.",
-      "En nuestro espacio de terapia no hay lugar para los sermones ni los juicios morales. Lo que haremos será <strong class=\"text-white\">\"reiniciar\" tu sistema nervioso</strong>, ayudándote a soltar la presión de la ficción para que puedas reconectar con el placer genuino y descubrir que la intimidad compartida, con toda su humanidad, es profundamente más satisfactoria.",
-      "<strong class=\"text-white font-bold\">\"La sexualidad real no compite con una pantalla; desaprender esos estándares irreales es clave para 'reiniciar' tu deseo.\"</strong>"
+      'Es muy común que, en el silencio y la privacidad, muchos hombres noten que el sexo en la vida real ya no les genera la misma respuesta física ni el mismo entusiasmo que lo que ven en una pantalla. Cuando tu cuerpo no responde frente a una pareja, pero sí frente al teléfono, <strong class="text-white">la confusión y la culpa suelen ser abrumadoras</strong>.',
+      'Para entender esto sin juzgarte, debemos mirar cómo funciona el cerebro frente a la <strong class="text-white">hiperestimulación</strong>. Cuando la exposición a la pornografía comienza a temprana edad, esta actúa como una "escuela" distorsionada que nos enseña a asociar la excitación con una novedad infinita y un rendimiento irreal, <strong class="text-white">sin la vulnerabilidad emocional que exige el contacto humano</strong>.',
+      'Con el tiempo, este consumo sostenido provoca una <strong class="text-white">profunda desconexión con el deseo real</strong>. Al enfrentarte a la intimidad humana —que es naturalmente más pausada e imperfecta— tu sistema nervioso puede sentirse desorientado, porque no encuentra ese nivel extremo de estímulo al que está acostumbrado.',
+      'Es justamente por esta descalibración que suelen aparecer los bloqueos: pérdidas de erección inexplicables, dificultad para llegar al clímax, o una <strong class="text-white">Disfunción Eréctil Inducida por Pornografía (PIED)</strong> (concepto analizado científicamente por <a href="https://pubmed.ncbi.nlm.nih.gov/27845656/" target="_blank" rel="noopener noreferrer" class="editorial-link">Park et al., 2016</a>), o una ansiedad asfixiante por sentir que tienes que "actuar" imitando lo que has visto en la pantalla. No es que tu cuerpo esté dañado; es simplemente que se ha <strong class="text-white">acostumbrado a un estímulo artificial</strong>.',
+      'En nuestro espacio de terapia no hay lugar para los sermones ni los juicios morales. Lo que haremos será "reiniciar" tu sistema nervioso, ayudándote a soltar la presión de la ficción para que puedas reconectar con el placer genuino y descubrir que la intimidad compartida, con toda su humanidad, es profundamente más satisfactoria.',
+      '<strong class="text-white font-bold">"La sexualidad real no compite con una pantalla; desaprender esos estándares irreales es clave para \'reiniciar\' tu deseo."</strong>'
+    ],
+    references: [
+      'Park, B. Y., et al. (2016). Is Internet Pornography Causing Sexual Dysfunctions? A Review with Clinical Reports. <a href="https://pubmed.ncbi.nlm.nih.gov/27845656/" target="_blank" rel="noopener noreferrer" class="editorial-link">Behavioral Sciences</a>.',
+      'World Health Organization (WHO). (2019). <a href="https://icd.who.int/browse11/l-m/en#/http%3a%2f%2fid.who.int%2ficd%2fentity%2f1630268601" target="_blank" rel="noopener noreferrer" class="editorial-link">Compulsive Sexual Behavior Disorder (CSBD) in ICD-11</a>.',
+      'Gola, M., et al. (2016). Behavioral and neural responses to pornography in men. <a href="https://pubmed.ncbi.nlm.nih.gov/27539958/" target="_blank" rel="noopener noreferrer" class="editorial-link">Journal of Behavioral Addictions</a>.'
     ]
   },
 ]
+export function getSpecializationBySlug(slug: string): Specialization | undefined {
+  return SPECIALIZATIONS.find((s) => s.slug === slug);
+}
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -433,7 +473,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
       {
         title: 'El silencio que nos aísla',
         paragraphs: [
-          'Quizás lo más doloroso de esta dinámica es el <strong class="text-white">silencio</strong>. Muchos hombres transitan lo que clínicamente llamamos <strong class="text-white">"Alexitimia Masculina Normativa"</strong>. Este término describe una dificultad aprendida para identificar y expresar emociones, fruto de una <strong class="text-white">socialización masculina prototípica</strong> que nos enseña, desde niños, que ser hombre es sinónimo de ser inquebrantable.',
+          'Quizás lo más doloroso de esta dinámica es el <strong class="text-white">silencio</strong>. Muchos hombres transitan lo que clínicamente llamamos <strong class="text-white"><a href="https://pubmed.ncbi.nlm.nih.gov/1435210/" target="_blank" rel="noopener noreferrer" class="editorial-link">"Alexitimia Masculina Normativa"</a></strong>. Este término describe una dificultad aprendida para identificar y expresar emociones, fruto de una <strong class="text-white">socialización masculina prototípica</strong> que nos enseña, desde niños, que ser hombre es sinónimo de ser inquebrantable.',
           'Si bien cada historia es única y no buscamos sobregeneralizar, es innegable que esta <strong class="text-white">"normalidad" estereotipada</strong> impone estándares donde expresar vulnerabilidad es visto como una falla. Al prohibirnos el lenguaje de las emociones, nos cuesta horre ponerle palabras a lo que sentimos, incluso a nosotros mismos. Cuando no tenemos permiso para nombrar el miedo o la carga, <strong class="text-white">el cuerpo termina hablando a través del síntoma sexual</strong>. El síntoma aparece como una <strong class="text-white">comunicación inconsciente</strong> de lo que no nos permitimos verbalizar. Vivir esto desde la <strong class="text-white">soledad y la vergüenza</strong> solo alimenta el fuego de la ansiedad y nos desconecta de nuestra propia experiencia.',
           'Entender qué nos pasa es el primer paso, pero el segundo es aprender a <strong class="text-white">romper ese silencio</strong> para que la relación vuelva a ser un refugio de seguridad y no un espacio de evaluación constante.',
           '<strong class="text-white">Lectura recomendada:</strong> Si sientes que el silencio está ganando terreno en tu relación y quieres herramientas para cambiar esta dinámica, te invito a leer mi artículo: <strong class="text-white font-bold">[El peso del silencio: Por qué hablar de sexo salva las relaciones]</strong>'
@@ -449,14 +489,14 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     },
     closingMessage: '',
     references: [
-      'Bacete, R. (2017). Nuevos hombres buenos: La masculinidad en la era del feminismo. Península.',
-      'Barlow, D. H. (1986). Causes of sexual dysfunction: The role of anxiety and cognitive interference.',
-      'Basson, R. (2000). The female sexual response: A different model.',
-      'Heilman, B., et al. (2017). The Man Box: A Study on Being a Young Man.',
-      'Jack, D. C., & Dill, D. (1992). The Silencing the Self Scale.',
-      'Levant, R. F. (1992). Toward the reconstruction of masculinity.',
-      'McCabe, M. P. (2005). The role of performance anxiety in sexual dysfunction.',
-      'Sanmartín Ortí, A., et al. (2022). La caja de la masculinidad: impacto en la juventud.'
+      'Bacete, R. (2017). Nuevos hombres buenos: La masculinidad en la era del feminismo. Península. <a href="https://www.planetadelibros.com/libro-nuevos-hombres-buenos/254406" target="_blank" rel="noopener noreferrer" class="editorial-link">Ficha editorial</a>.',
+      'Barlow, D. H. (1986). Causes of sexual dysfunction: The role of anxiety and cognitive interference. <a href="https://pubmed.ncbi.nlm.nih.gov/3700804/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Basson, R. (2000). The female sexual response: A different model. <a href="https://pubmed.ncbi.nlm.nih.gov/11107297/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Heilman, B., et al. (2017). The Man Box: A Study on Being a Young Man. <a href="https://equimundo.org/resources/the-man-box-study-on-being-a-young-man-in-us-uk-and-mexico/" target="_blank" rel="noopener noreferrer" class="editorial-link">Equimundo</a>.',
+      'Jack, D. C., & Dill, D. (1992). The Silencing the Self Scale. <a href="https://pubmed.ncbi.nlm.nih.gov/1556946/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Levant, R. F. (1992). Toward the reconstruction of masculinity. <a href="https://pubmed.ncbi.nlm.nih.gov/1435210/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'McCabe, M. P. (2005). The role of performance anxiety in sexual dysfunction. <a href="https://pubmed.ncbi.nlm.nih.gov/15774822/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Sanmartín Ortí, A., et al. (2022). La caja de la masculinidad: impacto en la juventud. <a href="https://www.fad.es/estudios-e-investigaciones/la-caja-de-la-masculinidad-su-impacto-en-la-salud/" target="_blank" rel="noopener noreferrer" class="editorial-link">Centro Reina Sofía / FAD</a>.'
     ],
     ctaTitle: '¿Damos el primer paso?',
     ctaSummary: '¡Agenda tu hora aquí!',
@@ -516,12 +556,12 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     },
     closingMessage: '',
     references: [
-      'Basson, R. (2001). Human sex-response cycles. Journal of Sex & Marital Therapy.',
-      'Bossio, J. A., et al. (2014). Mindfulness-Based Group Therapy for Men with Situational Erectile Dysfunction. The Journal of Sexual Medicine.',
-      'Carvalho, J., & Nobre, P. J. (2010). Predictors of men\'s sexual desire. The Journal of Sexual Medicine.',
-      'Janssen, E., & Bancroft, J. (2013). The Dual Control Model. En J. R. Bancroft (Ed.), The Kinsey Institute Series.',
-      'McCabe, M. P. (2005). The role of performance anxiety in sexual dysfunction. Journal of Sex & Marital Therapy.',
-      'Nagoski, E. (2015). Come as You Are. Simon & Schuster.'
+      'Basson, R. (2001). Human sex-response cycles. Journal of Sex & Marital Therapy. <a href="https://pubmed.ncbi.nlm.nih.gov/11794226/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Bossio, J. A., et al. (2014). Mindfulness-Based Group Therapy for Men with Situational Erectile Dysfunction. The Journal of Sexual Medicine. <a href="https://pubmed.ncbi.nlm.nih.gov/24512030/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Carvalho, J., & Nobre, P. J. (2010). Predictors of men\'s sexual desire. The Journal of Sexual Medicine. <a href="https://pubmed.ncbi.nlm.nih.gov/19758284/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Janssen, E., & Bancroft, J. (2013). The Dual Control Model. En J. R. Bancroft (Ed.), The Kinsey Institute Series. <a href="https://pubmed.ncbi.nlm.nih.gov/18158525/" target="_blank" rel="noopener noreferrer" class="editorial-link">ResearchGate</a>.',
+      'McCabe, M. P. (2005). The role of performance anxiety in sexual dysfunction. Journal of Sex & Marital Therapy. <a href="https://pubmed.ncbi.nlm.nih.gov/15774822/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Nagoski, E. (2015). Come as You Are. Simon & Schuster. <a href="https://www.indiebound.org/book/9781476762098" target="_blank" rel="noopener noreferrer" class="editorial-link">Ficha del libro</a>.'
     ],
     ctaTitle: '¿La ansiedad no te deja disfrutar?',
     ctaSummary: 'Agenda una sesión aquí',
@@ -596,13 +636,13 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     },
     closingMessage: '',
     references: [
-      'Llobat Rodríguez, L. A. (2023). Impacto del consumo de pornografía en la satisfacción sexual.',
-      'Nolin, M., et al. (2024). Associations Between Contents of Pornography and Sexual Satisfaction.',
-      'Park, B. Y., et al. (2016). Is Internet Pornography Causing Sexual Dysfunctions?',
-      'Paslakis, G., et al. (2020). Associations between pornography exposure and body image.',
-      'Steele, V. R., et al. (2013). Sexual desire and neurophysiological responses.',
-      'Vaillancourt-Morel, M.-P., et al. (2020). Pornography use and romantic relationships.',
-      'Zillmann, D., & Bryant, J. (1988). Pornography\'s Impact on Sexual Satisfaction.'
+      'Llobat Rodríguez, L. A. (2023). Impacto del consumo de pornografía en la satisfacción sexual. <a href="https://riunet.upv.es/" target="_blank" rel="noopener noreferrer" class="editorial-link">RIUNET</a>.',
+      'Nolin, M., et al. (2024). Associations Between Contents of Pornography and Sexual Satisfaction. <a href="https://pubmed.ncbi.nlm.nih.gov/38318721/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Park, B. Y., et al. (2016). Is Internet Pornography Causing Sexual Dysfunctions? <a href="https://pubmed.ncbi.nlm.nih.gov/27845656/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed / Behavioral Sciences</a>.',
+      'Paslakis, G., et al. (2020). Associations between pornography exposure and body image. <a href="https://pubmed.ncbi.nlm.nih.gov/32483864/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Steele, V. R., et al. (2013). Sexual desire and neurophysiological responses. <a href="https://pubmed.ncbi.nlm.nih.gov/23901362/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Vaillancourt-Morel, M.-P., et al. (2020). Pornography use and romantic relationships. <a href="https://pubmed.ncbi.nlm.nih.gov/31603387/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Zillmann, D., & Bryant, J. (1988). Pornography\'s Impact on Sexual Satisfaction. <a href="https://pubmed.ncbi.nlm.nih.gov/3394747/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.'
     ],
     ctaTitle: '¿Sientes que el porno está afectando tu vida?',
     ctaSummary: 'Agenda una sesión aquí',
@@ -640,7 +680,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
       {
         title: 'El muro de la Alexitimia en la pareja',
         paragraphs: [
-          'Para que esta comunicación fluya, debemos enfrentar un obstáculo que mencioné en mi artículo anterior: la <strong class="text-white">Alexitimia Masculina Normativa</strong>. Esta dificultad aprendida para identificar y verbalizar emociones no solo afecta al hombre en soledad, sino que levanta un muro invisible en la relación.',
+          'Para que esta comunicación fluya, debemos enfrentar un obstáculo que mencioné en mi artículo anterior: la <strong class="text-white"><a href="https://pubmed.ncbi.nlm.nih.gov/1435210/" target="_blank" rel="noopener noreferrer" class="editorial-link">Alexitimia Masculina Normativa</a></strong>. Esta dificultad aprendida para identificar y verbalizar emociones no solo afecta al hombre en soledad, sino que levanta un muro invisible en la relación.',
           'Cuando uno de los miembros de la pareja no puede ponerle palabras a su sentir —ya sea por miedo, vergüenza o por una socialización que le enseñó a callar—, la otra persona suele llenar ese vacío con <strong class="text-white">suposiciones</strong>. El silencio del hombre puede ser interpretado por su pareja como falta de interés o rechazo, cuando en realidad es una incapacidad de traducir su mundo interno. <strong class="text-white">Romper la alexitimia no es solo hablar de sentimientos; es permitir que tu pareja te conozca y te acompañe en lo que te sucede.</strong>'
         ]
       },
@@ -668,11 +708,11 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     },
     closingMessage: '',
     references: [
-      'Basson, R. (2001). Human sex-response cycles. Journal of Sex & Marital Therapy.',
-      'Gottman, J. M., & Silver, N. (1999). The seven principles for making marriage work. Crown.',
-      'Johnson, S. M. (2004). The practice of emotionally focused couple therapy.',
-      'Maxwell, J. A., et al. (2017). How implicit theories of sexuality shape sexual well-being.',
-      'Sánchez-Fuentes, M. M., et al. (2014). A systematic review of sexual satisfaction.'
+      'Basson, R. (2001). Human sex-response cycles. Journal of Sex & Marital Therapy. <a href="https://pubmed.ncbi.nlm.nih.gov/11794226/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Gottman, J. M., & Silver, N. (1999). The seven principles for making marriage work. Crown. <a href="https://www.gottman.com/" target="_blank" rel="noopener noreferrer" class="editorial-link">The Gottman Institute</a>.',
+      'Johnson, S. M. (2004). The practice of emotionally focused couple therapy. <a href="https://pubmed.ncbi.nlm.nih.gov/15318621/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Maxwell, J. A., et al. (2017). How implicit theories of sexuality shape sexual well-being. <a href="https://pubmed.ncbi.nlm.nih.gov/27845579/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.',
+      'Sánchez-Fuentes, M. M., et al. (2014). A systematic review of sexual satisfaction. <a href="https://pubmed.ncbi.nlm.nih.gov/24484224/" target="_blank" rel="noopener noreferrer" class="editorial-link">PubMed</a>.'
     ],
     ctaTitle: '¿Sientes que el silencio ha ganado espacio?',
     ctaSummary: 'Agenda una sesión aquí',
@@ -740,3 +780,48 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
     'Si sientes que es el momento de abordar eso que te hace ruido, estaré encantado de acompañarte en el proceso. Construyamos <strong class="text-white">juntos</strong> ese espacio seguro donde puedas, simplemente, <strong class="text-white">ser tú mismo</strong>.',
   ],
 }
+
+export const FAQ_DATA: FaqCategory[] = [
+  {
+    id: 'general',
+    title: 'General',
+    items: [
+      {
+        question: '¿Qué tipo de terapia realizas?',
+        answer: 'Realizo psicoterapia clínica individual para adultos, con un enfoque especializado en sexología clínica masculina, disfunciones sexuales psicógenas y manejo integral de la ansiedad de desempeño. Mi abordaje es cognitivo-conductual e integrador, centrado en herramientas prácticas y la desmitificación de la autoexigencia.'
+      },
+      {
+        question: '¿Cómo es la primera sesión?',
+        answer: 'La sesión inicial es un espacio de acogida y evaluación de 50 minutos. Conversaremos de forma totalmente abierta y sin prisas sobre el motivo de tu consulta, exploraremos tus inquietudes y definiremos juntos los objetivos del proceso terapéutico, bajo estricta confidencialidad.'
+      }
+    ]
+  },
+  {
+    id: 'sesiones',
+    title: 'Sesiones y Pagos',
+    items: [
+      {
+        question: '¿Cuánto duran las sesiones y cuál es el valor?',
+        answer: 'Las sesiones individuales tienen una duración aproximada de 50 minutos y se realizan online. Para conocer el valor actual y coordinar los detalles de pago y agenda, el sistema te redirigirá automáticamente a WhatsApp.'
+      },
+      {
+        question: '¿Cómo se coordina el agendamiento y pago?',
+        answer: 'Tras ingresar tus datos de contacto y firmar el Consentimiento Informado en nuestro calendario interactivo, el flujo te redirigirá a WhatsApp de forma directa. Allí coordinaremos la transferencia o pago electrónico, y recibirás de inmediato el enlace permanente de Google Meet para tu sesión.'
+      }
+    ]
+  },
+  {
+    id: 'privacidad',
+    title: 'Seguridad y Privacidad',
+    items: [
+      {
+        question: '¿Mis datos y conversaciones están seguros?',
+        answer: 'Totalmente. La terapia psicológica está protegida por el secreto profesional y la legislación chilena sobre derechos de los pacientes. En la telemetría del sitio web utilizamos PostHog con enmascaramiento riguroso, lo que asegura que tu información y visitas sean privadas y anónimas.'
+      },
+      {
+        question: '¿Por qué debo firmar un consentimiento informado?',
+        answer: 'El Consentimiento Informado es un requisito legal en salud que describe tus derechos y responsabilidades como paciente, y asegura que estás de acuerdo con el marco terapéutico digital antes de iniciar las sesiones. Se firma de manera digital y simple en el flujo de reserva.'
+      }
+    ]
+  }
+]

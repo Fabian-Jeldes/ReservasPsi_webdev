@@ -2,19 +2,75 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
-import { getArticleDataBySlug } from '../data/site'
-import { useEffect } from 'react'
+import { getArticleDataBySlug, getBlogPostBySlug } from '../data/site'
+import { useEffect, useMemo } from 'react'
+import { SEO } from '../components/SEO'
 
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const data = slug ? getArticleDataBySlug(slug) : undefined
+  const blogPost = slug ? getBlogPostBySlug(slug) : undefined
 
   useEffect(() => {
     if (slug && !data) {
       navigate('/articulos', { replace: true })
     }
   }, [slug, data, navigate])
+
+  const articleSchema = useMemo(() => {
+    if (!data) return undefined
+    
+    const parseDateStr = (dateStr?: string) => {
+      if (!dateStr) return new Date().toISOString().split('T')[0]
+      const months: Record<string, string> = {
+        Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+        Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+      }
+      const parts = dateStr.split(' ')
+      if (parts.length === 3) {
+        const day = parts[0].padStart(2, '0')
+        const month = months[parts[1]] || '01'
+        const year = parts[2]
+        return `${year}-${month}-${day}`
+      }
+      return new Date().toISOString().split('T')[0]
+    }
+
+    const isoDate = parseDateStr(blogPost?.date)
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      'headline': `${data.heroTitle}${data.heroAccent}`.trim(),
+      'image': data.heroImage ? `${window.location.origin}${data.heroImage}` : undefined,
+      'datePublished': isoDate,
+      'author': {
+        '@type': 'Person',
+        'name': 'Ps. Andrei Andrusco Fidalgo',
+        'url': `${window.location.origin}/sobre-mi`
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'Ps. Andrei Andrusco',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': `${window.location.origin}/Favicon2_PNG.png`
+        }
+      },
+      'description': data.heroSummary
+    }
+  }, [data, blogPost])
+
+  const articleKeywords = useMemo(() => {
+    const keywordMap: Record<string, string> = {
+      'mito-rendimiento-masculino': 'masculinidad, hombre maquina, rendimiento sexual, espectadorismo, alexitimia masculina',
+      'ansiedad-y-deseo': 'ansiedad de desempeño, deseo responsivo, modelo control dual, espectadorismo sexual, estres y placer',
+      'pornografia-y-salud-sexual': 'disfuncion erectil inducida por pornografia, adiccion al porno, dopamina y sexo, efecto coolidge, masturbacion',
+      'el-peso-del-silencio': 'comunicacion de pareja, terapia de pareja, guiones sexuales, metodo gottman, satisfaccion sexual'
+    }
+    return keywordMap[slug || ''] || 'sexologia clinica, terapia sexual online, psicologia clinica'
+  }, [slug])
 
   if (!data) return null
 
@@ -23,6 +79,13 @@ export function ArticlePage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
+      <SEO
+        title={`${data.heroTitle}${data.heroAccent} | Ps. Andrei Andrusco`}
+        description={data.heroSummary}
+        keywords={articleKeywords}
+        ogImage={data.heroImage}
+        jsonLd={articleSchema}
+      />
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
 
       {/* Hero Section */}
@@ -178,7 +241,7 @@ export function ArticlePage() {
             <div className="p-6 pt-0 border-t" style={{ borderColor: 'var(--border-primary)' }}>
               <ul className="space-y-3 text-sm" style={{ color: 'var(--text-muted)' }}>
                 {data.references.map((ref, rIdx) => (
-                  <li key={rIdx}>{ref}</li>
+                  <li key={rIdx} dangerouslySetInnerHTML={{ __html: ref }} className="hover:text-[var(--accent-text)] transition-colors" />
                 ))}
               </ul>
             </div>
