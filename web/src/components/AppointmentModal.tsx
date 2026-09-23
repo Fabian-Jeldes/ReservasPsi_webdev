@@ -3,6 +3,7 @@ import { X, Calendar, Mail, Phone, User, ExternalLink, CheckCircle2 } from 'luci
 import { kycSchema } from '../types/site'
 import type { KycFormState } from '../types/site'
 import { EMPTY_KYC } from '../data/site'
+import { track } from '../lib/posthog'
 
 type Props = {
   isOpen: boolean
@@ -36,6 +37,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
     }
     setErrors({})
     setStep(2)
+    track('reserva_datos_completados')
   }
 
   const handleClose = useCallback(() => {
@@ -59,9 +61,9 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
         onClick={handleClose}
       />
       
-      {/* Modal Container */}
+      {/* Modal Container — ph-no-capture: PostHog no registra clics, textos ni replay con datos del paciente */}
       <div
-        className="relative w-full max-w-lg overflow-hidden border shadow-2xl animate-in fade-in zoom-in duration-300"
+        className="ph-no-capture relative w-full max-w-lg overflow-hidden border shadow-2xl animate-in fade-in zoom-in duration-300"
         style={{
           borderRadius: 'var(--radius-card-lg)',
           borderColor: 'var(--border-card)',
@@ -213,6 +215,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                   href={`${CALENDAR_URL}?gv.firstname=${encodeURIComponent(formData.nombre)}&gv.emailaddress=${encodeURIComponent(formData.correo)}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('reserva_calendario_abierto')}
                   className="flex w-full items-center justify-center gap-3 rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
                   style={{
                     backgroundColor: 'var(--accent)',

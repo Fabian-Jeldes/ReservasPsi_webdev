@@ -1,22 +1,16 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { getArticleDataBySlug } from '../data/site'
-import { useEffect } from 'react'
+import { NotFoundPage } from './NotFoundPage'
 
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const data = slug ? getArticleDataBySlug(slug) : undefined
 
-  useEffect(() => {
-    if (slug && !data) {
-      navigate('/articulos', { replace: true })
-    }
-  }, [slug, data, navigate])
-
-  if (!data) return null
+  if (!data) return <NotFoundPage />
 
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
@@ -33,7 +27,7 @@ export function ArticlePage() {
               {data.heroEyebrow}
             </div>
             <h1 className="text-5xl md:text-7xl leading-[1.1] mb-6" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as any, letterSpacing: 'var(--heading-spacing)' }}>
-              {data.heroTitle.split(' ').slice(0, -1).join(' ')}<br />
+              {data.heroTitle.trim()}<br />
               <span style={{ color: 'var(--accent)', textShadow: 'var(--shadow-accent-lg)' }}>
                 {data.heroAccent}
               </span>
@@ -62,6 +56,9 @@ export function ArticlePage() {
                   <img
                     src={data.heroImage}
                     alt={data.heroTitle}
+                    width={1280}
+                    height={720}
+                    fetchPriority="high"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -83,9 +80,11 @@ export function ArticlePage() {
       <article id="contenido" className="mx-auto max-w-3xl px-6 py-20">
         <div className="mb-20">
           <p className="font-bold uppercase tracking-widest text-sm mb-4" style={{ color: 'var(--accent-text)' }}>{data.introKicker}</p>
-          <h2 className="text-4xl md:text-5xl mb-8 leading-tight" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as any, letterSpacing: 'var(--heading-spacing)' }}>
-            {data.introTitle}
-          </h2>
+          {data.introTitle && (
+            <h2 className="text-4xl md:text-5xl mb-8 leading-tight" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as any, letterSpacing: 'var(--heading-spacing)' }}>
+              {data.introTitle}
+            </h2>
+          )}
 
           {data.introQuote && (
             <blockquote className="text-2xl font-medium italic border-l-4 pl-6 mb-12" style={{ color: 'var(--text-muted)', borderColor: 'var(--accent)' }}>
@@ -101,7 +100,7 @@ export function ArticlePage() {
             {idx > 0 && <hr className="theme-divider mb-16" />}
 
             {section.title && (
-              <h3 
+              <h2
                 className="text-3xl mb-8" 
                 style={{ 
                   fontFamily: 'var(--font-heading)', 
@@ -136,7 +135,15 @@ export function ArticlePage() {
             {section.images?.map((img, iIdx) => (
               <figure key={iIdx} className="my-12">
                 <div className="overflow-hidden border border-white/10" style={{ borderRadius: 'var(--radius-card)' }}>
-                  <img src={img.url} alt={img.caption || ''} className="w-full h-auto grayscale transition-all duration-700 hover:grayscale-0" />
+                  <img
+                    src={img.url}
+                    alt={img.caption || ''}
+                    width={img.width}
+                    height={img.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto grayscale transition-all duration-700 hover:grayscale-0"
+                  />
                 </div>
                 {img.caption && <figcaption className="mt-4 text-center text-sm italic text-muted">{img.caption}</figcaption>}
               </figure>
@@ -195,13 +202,13 @@ export function ArticlePage() {
             <p className="text-lg mb-10 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
               {data.ctaSummary}
             </p>
-            <button
-              onClick={goKyc}
-              className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 flex items-center gap-3 mx-auto shadow-lg"
+            <Link
+              to="/#reserva"
+              className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 inline-flex items-center gap-3 mx-auto shadow-lg"
               style={{ backgroundColor: 'var(--accent)', color: 'var(--text-inverse)', borderRadius: 'var(--radius-btn)' }}
             >
               {data.ctaLabel} <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
         </section>
       </article>

@@ -85,6 +85,10 @@ export function BlogSection({ posts }: Props) {
                     <img
                       src={post.imageUrl}
                       alt={post.title}
+                      width={1280}
+                      height={768}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
                     />
                   ) : (

@@ -26,6 +26,22 @@ export type BlogPost = {
   category: string
   content: string
   imageUrl?: string
+  /** Fecha de publicación ISO (YYYY-MM-DD) — schema.org y sitemap */
+  datePublished: string
+  /** Fecha de última modificación ISO; por defecto = datePublished */
+  dateModified?: string
+  /** <title> del artículo (sin el sufijo del sitio) */
+  seoTitle: string
+  /** Meta description (~150–160 caracteres) */
+  seoDescription: string
+  /** Imagen Open Graph 1200×630 */
+  ogImage: string
+}
+
+/** Título y descripción de una página estática */
+export type PageSeo = {
+  title: string
+  description: string
 }
 
 export type ArticleSection = {
@@ -38,6 +54,8 @@ export type ArticleSection = {
   images?: {
     url: string
     caption?: string
+    width?: number
+    height?: number
   }[]
   clinicalNote?: {
     title: string

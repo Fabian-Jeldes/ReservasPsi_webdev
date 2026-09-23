@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Lock, ShieldCheck } from 'lucide-react'
 
 export function SiteFooter() {
@@ -32,8 +33,8 @@ export function SiteFooter() {
                 </span>
               </span>
             </div>
-            <a
-              href="#reserva"
+            <Link
+              to="/#reserva"
               className="rounded-full px-4 py-2 text-xs font-bold transition-all hover:scale-105"
               style={{
                 backgroundColor: 'var(--accent)',
@@ -42,7 +43,7 @@ export function SiteFooter() {
               }}
             >
               Ver horas disponibles
-            </a>
+            </Link>
           </div>
           <p
             className="max-w-2xl leading-relaxed"

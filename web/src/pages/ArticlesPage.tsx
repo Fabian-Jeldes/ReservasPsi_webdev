@@ -46,6 +46,10 @@ export function ArticlesPage() {
                   <img
                     src={post.imageUrl}
                     alt={post.title}
+                    width={1280}
+                    height={768}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                     style={{ objectPosition: '50% 40%' }}
                   />

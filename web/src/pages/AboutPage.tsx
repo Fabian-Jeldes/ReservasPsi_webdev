@@ -84,6 +84,9 @@ export function AboutPage() {
                 <img
                   src={data.imageUrl}
                   alt="Andrei Andrusco Fidalgo, psicólogo clínico y sexólogo"
+                  width={1200}
+                  height={675}
+                  fetchPriority="high"
                   className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
                 />
               </div>
