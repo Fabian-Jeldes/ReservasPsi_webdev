@@ -13,6 +13,7 @@ export function AboutPage() {
     setIsAppointmentModalOpen(true)
   }, [])
 
+
   return (
     <div
       className="min-h-screen font-sans"

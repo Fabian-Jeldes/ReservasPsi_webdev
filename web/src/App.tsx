@@ -5,7 +5,9 @@ import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { ArticlePage } from './pages/ArticlePage'
 import { ArticlesPage } from './pages/ArticlesPage'
+import { SpecializationPage } from './pages/SpecializationPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { BackgroundDecorations } from './components/BackgroundDecorations'
 import { getSeo } from './seo/seo'
 import { applySeoToDocument } from './seo/head'
 
@@ -41,11 +43,13 @@ export default function App() {
     <>
       <ScrollToTop />
       <SeoSync />
+      <BackgroundDecorations />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/sobre-mi" element={<AboutPage />} />
         <Route path="/articulos" element={<ArticlesPage />} />
         <Route path="/articulos/:slug" element={<ArticlePage />} />
+        <Route path="/especialidades/:slug" element={<SpecializationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {import.meta.env.DEV ? <DevAccentToggle /> : null}

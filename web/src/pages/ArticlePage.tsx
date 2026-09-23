@@ -185,7 +185,7 @@ export function ArticlePage() {
             <div className="p-6 pt-0 border-t" style={{ borderColor: 'var(--border-primary)' }}>
               <ul className="space-y-3 text-sm" style={{ color: 'var(--text-muted)' }}>
                 {data.references.map((ref, rIdx) => (
-                  <li key={rIdx}>{ref}</li>
+                  <li key={rIdx} dangerouslySetInnerHTML={{ __html: ref }} className="hover:text-[var(--accent-text)] transition-colors" />
                 ))}
               </ul>
             </div>

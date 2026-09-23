@@ -4,16 +4,15 @@ import {
   REVIEWS_DATA,
   SPECIALIZATIONS,
 } from '../data/site'
-import type { Specialization } from '../types/site'
 import { Navbar } from '../components/Navbar'
 import { HeroSection } from '../components/HeroSection'
 import { SpecializationsSection } from '../components/SpecializationsSection'
 import { ReviewsSection } from '../components/ReviewsSection'
 import { BlogSection } from '../components/BlogSection'
 import { SiteFooter } from '../components/SiteFooter'
-import { SpecializationModal } from '../components/SpecializationModal'
 import { AppointmentModal } from '../components/AppointmentModal'
 import { useReviewRotation } from '../hooks/useReviewRotation'
+import { FaqSection } from '../components/FaqSection'
 
 export function HomePage() {
   const DISPLAY_REVIEWS = useMemo(() => {
@@ -21,12 +20,12 @@ export function HomePage() {
     return [...REVIEWS_DATA]
   }, [])
   const { currentIndex: currentReview, fade } = useReviewRotation(DISPLAY_REVIEWS.length)
-  const [selectedSpec, setSelectedSpec] = useState<Specialization | null>(null)
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false)
 
   const openBooking = useCallback(() => {
     setIsAppointmentModalOpen(true)
   }, [])
+
 
   return (
     <div
@@ -42,7 +41,7 @@ export function HomePage() {
         const section = document.getElementById('reserva');
         section?.scrollIntoView({ behavior: 'smooth' });
       }} />
-      <SpecializationsSection items={SPECIALIZATIONS} onSelectSpec={setSelectedSpec} />
+      <SpecializationsSection items={SPECIALIZATIONS} />
       <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
       
       {/* CTA Agendamiento Bajo Demanda */}
@@ -95,11 +94,8 @@ export function HomePage() {
       </section>
 
       <BlogSection posts={BLOG_POSTS} />
+      <FaqSection />
       <SiteFooter />
-
-      {selectedSpec ? (
-        <SpecializationModal spec={selectedSpec} onClose={() => setSelectedSpec(null)} />
-      ) : null}
 
       <AppointmentModal 
         isOpen={isAppointmentModalOpen} 

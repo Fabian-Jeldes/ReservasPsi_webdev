@@ -3,12 +3,16 @@ import {
   BLOG_POSTS,
   BREADCRUMB_LABELS,
   DEFAULT_OG_IMAGE,
+  PRACTICE_LOCATION,
   PROFESSIONAL,
   PROFILE_IMAGE_URL,
   SEO_PAGES,
   SITE_NAME,
   SITE_URL,
+  SPECIALIZATIONS,
+  SPECIALIZATION_TITLE_SUFFIX,
   getBlogPostBySlug,
+  getSpecializationBySlug,
 } from '../data/site'
 
 /**
@@ -31,6 +35,7 @@ export type SeoData = {
 }
 
 const abs = (path: string) => `${SITE_URL}${path}`
+const plainText = (html: string) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
 
 const PERSON_ID = abs('/#persona')
 const BUSINESS_ID = abs('/#consulta')
@@ -57,6 +62,18 @@ const business = {
   url: abs('/'),
   image: abs(DEFAULT_OG_IMAGE),
   areaServed: { '@type': 'Country', name: 'Chile' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: PRACTICE_LOCATION.addressLocality,
+    addressRegion: PRACTICE_LOCATION.addressRegion,
+    addressCountry: PRACTICE_LOCATION.addressCountry,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: PRACTICE_LOCATION.openingDays,
+    opens: PRACTICE_LOCATION.opens,
+    closes: PRACTICE_LOCATION.closes,
+  },
   founder: { '@id': PERSON_ID },
   employee: { '@id': PERSON_ID },
 }
@@ -191,6 +208,40 @@ export function getSeo(pathname: string): SeoData {
     }
   }
 
+  const specMatch = path.match(/^\/especialidades\/([^/]+)$/)
+  const spec = specMatch ? getSpecializationBySlug(specMatch[1]) : undefined
+  if (spec) {
+    const url = abs(`/especialidades/${spec.slug}`)
+    const description = plainText(spec.description)
+    return {
+      title: `${spec.title}${SPECIALIZATION_TITLE_SUFFIX}`,
+      description,
+      canonical: url,
+      ogImage: abs(DEFAULT_OG_IMAGE),
+      ogType: 'website',
+      jsonLd: [
+        graph(
+          {
+            '@type': 'MedicalWebPage',
+            url,
+            name: spec.title,
+            description,
+            inLanguage: 'es-CL',
+            about: { '@type': 'MedicalCondition', name: spec.title },
+            author: { '@id': PERSON_ID },
+            reviewedBy: { '@id': PERSON_ID },
+            publisher: { '@id': BUSINESS_ID },
+          },
+          person,
+          breadcrumbs([
+            { name: BREADCRUMB_LABELS.home, path: '/' },
+            { name: spec.title, path: `/especialidades/${spec.slug}` },
+          ]),
+        ),
+      ],
+    }
+  }
+
   return {
     ...SEO_PAGES.notFound,
     canonical: abs(path),
@@ -207,6 +258,7 @@ export const PRERENDER_ROUTES = [
   '/sobre-mi',
   '/articulos',
   ...BLOG_POSTS.map((p) => `/articulos/${p.slug}`),
+  ...SPECIALIZATIONS.map((s) => `/especialidades/${s.slug}`),
 ]
 
 /** lastmod por ruta para sitemap.xml */

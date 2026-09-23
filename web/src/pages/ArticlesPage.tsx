@@ -9,6 +9,7 @@ export function ArticlesPage() {
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
 
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
