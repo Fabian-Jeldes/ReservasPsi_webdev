@@ -1,22 +1,191 @@
-import { ArrowRight, Heart, Brain, Timer, Infinity, Flame, BrainCircuit, HeartHandshake } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { Specialization } from '../types/site'
 
+const masculinoIconModules = import.meta.glob<string>('../assets/*masculin*', {
+  eager: true,
+  import: 'default',
+})
+const iconMasculinoUrl =
+  Object.values(masculinoIconModules)[0] || '/assets/icon-masculino.png'
+
+const femeninoIconModules = import.meta.glob<string>('../assets/*femenin*', {
+  eager: true,
+  import: 'default',
+})
+const iconFemeninoUrl =
+  Object.values(femeninoIconModules)[0] || '/assets/icon-femenino.png'
+
+const animoIconModules = import.meta.glob<string>('../assets/*animo*', {
+  eager: true,
+  import: 'default',
+})
+const iconAnimoUrl =
+  Object.values(animoIconModules)[0] || '/assets/icon-animo.png'
+
 type Props = {
-  items: Specialization[]
+  items?: Specialization[]
 }
 
-const iconMap: Record<number, any> = {
-  1: Brain,
-  2: Timer,
-  3: Infinity,
-  4: Flame,
-  5: BrainCircuit,
-  6: HeartHandshake,
+type SubAreaItem = {
+  title: string
+  subtitle: string
+  description: string
+  path: string
 }
 
-export function SpecializationsSection({ items }: Props) {
-  const navigate = useNavigate()
+type CategoryAccordion = {
+  id: string
+  title: string
+  highlightWord: string
+  subtitle: string
+  icon?: any
+  customIconSrc?: string
+  areas: SubAreaItem[]
+}
+
+const ACCORDION_CATEGORIES: CategoryAccordion[] = [
+  {
+    id: 'masculinos',
+    title: 'Problemas Sexuales Masculinos',
+    highlightWord: 'Masculinos',
+    subtitle: 'Abordaje clínico libre de exigencias y mitos de rendimiento',
+    customIconSrc: iconMasculinoUrl,
+    areas: [
+      {
+        title: 'Disfunción eréctil (Enfoque psicógeno)',
+        subtitle: 'Reconceptualizando la erección',
+        description:
+          'Desarmamos la presión por rendir y el miedo anticipatorio para que tu respuesta física vuelva a fluir desde la confianza.',
+        path: '/sexualidad-masculina/disfuncion-erectil-psicogena',
+      },
+      {
+        title: 'Eyaculación precoz',
+        subtitle: 'Calma y reconocimiento corporal',
+        description:
+          'Herramientas psicofisiológicas y cognitivas para regular la curva de excitación sin tensión ni cronómetros.',
+        path: '/sexualidad-masculina/eyaculacion-precoz',
+      },
+      {
+        title: 'Eyaculación retardada o aneyaculación',
+        subtitle: 'Desbloqueo y entrega sensorial',
+        description:
+          'Abordamos el hipercontrol y el rol de espectador que impiden alcanzar el clímax en la intimidad.',
+        path: '/sexualidad-masculina/eyaculacion-retardada',
+      },
+      {
+        title: 'Bajo deseo sexual (Deseo sexual hipoactivo masculino)',
+        subtitle: 'Normalizando tu experiencia',
+        description:
+          'Exploramos sin juicios cómo el estrés, el agotamiento y las exigencias apagan el interés erótico.',
+        path: '/sexualidad-masculina/bajo-deseo-sexual-masculino',
+      },
+      {
+        title: 'Ansiedad de desempeño sexual',
+        subtitle: 'Rompiendo la trampa mental',
+        description:
+          'Supera la hipervigilancia y el temor a fallar que bloquean el disfrute y la conexión en pareja.',
+        path: '/sexualidad-masculina/ansiedad-de-desempeno',
+      },
+      {
+        title: 'Adicción a la pornografía',
+        subtitle: 'Reinicio y reconexión real',
+        description:
+          'Recalibramos el sistema de recompensa frente a la hiperestimulación digital, sin sermones ni juicios morales.',
+        path: '/sexualidad-masculina/uso-problematico-de-pornografia',
+      },
+    ],
+  },
+  {
+    id: 'femeninos',
+    title: 'Problemas Sexuales Femeninos',
+    highlightWord: 'Femeninos',
+    subtitle: 'Espacio seguro para reconectar con el deseo, la calma y el placer corporal',
+    customIconSrc: iconFemeninoUrl,
+    areas: [
+      {
+        title: 'Vaginismo y dolor pélvico',
+        subtitle: 'Desactivando el reflejo defensivo',
+        description:
+          'Acompañamiento gradual y respetuoso para superar la contracción involuntaria y el temor al dolor.',
+        path: '/sexualidad-femenina/vaginismo-dolor-genitopelvico',
+      },
+      {
+        title: 'Dispareunia (Dolor durante las relaciones)',
+        subtitle: 'El placer nunca debería doler',
+        description:
+          'Abordaje psicofisiológico y comunicacional para recuperar la comodidad, la excitación y la confianza.',
+        path: '/sexualidad-femenina/dispareunia-dolor-relaciones',
+      },
+      {
+        title: 'Anorgasmia',
+        subtitle: 'Autoconocimiento y disfrute sin presiones',
+        description:
+          'Exploramos las barreras cognitivas, emocionales y relacionales que bloquean el acceso al clímax.',
+        path: '/sexualidad-femenina/anorgasmia-dificultad-orgasmo',
+      },
+      {
+        title: 'Bajo deseo sexual (Deseo sexual hipoactivo femenino)',
+        subtitle: 'Deseo responsivo y bienestar integral',
+        description:
+          'Comprendemos las condiciones emocionales y relacionales que necesita tu deseo para despertar sin culpa.',
+        path: '/sexualidad-femenina/deseo-sexual-hipoactivo-femenino',
+      },
+      {
+        title: 'Aversión al sexo',
+        subtitle: 'Restituyendo la seguridad corporal',
+        description:
+          'Espacio clínico compasivo para abordar el rechazo, la angustia o la evitación frente al contacto íntimo.',
+        path: '/sexualidad-femenina/aversion-al-sexo',
+      },
+    ],
+  },
+  {
+    id: 'animo-ansiedad',
+    title: 'Problemáticas del Ánimo y Ansiedad',
+    highlightWord: 'Ansiedad',
+    subtitle: 'Psicoterapia clínica enfocada en regulación emocional y bienestar integral',
+    customIconSrc: iconAnimoUrl,
+    areas: [
+      {
+        title: 'Trastornos de Ansiedad (Generalizada, social, crisis de pánico)',
+        subtitle: 'Desactivando la alarma permanente',
+        description:
+          'Estrategias clínicas basadas en evidencia para regular el sistema nervioso y recuperar la calma mental.',
+        path: '/salud-emocional/trastornos-ansiedad-panico',
+      },
+      {
+        title: 'Cuadros Depresivos y alteraciones del ánimo',
+        subtitle: 'Acompañamiento cálido y estructurado',
+        description:
+          'Un espacio seguro para procesar la desmotivación, el agotamiento silencioso y reconstruir tu vitalidad.',
+        path: '/salud-emocional/cuadros-depresivos-alteraciones-animo',
+      },
+      {
+        title: 'Estrés crónico y Burnout',
+        subtitle: 'Salir del modo de supervivencia',
+        description:
+          'Herramientas para descomprimir la sobrecarga laboral o vital y establecer límites saludables.',
+        path: '/salud-emocional/estres-cronico-burnout',
+      },
+      {
+        title: 'Regulación emocional y autoestima',
+        subtitle: 'Relación contigo mismo y con los demás',
+        description:
+          'Transformamos la autocrítica rígida en seguridad personal, alfabetización emocional y vínculos asertivos.',
+        path: '/salud-emocional/regulacion-emocional-autoestima',
+      },
+    ],
+  },
+]
+
+export function SpecializationsSection({ items: _items }: Props) {
+  const [openCategoryId, setOpenCategoryId] = useState<string | null>(null)
+
+  const toggleCategory = (id: string) => {
+    setOpenCategoryId((prev) => (prev === id ? null : id))
+  }
 
   return (
     <section
@@ -24,125 +193,207 @@ export function SpecializationsSection({ items }: Props) {
       className="py-32"
       style={{ backgroundColor: 'var(--bg-section-alt)' }}
     >
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2
-          className="mb-4 text-4xl"
-          style={{
-            color: 'var(--text-primary)',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: 'var(--heading-weight)',
-            textTransform: 'var(--heading-transform)' as any,
-            letterSpacing: 'var(--heading-spacing)',
-          }}
-        >
-          <p className='andi-hero-accent'>Áreas de atención:</p>
-        </h2>
-        <p className="mx-auto mb-16 max-w-2xl text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          Un enfoque <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>humano</span> <strong>y especializado</strong> para que vuelvas a <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>conectar contigo mismo</span> de una forma auténtica desde el placer
-        </p>
+      <div className="mx-auto max-w-4xl px-6">
+        {/* Encabezado de la sección */}
+        <div className="text-center mb-16">
+          <h2
+            className="mb-4 text-4xl"
+            style={{
+              color: 'var(--text-primary)',
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 'var(--heading-weight)',
+              textTransform: 'var(--heading-transform)' as any,
+              letterSpacing: 'var(--heading-spacing)',
+            }}
+          >
+            <span className="andi-hero-accent">Áreas de atención:</span>
+          </h2>
+          <p
+            className="mx-auto max-w-2xl text-lg leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Un enfoque{' '}
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>humano</span>{' '}
+            <strong>y especializado</strong> para que vuelvas a{' '}
+            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
+              conectar contigo mismo
+            </span>{' '}
+            de una forma auténtica y libre de juicios.
+          </p>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((spec) => {
-            // Logic to highlight one keyword per title
-            const highlightMap: Record<number, string> = {
-              1: 'Eréctil',
-              2: 'Eyaculatorio',
-              3: 'Deseo',
-              4: 'Ansiedad',
-              5: 'Comunicación',
-              6: 'Pornografía',
-            }
-            const keyword = highlightMap[spec.id]
-            const titleParts = keyword ? spec.title.split(keyword) : [spec.title]
-
-            const handleCardClick = () => {
-              navigate(`/especialidades/${spec.slug}`)
-            }
+        {/* Menú Acordeón de 3 grandes categorías */}
+        <div className="space-y-5">
+          {ACCORDION_CATEGORIES.map((category) => {
+            const isOpen = openCategoryId === category.id
+            const IconComponent = category.icon
+            const titleParts = category.title.split(category.highlightWord)
 
             return (
               <div
-                key={spec.id}
-                role="button"
-                tabIndex={0}
-                onClick={handleCardClick}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    handleCardClick()
-                  }
-                }}
-                className="group relative cursor-pointer border p-8 text-left transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
+                key={category.id}
+                className="border transition-all duration-300 overflow-hidden"
                 style={{
                   borderRadius: 'var(--radius-card)',
-                  borderColor: 'var(--border-card)',
-                  borderWidth: 'var(--card-border-width)',
+                  borderColor: isOpen
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 70%, transparent)',
+                  borderWidth: '1px',
                   backgroundColor: 'var(--bg-card)',
-                  boxShadow: 'var(--shadow-card)',
+                  boxShadow: isOpen
+                    ? 'var(--shadow-accent)'
+                    : '0 12px 35px -12px rgba(255, 77, 77, 0.18), var(--shadow-card)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-accent)'
-                  e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
+                  e.currentTarget.style.borderColor = 'var(--accent)'
+                  e.currentTarget.style.boxShadow =
+                    '0 16px 45px -10px rgba(255, 77, 77, 0.32), 0 0 20px rgba(255, 77, 77, 0.18)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-card)'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.borderColor = isOpen
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 70%, transparent)'
+                  e.currentTarget.style.boxShadow = isOpen
+                    ? 'var(--shadow-accent)'
+                    : '0 12px 35px -12px rgba(255, 77, 77, 0.18), var(--shadow-card)'
                 }}
               >
-                <div>
-                  <div
-                    className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner transition-all duration-500 group-hover:scale-110"
-                    style={{
-                      backgroundColor: 'var(--accent-soft)',
-                      color: 'var(--accent)',
-                    }}
-                  >
-                    {(() => {
-                      const IconComponent = iconMap[spec.id] || Heart
-                      return <IconComponent size={28} aria-hidden />
-                    })()}
-                  </div>
-                  <h3
-                    className="mb-3 text-xl font-bold"
-                    style={{
-                      color: 'var(--text-primary)',
-                      fontFamily: 'var(--font-heading)',
-                    }}
-                  >
-                    {keyword && titleParts.length > 1 ? (
-                      <>
-                        {titleParts[0]}
-                        <span style={{ color: 'var(--accent)' }}>{keyword}</span>
-                        {titleParts[1]}
-                      </>
-                    ) : (
-                      spec.title
-                    )}
-                  </h3>
-                  <p
-                    className="mb-5 text-xs font-bold uppercase tracking-widest"
-                    style={{ color: 'var(--accent-text)' }}
-                  >
-                    {spec.subtitle}
-                  </p>
-                  <p
-                    className="text-sm leading-relaxed line-clamp-1 md:line-clamp-none"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {spec.description}
-                  </p>
-                </div>
-                <div
-                  className="mt-8 flex items-center justify-between border-t pt-6"
-                  style={{ borderColor: 'var(--border-primary)' }}
+                {/* Botón Cabecera del Acordeón */}
+                <button
+                  type="button"
+                  onClick={() => toggleCategory(category.id)}
+                  aria-expanded={isOpen}
+                  className="w-full flex items-center justify-between p-6 md:p-8 text-left transition-colors gap-4"
                 >
-                  <span className="text-xs font-medium" style={{ color: 'var(--text-muted)' }} />
+                  <div className="flex items-center gap-5">
+                    {category.customIconSrc ? (
+                      <img
+                        src={category.customIconSrc}
+                        alt={`Icono ${category.title}`}
+                        className="h-14 w-14 shrink-0 object-contain transition-transform duration-300"
+                        style={{
+                          transform: isOpen ? 'scale(1.05)' : 'scale(1)',
+                        }}
+                      />
+                    ) : (
+                      <div
+                        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-inner transition-transform duration-300"
+                        style={{
+                          backgroundColor: 'var(--accent-soft)',
+                          color: 'var(--accent)',
+                          transform: isOpen ? 'scale(1.05)' : 'scale(1)',
+                        }}
+                      >
+                        {IconComponent && <IconComponent size={26} aria-hidden />}
+                      </div>
+                    )}
+                    <div>
+                      <h3
+                        className="text-xl md:text-2xl font-bold"
+                        style={{
+                          color: 'var(--text-primary)',
+                          fontFamily: 'var(--font-heading)',
+                        }}
+                      >
+                        {titleParts.length > 1 ? (
+                          <>
+                            {titleParts[0]}
+                            <span style={{ color: 'var(--accent)' }}>
+                              {category.highlightWord}
+                            </span>
+                            {titleParts[1]}
+                          </>
+                        ) : (
+                          category.title
+                        )}
+                      </h3>
+                      <p
+                        className="mt-1 text-sm md:text-base"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        {category.subtitle}
+                      </p>
+                    </div>
+                  </div>
+
                   <span
-                    className="transition-transform group-hover:translate-x-2"
-                    style={{ color: 'var(--accent)' }}
-                    aria-hidden
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300"
+                    style={{
+                      backgroundColor: isOpen ? 'var(--accent-soft)' : 'transparent',
+                      color: isOpen ? 'var(--accent)' : 'var(--text-muted)',
+                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    }}
                   >
-                    <ArrowRight size={20} />
+                    <ChevronDown size={22} />
                   </span>
+                </button>
+
+                {/* Contenido Desplegable */}
+                <div
+                  className="grid transition-all duration-300 ease-in-out"
+                  style={{
+                    gridTemplateRows: isOpen ? '1fr' : '0fr',
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                >
+                  <div className="overflow-hidden">
+                    <div
+                      className="border-t p-6 md:p-8 pt-6 grid gap-4 md:grid-cols-2"
+                      style={{ borderColor: 'var(--border-primary)' }}
+                    >
+                      {category.areas.map((area) => (
+                        <Link
+                          key={area.path}
+                          to={area.path}
+                          className="group rounded-xl border p-5 text-left transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+                          style={{
+                            borderColor: 'color-mix(in srgb, var(--accent) 45%, transparent)',
+                            backgroundColor: 'var(--bg-primary)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--accent)'
+                            e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor =
+                              'color-mix(in srgb, var(--accent) 45%, transparent)'
+                            e.currentTarget.style.boxShadow = 'none'
+                          }}
+                        >
+                          <div>
+                            <div className="flex items-start justify-between gap-3">
+                              <h4
+                                className="text-base md:text-lg font-bold mb-1"
+                                style={{
+                                  color: 'var(--text-primary)',
+                                  fontFamily: 'var(--font-heading)',
+                                }}
+                              >
+                                {area.title}
+                              </h4>
+                              <ArrowRight
+                                size={18}
+                                className="shrink-0 mt-1 transition-transform group-hover:translate-x-1"
+                                style={{ color: 'var(--accent)' }}
+                              />
+                            </div>
+                            <p
+                              className="mb-2 text-xs font-bold uppercase tracking-wider"
+                              style={{ color: 'var(--accent-text)' }}
+                            >
+                              {area.subtitle}
+                            </p>
+                            <p
+                              className="text-sm leading-relaxed"
+                              style={{ color: 'var(--text-secondary)' }}
+                            >
+                              {area.description}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             )

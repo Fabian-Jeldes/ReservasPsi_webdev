@@ -1,4 +1,5 @@
 import { Lock, ShieldCheck } from 'lucide-react'
+import logoPsAndrei from '../assets/logo-psandrei.jpeg'
 
 export function SiteFooter() {
   return (
@@ -13,16 +14,11 @@ export function SiteFooter() {
         <div className="md:col-span-3">
           <div className="mb-6 flex flex-wrap items-center gap-6">
             <div className="flex items-center gap-2">
-              <div
-                className="flex h-8 w-8 items-center justify-center rounded text-sm font-bold shadow-lg"
-                style={{
-                  backgroundColor: 'var(--accent)',
-                  color: 'var(--text-inverse)',
-                  boxShadow: 'var(--shadow-accent)',
-                }}
-              >
-                A
-              </div>
+              <img
+                src={logoPsAndrei}
+                alt="Logo Ps. Andrei Andrusco"
+                className="h-10 w-10 shrink-0 rounded-lg object-contain"
+              />
               <span
                 className="text-xl font-bold tracking-tight"
                 style={{ fontFamily: 'var(--font-heading)' }}

@@ -77,16 +77,18 @@ export function HomePage() {
       {/* CTA Agendamiento Bajo Demanda */}
       <section id="reserva" className="py-20 px-6 text-center">
         <div 
-          className="max-w-4xl mx-auto p-12 border shadow-2xl relative overflow-hidden group"
+          className="max-w-4xl mx-auto p-12 border relative overflow-hidden group transition-all duration-500"
           style={{
             borderRadius: 'var(--radius-card-lg)',
-            borderColor: 'var(--border-primary)',
+            borderColor: 'var(--accent)',
+            borderWidth: '1.5px',
             backgroundColor: 'var(--bg-card)',
-            boxShadow: 'var(--shadow-card)',
+            boxShadow:
+              '0 20px 55px -12px rgba(255, 77, 77, 0.28), 0 8px 30px -6px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 77, 77, 0.14)',
           }}
         >
           <div 
-            className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20"
+            className="absolute inset-0 opacity-10 transition-opacity duration-500 group-hover:opacity-20"
             style={{ 
               background: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)' 
             }}
@@ -110,10 +112,10 @@ export function HomePage() {
           <button
             type="button"
             onClick={openBooking}
-            className="relative z-10 px-10 py-5 font-bold text-lg transition-all hover:scale-105 active:scale-95"
+            className="relative z-10 px-10 py-5 font-bold text-lg transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 cursor-pointer"
             style={{
               backgroundColor: 'var(--accent)',
-              color: 'var(--text-inverse)',
+              color: '#ffffff',
               borderRadius: 'var(--radius-btn)',
               boxShadow: 'var(--shadow-accent)',
             }}
