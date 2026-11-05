@@ -25,7 +25,7 @@ export function EstresCronicoBurnoutPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/salud-emocional/estres-cronico-burnout`,
+      url: `https://psandrei.com/salud-emocional/estres-cronico-burnout`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function EstresCronicoBurnoutPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

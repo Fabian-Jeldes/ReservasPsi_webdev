@@ -25,7 +25,7 @@ export function TrastornosAnsiedadPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/salud-emocional/trastornos-ansiedad-panico`,
+      url: `https://psandrei.com/salud-emocional/trastornos-ansiedad-panico`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function TrastornosAnsiedadPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

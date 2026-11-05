@@ -25,7 +25,7 @@ export function AversionSexoPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/sexualidad-femenina/aversion-al-sexo`,
+      url: `https://psandrei.com/sexualidad-femenina/aversion-al-sexo`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function AversionSexoPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
     }),
     [seoDescription]

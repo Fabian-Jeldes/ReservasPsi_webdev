@@ -25,7 +25,7 @@ export function RegulacionEmocionalAutoestimaPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/salud-emocional/regulacion-emocional-autoestima`,
+      url: `https://psandrei.com/salud-emocional/regulacion-emocional-autoestima`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function RegulacionEmocionalAutoestimaPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

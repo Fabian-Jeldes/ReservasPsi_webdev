@@ -25,7 +25,7 @@ export function BajoDeseoMasculinoPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/sexualidad-masculina/bajo-deseo-sexual-masculino`,
+      url: `https://psandrei.com/sexualidad-masculina/bajo-deseo-sexual-masculino`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function BajoDeseoMasculinoPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

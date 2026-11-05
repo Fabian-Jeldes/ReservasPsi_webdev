@@ -25,7 +25,7 @@ export function EyaculacionPrecozPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/sexualidad-masculina/eyaculacion-precoz`,
+      url: `https://psandrei.com/sexualidad-masculina/eyaculacion-precoz`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function EyaculacionPrecozPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',
