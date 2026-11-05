@@ -21,39 +21,45 @@ export function FaqSection() {
   }
 
   return (
-    <section 
-      id="faq" 
+    <section
+      id="faq"
       className="py-32 px-6"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <div 
-            className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl"
-            style={{ backgroundColor: 'var(--accent-soft)', color: 'var(--accent)' }}
+          <div
+            className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border"
+            style={{
+              backgroundColor: 'var(--accent-soft)',
+              color: 'var(--accent)',
+              borderColor: 'var(--border-accent)',
+            }}
           >
             <MessageCircleQuestion size={22} />
           </div>
-          <h2 
+          <h2
             className="text-3xl md:text-5xl mb-4"
-            style={{ 
-              color: 'var(--text-primary)', 
+            style={{
+              color: 'var(--text-primary)',
               fontFamily: 'var(--font-heading)',
               fontWeight: 'var(--heading-weight)',
               textTransform: 'var(--heading-transform)' as any,
-              letterSpacing: 'var(--heading-spacing)'
+              letterSpacing: 'var(--heading-spacing)',
             }}
           >
             Preguntas <span style={{ color: 'var(--accent)' }}>Frecuentes</span>
           </h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+          <p
+            className="text-lg max-w-2xl mx-auto leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             Respuestas directas y profesionales organizadas por temas para aclarar tus dudas antes de iniciar tu proceso de terapia.
           </p>
         </div>
 
         {/* Categories / Tabs Selector */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3.5 mb-12">
           {FAQ_DATA.map((cat: FaqCategory) => {
             const isActive = cat.id === activeCategoryId
             return (
@@ -61,13 +67,35 @@ export function FaqSection() {
                 key={cat.id}
                 type="button"
                 onClick={() => handleCategoryChange(cat.id)}
-                className="px-5 py-2.5 font-semibold text-sm border transition-all hover:scale-105 active:scale-95"
+                className="px-5 py-2.5 font-semibold text-sm border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   backgroundColor: isActive ? 'var(--accent-soft)' : 'var(--bg-card)',
-                  borderColor: isActive ? 'var(--accent)' : 'var(--border-primary)',
-                  color: isActive ? 'var(--accent-text)' : 'var(--text-secondary)',
+                  borderColor: isActive
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 45%, transparent)',
+                  borderWidth: isActive ? '1.5px' : '1px',
+                  color: isActive ? '#ffffff' : 'var(--text-secondary)',
                   borderRadius: 'var(--radius-btn)',
-                  boxShadow: isActive ? 'var(--shadow-accent)' : 'none',
+                  boxShadow: isActive
+                    ? '0 8px 25px -4px rgba(255, 77, 77, 0.38), 0 0 14px rgba(255, 77, 77, 0.22)'
+                    : 'none',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--accent)'
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-primary)'
+                    e.currentTarget.style.boxShadow =
+                      '0 6px 18px -4px rgba(255, 77, 77, 0.22)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = isActive
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 45%, transparent)'
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-secondary)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }
                 }}
               >
                 {cat.title}
@@ -81,29 +109,42 @@ export function FaqSection() {
           {activeCategory.items.map((item: FaqItem, idx: number) => {
             const isOpen = openItemIdx === idx
             return (
-              <div 
+              <div
                 key={idx}
                 className="border transition-all duration-300 overflow-hidden"
                 style={{
                   borderRadius: 'var(--radius-card)',
-                  borderColor: isOpen ? 'var(--border-accent)' : 'var(--border-primary)',
+                  borderColor: isOpen
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 55%, transparent)',
+                  borderWidth: isOpen ? '1.5px' : '1px',
                   backgroundColor: 'var(--bg-card)',
-                  boxShadow: isOpen ? 'var(--shadow-accent)' : 'var(--shadow-card)',
+                  boxShadow: isOpen
+                    ? '0 14px 38px -10px rgba(255, 77, 77, 0.3), 0 0 18px rgba(255, 77, 77, 0.16)'
+                    : '0 8px 28px -10px rgba(255, 77, 77, 0.12), var(--shadow-card)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--accent)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = isOpen
+                    ? 'var(--accent)'
+                    : 'color-mix(in srgb, var(--accent) 55%, transparent)'
                 }}
               >
                 {/* Question Row */}
                 <button
                   type="button"
                   onClick={() => toggleItem(idx)}
-                  className="w-full flex items-center justify-between p-6 md:p-8 text-left font-bold text-lg md:text-xl transition-colors gap-4"
+                  className="w-full flex items-center justify-between p-6 md:p-8 text-left font-bold text-lg md:text-xl transition-colors gap-4 cursor-pointer"
                   style={{ color: 'var(--text-primary)' }}
                 >
                   <span>{item.question}</span>
-                  <span 
+                  <span
                     className="transition-transform duration-300 shrink-0"
-                    style={{ 
-                      color: isOpen ? 'var(--accent)' : 'var(--text-muted)',
-                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+                    style={{
+                      color: isOpen ? 'var(--accent)' : 'var(--text-secondary)',
+                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                     }}
                   >
                     <ChevronDown size={22} />
@@ -111,16 +152,16 @@ export function FaqSection() {
                 </button>
 
                 {/* Answer Content */}
-                <div 
+                <div
                   className="transition-all duration-300 ease-in-out"
                   style={{
                     maxHeight: isOpen ? '500px' : '0px',
                     opacity: isOpen ? 1 : 0,
                   }}
                 >
-                  <div 
+                  <div
                     className="p-6 md:p-8 pt-0 text-base md:text-lg leading-relaxed border-t"
-                    style={{ 
+                    style={{
                       color: 'var(--text-secondary)',
                       borderColor: 'var(--border-primary)',
                     }}

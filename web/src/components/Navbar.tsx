@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import logoPsAndrei from '../assets/logo-psandrei.jpeg'
 
 type Props = {
   onLogoClick: () => void
@@ -15,7 +16,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
   return (
     <nav
-      className="fixed z-50 w-full border-b transition-colors duration-300"
+      className="fixed top-0 left-0 right-0 z-50 w-full border-b transition-colors duration-300"
       style={{
         backgroundColor: 'var(--bg-nav)',
         borderColor: 'var(--border-primary)',
@@ -23,81 +24,94 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         WebkitBackdropFilter: 'var(--nav-backdrop)',
       }}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-8">
         <button
           type="button"
-          className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-left relative z-50"
+          className="flex cursor-pointer items-center gap-3 border-0 bg-transparent p-0 text-left relative z-50"
           onClick={() => {
             onLogoClick()
             closeMenu()
           }}
           aria-label="Ir al inicio"
         >
-          <div
-            className="flex h-8 w-8 items-center justify-center rounded-lg font-bold shadow-lg"
-            style={{
-              backgroundColor: 'var(--accent)',
-              color: 'var(--text-inverse)',
-              boxShadow: 'var(--shadow-accent)',
-            }}
-          >
-            A
-          </div>
+          <img
+            src={logoPsAndrei}
+            alt="Logo Ps. Andrei Andrusco"
+            className="h-10 w-10 shrink-0 rounded-lg object-contain"
+          />
           <span
             className="text-xl font-bold tracking-tight"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             <span className="brand-text">
-              <span className="brand-initial">A</span>ndrei <span className="brand-initial">A</span>ndrusco <span className="brand-initial">F</span>idalgo
+              <span className="brand-initial">A</span>ndrei{' '}
+              <span className="brand-initial">A</span>ndrusco{' '}
+              <span className="brand-initial">F</span>idalgo
             </span>
           </span>
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden items-center gap-8 text-sm font-medium md:flex">
+        <div className="hidden items-center gap-8 text-sm font-semibold md:flex">
           <Link
             to="/sobre-mi"
             className="transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
-            Sobre Mí
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              S
+            </span>
+            obre{' '}
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              M
+            </span>
+            í
           </Link>
           <a
             href="/#especialidades"
             className="transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
-            Especialidades
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              E
+            </span>
+            specialidades
           </a>
           <a
             href="/#reviews"
             className="transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
-            Reseñas
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              R
+            </span>
+            eseñas
           </a>
           <Link
             to="/articulos"
             className="transition-colors"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
-            Psicoeducación
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              P
+            </span>
+            sicoeducación
           </Link>
           <button
             type="button"
             onClick={onAgendarClick}
-            className="rounded-full px-5 py-2 font-bold shadow-lg transition-all active:scale-95 cursor-pointer"
+            className="rounded-full px-5 py-2.5 font-bold shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
             style={{
               backgroundColor: 'var(--accent)',
-              color: 'var(--text-inverse)',
+              color: '#ffffff',
               boxShadow: 'var(--shadow-accent)',
               borderRadius: 'var(--radius-btn)',
             }}
@@ -118,7 +132,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             color: 'var(--text-primary)',
             backgroundColor: 'var(--bg-card)',
           }}
-          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -142,8 +156,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             }}
           />
 
-          <div 
-            className="relative z-10 flex flex-col gap-6 text-center text-lg font-semibold py-8 border-t" 
+          <div
+            className="relative z-10 flex flex-col gap-6 text-center text-lg font-semibold py-8 border-t"
             style={{ borderColor: 'var(--border-primary)' }}
           >
             <Link
@@ -152,7 +166,14 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               className="py-3 transition-colors text-2xl"
               style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
             >
-              Sobre Mí
+              <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+                S
+              </span>
+              obre{' '}
+              <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+                M
+              </span>
+              í
             </Link>
             <a
               href="/#especialidades"
@@ -160,7 +181,10 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               className="py-3 transition-colors text-2xl"
               style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
             >
-              Especialidades
+              <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+                E
+              </span>
+              specialidades
             </a>
             <a
               href="/#reviews"
@@ -168,7 +192,10 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               className="py-3 transition-colors text-2xl"
               style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
             >
-              Reseñas
+              <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+                R
+              </span>
+              eseñas
             </a>
             <Link
               to="/articulos"
@@ -176,9 +203,12 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               className="py-3 transition-colors text-2xl"
               style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
             >
-              Psicoeducación
+              <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+                P
+              </span>
+              sicoeducación
             </Link>
-            
+
             <div className="mt-8 px-4">
               <button
                 type="button"
@@ -189,7 +219,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                 className="w-full py-4 font-bold shadow-lg transition-all active:scale-95 cursor-pointer text-lg animate-pulse"
                 style={{
                   backgroundColor: 'var(--accent)',
-                  color: 'var(--text-inverse)',
+                  color: '#ffffff',
                   boxShadow: 'var(--shadow-accent)',
                   borderRadius: 'var(--radius-btn)',
                 }}

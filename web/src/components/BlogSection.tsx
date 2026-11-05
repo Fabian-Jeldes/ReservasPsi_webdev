@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom'
 import { BookOpen, ChevronRight } from 'lucide-react'
 import type { BlogPost } from '../types/site'
 
+const psicoeducacionIconModules = import.meta.glob<string>(
+  '../assets/*psicoeducacion*',
+  {
+    eager: true,
+    import: 'default',
+  }
+)
+const iconPsicoeducacionUrl =
+  Object.values(psicoeducacionIconModules)[0] || '/assets/icon-psicoeducacion.png'
+
 type Props = {
   posts: BlogPost[]
 }
@@ -9,21 +19,32 @@ type Props = {
 export function BlogSection({ posts }: Props) {
   return (
     <section id="blog" className="mx-auto max-w-6xl px-6 py-32">
-      <div className="mb-16 flex items-end justify-between">
+      <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <h2
-            className="mb-4 text-4xl"
-            style={{
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-heading)',
-              fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
-              letterSpacing: 'var(--heading-spacing)',
-            }}
+          <div className="mb-4 flex items-center gap-4">
+            <img
+              src={iconPsicoeducacionUrl}
+              alt="Icono Psicoeducación y Bienestar"
+              className="h-14 w-14 shrink-0 object-contain transition-transform duration-300 hover:scale-105"
+            />
+            <h2
+              className="text-3xl md:text-4xl"
+              style={{
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 'var(--heading-weight)',
+                textTransform: 'var(--heading-transform)' as any,
+                letterSpacing: 'var(--heading-spacing)',
+              }}
+            >
+              <span style={{ color: 'var(--accent)' }}>Psicoeducación</span> y{' '}
+              <span style={{ color: 'var(--accent)' }}>Bienestar</span>:
+            </h2>
+          </div>
+          <p
+            className="max-w-2xl text-lg leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
           >
-            <span style={{ color: 'var(--accent)' }}>Psicoeducación</span> y <span style={{ color: 'var(--accent)' }}>Bienestar</span>:
-          </h2>
-          <p className="max-w-2xl text-lg leading-relaxed" style={{ color: 'var(--text-primary)' }}>
             Entender cómo funcionamos es el primer paso para disfrutar plenamente. Aquí encontrarás recursos clave para resolver dudas, derribar mitos y fortalecer tu salud sexual desde una mirada profesional.
           </p>
         </div>
@@ -32,7 +53,7 @@ export function BlogSection({ posts }: Props) {
           className="hidden items-center gap-2 rounded-full px-6 py-3 font-bold transition-all hover:scale-105 active:scale-95 md:flex"
           style={{
             backgroundColor: 'var(--accent)',
-            color: 'var(--text-inverse)',
+            color: '#ffffff',
             boxShadow: 'var(--shadow-accent)',
             borderRadius: 'var(--radius-btn)',
           }}
@@ -41,7 +62,7 @@ export function BlogSection({ posts }: Props) {
         </Link>
       </div>
 
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {posts.map((post) => {
           // Logic to highlight one keyword per blog card
           const highlightMap: Record<number, string> = {
@@ -51,36 +72,45 @@ export function BlogSection({ posts }: Props) {
             4: 'Silencio',
           }
           const keyword = highlightMap[post.id]
-          const titleParts = keyword ? post.title.split(new RegExp(`(${keyword})`, 'i')) : [post.title]
+          const titleParts = keyword
+            ? post.title.split(new RegExp(`(${keyword})`, 'i'))
+            : [post.title]
 
           return (
             <Link
               key={post.id}
               to={`/articulos/${post.slug}`}
-              className="group block cursor-pointer border border-transparent p-4 transition-all duration-500"
+              className="group flex flex-col cursor-pointer border p-4 transition-all duration-500 hover:-translate-y-1.5"
               style={{
                 borderRadius: 'var(--radius-card)',
-                borderWidth: 'var(--card-border-width)',
+                borderColor: 'color-mix(in srgb, var(--accent) 55%, transparent)',
+                borderWidth: '1px',
                 backgroundColor: 'var(--bg-card)',
-                boxShadow: 'var(--shadow-card)',
+                boxShadow:
+                  '0 12px 35px -12px rgba(255, 77, 77, 0.16), var(--shadow-card)',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--border-accent)')}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent)'
+                e.currentTarget.style.boxShadow =
+                  '0 18px 45px -10px rgba(255, 77, 77, 0.32), 0 0 20px rgba(255, 77, 77, 0.18)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor =
+                  'color-mix(in srgb, var(--accent) 55%, transparent)'
+                e.currentTarget.style.boxShadow =
+                  '0 12px 35px -12px rgba(255, 77, 77, 0.16), var(--shadow-card)'
+              }}
             >
               <div
-                className="relative mb-6 aspect-[4/5] overflow-hidden"
+                className="relative mb-5 aspect-[4/5] overflow-hidden"
                 style={{
                   borderRadius: 'calc(var(--radius-card) - 0.5rem)',
                   backgroundColor: 'var(--bg-section-alt)',
                 }}
               >
                 <div
-                  className="absolute inset-0 opacity-60"
-                  style={{
-                    background: `linear-gradient(to top, var(--bg-primary), transparent)`,
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  className="absolute inset-0 flex items-center justify-center p-8"
+                >
                   {post.imageUrl ? (
                     <img
                       src={post.imageUrl}
@@ -89,7 +119,7 @@ export function BlogSection({ posts }: Props) {
                       height={768}
                       loading="lazy"
                       decoding="async"
-                      className="absolute inset-0 h-full w-full object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
+                      className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
                     />
                   ) : (
                     <BookOpen
@@ -100,26 +130,37 @@ export function BlogSection({ posts }: Props) {
                     />
                   )}
                 </div>
-                <div className="absolute bottom-6 left-6 right-6">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      'linear-gradient(to top, rgba(10, 15, 29, 0.94) 10%, rgba(10, 15, 29, 0.45) 55%, transparent 100%)',
+                  }}
+                />
+                <div className="absolute bottom-5 left-5 right-5">
                   <div
-                    className="mb-2 inline-block rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-tighter shadow-lg"
+                    className="mb-2.5 inline-block rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg"
                     style={{
                       backgroundColor: 'var(--accent)',
-                      color: 'var(--text-inverse)',
+                      color: '#ffffff',
                     }}
                   >
                     {post.category}
                   </div>
                   <h4
-                    className="text-xl font-bold leading-tight transition-colors"
+                    className="text-lg md:text-xl font-bold leading-snug transition-colors"
                     style={{ color: 'var(--text-primary)' }}
                   >
                     {keyword && titleParts.length > 1 ? (
                       <>
-                        {titleParts.map((part, i) => 
-                          part.toLowerCase() === keyword.toLowerCase() 
-                            ? <span key={i} style={{ color: 'var(--accent)' }}>{part}</span> 
-                            : part
+                        {titleParts.map((part, i) =>
+                          part.toLowerCase() === keyword.toLowerCase() ? (
+                            <span key={i} style={{ color: 'var(--accent)' }}>
+                              {part}
+                            </span>
+                          ) : (
+                            part
+                          )
                         )}
                       </>
                     ) : (
@@ -128,13 +169,28 @@ export function BlogSection({ posts }: Props) {
                   </h4>
                 </div>
               </div>
+
+              {/* Resumen descriptivo con alto contraste */}
+              <p
+                className="mb-4 px-2 text-sm leading-relaxed line-clamp-2 flex-1"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {post.content}
+              </p>
+
               <div
-                className="flex items-center justify-between px-2 text-xs font-medium italic"
-                style={{ color: 'var(--text-muted)' }}
+                className="flex items-center justify-between px-2 pt-3 border-t text-xs font-semibold"
+                style={{
+                  color: 'var(--text-secondary)',
+                  borderColor: 'var(--border-primary)',
+                }}
               >
                 <span>{post.date}</span>
-                <span className="flex items-center gap-1">
-                  Lectura 5 min <ChevronRight size={12} aria-hidden />
+                <span
+                  className="flex items-center gap-1 font-bold transition-transform group-hover:translate-x-1"
+                  style={{ color: 'var(--accent-text)' }}
+                >
+                  Lectura 5 min <ChevronRight size={13} aria-hidden />
                 </span>
               </div>
             </Link>

@@ -74,28 +74,40 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
     <section id="reviews" className="overflow-hidden px-6 py-20">
       <div className="mx-auto max-w-4xl">
         <div
-          className="relative overflow-hidden border shadow-2xl"
+          className="relative overflow-hidden border transition-all duration-500"
           style={{
             borderRadius: 'var(--radius-card-lg)',
-            borderColor: 'var(--border-card)',
-            borderWidth: 'var(--card-border-width)',
+            borderColor: 'var(--accent)',
+            borderWidth: '1.5px',
             backgroundColor: 'var(--bg-card-solid)',
-            boxShadow: 'var(--shadow-card)',
+            boxShadow:
+              '0 20px 55px -12px rgba(255, 77, 77, 0.28), 0 8px 30px -6px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 77, 77, 0.14)',
           }}
         >
           {/* Inner content — padded so nothing overflows */}
           <div className="p-8 md:p-12">
             {/* Badge — inside card, top-right */}
             <div className="mb-6 flex justify-end">
-              <span
-                className="rounded-full px-5 py-1.5 text-xs font-bold shadow-lg"
+              <a
+                href="https://www.doctoralia.cl/perfil/andrei-andrusco-fidalgo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full px-5 py-1.5 text-xs font-bold shadow-lg transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 cursor-pointer"
                 style={{
                   backgroundColor: 'var(--accent)',
                   color: 'var(--text-inverse)',
+                  boxShadow: 'var(--shadow-accent)',
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = 'var(--shadow-accent-lg)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
+                }}
+                aria-label="Ver perfil verificado en Doctoralia de Andrei Andrusco Fidalgo"
               >
                 Doctoralia Verified
-              </span>
+              </a>
             </div>
 
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
