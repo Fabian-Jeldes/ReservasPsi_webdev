@@ -8,6 +8,8 @@ import { ArticlesPage } from './pages/ArticlesPage'
 import { SpecializationPage } from './pages/SpecializationPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { BackgroundDecorations } from './components/BackgroundDecorations'
+import { IntroCurtainReveal } from './components/IntroCurtainReveal'
+import { CustomCursor } from './components/CustomCursor'
 import { getSeo } from './seo/seo'
 import { applySeoToDocument } from './seo/head'
 
@@ -60,12 +62,16 @@ function SeoSync() {
 }
 
 export default function App() {
+  const location = useLocation()
+
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <IntroCurtainReveal />
+      <CustomCursor />
       <ScrollToTop />
       <SeoSync />
       <BackgroundDecorations />
-      <div className="relative z-10">
+      <div key={location.pathname} className="view-enter relative z-10">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre-mi" element={<AboutPage />} />

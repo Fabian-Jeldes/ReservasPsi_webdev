@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, Tag } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { BLOG_POSTS } from '../data/site'
+import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
 const psicoeducacionIconModules = import.meta.glob<string>(
   '../assets/*psicoeducacion*',
@@ -58,7 +59,13 @@ export function ArticlesPage() {
             letterSpacing: 'var(--heading-spacing)',
           }}
         >
-          Biblioteca de <span style={{ color: 'var(--accent)' }}>Recursos</span>
+          Biblioteca de{' '}
+          <span
+            className="font-editorial-accent"
+            style={{ color: 'var(--accent)' }}
+          >
+            Recursos
+          </span>
         </h1>
         <p
           className="text-xl max-w-3xl mx-auto leading-relaxed"
@@ -68,14 +75,14 @@ export function ArticlesPage() {
         </p>
       </header>
 
-      {/* Articles Grid */}
-      <main className="mx-auto max-w-6xl px-6 pb-40">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      {/* Articles Grid (2x2 Escalonada Editorial) */}
+      <main className="mx-auto max-w-5xl px-6 pb-44">
+        <div className="stagger-grid-library grid gap-10 md:grid-cols-2">
           {BLOG_POSTS.map((post) => (
             <Link
               key={post.id}
               to={`/articulos/${post.slug}`}
-              className="group relative flex flex-col border transition-all duration-500 hover:-translate-y-2"
+              className="bullet-reveal-card group relative flex flex-col border transition-all duration-500 hover:-translate-y-2"
               style={{
                 backgroundColor: 'var(--bg-card)',
                 borderColor: 'color-mix(in srgb, var(--accent) 60%, transparent)',
@@ -96,32 +103,35 @@ export function ArticlesPage() {
                   '0 14px 40px -12px rgba(255, 77, 77, 0.18), var(--shadow-card)'
               }}
             >
-              <div
-                className="relative aspect-[4/3] overflow-hidden"
-                style={{
-                  borderTopLeftRadius: 'calc(var(--radius-card-lg) - 1px)',
-                  borderTopRightRadius: 'calc(var(--radius-card-lg) - 1px)',
-                }}
-              >
-                {post.imageUrl ? (
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    width={1280}
-                    height={768}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ objectPosition: '50% 40%' }}
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-800">
-                    <span className="text-4xl font-black opacity-10 text-white italic">
-                      Andi
-                    </span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="p-4 pb-0">
+                <ElasticBorderCard
+                  className="aspect-[4/3] w-full"
+                  cornerRadius={22}
+                  maxPull={20}
+                  borderWidth={1.5}
+                  restingStrokeOpacity={0.6}
+                  backgroundColor="var(--bg-section-alt)"
+                >
+                  {post.imageUrl ? (
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      width={1280}
+                      height={768}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      style={{ objectPosition: '50% 40%' }}
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-slate-800">
+                      <span className="text-4xl font-black opacity-10 text-white italic">
+                        Andi
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </ElasticBorderCard>
               </div>
 
               <div className="flex flex-1 flex-col p-8">
@@ -141,14 +151,15 @@ export function ArticlesPage() {
                 </div>
 
                 <h3
-                  className="mb-4 text-2xl"
+                  className="bullet-reveal-title mb-4 text-2xl leading-snug"
                   style={{
                     fontFamily: 'var(--font-heading)',
                     fontWeight: 'var(--heading-weight)',
                     color: 'var(--text-primary)',
                   }}
                 >
-                  {post.title}
+                  <span className="bullet-reveal-dot" aria-hidden />
+                  <span className="bullet-reveal-text">{post.title}</span>
                 </h3>
 
                 <p

@@ -1,11 +1,55 @@
+import { useState, useEffect, useCallback } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { PROFILE_IMAGE_URL } from '../data/site'
+import { ElasticBorderCard } from './ElasticBorderCard'
+
+const HERO_ROTATING_PHRASES = [
+  'bienestar sexual',
+  'paz mental',
+  'vínculo auténtico',
+] as const
+
+const HERO_ROTATION_INTERVAL_MS = 3500
 
 type Props = {
   onContactClick: () => void
 }
 
 export function HeroSection({ onContactClick }: Props) {
+  const [activePhraseIdx, setActivePhraseIdx] = useState(0)
+  const [leavingPhraseIdx, setLeavingPhraseIdx] = useState<number | null>(null)
+  const [timerResetKey, setTimerResetKey] = useState(0)
+
+  const selectPhrase = useCallback((nextIdx: number, isManual = false) => {
+    setActivePhraseIdx((currentIdx) => {
+      if (nextIdx === currentIdx) return currentIdx
+      setLeavingPhraseIdx(currentIdx)
+      return nextIdx
+    })
+    if (isManual) {
+      setTimerResetKey((k) => k + 1)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (leavingPhraseIdx === null) return
+    const cleanup = window.setTimeout(() => {
+      setLeavingPhraseIdx(null)
+    }, 660)
+    return () => window.clearTimeout(cleanup)
+  }, [leavingPhraseIdx])
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActivePhraseIdx((currentIdx) => {
+        const nextIdx = (currentIdx + 1) % HERO_ROTATING_PHRASES.length
+        setLeavingPhraseIdx(currentIdx)
+        return nextIdx
+      })
+    }, HERO_ROTATION_INTERVAL_MS)
+
+    return () => window.clearInterval(timer)
+  }, [timerResetKey])
   return (
     <header
       id="sobre-mi"
@@ -37,22 +81,77 @@ export function HeroSection({ onContactClick }: Props) {
           Consultas Disponibles
         </div>
 
-        {/* Titular principal con jerarquía y saltos de línea armónicos */}
+        {/* Titular principal en 2 líneas estrictas con frase rotativa dinámica */}
         <h1
-          className="text-4xl sm:text-5xl lg:text-6xl leading-[1.16] md:leading-[1.12] text-balance"
+          className="leading-[1.16] md:leading-[1.12]"
           style={{
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-heading)',
             fontWeight: 'var(--heading-weight)',
             textTransform: 'var(--heading-transform)' as any,
-            letterSpacing: 'var(--heading-spacing)',
+            fontSize: 'clamp(2.2rem, 3.6vw, 3.25rem)',
+            letterSpacing: '-0.02em',
           }}
         >
-          <span className="inline-block">Terapia enfocada en</span>{' '}
-          <span className="inline-block">
-            tu <span className="andi-hero-accent">bienestar sexual</span>
+          <span className="block md:whitespace-nowrap">
+            Terapia enfocada en tu
+          </span>
+          <span className="hero-rotator-grid mt-1 justify-items-center md:justify-items-start">
+            {HERO_ROTATING_PHRASES.map((phrase, idx) => {
+              const stateClass =
+                idx === activePhraseIdx
+                  ? 'is-active'
+                  : idx === leavingPhraseIdx
+                    ? 'is-leaving'
+                    : 'is-waiting'
+
+              return (
+                <span
+                  key={phrase}
+                  aria-hidden={idx !== activePhraseIdx}
+                  className={`hero-rotator-item andi-hero-accent font-editorial-accent ${stateClass}`}
+                >
+                  {phrase}
+                </span>
+              )
+            })}
           </span>
         </h1>
+
+        {/* Indicadores interactivos (Ancla visual de 3 puntos) */}
+        <div
+          className="mt-3.5 flex items-center justify-center gap-2 md:justify-start"
+          role="tablist"
+          aria-label="Enfoques de la terapia"
+        >
+          {HERO_ROTATING_PHRASES.map((phrase, idx) => {
+            const isActive = idx === activePhraseIdx
+            return (
+              <button
+                key={phrase}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`Mostrar frase: ${phrase}`}
+                onClick={() => selectPhrase(idx, true)}
+                onMouseEnter={() => selectPhrase(idx, true)}
+                className="cursor-pointer rounded-full border-0 p-0"
+                style={{
+                  height: '6px',
+                  width: isActive ? '20px' : '6px',
+                  backgroundColor: isActive
+                    ? 'var(--accent)'
+                    : 'rgba(255, 255, 255, 0.25)',
+                  boxShadow: isActive
+                    ? '0 0 10px var(--accent), 0 0 4px rgba(255, 77, 77, 0.55)'
+                    : 'none',
+                  transition:
+                    'width 450ms cubic-bezier(0.22, 1, 0.36, 1), background-color 350ms ease, box-shadow 350ms ease',
+                }}
+              />
+            )
+          })}
+        </div>
 
         <p
           className="mt-6 max-w-xl text-lg md:text-xl leading-relaxed"
@@ -114,21 +213,21 @@ export function HeroSection({ onContactClick }: Props) {
         </div>
       </div>
 
-      {/* Fotografía con marco rojo coral corporativo y sombra difusa cálida */}
+      {/* Fotografía con marco rojo coral corporativo, sombra difusa cálida y borde elástico reactivo al cursor */}
       <div className="group relative shrink-0">
         <div
           className="pointer-events-none absolute -inset-3 rounded-full blur-[65px] transition-all duration-700 group-hover:blur-[80px]"
           style={{ backgroundColor: 'var(--accent-glow)' }}
         />
-        <div
-          className="relative h-64 w-64 overflow-hidden border-2 p-3 backdrop-blur-xl transition-transform duration-500 group-hover:scale-[1.015] md:h-96 md:w-96"
-          style={{
-            borderRadius: 'var(--radius-card-lg)',
-            borderColor: 'var(--accent)',
-            backgroundColor: 'var(--bg-card)',
-            boxShadow:
-              'var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.4), 0 10px 30px -6px rgba(255, 115, 77, 0.25), 0 0 25px rgba(255, 77, 77, 0.2))',
-          }}
+        <ElasticBorderCard
+          className="h-64 w-64 md:h-96 md:w-96"
+          cornerRadius={28}
+          maxPull={20}
+          borderWidth={2}
+          restingStrokeOpacity={0.9}
+          innerPadding={12}
+          backgroundColor="var(--bg-card)"
+          boxShadow="var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.4), 0 10px 30px -6px rgba(255, 115, 77, 0.25), 0 0 25px rgba(255, 77, 77, 0.2))"
         >
           <img
             src={PROFILE_IMAGE_URL}
@@ -136,10 +235,9 @@ export function HeroSection({ onContactClick }: Props) {
             width={1200}
             height={1052}
             fetchPriority="high"
-            className="h-full w-full object-cover"
-            style={{ borderRadius: 'var(--radius-card)' }}
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
-        </div>
+        </ElasticBorderCard>
       </div>
     </header>
   )

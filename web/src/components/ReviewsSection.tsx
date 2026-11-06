@@ -136,7 +136,13 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                   }}
                 >
                   Lo que dicen <br />
-                  mis <span style={{ color: 'var(--accent)' }}>pacientes</span>
+                  mis{' '}
+                  <span
+                    className="font-editorial-accent"
+                    style={{ color: 'var(--accent)' }}
+                  >
+                    pacientes
+                  </span>
                 </h2>
               </div>
 
@@ -154,8 +160,8 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                 >
                   <div className="relative">
                     <p
-                      className="relative z-10 text-lg italic leading-relaxed md:text-xl"
-                      style={{ color: 'var(--text-secondary)' }}
+                      className="font-editorial relative z-10 text-lg leading-relaxed md:text-xl"
+                      style={{ color: 'var(--text-secondary)', fontWeight: 500 }}
                     >
                       <span
                         className="mr-1 inline-block text-3xl font-bold not-italic leading-none align-top"

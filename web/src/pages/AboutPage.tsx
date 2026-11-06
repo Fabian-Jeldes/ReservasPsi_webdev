@@ -1,12 +1,15 @@
 import { useState, useCallback } from 'react'
-import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ABOUT_PAGE_DATA } from '../data/site'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
+import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
 export function AboutPage() {
   const data = ABOUT_PAGE_DATA
+  const navigate = useNavigate()
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false)
 
   const openBooking = useCallback(() => {
@@ -23,7 +26,7 @@ export function AboutPage() {
       }}
     >
       <Navbar
-        onLogoClick={() => (window.location.href = '/')}
+        onLogoClick={() => navigate('/')}
         onAgendarClick={openBooking}
       />
 
@@ -62,7 +65,13 @@ export function AboutPage() {
               letterSpacing: 'var(--heading-spacing)',
             }}
           >
-            Sobre <span style={{ color: 'var(--accent)' }}>mí</span>
+            Sobre{' '}
+            <span
+              className="font-editorial-accent"
+              style={{ color: 'var(--accent)' }}
+            >
+              mí
+            </span>
           </h1>
 
           {/* Intro + Image */}
@@ -76,24 +85,24 @@ export function AboutPage() {
                 dangerouslySetInnerHTML={{ __html: data.intro }}
               />
             </div>
-            <div className="relative flex-shrink-0 order-1 lg:order-2 mx-auto lg:mx-0">
+            <div className="group relative flex-shrink-0 order-1 lg:order-2 mx-auto lg:mx-0">
               <div
-                className="absolute inset-0 blur-[45px] transition-all duration-700"
+                className="pointer-events-none absolute inset-0 blur-[45px] transition-all duration-700 group-hover:blur-[65px]"
                 style={{
                   backgroundColor: 'var(--accent-glow)',
                   borderRadius: '50%',
                 }}
               />
-              <div
-                className="relative overflow-hidden border-2 p-2 w-full max-w-md lg:w-[380px]"
-                style={{
-                  borderRadius: 'var(--radius-card-lg)',
-                  borderColor: 'var(--accent)',
-                  backgroundColor: 'var(--bg-card)',
-                  boxShadow:
-                    'var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.38))',
-                  aspectRatio: '16 / 10',
-                }}
+              <ElasticBorderCard
+                className="w-full max-w-md lg:w-[380px]"
+                style={{ aspectRatio: '16 / 10' }}
+                cornerRadius={24}
+                maxPull={20}
+                borderWidth={2}
+                restingStrokeOpacity={0.9}
+                innerPadding={8}
+                backgroundColor="var(--bg-card)"
+                boxShadow="var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.38))"
               >
                 <img
                   src={data.imageUrl}
@@ -101,10 +110,9 @@ export function AboutPage() {
                   width={1200}
                   height={675}
                   fetchPriority="high"
-                  className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
-                  style={{ borderRadius: 'var(--radius-card)' }}
+                  className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
-              </div>
+              </ElasticBorderCard>
             </div>
           </div>
         </div>
@@ -139,7 +147,12 @@ export function AboutPage() {
               }}
             >
               Mi enfoque:{' '}
-              <span style={{ color: 'var(--accent)' }}>{data.enfoque.title}</span>
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                {data.enfoque.title}
+              </span>
             </h2>
           </div>
 
@@ -188,7 +201,12 @@ export function AboutPage() {
               }}
             >
               La ciencia detrás de la{' '}
-              <span style={{ color: 'var(--accent)' }}>sesión sexológica</span>
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                sesión sexológica
+              </span>
             </h2>
           </div>
 
@@ -232,7 +250,14 @@ export function AboutPage() {
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
-              ¿<span style={{ color: 'var(--accent)' }}>Dónde</span> me encuentras?
+              ¿
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                Dónde
+              </span>{' '}
+              me encuentras?
             </h2>
           </div>
           <p
@@ -246,35 +271,47 @@ export function AboutPage() {
           </p>
 
           <div className="space-y-5 max-w-prose">
-            {data.donde.workplaces.map((wp, i) => (
-              <div
-                key={i}
-                className="clinical-callout group relative transition-all duration-300 hover:-translate-y-0.5"
-              >
+            {data.donde.workplaces.map((wp, i) => {
+              const cardContent = (
                 <div className="relative z-10">
-                  <div className="flex flex-wrap items-baseline gap-2.5 mb-2.5">
-                    <h3
-                      className="text-lg font-bold"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {wp.name}
-                    </h3>
-                    <span
-                      className="rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider"
-                      style={{
-                        backgroundColor: 'var(--accent-soft)',
-                        color: 'var(--accent-text)',
-                        border: '1px solid var(--border-accent)',
-                      }}
-                    >
-                      {wp.modality}
-                    </span>
-                    <span
-                      className="text-xs font-semibold"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      [{wp.since}]
-                    </span>
+                  <div className="flex items-start justify-between gap-3 mb-2.5">
+                    <div className="flex flex-wrap items-baseline gap-2.5">
+                      <h3
+                        className="bullet-reveal-title text-lg font-bold leading-snug"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        <span className="bullet-reveal-dot" aria-hidden />
+                        <span className="bullet-reveal-text">{wp.name}</span>
+                      </h3>
+                      <span
+                        className="rounded-full px-3 py-0.5 text-xs font-bold uppercase tracking-wider"
+                        style={{
+                          backgroundColor: 'var(--accent-soft)',
+                          color: 'var(--accent-text)',
+                          border: '1px solid var(--border-accent)',
+                        }}
+                      >
+                        {wp.modality}
+                      </span>
+                      <span
+                        className="text-xs font-semibold"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        [{wp.since}]
+                      </span>
+                    </div>
+
+                    {wp.url && (
+                      <span
+                        className="bullet-reveal-arrow-btn mt-0.5"
+                        aria-hidden
+                      >
+                        <ArrowUpRight
+                          size={15}
+                          className="bullet-reveal-arrow-icon"
+                        />
+                      </span>
+                    )}
                   </div>
                   <p
                     className="text-sm md:text-base leading-[1.78]"
@@ -283,8 +320,28 @@ export function AboutPage() {
                     {wp.description}
                   </p>
                 </div>
-              </div>
-            ))}
+              )
+
+              return wp.url ? (
+                <a
+                  key={i}
+                  href={wp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visitar sitio web oficial de ${wp.name} (se abre en una pestaña nueva)`}
+                  className="bullet-reveal-card clinical-callout clinical-callout-link group relative"
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <div
+                  key={i}
+                  className="bullet-reveal-card clinical-callout group relative transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  {cardContent}
+                </div>
+              )
+            })}
           </div>
         </section>
 
@@ -313,7 +370,14 @@ export function AboutPage() {
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
-              ¿Qué te <span style={{ color: 'var(--accent)' }}>ofrezco</span>?
+              ¿Qué te{' '}
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                ofrezco
+              </span>
+              ?
             </h2>
           </div>
           <div className="space-y-6 max-w-prose">
