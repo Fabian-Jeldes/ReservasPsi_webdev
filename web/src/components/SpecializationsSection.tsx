@@ -186,6 +186,7 @@ export function SpecializationsSection({ items: _items }: Props) {
   const toggleCategory = (id: string) => {
     setOpenCategoryId((prev) => (prev === id ? null : id))
   }
+
   return (
     <section
       id="especialidades"

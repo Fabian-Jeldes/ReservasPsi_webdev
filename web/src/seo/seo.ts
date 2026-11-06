@@ -109,6 +109,117 @@ export function normalizePath(pathname: string) {
   return p === '' ? '/' : p
 }
 
+const CLINICAL_SPECIALTY_SEO: Record<
+  string,
+  { conditionName: string; title: string; description: string }
+> = {
+  '/sexualidad-masculina/disfuncion-erectil-psicogena': {
+    conditionName: 'Disfunción Eréctil Psicógena',
+    title:
+      'Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La disfunción eréctil psicógena no es un fracaso, sino una respuesta neurobiológica frente a la ansiedad de desempeño. Tratamiento sexológico clínico e integrativo en Chile.',
+  },
+  '/sexualidad-masculina/eyaculacion-precoz': {
+    conditionName: 'Eyaculación Precoz',
+    title:
+      'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'Abordaje sexológico clínico e integrativo para la eyaculación precoz o prematura en Chile. Reentrenamiento del reflejo eyaculatorio, manejo de la ansiedad de desempeño y técnicas conductuales.',
+  },
+  '/sexualidad-masculina/eyaculacion-retardada': {
+    conditionName: 'Eyaculación Retardada',
+    title:
+      'Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La Eyaculación Retardada se caracteriza por un retraso significativo o una ausencia recurrente del reflejo eyaculatorio a pesar de la presencia de una estimulación sexual adecuada. Tratamiento sexológico clínico e integrativo en Chile.',
+  },
+  '/sexualidad-masculina/bajo-deseo-sexual-masculino': {
+    conditionName: 'Deseo Sexual Hipoactivo Masculino',
+    title:
+      'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'El Deseo Sexual Hipoactivo Masculino se define como una disminución o ausencia persistente o recurrente de pensamientos, fantasías eróticas y motivación para iniciar o responder a la actividad íntima.',
+  },
+  '/sexualidad-masculina/ansiedad-de-desempeno': {
+    conditionName: 'Ansiedad de Desempeño Sexual',
+    title:
+      'Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La Ansiedad de Desempeño Sexual se define como un estado de aprensión, tensión psicofisiológica y miedo anticipatorio focalizado en la capacidad de obtener, mantener o regular la respuesta sexual.',
+  },
+  '/sexualidad-masculina/uso-problematico-de-pornografia': {
+    conditionName: 'Uso Problemático de Pornografía',
+    title:
+      'Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'El uso problemático o compulsivo de pornografía se caracteriza por un patrón persistente de incapacidad para controlar los impulsos o conductas de consumo de material erótico explícito.',
+  },
+  '/sexualidad-femenina/vaginismo-dolor-genitopelvico': {
+    conditionName: 'Vaginismo y Dolor Genitopélvico',
+    title:
+      'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'El Vaginismo y las condiciones de Dolor Genitopélvico comprenden dificultades caracterizadas por la imposibilidad o dificultad recurrente para permitir la penetración vaginal.',
+  },
+  '/sexualidad-femenina/dispareunia-dolor-relaciones': {
+    conditionName: 'Dispareunia y Dolor durante las Relaciones',
+    title:
+      'Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La Dispareunia se define como el dolor genital persistente o recurrente que se experimenta antes, durante o después del coito o de la penetración sexual.',
+  },
+  '/sexualidad-femenina/anorgasmia-dificultad-orgasmo': {
+    conditionName: 'Anorgasmia y Dificultad del Orgasmo',
+    title:
+      'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La Anorgasmia y las dificultades en el alcance del clímax comprenden la ausencia o el retraso significativo del orgasmo, así como una reducción marcada en la intensidad de las sensaciones orgásmicas.',
+  },
+  '/sexualidad-femenina/deseo-sexual-hipoactivo-femenino': {
+    conditionName: 'Deseo Sexual Hipoactivo Femenino',
+    title:
+      'Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'El Deseo Sexual Hipoactivo Femenino se define como una disminución o ausencia persistente o recurrente del interés erótico, pensamientos, fantasías sexuales y motivación íntima.',
+  },
+  '/sexualidad-femenina/aversion-al-sexo': {
+    conditionName: 'Aversión al Sexo',
+    title:
+      'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'La Aversión al Sexo se caracteriza por una respuesta fóbica, de rechazo persistente o evitación extrema y activa de cualquier tipo de contacto íntimo o cercanía erótica compartida.',
+  },
+  '/salud-emocional/trastornos-ansiedad-panico': {
+    conditionName: 'Trastornos de Ansiedad y Pánico',
+    title:
+      'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'Los Trastornos de Ansiedad y Pánico comprenden un conjunto de condiciones caracterizadas por una activación neurofisiológica desproporcionada, miedo intenso o aprensión anticipatoria.',
+  },
+  '/salud-emocional/cuadros-depresivos-alteraciones-animo': {
+    conditionName: 'Cuadros Depresivos y Alteraciones del Ánimo',
+    title:
+      'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'Los cuadros depresivos y las alteraciones del estado de ánimo configuran una compleja red de síntomas somáticos, cognitivos y relacionales que erosionan la vitalidad.',
+  },
+  '/salud-emocional/estres-cronico-burnout': {
+    conditionName: 'Estrés Crónico y Síndrome de Burnout',
+    title:
+      'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'El estrés crónico y el síndrome de burnout se caracterizan por agotamiento extremo, distanciamiento mental y sobrecarga alostática.',
+  },
+  '/salud-emocional/regulacion-emocional-autoestima': {
+    conditionName: 'Regulación Emocional y Autoestima',
+    title:
+      'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    description:
+      'Abordaje psicoterapéutico clínico e integrativo para la regulación emocional, superación de la autocrítica severa, autocompasión y fortalecimiento de la autoestima en Chile.',
+  },
+}
+
 export function getSeo(pathname: string): SeoData {
   const path = normalizePath(pathname)
 
@@ -282,117 +393,6 @@ export function getSeo(pathname: string): SeoData {
     jsonLd: [],
     noindex: true,
   }
-}
-
-const CLINICAL_SPECIALTY_SEO: Record<
-  string,
-  { conditionName: string; title: string; description: string }
-> = {
-  '/sexualidad-masculina/disfuncion-erectil-psicogena': {
-    conditionName: 'Disfunción Eréctil Psicógena',
-    title:
-      'Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La disfunción eréctil psicógena no es un fracaso, sino una respuesta neurobiológica frente a la ansiedad de desempeño. Tratamiento sexológico clínico e integrativo en Chile.',
-  },
-  '/sexualidad-masculina/eyaculacion-precoz': {
-    conditionName: 'Eyaculación Precoz',
-    title:
-      'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'Abordaje sexológico clínico e integrativo para la eyaculación precoz o prematura en Chile. Reentrenamiento del reflejo eyaculatorio, manejo de la ansiedad de desempeño y técnicas conductuales.',
-  },
-  '/sexualidad-masculina/eyaculacion-retardada': {
-    conditionName: 'Eyaculación Retardada',
-    title:
-      'Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La Eyaculación Retardada se caracteriza por un retraso significativo o una ausencia recurrente del reflejo eyaculatorio a pesar de la presencia de una estimulación sexual adecuada. Tratamiento sexológico clínico e integrativo en Chile.',
-  },
-  '/sexualidad-masculina/bajo-deseo-sexual-masculino': {
-    conditionName: 'Deseo Sexual Hipoactivo Masculino',
-    title:
-      'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'El Deseo Sexual Hipoactivo Masculino se define como una disminución o ausencia persistente o recurrente de pensamientos, fantasías eróticas y motivación para iniciar o responder a la actividad íntima.',
-  },
-  '/sexualidad-masculina/ansiedad-de-desempeno': {
-    conditionName: 'Ansiedad de Desempeño Sexual',
-    title:
-      'Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La Ansiedad de Desempeño Sexual se define como un estado de aprensión, tensión psicofisiológica y miedo anticipatorio focalizado en la capacidad de obtener, mantener o regular la respuesta sexual.',
-  },
-  '/sexualidad-masculina/uso-problematico-de-pornografia': {
-    conditionName: 'Uso Problemático de Pornografía',
-    title:
-      'Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'El uso problemático o compulsivo de pornografía se caracteriza por un patrón persistente de incapacidad para controlar los impulsos o conductas de consumo de material erótico explícito.',
-  },
-  '/sexualidad-femenina/vaginismo-dolor-genitopelvico': {
-    conditionName: 'Vaginismo y Dolor Genitopélvico',
-    title:
-      'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'El Vaginismo y las condiciones de Dolor Genitopélvico comprenden dificultades caracterizadas por la imposibilidad o dificultad recurrente para permitir la penetración vaginal.',
-  },
-  '/sexualidad-femenina/dispareunia-dolor-relaciones': {
-    conditionName: 'Dispareunia y Dolor durante las Relaciones',
-    title:
-      'Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La Dispareunia se define como el dolor genital persistente o recurrente que se experimenta antes, durante o después del coito o de la penetración sexual.',
-  },
-  '/sexualidad-femenina/anorgasmia-dificultad-orgasmo': {
-    conditionName: 'Anorgasmia y Dificultad del Orgasmo',
-    title:
-      'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La Anorgasmia y las dificultades en el alcance del clímax comprenden la ausencia o el retraso significativo del orgasmo, así como una reducción marcada en la intensidad de las sensaciones orgásmicas.',
-  },
-  '/sexualidad-femenina/deseo-sexual-hipoactivo-femenino': {
-    conditionName: 'Deseo Sexual Hipoactivo Femenino',
-    title:
-      'Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'El Deseo Sexual Hipoactivo Femenino se define como una disminución o ausencia persistente o recurrente del interés erótico, pensamientos, fantasías sexuales y motivación íntima.',
-  },
-  '/sexualidad-femenina/aversion-al-sexo': {
-    conditionName: 'Aversión al Sexo',
-    title:
-      'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'La Aversión al Sexo se caracteriza por una respuesta fóbica, de rechazo persistente o evitación extrema y activa de cualquier tipo de contacto íntimo o cercanía erótica compartida.',
-  },
-  '/salud-emocional/trastornos-ansiedad-panico': {
-    conditionName: 'Trastornos de Ansiedad y Pánico',
-    title:
-      'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'Los Trastornos de Ansiedad y Pánico comprenden un conjunto de condiciones caracterizadas por una activación neurofisiológica desproporcionada, miedo intenso o aprensión anticipatoria.',
-  },
-  '/salud-emocional/cuadros-depresivos-alteraciones-animo': {
-    conditionName: 'Cuadros Depresivos y Alteraciones del Ánimo',
-    title:
-      'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'Los cuadros depresivos y las alteraciones del estado de ánimo configuran una compleja red de síntomas somáticos, cognitivos y relacionales que erosionan la vitalidad.',
-  },
-  '/salud-emocional/estres-cronico-burnout': {
-    conditionName: 'Estrés Crónico y Síndrome de Burnout',
-    title:
-      'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'El estrés crónico y el síndrome de burnout se caracterizan por agotamiento extremo, distanciamiento mental y sobrecarga alostática.',
-  },
-  '/salud-emocional/regulacion-emocional-autoestima': {
-    conditionName: 'Regulación Emocional y Autoestima',
-    title:
-      'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
-    description:
-      'Abordaje psicoterapéutico clínico e integrativo para la regulación emocional, superación de la autocrítica severa, autocompasión y fortalecimiento de la autoestima en Chile.',
-  },
 }
 
 /** Rutas que se generan como HTML estático en build (además de 404.html) */

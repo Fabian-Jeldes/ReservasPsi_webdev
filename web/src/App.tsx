@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { flushSync } from 'react-dom'
 import { DevAccentToggle } from './dev/DevAccentToggle'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
@@ -12,6 +13,10 @@ import { IntroCurtainReveal } from './components/IntroCurtainReveal'
 import { CustomCursor } from './components/CustomCursor'
 import { getSeo } from './seo/seo'
 import { applySeoToDocument } from './seo/head'
+
+type ViewTransitionDoc = Document & {
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> }
+}
 
 // Problemas Sexuales Masculinos
 import { DisfuncionErectilPage } from './pages/especialidades/DisfuncionErectilPage'
@@ -34,18 +39,6 @@ import { CuadrosDepresivosPage } from './pages/especialidades/CuadrosDepresivosP
 import { EstresCronicoBurnoutPage } from './pages/especialidades/EstresCronicoBurnoutPage'
 import { RegulacionEmocionalAutoestimaPage } from './pages/especialidades/RegulacionEmocionalAutoestimaPage'
 
-function ScrollToTop() {
-  const { pathname, hash } = useLocation()
-  useEffect(() => {
-    if (hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
-      return
-    }
-    window.scrollTo(0, 0)
-  }, [pathname, hash])
-  return null
-}
-
 /** Actualiza <title>, meta y JSON-LD al navegar (la carga inicial ya viene prerenderizada) */
 function SeoSync() {
   const { pathname } = useLocation()
@@ -63,16 +56,52 @@ function SeoSync() {
 
 export default function App() {
   const location = useLocation()
+  const [displayLocation, setDisplayLocation] = useState(location)
+  const prevPathRef = useRef(location.pathname)
+
+  useEffect(() => {
+    const scrollAfterNav = () => {
+      if (location.hash) {
+        const target = document.getElementById(location.hash.slice(1))
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' })
+          return
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+
+    if (location.pathname === prevPathRef.current) {
+      setDisplayLocation(location)
+      scrollAfterNav()
+      return
+    }
+
+    prevPathRef.current = location.pathname
+    const doc = document as ViewTransitionDoc
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (doc.startViewTransition && !prefersReducedMotion) {
+      doc.startViewTransition(() => {
+        flushSync(() => {
+          setDisplayLocation(location)
+        })
+        scrollAfterNav()
+      })
+    } else {
+      setDisplayLocation(location)
+      scrollAfterNav()
+    }
+  }, [location])
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <IntroCurtainReveal />
       <CustomCursor />
-      <ScrollToTop />
       <SeoSync />
       <BackgroundDecorations />
-      <div key={location.pathname} className="view-enter relative z-10">
-        <Routes>
+      <div key={displayLocation.pathname} className="view-enter relative z-10">
+        <Routes location={displayLocation}>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre-mi" element={<AboutPage />} />
           <Route path="/articulos" element={<ArticlesPage />} />

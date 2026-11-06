@@ -26,6 +26,7 @@ export function SEO({
     document.title = title
 
     const setMetaTag = (attrName: 'name' | 'property', attrValue: string, content: string) => {
+      if (!content) return
       let element = document.head.querySelector(`meta[${attrName}="${attrValue}"]`) as HTMLMetaElement | null
       if (!element) {
         element = document.createElement('meta')
@@ -54,6 +55,9 @@ export function SEO({
     setMetaTag('property', 'og:site_name', SITE_NAME)
     setMetaTag('property', 'og:locale', 'es_CL')
     setMetaTag('name', 'twitter:card', 'summary_large_image')
+    setMetaTag('name', 'twitter:title', title)
+    setMetaTag('name', 'twitter:description', description)
+    setMetaTag('name', 'twitter:image', resolvedOgImage)
 
     let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!canonical) {
@@ -62,7 +66,7 @@ export function SEO({
       canonical.setAttribute('data-seo', '')
       document.head.appendChild(canonical)
     }
-    canonical.setAttribute('href', currentUrl)
+    canonical.setAttribute('href', currentUrl.split('#')[0])
 
     if (jsonLd) {
       const existingScripts = document.head.querySelectorAll('script[type="application/ld+json"][data-seo-custom]')
@@ -82,4 +86,3 @@ export function SEO({
 
   return null
 }
-
