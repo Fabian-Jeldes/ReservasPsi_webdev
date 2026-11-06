@@ -1,0 +1,59 @@
+# Respaldo para el despliegue en Cloudflare Workers Builds.
+#
+# Normalmente la GitHub App de Cloudflare dispara el build en cada push a main.
+# Si ese aviso se pierde (como pasó el 2026-11-05), este workflow espera unos
+# minutos y, si el commit no tiene el check "Workers Builds", dispara el build
+# mediante un Deploy Hook. Así no hay builds duplicados cuando la app funciona.
+#
+# Secret requerido: CLOUDFLARE_DEPLOY_HOOK_URL
+# (Cloudflare → reservas-psicoandi → Settings → Builds → Deploy Hooks)
+
+name: Cloudflare deploy (respaldo)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Disparar el build aunque ya exista el check de Cloudflare"
+        type: boolean
+        default: false
+
+permissions:
+  checks: read
+  contents: read
+
+concurrency:
+  group: cloudflare-deploy-fallback
+  cancel-in-progress: true
+
+jobs:
+  fallback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Esperar a que Cloudflare registre el build
+        if: ${{ github.event_name == 'push' }}
+        run: sleep 180
+
+      - name: Revisar si Workers Builds tomó el commit
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/check-runs" \
+            --jq '[.check_runs[] | select(.name | startswith("Workers Builds"))] | length')
+          echo "Checks de Workers Builds encontrados: $count"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Disparar Deploy Hook
+        if: ${{ steps.check.outputs.count == '0' || inputs.force }}
+        env:
+          HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK_URL" ]; then
+            echo "::error::Falta el secret CLOUDFLARE_DEPLOY_HOOK_URL"
+            exit 1
+          fi
+          echo "::warning::Cloudflare no recibió el push; disparando el build por Deploy Hook."
+          curl -fsS -X POST "$HOOK_URL"
