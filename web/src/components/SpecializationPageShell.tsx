@@ -55,7 +55,7 @@ export function SpecializationPageShell({
       author: {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: 'https://psandrei.com/sobre-mi',
       },
     }),
     [seoTitle, seoDescription, title]

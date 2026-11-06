@@ -232,6 +232,9 @@ export function HeroSection({ onContactClick }: Props) {
           <img
             src={PROFILE_IMAGE_URL}
             alt="Andrei Andrusco Fidalgo, psicólogo clínico"
+            width={1200}
+            height={1052}
+            fetchPriority="high"
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
         </ElasticBorderCard>

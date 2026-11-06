@@ -25,7 +25,7 @@ export function VaginismoDolorPelvicoPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/sexualidad-femenina/vaginismo-dolor-genitopelvico`,
+      url: `https://psandrei.com/sexualidad-femenina/vaginismo-dolor-genitopelvico`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function VaginismoDolorPelvicoPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

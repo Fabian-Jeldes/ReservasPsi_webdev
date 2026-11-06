@@ -5,11 +5,89 @@ import type {
   Specialization,
   ArticlePageData,
   AboutPageData,
+  PageSeo,
   FaqCategory,
 } from '../types/site'
 
-export const PROFILE_IMAGE_URL = '/portada-andi.png'
-export const ABOUT_IMAGE_URL = '/sobre-mi-andi.jpg'
+export const PROFILE_IMAGE_URL = '/portada-andi.webp'
+export const ABOUT_IMAGE_URL = '/sobre-mi-andi.webp'
+
+/* ── SEO ─────────────────────────────────────────────────────────── */
+
+/** Dominio canónico (sin barra final). Se usa en canonical, sitemap, OG y JSON-LD. */
+export const SITE_URL = 'https://psandrei.com'
+export const SITE_NAME = 'Ps. Andrei Andrusco'
+export const DEFAULT_OG_IMAGE = '/og/home.jpg'
+
+/** Datos del profesional para schema.org (Person / ProfessionalService) */
+export const PROFESSIONAL = {
+  name: 'Andrei Andrusco Fidalgo',
+  jobTitle: 'Psicólogo clínico y sexólogo',
+  description:
+    'Psicólogo clínico y sexólogo. Terapia sexual y psicológica online y presencial en Chile, enfocada en disfunciones sexuales psicógenas y ansiedad de rendimiento.',
+  alumniOf: ['Universidad Adolfo Ibáñez', 'Universidad del Desarrollo'],
+  knowsAbout: [
+    'Terapia sexual',
+    'Sexología clínica',
+    'Disfunción eréctil psicógena',
+    'Eyaculación precoz',
+    'Bajo deseo sexual',
+    'Ansiedad de rendimiento',
+    'Terapia de pareja',
+  ],
+  /** Perfiles públicos (Doctoralia, LinkedIn, Instagram…) — refuerzan E-E-A-T en Google */
+  sameAs: [] as string[],
+}
+
+export const SEO_PAGES = {
+  home: {
+    title: 'Ps. Andrei Andrusco | Psicólogo y Sexólogo Clínico en Santiago',
+    description:
+      'Consulta especializada en sexología clínica y terapia sexual en Santiago de Chile. Tratamiento humano para disfunción eréctil, eyaculación precoz y ansiedad de desempeño.',
+  },
+  about: {
+    title: 'Sobre mí | Ps. Andrei Andrusco - Formación y Enfoque Clínico',
+    description:
+      'Conoce la trayectoria y formación del Ps. Andrei Andrusco, Psicólogo Clínico y Sexólogo. Magíster en Psicología Clínica y diplomados en Sexología Clínica.',
+  },
+  articles: {
+    title: 'Biblioteca de Psicoeducación y Salud Sexual | Ps. Andrei Andrusco',
+    description:
+      'Artículos clínicos sobre sexualidad masculina, disfunción eréctil, eyaculación precoz, pornografía y comunicación de pareja, basados en evidencia.',
+  },
+  notFound: {
+    title: 'Página no encontrada | Ps. Andrei Andrusco',
+    description: 'La página que buscas no existe o fue movida.',
+  },
+} satisfies Record<string, PageSeo>
+
+/** Sufijo del <title> en artículos */
+export const ARTICLE_TITLE_SUFFIX = ' | Ps. Andrei Andrusco'
+/** Sufijo del <title> en páginas de especialidad */
+export const SPECIALIZATION_TITLE_SUFFIX = ' | Sexología en Santiago - Ps. Andrei Andrusco'
+
+/** Ubicación y horario de atención (schema.org ProfessionalService) */
+export const PRACTICE_LOCATION = {
+  addressLocality: 'Santiago',
+  addressRegion: 'Región Metropolitana',
+  addressCountry: 'CL',
+  openingDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+  opens: '09:00',
+  closes: '19:00',
+}
+
+export const BREADCRUMB_LABELS = {
+  home: 'Inicio',
+  articles: 'Artículos',
+}
+
+export const NOT_FOUND_PAGE = {
+  code: '404',
+  title: 'Esta página no existe',
+  summary: 'Puede que el enlace esté roto o que el contenido haya cambiado de lugar.',
+  homeLabel: 'Volver al inicio',
+  articlesLabel: 'Ver artículos',
+}
 
 export const REVIEWS_DATA: Review[] = [
   {
@@ -380,7 +458,12 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Psicoeducación',
     content:
       'No necesitas ser una máquina: Por qué la exigencia de estar siempre listo te está apagando y cómo entenderlo cambiará tu vida sexual...',
-    imageUrl: '/fotos_articulo/articulo1/portada.png',
+    imageUrl: '/fotos_articulo/articulo1/portada.webp',
+    datePublished: '2026-03-12',
+    seoTitle: 'Más allá del rendimiento: no necesitas ser una máquina',
+    seoDescription:
+      'La presión de rendir como una máquina apaga el deseo. Un psicólogo y sexólogo clínico explica cómo esa exigencia afecta la erección y cómo salir de la trampa.',
+    ogImage: '/og/articulo1.jpg',
   },
   {
     id: 2,
@@ -390,7 +473,12 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Tratamiento',
     content:
       'Cuando sobrevivir bloquea el placer: Entiende cómo tu cerebro prioriza la defensa ante la amenaza y cómo desprogramar el modo de alerta...',
-    imageUrl: '/fotos_articulo/articulo2/portada.png',
+    imageUrl: '/fotos_articulo/articulo2/portada.webp',
+    datePublished: '2026-03-05',
+    seoTitle: 'Ansiedad y deseo: cuando sobrevivir bloquea el placer',
+    seoDescription:
+      'Cuando el cerebro está en modo alerta, el placer se bloquea. Entiende cómo la ansiedad afecta el deseo y la respuesta sexual, y cómo volver a sentirte seguro.',
+    ogImage: '/og/articulo2.jpg',
   },
   {
     id: 3,
@@ -400,7 +488,12 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Salud Sexual',
     content:
       'El peligro del acceso y del exceso: Descubre cómo el consumo sistemático impacta el sistema de recompensa del cerebro y cómo recuperarte...',
-    imageUrl: '/fotos_articulo/articulo3/portada.png',
+    imageUrl: '/fotos_articulo/articulo3/portada.webp',
+    datePublished: '2026-02-28',
+    seoTitle: 'La pornografía y tu salud sexual: acceso y exceso',
+    seoDescription:
+      'Cómo el consumo sistemático de pornografía impacta el sistema de recompensa del cerebro y tu vida sexual, y qué pasos ayudan a recuperar una sexualidad auténtica.',
+    ogImage: '/og/articulo3.jpg',
   },
   {
     id: 4,
@@ -410,7 +503,12 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Relaciones',
     content:
       'Por qué hablar de sexo salva las relaciones: El silencio en la pareja no es neutro, es un muro que desconecta. Aprende a romperlo...',
-    imageUrl: '/fotos_articulo/articulo4/portada.png',
+    imageUrl: '/fotos_articulo/articulo4/portada.webp',
+    datePublished: '2026-05-10',
+    seoTitle: 'El peso del silencio: por qué hablar de sexo salva la pareja',
+    seoDescription:
+      'El silencio sexual en la pareja no es neutro: es un muro que desconecta. Por qué hablar de sexo fortalece la relación y cómo empezar esa conversación.',
+    ogImage: '/og/articulo4.jpg',
   },
 ]
 
@@ -425,7 +523,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     heroTitle: 'Más allá del rendimiento ',
     heroAccent: 'No necesitas ser una máquina',
     heroSummary: 'Y por qué entenderlo cambiará tu vida sexual',
-    heroImage: '/fotos_articulo/articulo1/portada.png',
+    heroImage: '/fotos_articulo/articulo1/portada.webp',
     introKicker: 'Rompiendo mitos',
     introTitle: '',
     introQuote: '',
@@ -453,7 +551,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           'Al final, lo que te da <strong class="text-white">bienestar</strong> y te hace <strong class="text-white">feliz</strong> a ti es único; por eso, el camino es dejar de mirar hacia afuera para empezar a <strong class="text-white">escuchar lo que realmente pasa en tu interior</strong>. Cuando ignoramos ese interior y nos enfocamos solo en la exigencia externa, entramos inevitablemente en un estado de juicio constante.'
         ],
         images: [
-          { url: '/fotos_articulo/articulo1/imagen1.png' }
+          { url: '/fotos_articulo/articulo1/imagen1.webp', width: 1324, height: 768 }
         ]
       },
       {
@@ -479,7 +577,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           '<strong class="text-white">Lectura recomendada:</strong> Si sientes que el silencio está ganando terreno en tu relación y quieres herramientas para cambiar esta dinámica, te invito a leer mi artículo: <strong class="text-white font-bold">[El peso del silencio: Por qué hablar de sexo salva las relaciones]</strong>'
         ],
         images: [
-          { url: '/fotos_articulo/articulo1/imagen2.png' }
+          { url: '/fotos_articulo/articulo1/imagen2.webp', width: 1271, height: 768 }
         ]
       }
     ],
@@ -508,7 +606,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     heroTitle: 'Ansiedad y Deseo: ',
     heroAccent: 'Cuando sobrevivir bloquea el placer',
     heroSummary: '',
-    heroImage: '/fotos_articulo/articulo2/portada.png',
+    heroImage: '/fotos_articulo/articulo2/portada.webp',
     introKicker: 'Neurobiología',
     introTitle: '',
     introQuote: '',
@@ -530,7 +628,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           'Este círculo vicioso de ansiedad genera un daño colateral inmenso: <strong class="text-white">la evitación</strong>. Para no enfrentar la angustia del "examen", empezamos a hacerle el quite al contacto. Nos acostamos más tarde, evitamos los regaloneos o nos volvemos distantes. Nuestra pareja suele interpretar esto como rechazo o falta de amor, cuando en realidad es puro miedo. Pucha que duele ver cómo <strong class="text-white">el silencio y la distancia terminan lastimando la relación mucho más que la pérdida de la erección</strong>.'
         ],
         images: [
-          { url: '/fotos_articulo/articulo2/imagen1.png' }
+          { url: '/fotos_articulo/articulo2/imagen1.webp', width: 1261, height: 768 }
         ]
       },
       {
@@ -546,7 +644,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
       {
         paragraphs: [],
         images: [
-          { url: '/fotos_articulo/articulo2/imagen2.png' }
+          { url: '/fotos_articulo/articulo2/imagen2.webp', width: 1322, height: 768 }
         ]
       }
     ],
@@ -573,7 +671,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     heroTitle: 'La Pornografía y tu Salud Sexual',
     heroAccent: 'El peligro del acceso y del exceso',
     heroSummary: 'Explora cómo el bombardeo de dopamina artificial impacta tu sistema de recompensa y cómo recuperarte para vivir una sexualidad humana y auténtica.',
-    heroImage: '/fotos_articulo/articulo3/portada.png',
+    heroImage: '/fotos_articulo/articulo3/portada.webp',
     introKicker: 'Impacto digital',
     introTitle: '',
     introQuote: '',
@@ -593,7 +691,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           'Con el tiempo, tanta dopamina genera <strong class="text-white">tolerancia</strong>. En buen chileno, el cerebro se acostumbra y empieza a necesitar material cada vez más extremo o novedoso para lograr el mismo nivel de excitación. Es aquí donde aparece el <strong class="text-white">"Efecto Coolidge"</strong>: ese instinto biológico de buscar novedad sexual que el internet secuestra al ofrecerte un catálogo infinito a un solo clic. Tu pareja de carne y hueso no cambia físicamente cada cinco segundos, y ante un sistema nervioso <strong class="text-white">malacostumbrado a la hiperestimulación</strong>, la realidad empieza a parecerle insuficiente.'
         ],
         images: [
-          { url: '/fotos_articulo/articulo3/imagen1.png' }
+          { url: '/fotos_articulo/articulo3/imagen1.webp', width: 1287, height: 768 }
         ]
       },
       {
@@ -626,7 +724,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
       {
         paragraphs: [],
         images: [
-          { url: '/fotos_articulo/articulo3/imagen2.png' }
+          { url: '/fotos_articulo/articulo3/imagen2.webp', width: 1267, height: 768 }
         ]
       }
     ],
@@ -654,7 +752,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
     heroTitle: 'El Peso del Silencio: ',
     heroAccent: 'Por qué hablar de sexo salva las relaciones',
     heroSummary: '',
-    heroImage: '/fotos_articulo/articulo4/portada.png',
+    heroImage: '/fotos_articulo/articulo4/portada.webp',
     introKicker: '',
     introTitle: '',
     introQuote: '',
@@ -674,7 +772,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           'Este modelo clínico explica cómo muchas veces partimos desde una <strong class="text-white">"neutralidad sexual"</strong> y es precisamente a través de la comunicación y la intimidad emocional que logramos transitar hacia un <strong class="text-white">deseo responsivo</strong>. Hablar de lo que sentimos y quitar la presión del rendimiento es, con frecuencia, el verdadero motor que termina encendiendo el deseo.'
         ],
         images: [
-          { url: '/fotos_articulo/articulo4/imagen1.png' }
+          { url: '/fotos_articulo/articulo4/imagen1.webp', width: 1215, height: 768 }
         ]
       },
       {
@@ -691,7 +789,7 @@ export const ARTICLE_PAGES_DATA: ArticlePageData[] = [
           'Preguntarse de vez en cuando, en un ambiente relajado y seguro: <strong class="text-white">"¿Cómo nos estamos sintiendo en nuestra intimidad?"</strong> o <strong class="text-white">"¿Qué te gustaría que hiciéramos diferente?"</strong> marca toda la diferencia. Los datos confirman que estas estrategias preventivas mejoran significativamente la cercanía y el ajuste de la pareja a largo plazo.'
         ],
         images: [
-          { url: '/fotos_articulo/articulo4/imagen2.png' }
+          { url: '/fotos_articulo/articulo4/imagen2.webp', width: 1208, height: 768 }
         ]
       },
       {
@@ -732,7 +830,7 @@ export const EMPTY_KYC: KycFormState = {
 
 export const ABOUT_PAGE_DATA: AboutPageData = {
   intro: '¡Hola! Soy <strong class="text-white font-bold"><span class="brand-initial">A</span>ndrei <span class="brand-initial">A</span>ndrusco <span class="brand-initial">F</span>idalgo</strong>. Si llegaste hasta aquí, probablemente estés buscando respuestas, un espacio seguro, o simplemente tratando de entender por qué algo tan natural como la sexualidad a veces se siente como un rompecabezas imposible. Bienvenido, estás en el lugar correcto.',
-  imageUrl: '/sobre-mi-andi.jpg',
+  imageUrl: '/sobre-mi-andi.webp',
   enfoque: {
     title: 'Cercanía, humor y cero juicios',
     paragraphs: [

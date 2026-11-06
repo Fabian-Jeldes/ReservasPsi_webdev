@@ -7,9 +7,12 @@ import { AboutPage } from './pages/AboutPage'
 import { ArticlePage } from './pages/ArticlePage'
 import { ArticlesPage } from './pages/ArticlesPage'
 import { SpecializationPage } from './pages/SpecializationPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { BackgroundDecorations } from './components/BackgroundDecorations'
 import { IntroCurtainReveal } from './components/IntroCurtainReveal'
 import { CustomCursor } from './components/CustomCursor'
+import { getSeo } from './seo/seo'
+import { applySeoToDocument } from './seo/head'
 
 // Problemas Sexuales Masculinos
 import { DisfuncionErectilPage } from './pages/especialidades/DisfuncionErectilPage'
@@ -34,6 +37,21 @@ import { RegulacionEmocionalAutoestimaPage } from './pages/especialidades/Regula
 
 type ViewTransitionDoc = Document & {
   startViewTransition?: (callback: () => void) => { finished: Promise<void> }
+}
+
+/** Actualiza <title>, meta y JSON-LD al navegar (la carga inicial ya viene prerenderizada) */
+function SeoSync() {
+  const { pathname } = useLocation()
+  const isFirst = useRef(true)
+  useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false
+      // En dev no hay prerender: aplicar también en la primera carga
+      if (!import.meta.env.DEV) return
+    }
+    applySeoToDocument(getSeo(pathname))
+  }, [pathname])
+  return null
 }
 
 export default function App() {
@@ -110,6 +128,7 @@ export default function App() {
     <div className="relative min-h-screen overflow-x-hidden">
       <IntroCurtainReveal />
       <CustomCursor />
+      <SeoSync />
       <BackgroundDecorations />
       <div key={displayLocation.pathname} className="view-enter relative z-10">
         <Routes location={displayLocation}>
@@ -251,9 +270,10 @@ export default function App() {
 
           {/* Ruta dinámica de respaldo */}
           <Route path="/especialidades/:slug" element={<SpecializationPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      <DevAccentToggle />
+      {import.meta.env.DEV ? <DevAccentToggle /> : null}
     </div>
   )
 }

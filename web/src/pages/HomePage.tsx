@@ -12,7 +12,6 @@ import { BlogSection } from '../components/BlogSection'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
 import { useReviewRotation } from '../hooks/useReviewRotation'
-import { SEO } from '../components/SEO'
 import { FaqSection } from '../components/FaqSection'
 
 export function HomePage() {
@@ -27,29 +26,6 @@ export function HomePage() {
     setIsAppointmentModalOpen(true)
   }, [])
 
-  const homeSchema = useMemo(() => ({
-    '@context': 'https://schema.org',
-    '@type': 'Physician',
-    'name': 'Ps. Andrei Andrusco Fidalgo',
-    'image': `${window.location.origin}/portada-andi.png`,
-    'description': 'Psicólogo Clínico y Sexólogo especializado en disfunciones sexuales psicógenas y acompañamiento terapéutico individual y de pareja.',
-    'medicalSpecialty': ['Psychiatry', 'SexualMedicine'],
-    'address': {
-      '@type': 'PostalAddress',
-      'addressLocality': 'Santiago',
-      'addressRegion': 'Región Metropolitana',
-      'addressCountry': 'CL'
-    },
-    'url': `${window.location.origin}/`,
-    'openingHoursSpecification': [
-      {
-        '@type': 'OpeningHoursSpecification',
-        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        'opens': '09:00',
-        'closes': '19:00'
-      }
-    ]
-  }), [])
 
   return (
     <div
@@ -60,12 +36,6 @@ export function HomePage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title="Ps. Andrei Andrusco | Psicólogo y Sexólogo Clínico en Santiago"
-        description="Consulta especializada en sexología clínica y terapia sexual en Santiago de Chile. Tratamiento humano para disfunción eréctil, eyaculación precoz y ansiedad de desempeño."
-        keywords="psicólogo clínico Santiago, sexólogo Santiago, terapia sexual Chile, disfunción eréctil psicógena, eyaculación precoz, ansiedad de desempeño, Andrei Andrusco"
-        jsonLd={homeSchema}
-      />
       <Navbar onLogoClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} onAgendarClick={openBooking} />
       <HeroSection onContactClick={() => {
         const section = document.getElementById('reserva');

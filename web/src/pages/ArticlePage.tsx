@@ -1,86 +1,17 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
-import { getArticleDataBySlug, getBlogPostBySlug } from '../data/site'
-import { useEffect, useMemo } from 'react'
-import { SEO } from '../components/SEO'
+import { getArticleDataBySlug } from '../data/site'
+import { NotFoundPage } from './NotFoundPage'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const data = slug ? getArticleDataBySlug(slug) : undefined
-  const blogPost = slug ? getBlogPostBySlug(slug) : undefined
 
-  useEffect(() => {
-    if (slug && !data) {
-      navigate('/articulos', { replace: true })
-    }
-  }, [slug, data, navigate])
-
-  const articleSchema = useMemo(() => {
-    if (!data) return undefined
-
-    const parseDateStr = (dateStr?: string) => {
-      if (!dateStr) return new Date().toISOString().split('T')[0]
-      const months: Record<string, string> = {
-        Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-        Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12',
-      }
-      const parts = dateStr.split(' ')
-      if (parts.length === 3) {
-        const day = parts[0].padStart(2, '0')
-        const month = months[parts[1]] || '01'
-        const year = parts[2]
-        return `${year}-${month}-${day}`
-      }
-      return new Date().toISOString().split('T')[0]
-    }
-
-    const isoDate = parseDateStr(blogPost?.date)
-
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: `${data.heroTitle}${data.heroAccent}`.trim(),
-      image: data.heroImage ? `${window.location.origin}${data.heroImage}` : undefined,
-      datePublished: isoDate,
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        url: `${window.location.origin}/sobre-mi`,
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Ps. Andrei Andrusco',
-        logo: {
-          '@type': 'ImageObject',
-          url: `${window.location.origin}/Favicon2_PNG.png`,
-        },
-      },
-      description: data.heroSummary,
-    }
-  }, [data, blogPost])
-
-  const articleKeywords = useMemo(() => {
-    const keywordMap: Record<string, string> = {
-      'mito-rendimiento-masculino':
-        'masculinidad, hombre maquina, rendimiento sexual, espectadorismo, alexitimia masculina',
-      'ansiedad-y-deseo':
-        'ansiedad de desempeño, deseo responsivo, modelo control dual, espectadorismo sexual, estres y placer',
-      'pornografia-y-salud-sexual':
-        'disfuncion erectil inducida por pornografia, adiccion al porno, dopamina y sexo, efecto coolidge, masturbacion',
-      'el-peso-del-silencio':
-        'comunicacion de pareja, terapia de pareja, guiones sexuales, metodo gottman, satisfaccion sexual',
-    }
-    return (
-      keywordMap[slug || ''] ||
-      'sexologia clinica, terapia sexual online, psicologia clinica'
-    )
-  }, [slug])
-
-  if (!data) return null
+  if (!data) return <NotFoundPage />
 
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
@@ -94,13 +25,6 @@ export function ArticlePage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={`${data.heroTitle}${data.heroAccent} | Ps. Andrei Andrusco`}
-        description={data.heroSummary}
-        keywords={articleKeywords}
-        ogImage={data.heroImage}
-        jsonLd={articleSchema}
-      />
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
 
       {/* Hero Section */}
@@ -126,7 +50,7 @@ export function ArticlePage() {
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
-              {data.heroTitle.split(' ').slice(0, -1).join(' ')}
+              {data.heroTitle.trim()}
               <br />
               <span
                 className="font-editorial-accent"
@@ -179,6 +103,9 @@ export function ArticlePage() {
                   <img
                     src={data.heroImage}
                     alt={data.heroTitle}
+                    width={1280}
+                    height={720}
+                    fetchPriority="high"
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -213,17 +140,19 @@ export function ArticlePage() {
           >
             {data.introKicker}
           </p>
-          <h2
-            className="text-3xl md:text-5xl mb-8 leading-tight"
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
-              letterSpacing: 'var(--heading-spacing)',
-            }}
-          >
-            {data.introTitle}
-          </h2>
+          {data.introTitle && (
+            <h2
+              className="text-3xl md:text-5xl mb-8 leading-tight"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 'var(--heading-weight)',
+                textTransform: 'var(--heading-transform)' as any,
+                letterSpacing: 'var(--heading-spacing)',
+              }}
+            >
+              {data.introTitle}
+            </h2>
+          )}
 
           {data.introQuote && (
             <blockquote className="editorial-blockquote mb-10">
@@ -243,7 +172,7 @@ export function ArticlePage() {
             {idx > 0 && <hr className="theme-divider mb-16" />}
 
             {section.title && (
-              <h3
+              <h2
                 className="text-2xl md:text-3xl mb-8"
                 style={{
                   fontFamily: 'var(--font-heading)',
@@ -306,6 +235,10 @@ export function ArticlePage() {
                   <img
                     src={img.url}
                     alt={img.caption || ''}
+                    width={img.width}
+                    height={img.height}
+                    loading="lazy"
+                    decoding="async"
                     className="block w-full h-auto transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                 </ElasticBorderCard>
@@ -327,7 +260,13 @@ export function ArticlePage() {
                   borderLeft: '5px solid var(--accent)',
                 }}
               >
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-black uppercase tracking-widest" style={{ backgroundColor: 'var(--accent-soft)', color: 'var(--accent-text)' }}>
+                <div
+                  className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-black uppercase tracking-widest"
+                  style={{
+                    backgroundColor: 'var(--accent-soft)',
+                    color: 'var(--accent-text)',
+                  }}
+                >
                   {section.clinicalNote.title}
                 </div>
                 <p
@@ -439,9 +378,9 @@ export function ArticlePage() {
             >
               {data.ctaSummary}
             </p>
-            <button
-              onClick={goKyc}
-              className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 flex items-center gap-3 mx-auto shadow-lg cursor-pointer"
+            <Link
+              to="/#reserva"
+              className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 inline-flex items-center gap-3 mx-auto shadow-lg"
               style={{
                 backgroundColor: 'var(--accent)',
                 color: '#ffffff',
@@ -450,7 +389,7 @@ export function ArticlePage() {
               }}
             >
               {data.ctaLabel} <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
         </section>
       </article>

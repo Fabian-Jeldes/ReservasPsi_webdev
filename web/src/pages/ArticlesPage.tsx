@@ -1,11 +1,9 @@
-import { useMemo } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { ArrowRight, Calendar, Tag } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { BLOG_POSTS } from '../data/site'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
-import { SEO } from '../components/SEO'
 
 const psicoeducacionIconModules = import.meta.glob<string>(
   '../assets/*psicoeducacion*',
@@ -22,17 +20,6 @@ export function ArticlesPage() {
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
 
-  const articlesSchema = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: 'Biblioteca de Psicoeducación y Salud Sexual',
-      description:
-        'Biblioteca con artículos clínicos de psicoeducación sobre sexualidad, relaciones y terapia de pareja.',
-    }),
-    []
-  )
-
   return (
     <div
       className="min-h-screen"
@@ -42,12 +29,6 @@ export function ArticlesPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title="Biblioteca de Psicoeducación y Salud Sexual | Ps. Andrei Andrusco"
-        description="Recursos y artículos clínicos sobre sexualidad masculina, disfunción eréctil, eyaculación precoz, desmitificación de la pornografía y comunicación de pareja."
-        keywords="psicoeducación sexual, salud sexual digital, blog de sexología, educación sexual masculina"
-        jsonLd={articlesSchema}
-      />
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
 
       {/* Header Section */}
@@ -135,6 +116,10 @@ export function ArticlesPage() {
                     <img
                       src={post.imageUrl}
                       alt={post.title}
+                      width={1280}
+                      height={768}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                       style={{ objectPosition: '50% 40%' }}
                     />

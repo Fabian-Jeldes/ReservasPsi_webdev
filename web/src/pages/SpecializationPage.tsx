@@ -3,63 +3,14 @@ import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { getSpecializationBySlug } from '../data/site'
-import { useEffect, useMemo } from 'react'
-import { SEO } from '../components/SEO'
+import { NotFoundPage } from './NotFoundPage'
 
 export function SpecializationPage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const data = slug ? getSpecializationBySlug(slug) : undefined
 
-  useEffect(() => {
-    if (slug && !data) {
-      navigate('/', { replace: true })
-    }
-  }, [slug, data, navigate])
-
-  const specSchema = useMemo(() => {
-    if (!data) return undefined
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: `${data.title} | Ps. Andrei Andrusco`,
-      description: data.description,
-      aspect: ['treatment', 'overview'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: data.title,
-        description: data.description,
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        url: `${window.location.origin}/sobre-mi`,
-      },
-    }
-  }, [data])
-
-  const specKeywords = useMemo(() => {
-    const keywordMap: Record<string, string> = {
-      'disfuncion-erectil-psicogena':
-        'disfuncion erectil psicogena santiago, impotencia psicologica, ansiedad sexual masculina, sexologo santiago',
-      'control-eyaculatorio':
-        'eyaculacion precoz santiago, eyaculacion retardada chile, control eyaculatorio, tratamiento sexual precoz',
-      'cambios-deseo-sexual':
-        'bajo deseo sexual masculino, perdida de libido hombre, estres y deseo sexual, sexologia chile',
-      'ansiedad-desempeno':
-        'ansiedad de desempeño sexual, miedo a fallar en la cama, bloqueo de ereccion por nervios, sexologo online',
-      'comunicacion-sexual':
-        'terapia de pareja santiago, comunicacion sexual en la pareja, timidez en el sexo, resolver problemas de pareja',
-      'impacto-pornografia':
-        'adiccion al porno chile, disfuncion erectil por pornografia, desintoxicacion dopamina porno, reiniciar deseo sexual',
-    }
-    return (
-      keywordMap[slug || ''] ||
-      'sexologia clinica santiago, psicologo clinico online, terapia sexual chile'
-    )
-  }, [slug])
-
-  if (!data) return null
+  if (!data) return <NotFoundPage />
 
   const goHome = () => navigate('/')
   const goKyc = () => navigate('/#reserva')
@@ -73,12 +24,6 @@ export function SpecializationPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={`${data.title} | Ps. Andrei Andrusco - Sexología en Santiago`}
-        description={data.description}
-        keywords={specKeywords}
-        jsonLd={specSchema}
-      />
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
 
       {/* Hero Section */}

@@ -25,7 +25,7 @@ export function CuadrosDepresivosPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/salud-emocional/cuadros-depresivos-alteraciones-animo`,
+      url: `https://psandrei.com/salud-emocional/cuadros-depresivos-alteraciones-animo`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function CuadrosDepresivosPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

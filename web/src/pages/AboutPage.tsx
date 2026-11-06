@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ABOUT_PAGE_DATA } from '../data/site'
@@ -6,7 +6,6 @@ import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
-import { SEO } from '../components/SEO'
 
 export function AboutPage() {
   const data = ABOUT_PAGE_DATA
@@ -17,26 +16,6 @@ export function AboutPage() {
     setIsAppointmentModalOpen(true)
   }, [])
 
-  const aboutSchema = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'AboutPage',
-      mainEntity: {
-        '@type': 'Person',
-        name: 'Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        alumniOf: {
-          '@type': 'EducationalOrganization',
-          name: 'Universidad Adolfo Ibáñez',
-        },
-        description:
-          'Psicólogo Clínico y Sexólogo con Magíster en Psicología Clínica y diplomados en Sexología Clínica, especializado en disfunciones sexuales psicógenas.',
-        image: `${window.location.origin}/sobre-mi-andi.jpg`,
-      },
-    }),
-    []
-  )
-
   return (
     <div
       className="min-h-screen font-sans"
@@ -46,12 +25,6 @@ export function AboutPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title="Sobre mí | Ps. Andrei Andrusco - Formación y Enfoque Clínico"
-        description="Conoce la trayectoria y formación del Ps. Andrei Andrusco, Psicólogo Clínico y Sexólogo. Especialista con Magíster en Psicología y diplomados en Sexología Clínica."
-        keywords="Andrei Andrusco Fidalgo, sexólogo clínico Chile, psicólogo online Chile, terapia sexología clínica, formación UAI"
-        jsonLd={aboutSchema}
-      />
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={openBooking}
@@ -134,6 +107,9 @@ export function AboutPage() {
                 <img
                   src={data.imageUrl}
                   alt="Andrei Andrusco Fidalgo, psicólogo clínico y sexólogo"
+                  width={1200}
+                  height={675}
+                  fetchPriority="high"
                   className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
               </ElasticBorderCard>

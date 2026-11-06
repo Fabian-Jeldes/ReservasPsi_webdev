@@ -29,7 +29,7 @@ Plataforma / sitio web orientado a **servicios de psicología clínica y especia
 | Pieza | Elección | Notas |
 |--------|-----------|--------|
 | Front-end público | **Cloudflare Pages** | Bajo volumen de tráfico; CDN global, SSL y buen coste fijo/cero en muchos casos. |
-| Telemetría | **PostHog** (cloud o self-host según presupuesto y cumplimiento) | Configurar mascarado de datos sensibles y políticas; evitar PII clínica en eventos. |
+| Telemetría | **PostHog** (cloud US) | Tráfico vía proxy `/ingest/*` en el Worker del sitio (`web/worker/index.ts`); formularios con datos del paciente llevan `ph-no-capture`; evitar PII clínica en eventos. |
 | CMS / Backend | **Strapi** | Headless CMS para manejar el contenido del blog y también cuentas de usuario/pacientes. |
 | Pasarela de Pagos | **WhatsApp Directo** | Redirección manual a WhatsApp para coordinar pago y enlace de sesión. Se descartó MercadoPago. |
 
@@ -81,6 +81,18 @@ Los temas se diferencian no solo en **paleta de colores** sino también en **geo
 - `ARTICLE_PAGES` — 3 artículos completos (hero, secciones, notas clínicas, referencias, CTA)
 - `PROFILE_IMAGE_URL` — URL de la foto de perfil
 - `generateCalendarDays()` — generador de disponibilidad del calendario
+- `SITE_URL`, `SEO_PAGES`, `PROFESSIONAL` y los campos `seoTitle` / `seoDescription` / `datePublished` / `ogImage` de cada `BLOG_POSTS` — metadatos SEO
+
+## SEO y prerender
+
+Dominio canónico: **https://psandrei.com** (sin www, sin barra final). `npm run build` genera un HTML estático por ruta con contenido, `<title>`, meta, Open Graph y JSON-LD, y React hidrata encima:
+
+- `web/src/seo/seo.ts` — `getSeo(pathname)`: fuente única de metadatos (prerender + navegación cliente) y `PRERENDER_ROUTES`.
+- `web/src/seo/head.ts` — render de etiquetas `<head>` (string para build, DOM para el cliente).
+- `web/src/entry-server.tsx` + `web/vite.ssr.config.ts` + `web/scripts/prerender.mjs` — escriben `dist/client/<ruta>.html`, `404.html` y `sitemap.xml`.
+- `wrangler.jsonc` usa `not_found_handling: "404-page"`: **una ruta nueva debe agregarse a `PRERENDER_ROUTES`** (y a `getSeo`) o responderá 404.
+- El render debe ser determinista (sin `Math.random`, `localStorage` ni `window` durante el render) para no romper la hidratación; lo aleatorio va en `useEffect`.
+- Imágenes: WebP en `public/` generadas con `npm run optimize-images` (incluye OG 1200×630 en `public/og/`). Sin `AggregateRating`/`Review` en schema (política de Google para reseñas propias).
 
 ## Artículos (diseño editorial orgánico)
 
@@ -95,7 +107,7 @@ Los artículos (`/articulos/:slug`) se renderizan como contenido editorial fluid
 7. **Referencias** colapsables (`<details>`)
 8. **Autor** + categoría + fecha
 
-Archivos: `web/src/pages/ArticlePage.tsx` (layout) + `web/src/components/ArticleContent.tsx` (contenido).
+Archivos: `web/src/pages/ArticlePage.tsx` (layout) + `ARTICLE_PAGES_DATA` en `web/src/data/site.ts` (contenido).
 
 ## Diseño de referencia (obligatorio para UI)
 

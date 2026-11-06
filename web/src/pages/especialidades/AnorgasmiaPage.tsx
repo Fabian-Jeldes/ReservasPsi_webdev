@@ -25,7 +25,7 @@ export function AnorgasmiaPage() {
       '@type': 'MedicalWebPage',
       name: 'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo',
       description: seoDescription,
-      url: `${window.location.origin}/sexualidad-femenina/anorgasmia-dificultad-orgasmo`,
+      url: `https://psandrei.com/sexualidad-femenina/anorgasmia-dificultad-orgasmo`,
       inLanguage: 'es-CL',
       aspect: ['diagnosis', 'treatment', 'psychophysiology'],
       about: {
@@ -39,7 +39,7 @@ export function AnorgasmiaPage() {
         '@type': 'Person',
         name: 'Ps. Andrei Andrusco Fidalgo',
         jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `${window.location.origin}/sobre-mi`,
+        url: `https://psandrei.com/sobre-mi`,
       },
       mainEntity: {
         '@type': 'FAQPage',

@@ -26,12 +26,15 @@ export function useReviewRotation(total: number, options?: Options) {
   const intervalMs = options?.intervalMs ?? 10000
   const fadeMs = options?.fadeMs ?? 600
 
-  const [order, setOrder] = useState<number[]>(() => {
-    if (total <= 0) return []
-    return shuffle(Array.from({ length: total }, (_, i) => i))
-  })
+  // Orden inicial determinista para que el HTML prerenderizado coincida con la hidratación;
+  // el shuffle se aplica recién en el cliente.
+  const [order, setOrder] = useState<number[]>(() => Array.from({ length: Math.max(total, 0) }, (_, i) => i))
   const [position, setPosition] = useState(0)
   const [fade, setFade] = useState(true)
+
+  useEffect(() => {
+    if (total > 0) setOrder(shuffle(Array.from({ length: total }, (_, i) => i)))
+  }, [total])
 
   const positionRef = useRef(position)
   positionRef.current = position

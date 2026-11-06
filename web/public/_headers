@@ -1,0 +1,26 @@
+# Caché del navegador para los assets estáticos (Workers Static Assets).
+# El HTML no se toca: sigue revalidándose para que cada deploy se vea al instante.
+# Las reglas no deben solaparse (Cloudflare concatena las cabeceras que coinciden).
+
+# JS/CSS de Vite: el nombre lleva hash, cambia en cada build → inmutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imágenes: nombres fijos, pueden cambiar → 1 semana
+/og/*
+  Cache-Control: public, max-age=604800
+
+/fotos_articulo/*
+  Cache-Control: public, max-age=604800
+
+/portada-andi.webp
+  Cache-Control: public, max-age=604800
+
+/sobre-mi-andi.webp
+  Cache-Control: public, max-age=604800
+
+/Favicon2_PNG.png
+  Cache-Control: public, max-age=604800
+
+/favicon.svg
+  Cache-Control: public, max-age=604800

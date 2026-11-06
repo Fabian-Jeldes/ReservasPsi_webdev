@@ -1,13 +1,26 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import { AppProviders } from './providers/AppProviders.tsx'
 
-createRoot(document.getElementById('root')!).render(
+const app = (
   <StrictMode>
     <AppProviders>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AppProviders>
-  </StrictMode>,
+  </StrictMode>
 )
+
+const root = document.getElementById('root')!
+
+// En producción cada ruta llega prerenderizada (scripts/prerender.mjs): se hidrata.
+// En dev (vite) el #root viene vacío: render normal.
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app)
+} else {
+  createRoot(root).render(app)
+}
