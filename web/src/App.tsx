@@ -14,6 +14,10 @@ import { CustomCursor } from './components/CustomCursor'
 import { getSeo } from './seo/seo'
 import { applySeoToDocument } from './seo/head'
 
+type ViewTransitionDoc = Document & {
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> }
+}
+
 // Problemas Sexuales Masculinos
 import { DisfuncionErectilPage } from './pages/especialidades/DisfuncionErectilPage'
 import { EyaculacionPrecozPage } from './pages/especialidades/EyaculacionPrecozPage'
@@ -34,10 +38,6 @@ import { TrastornosAnsiedadPage } from './pages/especialidades/TrastornosAnsieda
 import { CuadrosDepresivosPage } from './pages/especialidades/CuadrosDepresivosPage'
 import { EstresCronicoBurnoutPage } from './pages/especialidades/EstresCronicoBurnoutPage'
 import { RegulacionEmocionalAutoestimaPage } from './pages/especialidades/RegulacionEmocionalAutoestimaPage'
-
-type ViewTransitionDoc = Document & {
-  startViewTransition?: (callback: () => void) => { finished: Promise<void> }
-}
 
 /** Actualiza <title>, meta y JSON-LD al navegar (la carga inicial ya viene prerenderizada) */
 function SeoSync() {
@@ -273,7 +273,7 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      {import.meta.env.DEV ? <DevAccentToggle /> : null}
+      <DevAccentToggle />
     </div>
   )
 }
