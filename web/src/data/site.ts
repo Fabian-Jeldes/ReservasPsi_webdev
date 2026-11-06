@@ -761,12 +761,14 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
         modality: 'Online',
         since: 'Desde 2022',
         description: 'Donde trabajo en conjunto con un equipo multidisciplinario, colaborando de cerca con urólogos y médicos generales.',
+        url: 'https://www.clinicamediterra.cl/',
       },
       {
         name: 'Clínica Uromed',
         modality: 'Presencial',
         since: 'Desde 2023',
         description: 'Atención en consulta para evaluar casos que requieren un abordaje médico-psicológico más integrado, los días lunes y viernes.',
+        url: 'https://www.uromed.cl/',
       },
     ],
   },
@@ -784,44 +786,77 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
 export const FAQ_DATA: FaqCategory[] = [
   {
     id: 'general',
-    title: 'General',
+    title: 'Enfoque y Terapia',
     items: [
       {
-        question: '¿Qué tipo de terapia realizas?',
-        answer: 'Realizo psicoterapia clínica individual para adultos, con un enfoque especializado en sexología clínica masculina, disfunciones sexuales psicógenas y manejo integral de la ansiedad de desempeño. Mi abordaje es cognitivo-conductual e integrador, centrado en herramientas prácticas y la desmitificación de la autoexigencia.'
+        badge: 'Enfoque Clínico',
+        question: '¿Cuál es tu enfoque clínico y a quién está dirigida la terapia?',
+        answer:
+          'Realizo psicoterapia clínica individual para adultos, con un sólido enfoque especializado en sexología clínica. En consulta abordamos disfunciones sexuales de origen psicógeno, el manejo integral de la ansiedad de desempeño, y las problemáticas del ánimo y la ansiedad, comprendiendo cómo todas ellas se relacionan directamente con tu espacio íntimo y vincular.',
+        paragraphs: [
+          'Realizo <strong>psicoterapia clínica individual para adultos</strong>, con un sólido enfoque especializado en <strong>sexología clínica</strong>. En consulta abordamos disfunciones sexuales de origen psicógeno, el manejo integral de la ansiedad de desempeño, y las problemáticas del ánimo y la ansiedad, comprendiendo cómo todas ellas se relacionan directamente con tu espacio íntimo y vincular.',
+          'Mi mirada terapéutica es de carácter <strong>integrador y pragmático</strong>: más allá de ceñirme a una sola escuela dogmática, me sirvo de herramientas basadas en la evidencia (con raíces en lo cognitivo-conductual y otras corrientes clínicas útiles), poniendo el foco en entregarte <strong>recursos prácticos y aplicables para tu día a día</strong>, y en la desmitificación profunda de la autoexigencia.',
+        ],
       },
       {
+        badge: 'Primera Sesión',
         question: '¿Cómo es la primera sesión?',
-        answer: 'La sesión inicial es un espacio de acogida y evaluación de 50 minutos. Conversaremos de forma totalmente abierta y sin prisas sobre el motivo de tu consulta, exploraremos tus inquietudes y definiremos juntos los objetivos del proceso terapéutico, bajo estricta confidencialidad.'
-      }
-    ]
+        answer:
+          'La sesión inicial es un espacio de entrevista y evaluación de 60 minutos (una hora). Es un encuentro conversado, abierto y sin prisas para explorar tu motivo de consulta, comprender qué te está pasando, tus inquietudes, temores y los objetivos que esperas alcanzar en el proceso terapéutico, bajo un marco estricto de confidencialidad, cuidado y privacidad absoluta.',
+        paragraphs: [
+          'La sesión inicial es un espacio de <strong>entrevista y evaluación de 60 minutos (una hora completa)</strong>. Lejos de ser un interrogatorio frío, es un encuentro conversado, abierto y sin prisas pensado para que te sientas cómodo desde el primer minuto.',
+          'En esta primera hora exploraremos juntos tu motivo de consulta para comprender qué te está pasando, cuáles son tus inquietudes, tus temores y qué objetivos esperas alcanzar en el proceso terapéutico. Todo esto se desarrolla siempre bajo un marco estricto de <strong>confidencialidad, cuidado y privacidad absoluta</strong>.',
+        ],
+      },
+    ],
   },
   {
     id: 'sesiones',
-    title: 'Sesiones y Pagos',
+    title: 'Valores y Modalidad',
     items: [
       {
-        question: '¿Cuánto duran las sesiones y cuál es el valor?',
-        answer: 'Las sesiones individuales tienen una duración aproximada de 50 minutos y se realizan online. Para conocer el valor actual y coordinar los detalles de pago y agenda, el sistema te redirigirá automáticamente a WhatsApp.'
+        badge: 'Duración y Valores',
+        question: '¿Cuánto duran las sesiones y cuáles son los valores?',
+        answer:
+          'Todas las sesiones duran una hora (60 minutos) y se realizan en formato online. El valor de la sesión inicial de evaluación es de $30.000 pesos; las sesiones de seguimiento siguientes tienen un valor de $35.000 pesos por sesión individual; y puedes optar por un pack de 3 sesiones de seguimiento pagadas al contado por $90.000 pesos ($30.000 cada una).',
+        paragraphs: [
+          'Todas las sesiones tienen una duración de <strong>una hora (60 minutos)</strong> y se realizan en <strong>formato 100% online</strong>, para que puedas conectarte desde un espacio tranquilo y privado.',
+        ],
+        highlights: [
+          {
+            label: 'Sesión Inicial de Evaluación',
+            value: '$30.000',
+            note: 'Primera sesión · 60 min online',
+          },
+          {
+            label: 'Sesión de Seguimiento',
+            value: '$35.000',
+            note: 'Tarifa por sesión individual · 60 min',
+          },
+          {
+            label: 'Pack 3 Sesiones de Seguimiento',
+            value: '$90.000',
+            note: '$30.000 por sesión al contado (ahorras $15.000)',
+            featured: true,
+          },
+        ],
       },
-      {
-        question: '¿Cómo se coordina el agendamiento y pago?',
-        answer: 'Tras ingresar tus datos de contacto y firmar el Consentimiento Informado en nuestro calendario interactivo, el flujo te redirigirá a WhatsApp de forma directa. Allí coordinaremos la transferencia o pago electrónico, y recibirás de inmediato el enlace permanente de Google Meet para tu sesión.'
-      }
-    ]
+    ],
   },
   {
-    id: 'privacidad',
-    title: 'Seguridad y Privacidad',
+    id: 'coordinacion',
+    title: 'Agenda y Contacto',
     items: [
       {
-        question: '¿Mis datos y conversaciones están seguros?',
-        answer: 'Totalmente. La terapia psicológica está protegida por el secreto profesional y la legislación chilena sobre derechos de los pacientes. En la telemetría del sitio web utilizamos PostHog con enmascaramiento riguroso, lo que asegura que tu información y visitas sean privadas y anónimas.'
+        badge: 'Coordinación Directa',
+        question: '¿Cómo se coordina el agendamiento y las comunicaciones?',
+        answer:
+          'Tras ingresar tus datos de contacto y firmar el consentimiento informado en la plataforma, el flujo redirige directamente al correo electrónico. A través de ese canal coordinamos los horarios definitivos, mantenemos comunicación continua entre sesiones, te envío los ejercicios o recursos correspondientes, y gestionamos los recordatorios y confirmaciones.',
+        paragraphs: [
+          'El proceso es muy simple y directo: tras ingresar tus datos de contacto y aceptar el <strong>Consentimiento Informado</strong> aquí en la plataforma, el flujo te conectará directamente vía <strong>correo electrónico</strong>.',
+          'A través del correo electrónico coordinamos tus horarios definitivos, mantenemos una <strong>comunicación continua y cercana entre sesiones</strong>, te envío los ejercicios prácticos o lecturas correspondientes a tu proceso, y gestionamos todos los recordatorios y confirmaciones de manera ordenada y privada.',
+        ],
       },
-      {
-        question: '¿Por qué debo firmar un consentimiento informado?',
-        answer: 'El Consentimiento Informado es un requisito legal en salud que describe tus derechos y responsabilidades como paciente, y asegura que estás de acuerdo con el marco terapéutico digital antes de iniciar las sesiones. Se firma de manera digital y simple en el flujo de reserva.'
-      }
-    ]
-  }
+    ],
+  },
 ]

@@ -4,16 +4,38 @@
 /* Base alineada al prototipo webdev_try1 (fondo oscuro, texto slate) */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 body {
   margin: 0;
   min-height: 100svh;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
   background-color: var(--bg-primary);
   color: var(--text-secondary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ocultar el cursor nativo en pantallas de escritorio con puntero fino cuando CustomCursor está activo */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor summary,
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select,
+  html.has-custom-cursor label,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor [role="tab"],
+  html.has-custom-cursor .cursor-pointer {
+    cursor: none !important;
+  }
 }
 
 ::selection {
@@ -29,12 +51,143 @@ body {
   background-color: transparent !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+ *  VIEW TRANSITIONS API NATIVA + ENTRADA EN MICRO-CASCADA (60 FPS GPU)
+ * ═══════════════════════════════════════════════════════════════════ */
+@keyframes vtFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vtFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+::view-transition-old(root) {
+  animation: vtFadeOut 180ms ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: vtFadeIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Fade-in limpio y rápido para el contenedor principal de la vista (sin blur ni scale) */
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Deslizamiento vertical corto acelerado por GPU para los elementos hijos en micro-cascada */
+@keyframes staggerRevealUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  99% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.view-enter {
+  animation: viewEnter 280ms ease-out both;
+  will-change: opacity;
+}
+
+/* Micro-cascada escalonada (0ms, 60ms, 120ms, 180ms) para los bloques hijos de cada vista */
+.view-enter > div.min-h-screen > header > *:nth-child(1),
+.view-enter > div.min-h-screen > header > div > *:nth-child(1) {
+  animation: staggerRevealUp 500ms cubic-bezier(0.16, 1, 0.3, 1) 0ms both;
+  will-change: transform, opacity;
+}
+
+.view-enter > div.min-h-screen > header > *:nth-child(2),
+.view-enter > div.min-h-screen > header > div > *:nth-child(2) {
+  animation: staggerRevealUp 500ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+  will-change: transform, opacity;
+}
+
+.view-enter > div.min-h-screen > header > *:nth-child(3),
+.view-enter > div.min-h-screen > header > div > *:nth-child(3) {
+  animation: staggerRevealUp 500ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  will-change: transform, opacity;
+}
+
+.view-enter > div.min-h-screen > main,
+.view-enter > div.min-h-screen > article,
+.view-enter > div.min-h-screen > section:first-of-type {
+  animation: staggerRevealUp 500ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+  will-change: transform, opacity;
+}
+
 /* Gradiente del hero: permite variante "rojo más profundo" solo con data-dev-accent */
 .andi-hero-accent {
   background-image: linear-gradient(to right, var(--accent), var(--accent-text));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Rotador dinámico de frases en Hero (Smooth Vertical Slide + Fade aislado sin layout shift) */
+.hero-rotator-grid {
+  display: grid;
+  height: 1.25em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+  align-items: center;
+  contain: layout paint;
+}
+
+.hero-rotator-item {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  line-height: 1.15;
+  will-change: transform, opacity, filter;
+  pointer-events: none;
+}
+
+.hero-rotator-item.is-waiting {
+  opacity: 0;
+  transform: translateY(40%);
+  filter: blur(4px);
+  transition: none;
+}
+
+.hero-rotator-item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+  transition:
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-rotator-item.is-leaving {
+  opacity: 0;
+  transform: translateY(-40%);
+  filter: blur(4px);
+  transition:
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Transition suave al cambiar tema */
@@ -156,45 +309,83 @@ html[data-dev-accent="deep"] .andi-hero-accent {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
- *  ANIMACIÓN DE TEXTURA DE FONDO (Rotación Alternada + Pulse-Scale y Opacidad +15%)
+ *  ANIMACIÓN DE TEXTURA DE FONDO EN 3 CAPAS INDEPENDIENTES (60 FPS GPU)
+ *  - Capa A: Desplazamiento lateral infinito por filas alternadas (110s-140s)
+ *  - Capa B: Flotación vertical tipo ola (-14px a +14px, 6s-9s)
+ *  - Capa C: Pulso de escala y opacidad (+15% en cresta de escala)
  * ═══════════════════════════════════════════════════════════════════ */
+
+/* Capa A: Filas impares (1, 3, 5...) hacia la izquierda; pares (2, 4, 6...) hacia la derecha */
+@keyframes wmRowScrollLeft {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes wmRowScrollRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.wm-row-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  overflow: visible;
+  will-change: transform;
+}
+
+.wm-row-track.is-odd-row {
+  animation: wmRowScrollLeft var(--row-duration, 122s) linear infinite;
+  animation-delay: var(--row-delay, 0s);
+}
+
+.wm-row-track.is-even-row {
+  animation: wmRowScrollRight var(--row-duration, 132s) linear infinite;
+  animation-delay: var(--row-delay, 0s);
+}
+
+/* Capa B: Wrapper de flotación vertical tipo ola (-14px a +14px) */
+@keyframes wmFloatWave {
+  0% {
+    transform: translate3d(0, -14px, 0);
+  }
+  100% {
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+.wm-float-wrapper {
+  overflow: visible;
+  animation: wmFloatWave var(--float-duration, 7.5s) ease-in-out infinite alternate;
+  animation-delay: var(--float-delay, 0s);
+  will-change: transform;
+}
+
+/* Capa C: Pulso de escala y aumento de opacidad (+15% en cresta) */
 @keyframes pulse-scale {
   0%, 100% {
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(1);
     opacity: 0.87;
   }
   32% {
-    transform: scale(1.15);
+    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(1.15);
     opacity: 1;
   }
   68% {
-    transform: scale(0.85);
+    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(0.85);
     opacity: 0.87;
   }
 }
 
-.watermark-grid > .watermark-item:nth-child(odd) {
-  --wm-rot: -18deg;
-}
-
-.watermark-grid > .watermark-item:nth-child(even) {
-  --wm-rot: 18deg;
-}
-
-/* Desincronización adicional por selectores primos para romper cualquier simetría en filas */
-.watermark-grid > .watermark-item:nth-child(3n + 1) .watermark-icon {
-  animation-direction: alternate;
-}
-
-.watermark-grid > .watermark-item:nth-child(5n + 2) .watermark-icon {
-  animation-direction: alternate-reverse;
-}
-
-.watermark-grid > .watermark-item:nth-child(7n + 4) .watermark-icon {
-  animation-direction: reverse;
-}
-
-.watermark-grid > .watermark-item .watermark-icon {
+.watermark-icon {
   animation: pulse-scale var(--wm-duration, 12s) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   animation-delay: var(--wm-delay, -3.5s);
   will-change: transform, opacity;
@@ -215,7 +406,7 @@ article ol,
   line-height: 1.82;
 }
 
-/* 2. Citas Destacadas (Blockquotes) con borde izquierdo grueso rojo coral */
+/* 2. Citas Destacadas (Blockquotes) con borde izquierdo grueso rojo coral y máxima legibilidad Sans-Serif */
 article blockquote,
 .editorial-blockquote {
   position: relative;
@@ -233,10 +424,27 @@ article blockquote,
   box-shadow: 0 12px 32px -10px rgba(255, 77, 77, 0.18),
     0 4px 16px -4px rgba(0, 0, 0, 0.3);
   color: var(--text-primary);
-  font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.75;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 1.15rem;
+  line-height: 1.78;
   max-width: 68ch;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  CONTRASTE TIPOGRÁFICO EDITORIAL (Fraunces SemiBold/Medium + Inter)
+ * ═══════════════════════════════════════════════════════════════════ */
+.font-editorial {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.font-editorial-accent {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
 }
 
 /* 3. Cajas de Resumen o Callouts para Datos Clínicos (CIE-11, DSM-5-TR, Notas Clínicas) */
@@ -252,4 +460,173 @@ article > section:first-of-type > div:has(> h3) {
   );
   box-shadow: 0 14px 36px -12px rgba(255, 77, 77, 0.16),
     0 4px 20px -4px rgba(0, 0, 0, 0.28);
+}
+
+.clinical-callout-link {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms ease,
+    background 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.clinical-callout-link:hover,
+.clinical-callout-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: linear-gradient(
+    145deg,
+    rgba(20, 30, 55, 0.88) 0%,
+    rgba(255, 77, 77, 0.15) 100%
+  );
+  box-shadow:
+    0 20px 44px -10px rgba(255, 77, 77, 0.32),
+    0 0 20px rgba(255, 77, 77, 0.18),
+    0 6px 22px -4px rgba(0, 0, 0, 0.38);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  MICROINTERACCIÓN: BULLET POINT REVEAL (Inspirado en Hello Monday)
+ * ═══════════════════════════════════════════════════════════════════ */
+.bullet-reveal-title {
+  position: relative;
+  display: block;
+  padding-right: 18px;
+}
+
+.bullet-reveal-dot {
+  position: absolute;
+  left: 0;
+  top: calc(0.68em - 3.5px);
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--accent) 85%, transparent),
+    0 0 4px var(--accent);
+  opacity: 0;
+  transform: scale(0) translateX(-8px);
+  transition:
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.bullet-reveal-text {
+  display: block;
+  transform: translateX(0);
+  transition:
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 300ms ease;
+  will-change: transform;
+}
+
+.bullet-reveal-card:hover .bullet-reveal-dot,
+.bullet-reveal-card:focus-visible .bullet-reveal-dot {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+.bullet-reveal-card:hover .bullet-reveal-text,
+.bullet-reveal-card:focus-visible .bullet-reveal-text {
+  transform: translateX(16px);
+}
+
+/* Botón circular de flecha ↗ sincronizado en sub-tarjetas de Áreas de atención */
+.bullet-reveal-arrow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent);
+  transition:
+    border-color 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bullet-reveal-arrow-icon {
+  transform: translate(0, 0);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.bullet-reveal-card:hover .bullet-reveal-arrow-btn,
+.bullet-reveal-card:focus-visible .bullet-reveal-arrow-btn {
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.bullet-reveal-card:hover .bullet-reveal-arrow-icon,
+.bullet-reveal-card:focus-visible .bullet-reveal-arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Flecha derecha (>) sincronizada en barra desplegable de Referencias Bibliográficas */
+.bullet-reveal-chevron {
+  transform: translateX(0) rotate(0deg);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.bullet-reveal-card:hover .bullet-reveal-chevron,
+.bullet-reveal-card:focus-visible .bullet-reveal-chevron {
+  transform: translateX(5px) rotate(0deg);
+}
+
+details[open].bullet-reveal-card .bullet-reveal-chevron {
+  transform: translateX(0) rotate(90deg);
+}
+
+details[open].bullet-reveal-card:hover .bullet-reveal-chevron,
+details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
+  transform: translateX(4px) rotate(90deg);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  GRILLA ESCALONADA EDITORIAL (Staggered Grid — Hello Monday)
+ * ═══════════════════════════════════════════════════════════════════ */
+
+/* 1. Psicoeducación y Bienestar: 4 columnas en desktop (lg >= 1024px) */
+@media (min-width: 1024px) {
+  .stagger-grid-blog > *:nth-child(odd) {
+    margin-bottom: 36px;
+  }
+
+  .stagger-grid-blog > *:nth-child(even) {
+    margin-top: 36px;
+  }
+}
+
+/* 2. Sub-tarjetas en acordeones de Áreas de atención: 2 columnas en desktop (md >= 768px) */
+@media (min-width: 768px) {
+  .stagger-grid-areas > *:nth-child(odd):not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .stagger-grid-areas > *:nth-child(even) {
+    margin-top: 20px;
+  }
+}
+
+/* 3. Biblioteca de Recursos (/articulos): grilla 2x2 amplia con columna derecha a +32px (md >= 768px) */
+@media (min-width: 768px) {
+  .stagger-grid-library > *:nth-child(odd) {
+    margin-bottom: 32px;
+  }
+
+  .stagger-grid-library > *:nth-child(even) {
+    margin-top: 32px;
+  }
 }

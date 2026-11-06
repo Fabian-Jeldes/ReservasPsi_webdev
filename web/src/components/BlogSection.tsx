@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { BookOpen, ChevronRight } from 'lucide-react'
 import type { BlogPost } from '../types/site'
+import { ElasticBorderCard } from './ElasticBorderCard'
 
 const psicoeducacionIconModules = import.meta.glob<string>(
   '../assets/*psicoeducacion*',
@@ -18,7 +19,7 @@ type Props = {
 
 export function BlogSection({ posts }: Props) {
   return (
-    <section id="blog" className="mx-auto max-w-6xl px-6 py-32">
+    <section id="blog" className="mx-auto max-w-6xl px-6 pt-32 pb-32 lg:pb-44">
       <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="mb-4 flex items-center gap-4">
@@ -37,8 +38,20 @@ export function BlogSection({ posts }: Props) {
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
-              <span style={{ color: 'var(--accent)' }}>Psicoeducación</span> y{' '}
-              <span style={{ color: 'var(--accent)' }}>Bienestar</span>:
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                Psicoeducación
+              </span>{' '}
+              y{' '}
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--accent)' }}
+              >
+                Bienestar
+              </span>
+              :
             </h2>
           </div>
           <p
@@ -62,7 +75,7 @@ export function BlogSection({ posts }: Props) {
         </Link>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div className="stagger-grid-blog grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {posts.map((post) => {
           // Logic to highlight one keyword per blog card
           const highlightMap: Record<number, string> = {
@@ -80,7 +93,7 @@ export function BlogSection({ posts }: Props) {
             <Link
               key={post.id}
               to={`/articulos/${post.slug}`}
-              className="group flex flex-col cursor-pointer border p-4 transition-all duration-500 hover:-translate-y-1.5"
+              className="bullet-reveal-card group flex flex-col cursor-pointer border p-4 transition-all duration-500 hover:-translate-y-1.5"
               style={{
                 borderRadius: 'var(--radius-card)',
                 borderColor: 'color-mix(in srgb, var(--accent) 55%, transparent)',
@@ -101,26 +114,25 @@ export function BlogSection({ posts }: Props) {
                   '0 12px 35px -12px rgba(255, 77, 77, 0.16), var(--shadow-card)'
               }}
             >
-              <div
-                className="relative mb-5 aspect-[4/5] overflow-hidden"
-                style={{
-                  borderRadius: 'calc(var(--radius-card) - 0.5rem)',
-                  backgroundColor: 'var(--bg-section-alt)',
-                }}
+              <ElasticBorderCard
+                className="mb-5 aspect-[4/5] w-full"
+                cornerRadius={22}
+                maxPull={20}
+                borderWidth={1.5}
+                restingStrokeOpacity={0.6}
+                backgroundColor="var(--bg-section-alt)"
               >
-                <div
-                  className="absolute inset-0 flex items-center justify-center p-8"
-                >
+                <div className="absolute inset-0 flex items-center justify-center p-8">
                   {post.imageUrl ? (
                     <img
                       src={post.imageUrl}
                       alt={post.title}
-                      className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+                      className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:opacity-90"
                     />
                   ) : (
                     <BookOpen
                       size={48}
-                      className="transition-all duration-700 group-hover:scale-110"
+                      className="transition-all duration-500 group-hover:scale-110"
                       style={{ color: 'var(--accent-soft)' }}
                       aria-hidden
                     />
@@ -133,7 +145,7 @@ export function BlogSection({ posts }: Props) {
                       'linear-gradient(to top, rgba(10, 15, 29, 0.94) 10%, rgba(10, 15, 29, 0.45) 55%, transparent 100%)',
                   }}
                 />
-                <div className="absolute bottom-5 left-5 right-5">
+                <div className="absolute bottom-6 left-5 right-5 z-10">
                   <div
                     className="mb-2.5 inline-block rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg"
                     style={{
@@ -144,27 +156,30 @@ export function BlogSection({ posts }: Props) {
                     {post.category}
                   </div>
                   <h4
-                    className="text-lg md:text-xl font-bold leading-snug transition-colors"
+                    className="bullet-reveal-title text-lg md:text-xl font-bold leading-snug transition-colors"
                     style={{ color: 'var(--text-primary)' }}
                   >
-                    {keyword && titleParts.length > 1 ? (
-                      <>
-                        {titleParts.map((part, i) =>
-                          part.toLowerCase() === keyword.toLowerCase() ? (
-                            <span key={i} style={{ color: 'var(--accent)' }}>
-                              {part}
-                            </span>
-                          ) : (
-                            part
-                          )
-                        )}
-                      </>
-                    ) : (
-                      post.title
-                    )}
+                    <span className="bullet-reveal-dot" aria-hidden />
+                    <span className="bullet-reveal-text">
+                      {keyword && titleParts.length > 1 ? (
+                        <>
+                          {titleParts.map((part, i) =>
+                            part.toLowerCase() === keyword.toLowerCase() ? (
+                              <span key={i} style={{ color: 'var(--accent)' }}>
+                                {part}
+                              </span>
+                            ) : (
+                              part
+                            )
+                          )}
+                        </>
+                      ) : (
+                        post.title
+                      )}
+                    </span>
                   </h4>
                 </div>
-              </div>
+              </ElasticBorderCard>
 
               {/* Resumen descriptivo con alto contraste */}
               <p

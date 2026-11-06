@@ -94,6 +94,7 @@ export type AboutWorkplace = {
   modality: string
   since: string
   description: string
+  url?: string
 }
 
 export type AboutPageData = {
@@ -126,9 +127,19 @@ export type AboutPageData = {
   cierre: string[]
 }
 
+export type FaqHighlight = {
+  label: string
+  value: string
+  note?: string
+  featured?: boolean
+}
+
 export type FaqItem = {
   question: string
   answer: string
+  badge?: string
+  paragraphs?: string[]
+  highlights?: FaqHighlight[]
 }
 
 export type FaqCategory = {

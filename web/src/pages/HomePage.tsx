@@ -101,7 +101,14 @@ export function HomePage() {
               fontWeight: 'var(--heading-weight)'
             }}
           >
-            ¿Te gustaría que <span style={{ color: 'var(--accent)' }}>conversemos</span>?
+            ¿Te gustaría que{' '}
+            <span
+              className="font-editorial-accent"
+              style={{ color: 'var(--accent)' }}
+            >
+              conversemos
+            </span>
+            ?
           </h2>
           <p 
             className="text-xl mb-10 relative z-10 max-w-2xl mx-auto"

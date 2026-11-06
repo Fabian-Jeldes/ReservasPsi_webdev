@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Specialization } from '../types/site'
 
@@ -206,16 +206,27 @@ export function SpecializationsSection({ items: _items }: Props) {
               letterSpacing: 'var(--heading-spacing)',
             }}
           >
-            <span className="andi-hero-accent">Áreas de atención:</span>
+            <span className="andi-hero-accent">
+              Áreas de{' '}
+              <span className="font-editorial-accent">atención:</span>
+            </span>
           </h2>
           <p
             className="mx-auto max-w-2xl text-lg leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
             Un enfoque{' '}
-            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>humano</span>{' '}
+            <span
+              className="font-editorial-accent"
+              style={{ color: 'var(--accent)' }}
+            >
+              humano
+            </span>{' '}
             <strong>y especializado</strong> para que vuelvas a{' '}
-            <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
+            <span
+              className="font-editorial-accent"
+              style={{ color: 'var(--accent)' }}
+            >
               conectar contigo mismo
             </span>{' '}
             de una forma auténtica y libre de juicios.
@@ -298,7 +309,10 @@ export function SpecializationsSection({ items: _items }: Props) {
                         {titleParts.length > 1 ? (
                           <>
                             {titleParts[0]}
-                            <span style={{ color: 'var(--accent)' }}>
+                            <span
+                              className="font-editorial-accent"
+                              style={{ color: 'var(--accent)' }}
+                            >
                               {category.highlightWord}
                             </span>
                             {titleParts[1]}
@@ -338,14 +352,14 @@ export function SpecializationsSection({ items: _items }: Props) {
                 >
                   <div className="overflow-hidden">
                     <div
-                      className="border-t p-6 md:p-8 pt-6 grid gap-4 md:grid-cols-2"
+                      className="stagger-grid-areas border-t p-6 md:px-8 md:pt-6 md:pb-10 grid gap-4 md:grid-cols-2"
                       style={{ borderColor: 'var(--border-primary)' }}
                     >
                       {category.areas.map((area) => (
                         <Link
                           key={area.path}
                           to={area.path}
-                          className="group rounded-xl border p-5 text-left transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+                          className="bullet-reveal-card group rounded-xl border p-5 text-left transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
                           style={{
                             borderColor: 'color-mix(in srgb, var(--accent) 45%, transparent)',
                             backgroundColor: 'var(--bg-primary)',
@@ -363,19 +377,26 @@ export function SpecializationsSection({ items: _items }: Props) {
                           <div>
                             <div className="flex items-start justify-between gap-3">
                               <h4
-                                className="text-base md:text-lg font-bold mb-1"
+                                className="bullet-reveal-title text-base md:text-lg font-bold mb-1 leading-snug"
                                 style={{
                                   color: 'var(--text-primary)',
                                   fontFamily: 'var(--font-heading)',
                                 }}
                               >
-                                {area.title}
+                                <span className="bullet-reveal-dot" aria-hidden />
+                                <span className="bullet-reveal-text">
+                                  {area.title}
+                                </span>
                               </h4>
-                              <ArrowRight
-                                size={18}
-                                className="shrink-0 mt-1 transition-transform group-hover:translate-x-1"
-                                style={{ color: 'var(--accent)' }}
-                              />
+                              <span
+                                className="bullet-reveal-arrow-btn mt-0.5"
+                                aria-hidden
+                              >
+                                <ArrowUpRight
+                                  size={15}
+                                  className="bullet-reveal-arrow-icon"
+                                />
+                              </span>
                             </div>
                             <p
                               className="mb-2 text-xs font-bold uppercase tracking-wider"

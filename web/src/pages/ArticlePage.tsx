@@ -5,6 +5,7 @@ import { SiteFooter } from '../components/SiteFooter'
 import { getArticleDataBySlug, getBlogPostBySlug } from '../data/site'
 import { useEffect, useMemo } from 'react'
 import { SEO } from '../components/SEO'
+import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>()
@@ -117,7 +118,7 @@ export function ArticlePage() {
               {data.heroEyebrow}
             </div>
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl leading-[1.12] mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl leading-[1.14] mb-6"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
@@ -128,6 +129,7 @@ export function ArticlePage() {
               {data.heroTitle.split(' ').slice(0, -1).join(' ')}
               <br />
               <span
+                className="font-editorial-accent"
                 style={{
                   color: 'var(--accent)',
                   textShadow: 'var(--shadow-accent-lg)',
@@ -163,22 +165,21 @@ export function ArticlePage() {
           </div>
 
           <div className="relative hidden lg:flex justify-end">
-            <div
-              className="w-full aspect-[16/9] relative overflow-hidden border-2"
-              style={{
-                backgroundColor: 'var(--bg-card-solid)',
-                borderColor: 'var(--accent)',
-                borderRadius: 'var(--radius-card-lg)',
-                boxShadow:
-                  'var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.35))',
-              }}
+            <ElasticBorderCard
+              className="group w-full aspect-[16/9]"
+              cornerRadius={28}
+              maxPull={20}
+              borderWidth={2}
+              restingStrokeOpacity={0.95}
+              backgroundColor="var(--bg-card-solid)"
+              boxShadow="var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.35))"
             >
               {data.heroImage ? (
                 <>
                   <img
                     src={data.heroImage}
                     alt={data.heroTitle}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </>
@@ -193,7 +194,7 @@ export function ArticlePage() {
                   </div>
                 </>
               )}
-            </div>
+            </ElasticBorderCard>
           </div>
         </div>
       </header>
@@ -294,19 +295,20 @@ export function ArticlePage() {
 
             {section.images?.map((img, iIdx) => (
               <figure key={iIdx} className="my-12 max-w-prose">
-                <div
-                  className="overflow-hidden border"
-                  style={{
-                    borderRadius: 'var(--radius-card)',
-                    borderColor: 'color-mix(in srgb, var(--accent) 45%, transparent)',
-                  }}
+                <ElasticBorderCard
+                  className="group w-full"
+                  cornerRadius={24}
+                  maxPull={20}
+                  borderWidth={1.5}
+                  restingStrokeOpacity={0.65}
+                  backgroundColor="var(--bg-card)"
                 >
                   <img
                     src={img.url}
                     alt={img.caption || ''}
-                    className="w-full h-auto"
+                    className="block w-full h-auto transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
-                </div>
+                </ElasticBorderCard>
                 {img.caption && (
                   <figcaption
                     className="mt-4 text-center text-sm italic"
@@ -368,16 +370,21 @@ export function ArticlePage() {
         {/* References */}
         <div className="mb-20 max-w-prose">
           <details
-            className="group clinical-callout p-0 overflow-hidden"
+            className="bullet-reveal-card group clinical-callout p-0 overflow-hidden"
           >
             <summary
               className="flex items-center justify-between p-6 cursor-pointer list-none font-bold uppercase tracking-widest text-sm"
               style={{ color: 'var(--text-primary)' }}
             >
-              <span>Referencias Bibliográficas</span>
+              <span className="bullet-reveal-title">
+                <span className="bullet-reveal-dot" aria-hidden />
+                <span className="bullet-reveal-text">
+                  Referencias Bibliográficas
+                </span>
+              </span>
               <ChevronRight
                 size={20}
-                className="transition-transform group-open:rotate-90"
+                className="bullet-reveal-chevron shrink-0"
                 style={{ color: 'var(--accent)' }}
               />
             </summary>
