@@ -5,7 +5,7 @@ import type { FaqCategory, FaqItem } from '../types/site'
 
 export function FaqSection() {
   const [activeCategoryId, setActiveCategoryId] = useState<string>('all')
-  const [openItemKey, setOpenItemKey] = useState<string | null>('0')
+  const [openItemKey, setOpenItemKey] = useState<string | null>(null)
 
   const allItems = useMemo<FaqItem[]>(() => {
     return FAQ_DATA.flatMap((cat: FaqCategory) => cat.items)
@@ -23,7 +23,7 @@ export function FaqSection() {
 
   const handleCategoryChange = (id: string) => {
     setActiveCategoryId(id)
-    setOpenItemKey('0')
+    setOpenItemKey(null)
   }
 
   const filterTabs = useMemo(
@@ -35,7 +35,7 @@ export function FaqSection() {
   )
 
   return (
-    <section id="faq" className="px-6 py-32">
+    <section id="preguntas" className="scroll-mt-24 px-6 py-32">
       <div className="mx-auto max-w-4xl">
         {/* Encabezado cercano y transparente */}
         <div className="mb-14 text-center">

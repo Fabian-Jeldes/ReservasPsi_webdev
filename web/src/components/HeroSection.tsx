@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { PROFILE_IMAGE_URL } from '../data/site'
 import { ElasticBorderCard } from './ElasticBorderCard'
+import instagramBotonImg from '../assets/InstagramBoton.jpeg'
 
 const HERO_ROTATING_PHRASES = [
   'bienestar sexual',
@@ -53,7 +54,7 @@ export function HeroSection({ onContactClick }: Props) {
   return (
     <header
       id="sobre-mi"
-      className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-12 px-6 pb-20 pt-36 md:flex-row lg:gap-16 lg:px-8"
+      className="mx-auto flex max-w-6xl scroll-mt-20 flex-col items-center justify-between gap-12 px-6 pb-20 pt-[9.5rem] md:flex-row md:pt-36 lg:gap-16 lg:px-8"
     >
       <div className="flex-1 max-w-xl lg:max-w-[38rem] text-center md:text-left">
         {/* Badge superior con microinteracción de pulso lento */}
@@ -237,6 +238,22 @@ export function HeroSection({ onContactClick }: Props) {
             fetchPriority="high"
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           />
+          {/* Acceso directo a Instagram centrado en la parte baja del marco coral */}
+          <a
+            href="https://www.instagram.com/ps.aandrusco"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Seguir a Ps. Andrei Andrusco en Instagram"
+            title="Instagram @ps.aandrusco"
+            className="hero-ig-btn absolute bottom-3 left-1/2 z-10 block h-11 w-11 overflow-hidden rounded-xl md:bottom-4 md:h-14 md:w-14 md:rounded-2xl"
+          >
+            <img
+              src={instagramBotonImg}
+              alt="Instagram @ps.aandrusco"
+              className="h-full w-full object-cover"
+              decoding="async"
+            />
+          </a>
         </ElasticBorderCard>
       </div>
     </header>

@@ -54,7 +54,7 @@ export function DevAccentToggle() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 z-[200] flex flex-col items-start gap-2">
+    <div className="fixed bottom-3 left-3 z-[200] flex flex-col items-start gap-2 md:bottom-4 md:left-4">
       {/* Panel expandido */}
       {expanded && (
         <div
@@ -98,27 +98,28 @@ export function DevAccentToggle() {
         </div>
       )}
 
-      {/* Botón principal */}
+      {/* Botón principal (compacto circular en móvil, píldora completa en desktop) */}
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
-        className="flex items-center gap-2.5 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-wide shadow-lg backdrop-blur-xl transition-all hover:scale-105"
+        className="flex h-10 w-10 items-center justify-center rounded-full border p-0 text-xs font-bold uppercase tracking-wide shadow-lg backdrop-blur-xl transition-all hover:scale-105 md:h-auto md:w-auto md:gap-2.5 md:px-4 md:py-2.5"
         style={{
           backgroundColor: 'var(--bg-card-solid)',
           borderColor: 'var(--border-card)',
           color: 'var(--text-primary)',
         }}
         title="Cambiar tema de diseño (solo dev)"
+        aria-label={`Cambiar tema de diseño: ${current.label}`}
       >
-        <Palette size={14} style={{ color: current.dot }} />
+        <Palette size={15} style={{ color: current.dot }} />
         <span
-          className="h-2.5 w-2.5 rounded-full"
+          className="hidden h-2.5 w-2.5 rounded-full md:inline-block"
           style={{
             backgroundColor: current.dot,
             boxShadow: `0 0 8px ${current.dot}`,
           }}
         />
-        {current.label}
+        <span className="hidden md:inline">{current.label}</span>
       </button>
     </div>
   )

@@ -162,6 +162,17 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
       ),
       to: '/articulos',
     },
+    {
+      label: (
+        <>
+          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+            P
+          </span>
+          reguntas
+        </>
+      ),
+      to: '/#preguntas',
+    },
   ]
 
   return (
@@ -174,10 +185,10 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         WebkitBackdropFilter: 'var(--nav-backdrop)',
       }}
     >
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-4 sm:px-6 md:h-20 lg:px-8">
         <button
           type="button"
-          className="relative z-50 flex cursor-pointer items-center gap-3 border-0 bg-transparent p-0 text-left"
+          className="relative z-50 flex min-w-0 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-left md:gap-3"
           onClick={() => {
             if (isOpen) {
               closeMenuWithAction(onLogoClick)
@@ -190,10 +201,10 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           <img
             src={logoPsAndrei}
             alt="Logo Ps. Andrei Andrusco"
-            className="h-10 w-10 shrink-0 rounded-lg object-contain"
+            className="h-8 w-8 shrink-0 rounded-lg object-contain md:h-10 md:w-10"
           />
           <span
-            className="text-xl font-bold tracking-tight"
+            className="whitespace-nowrap text-[15px] font-bold tracking-tight sm:text-base md:text-xl"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             <span className="brand-text">
@@ -204,11 +215,11 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           </span>
         </button>
 
-        {/* Desktop Menu (sin cambios) */}
-        <div className="hidden items-center gap-8 text-sm font-semibold md:flex">
+        {/* Desktop Menu */}
+        <div className="hidden items-center gap-5 text-sm font-semibold md:flex lg:gap-7 xl:gap-8">
           <Link
             to="/sobre-mi"
-            className="transition-colors"
+            className="whitespace-nowrap transition-colors"
             style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
@@ -224,7 +235,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           </Link>
           <Link
             to="/#especialidades"
-            className="transition-colors"
+            className="whitespace-nowrap transition-colors"
             style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
@@ -236,7 +247,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           </Link>
           <Link
             to="/#reviews"
-            className="transition-colors"
+            className="whitespace-nowrap transition-colors"
             style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
@@ -248,7 +259,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           </Link>
           <Link
             to="/articulos"
-            className="transition-colors"
+            className="whitespace-nowrap transition-colors"
             style={{ color: 'var(--text-primary)' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
@@ -258,10 +269,22 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             </span>
             sicoeducación
           </Link>
+          <Link
+            to="/#preguntas"
+            className="whitespace-nowrap transition-colors"
+            style={{ color: 'var(--text-primary)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+          >
+            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
+              P
+            </span>
+            reguntas
+          </Link>
           <button
             type="button"
             onClick={onAgendarClick}
-            className="cursor-pointer rounded-full px-5 py-2.5 font-bold shadow-lg transition-all hover:scale-105 active:scale-95"
+            className="cursor-pointer whitespace-nowrap rounded-full px-5 py-2.5 font-bold shadow-lg transition-all hover:scale-105 active:scale-95"
             style={{
               backgroundColor: 'var(--accent)',
               color: '#ffffff',
@@ -279,13 +302,9 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         <button
           type="button"
           onClick={toggleMenu}
-          className="relative z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border transition-all duration-300 md:hidden"
-          style={{
-            borderColor: isOpen ? 'var(--accent)' : 'var(--border-primary)',
-            color: 'var(--text-primary)',
-            backgroundColor: 'var(--bg-card)',
-            boxShadow: isOpen ? '0 0 14px rgba(255, 77, 77, 0.3)' : 'none',
-          }}
+          className={`mobile-menu-toggle relative z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border transition-colors duration-300 md:hidden ${
+            isOpen ? 'is-open' : ''
+          }`}
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={isOpen}
         >
@@ -301,15 +320,15 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             pointerEvents: isOpen ? 'auto' : 'none',
           }}
         >
-          {/* Capa de desenfoque de fondo sincronizada */}
+          {/* Capa de desenfoque de fondo sincronizada con mayor opacidad para evitar transparencias */}
           <div
             ref={backdropRef}
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 backdrop-blur-md"
             style={{
               opacity: 0,
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              backgroundColor: 'rgba(10, 15, 29, 0.45)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              backgroundColor: 'rgba(18, 40, 62, 0.94)',
             }}
           />
 
@@ -324,7 +343,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               ref={drawerFillRef}
               d="M 100,0 L 100,0 Q 100,42 100,100 L 100,100 Z"
               fill="var(--bg-primary)"
-              fillOpacity="0.93"
+              fillOpacity="0.97"
             />
             <path
               ref={drawerGlowRef}

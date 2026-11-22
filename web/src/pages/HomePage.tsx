@@ -6,6 +6,7 @@ import {
 } from '../data/site'
 import { Navbar } from '../components/Navbar'
 import { HeroSection } from '../components/HeroSection'
+import { TrustBarSection } from '../components/TrustBarSection'
 import { SpecializationsSection } from '../components/SpecializationsSection'
 import { ReviewsSection } from '../components/ReviewsSection'
 import { BlogSection } from '../components/BlogSection'
@@ -41,6 +42,7 @@ export function HomePage() {
         const section = document.getElementById('reserva');
         section?.scrollIntoView({ behavior: 'smooth' });
       }} />
+      <TrustBarSection />
       <SpecializationsSection items={SPECIALIZATIONS} />
       <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
       

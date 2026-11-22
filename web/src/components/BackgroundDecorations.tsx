@@ -119,8 +119,8 @@ export function BackgroundDecorations() {
         const angle = 14 + Math.round(randA * 8)
         const rotationDeg = (r + c) % 2 === 0 ? -angle : angle
 
-        // Opacidad base con +15% en el pico de pulse-scale
-        const baseOpacity = 0.125 + randB * 0.032
+        // Opacidad base (+25% de visibilidad) con +15% en el pico de pulse-scale
+        const baseOpacity = (0.125 + randB * 0.032) * 1.25
         const peakOpacity = Number((baseOpacity * 1.15).toFixed(3))
 
         // Capa B: Flotación vertical tipo ola (entre 6s y 9s) con desfase progresivo por columna
