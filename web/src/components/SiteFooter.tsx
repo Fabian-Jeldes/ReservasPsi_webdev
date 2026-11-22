@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Lock, ShieldCheck } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.jpeg'
+import instagramBotonImg from '../assets/InstagramBoton.jpeg'
 
 export function SiteFooter() {
   return (
@@ -40,6 +41,22 @@ export function SiteFooter() {
             >
               Ver horas disponibles
             </Link>
+            <a
+              href="https://www.instagram.com/ps.aandrusco"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Seguir a Ps. Andrei Andrusco en Instagram"
+              title="Instagram @ps.aandrusco"
+              className="block h-10 w-10 shrink-0 overflow-hidden rounded-xl transition-transform hover:scale-105"
+            >
+              <img
+                src={instagramBotonImg}
+                alt="Instagram @ps.aandrusco"
+                className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
           </div>
           <p
             className="max-w-2xl leading-relaxed"
