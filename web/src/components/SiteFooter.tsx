@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom'
-import { Lock, ShieldCheck } from 'lucide-react'
+import { FileText, Lock, ShieldCheck } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.jpeg'
 import instagramBotonImg from '../assets/InstagramBoton.jpeg'
+import { LEGAL_NAV_LINKS } from '../data/site'
+import type { LegalPageId } from '../types/site'
+
+const SECURITY_ICONS: Record<LegalPageId, typeof ShieldCheck> = {
+  privacidad: ShieldCheck,
+  'practica-digital': Lock,
+  terminos: FileText,
+}
 
 export function SiteFooter() {
   return (
@@ -26,7 +34,9 @@ export function SiteFooter() {
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 <span className="brand-text">
-                  <span className="brand-initial">A</span>ndrei <span className="brand-initial">A</span>ndrusco <span className="brand-initial">F</span>idalgo
+                  <span className="brand-initial">A</span>ndrei{' '}
+                  <span className="brand-initial">A</span>ndrusco{' '}
+                  <span className="brand-initial">F</span>idalgo
                 </span>
               </span>
             </div>
@@ -67,29 +77,59 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h5
-            className="mb-6 font-bold"
+          <h2
+            className="mb-5 text-base font-bold"
             style={{ color: 'var(--text-primary)' }}
           >
             Seguridad
-          </h5>
-          <div className="flex gap-4">
-            {[ShieldCheck, Lock].map((Icon, i) => (
-              <div
-                key={i}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border transition-colors"
-                style={{
-                  borderColor: 'var(--border-primary)',
-                  backgroundColor: 'var(--bg-card)',
-                  color: 'var(--text-secondary)',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-              >
-                <Icon size={20} aria-hidden />
-              </div>
-            ))}
+          </h2>
+          <div className="flex items-center gap-3">
+            {LEGAL_NAV_LINKS.map((item) => {
+              const Icon = SECURITY_ICONS[item.id]
+              return (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  aria-label={`${item.label}: ${item.description}`}
+                  title={`${item.label} — ${item.description}`}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border transition-all hover:scale-105"
+                  style={{
+                    borderColor: 'var(--border-card)',
+                    backgroundColor: 'var(--bg-card)',
+                    color: 'var(--text-secondary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--accent)'
+                    e.currentTarget.style.borderColor = 'var(--border-accent)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-secondary)'
+                    e.currentTarget.style.borderColor = 'var(--border-card)'
+                  }}
+                >
+                  <Icon size={19} aria-hidden />
+                </Link>
+              )
+            })}
           </div>
+          <p
+            className="mt-4 text-xs leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Consulta nuestras condiciones de{' '}
+            <Link to="/privacidad" className="editorial-link">
+              privacidad
+            </Link>
+            ,{' '}
+            <Link to="/practica-digital" className="editorial-link">
+              práctica digital
+            </Link>{' '}
+            y{' '}
+            <Link to="/terminos" className="editorial-link">
+              términos de uso
+            </Link>
+            .
+          </p>
         </div>
       </div>
       <div
@@ -97,27 +137,29 @@ export function SiteFooter() {
         style={{ borderColor: 'var(--border-primary)' }}
       >
         <p
-          className="text-[10px] font-black uppercase italic tracking-widest"
+          className="text-center text-[10px] font-black uppercase italic tracking-widest md:text-left"
           style={{ color: 'var(--text-muted)' }}
         >
           © 2026 Andrei Andrusco Fidalgo — Psicología Clínica
         </p>
-        <div
-          className="flex gap-8 text-[10px] font-bold uppercase tracking-widest"
+        <nav
+          aria-label="Enlaces legales y de seguridad"
+          className="flex flex-wrap items-center justify-center gap-6 text-[10px] font-bold uppercase tracking-widest md:gap-8"
           style={{ color: 'var(--text-muted)' }}
         >
-          {['Términos', 'Privacidad', 'Clínica Digital'].map((label) => (
-            <a
-              key={label}
-              href="#"
+          {LEGAL_NAV_LINKS.map((item) => (
+            <Link
+              key={item.id}
+              to={item.to}
               className="transition-colors"
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              style={{ color: 'var(--text-muted)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
             >
-              {label}
-            </a>
+              {item.label}
+            </Link>
           ))}
-        </div>
+        </nav>
       </div>
     </footer>
   )

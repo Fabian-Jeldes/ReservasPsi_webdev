@@ -36,7 +36,8 @@ export function ArticlesPage() {
         <div className="mb-5 flex justify-center">
           <img
             src={iconPsicoeducacionUrl}
-            alt="Icono Biblioteca de Recursos de Psicoeducación"
+            alt=""
+            aria-hidden="true"
             className="h-16 w-16 shrink-0 object-contain transition-transform duration-300 hover:scale-105"
           />
         </div>
@@ -76,7 +77,7 @@ export function ArticlesPage() {
       </header>
 
       {/* Articles Grid (2x2 Escalonada Editorial) */}
-      <main className="mx-auto max-w-5xl px-6 pb-44">
+      <main id="contenido-principal" className="mx-auto max-w-5xl px-6 pb-44">
         <div className="stagger-grid-library grid gap-10 md:grid-cols-2">
           {BLOG_POSTS.map((post) => (
             <Link
@@ -146,17 +147,17 @@ export function ArticlesPage() {
                   style={{ color: 'var(--accent-text)' }}
                 >
                   <span className="flex items-center gap-1.5">
-                    <Tag size={14} /> {post.category}
+                    <Tag size={14} aria-hidden="true" /> {post.category}
                   </span>
                   <span
                     className="flex items-center gap-1.5"
                     style={{ color: 'var(--text-secondary)' }}
                   >
-                    <Calendar size={14} /> {post.date}
+                    <Calendar size={14} aria-hidden="true" /> {post.date}
                   </span>
                 </div>
 
-                <h3
+                <h2
                   className="bullet-reveal-title mb-4 text-2xl leading-snug"
                   style={{
                     fontFamily: 'var(--font-heading)',
@@ -166,7 +167,7 @@ export function ArticlesPage() {
                 >
                   <span className="bullet-reveal-dot" aria-hidden />
                   <span className="bullet-reveal-text">{post.title}</span>
-                </h3>
+                </h2>
 
                 <p
                   className="mb-8 line-clamp-3 flex-1 text-base leading-relaxed"
@@ -179,7 +180,7 @@ export function ArticlesPage() {
                   className="flex items-center gap-2 text-sm font-black uppercase tracking-widest transition-all group-hover:gap-4"
                   style={{ color: 'var(--accent)' }}
                 >
-                  Leer artículo completo <ArrowRight size={16} />
+                  Leer artículo completo <ArrowRight size={16} aria-hidden="true" />
                 </div>
               </div>
             </Link>

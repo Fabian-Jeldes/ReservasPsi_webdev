@@ -224,6 +224,7 @@ export function BackgroundDecorations() {
                     <img
                       src={item.src}
                       alt=""
+                      aria-hidden="true"
                       decoding="async"
                       className="watermark-icon h-14 w-14 md:h-18 md:w-18 object-contain"
                       style={

@@ -71,7 +71,7 @@ export function SpecializationPage() {
       <hr className="theme-divider mx-auto max-w-6xl" />
 
       {/* Specialty Content */}
-      <main className="editorial-prose mx-auto max-w-3xl px-6 py-16">
+      <main id="contenido-principal" className="editorial-prose mx-auto max-w-3xl px-6 py-16">
         <div
           className="space-y-8 max-w-prose text-lg leading-[1.82]"
           style={{ color: 'var(--text-secondary)' }}
@@ -92,12 +92,12 @@ export function SpecializationPage() {
             borderLeft: '5px solid var(--accent)',
           }}
         >
-          <h4
+          <h2
             className="font-black uppercase tracking-widest mb-3 text-sm"
             style={{ color: 'var(--accent-text)' }}
           >
             Nuestro Abordaje en Consulta
-          </h4>
+          </h2>
           <p
             className="leading-[1.8] text-lg"
             style={{ color: 'var(--text-primary)' }}
@@ -117,6 +117,7 @@ export function SpecializationPage() {
                 <span>Evidencia Científica y Referencias</span>
                 <ChevronRight
                   size={20}
+                  aria-hidden="true"
                   className="transition-transform group-open:rotate-90"
                   style={{ color: 'var(--accent)' }}
                 />
@@ -155,7 +156,7 @@ export function SpecializationPage() {
         >
           <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-accent to-transparent pointer-events-none" />
           <div className="relative z-10 animate-fade-in">
-            <h3
+            <h2
               className="text-3xl md:text-4xl mb-6"
               style={{
                 fontFamily: 'var(--font-heading)',
@@ -163,7 +164,7 @@ export function SpecializationPage() {
               }}
             >
               ¿Comenzamos a trabajar en esto?
-            </h3>
+            </h2>
             <p
               className="text-lg mb-10 max-w-xl mx-auto"
               style={{ color: 'var(--text-secondary)' }}
@@ -171,6 +172,7 @@ export function SpecializationPage() {
               Reserva una hora para conversar tranquilos y evaluar tu caso en un espacio seguro, humano y profesional.
             </p>
             <button
+              type="button"
               onClick={goKyc}
               className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 flex items-center gap-3 mx-auto shadow-lg cursor-pointer"
               style={{
@@ -180,7 +182,7 @@ export function SpecializationPage() {
                 boxShadow: 'var(--shadow-accent)',
               }}
             >
-              Ver disponibilidad directa <ArrowRight size={18} />
+              Ver disponibilidad directa <ArrowRight size={18} aria-hidden="true" />
             </button>
           </div>
         </section>

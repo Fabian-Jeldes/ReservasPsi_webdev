@@ -355,7 +355,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                     {category.customIconSrc ? (
                       <img
                         src={category.customIconSrc}
-                        alt={`Icono ${category.title}`}
+                        alt=""
+                        aria-hidden="true"
                         className="h-11 w-11 shrink-0 rounded-lg object-contain transition-opacity duration-200"
                         style={{ opacity: isActive ? 1 : 0.78 }}
                       />
@@ -409,7 +410,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                         {category.customIconSrc ? (
                           <img
                             src={category.customIconSrc}
-                            alt={`Icono ${category.title}`}
+                            alt=""
+                            aria-hidden="true"
                             className="h-11 w-11 shrink-0 rounded-xl object-contain"
                           />
                         ) : (
@@ -518,7 +520,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                 {activeCategory.customIconSrc ? (
                   <img
                     src={activeCategory.customIconSrc}
-                    alt={`Icono ${activeCategory.title}`}
+                    alt=""
+                    aria-hidden="true"
                     className="h-14 w-14 shrink-0 rounded-xl object-contain"
                   />
                 ) : (

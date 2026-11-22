@@ -100,9 +100,22 @@ export type CalendarDay = {
 import { z } from 'zod'
 
 export const kycSchema = z.object({
-  nombre: z.string().min(2, "El nombre completo es obligatorio"),
-  correo: z.string().email("Correo electrónico inválido"),
-  telefono: z.string().min(8, "Teléfono inválido"),
+  nombre: z
+    .string()
+    .trim()
+    .min(2, "El nombre completo es obligatorio")
+    .max(120, "El nombre no puede superar los 120 caracteres"),
+  correo: z
+    .string()
+    .trim()
+    .email("Correo electrónico inválido")
+    .max(254, "El correo electrónico es demasiado largo"),
+  telefono: z
+    .string()
+    .trim()
+    .min(8, "Teléfono inválido")
+    .max(25, "El número de teléfono es demasiado largo")
+    .regex(/^[+\d\s()-]+$/, "Ingresa un número de teléfono válido"),
 })
 
 export type KycFormState = z.infer<typeof kycSchema>
@@ -164,4 +177,27 @@ export type FaqCategory = {
   id: string
   title: string
   items: FaqItem[]
+}
+
+export type LegalPageId = 'privacidad' | 'practica-digital' | 'terminos'
+
+export type LegalSection = {
+  title: string
+  paragraphs: string[]
+  bullets?: string[]
+}
+
+export type LegalPageData = {
+  id: LegalPageId
+  path: `/${LegalPageId}`
+  navLabel: string
+  eyebrow: string
+  titlePrefix: string
+  titleAccent: string
+  summary: string
+  updatedLabel: string
+  sections: LegalSection[]
+  closingQuote: string
+  ctaTitle: string
+  ctaDescription: string
 }

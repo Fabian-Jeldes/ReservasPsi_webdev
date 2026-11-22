@@ -22,6 +22,9 @@ export function getHeadTags(seo: SeoData): HeadTag[] {
     { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
     { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
     { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+    { tag: 'meta', attrs: { name: 'twitter:title', content: seo.title } },
+    { tag: 'meta', attrs: { name: 'twitter:description', content: seo.description } },
+    { tag: 'meta', attrs: { name: 'twitter:image', content: seo.ogImage } },
   ]
   if (seo.publishedTime) {
     tags.push({ tag: 'meta', attrs: { property: 'article:published_time', content: seo.publishedTime } })

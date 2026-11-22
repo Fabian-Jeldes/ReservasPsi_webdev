@@ -1,3 +1,12 @@
+# Cabeceras de seguridad globales (Workers Static Assets).
+# No se solapan con las reglas de Cache-Control de abajo (Cloudflare concatena cabeceras repetidas).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://us-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
 # Caché del navegador para los assets estáticos (Workers Static Assets).
 # El HTML no se toca: sigue revalidándose para que cada deploy se vea al instante.
 # Las reglas no deben solaparse (Cloudflare concatena las cabeceras que coinciden).

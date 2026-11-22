@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { X, Calendar, Mail, Phone, User, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { kycSchema } from '../types/site'
 import type { KycFormState } from '../types/site'
@@ -50,15 +50,30 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
     }, 300)
   }, [onClose])
 
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') handleClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, handleClose])
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="appointment-modal-title"
+    >
       {/* Backdrop */}
       <div 
         className="absolute inset-0 backdrop-blur-md transition-opacity duration-500"
         style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
         onClick={handleClose}
+        aria-hidden="true"
       />
       
       {/* Modal Container — ph-no-capture: PostHog no registra clics, textos ni replay con datos del paciente */}
@@ -74,6 +89,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
         {/* Top Accent Line */}
         <div
           className="absolute left-0 top-0 h-1 w-full"
+          aria-hidden="true"
           style={{
             background: `linear-gradient(to right, transparent, var(--accent), transparent)`,
           }}
@@ -81,14 +97,16 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
 
         {/* Close Button */}
         <button
+          type="button"
           onClick={handleClose}
-          className="absolute right-6 top-6 z-10 rounded-full p-2 transition-all hover:scale-110 active:scale-95"
+          aria-label="Cerrar ventana de agendamiento"
+          className="absolute right-6 top-6 z-10 cursor-pointer rounded-full p-2 transition-all hover:scale-110 active:scale-95"
           style={{
             backgroundColor: 'var(--accent-soft)',
             color: 'var(--accent-text)',
           }}
         >
-          <X size={20} />
+          <X size={20} aria-hidden="true" />
         </button>
 
         <div className="p-8 md:p-12">
@@ -96,15 +114,17 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
             <div className="animate-in fade-in slide-in-from-right-4 duration-500">
               <div
                 className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl"
+                aria-hidden="true"
                 style={{
                   backgroundColor: 'var(--accent-soft)',
                   color: 'var(--accent)',
                 }}
               >
-                <User size={28} />
+                <User size={28} aria-hidden="true" />
               </div>
               
               <h2
+                id="appointment-modal-title"
                 className="mb-3 text-3xl font-bold"
                 style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
               >
@@ -118,10 +138,14 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-1">
                   <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} />
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} aria-hidden="true" />
                     <input
                       type="text"
                       name="nombre"
+                      aria-label="Nombre completo"
+                      aria-invalid={Boolean(errors.nombre)}
+                      autoComplete="name"
+                      maxLength={120}
                       placeholder="Nombre completo"
                       value={formData.nombre}
                       onChange={handleChange}
@@ -137,10 +161,14 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
 
                 <div className="space-y-1">
                   <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} />
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} aria-hidden="true" />
                     <input
                       type="email"
                       name="correo"
+                      aria-label="Correo electrónico"
+                      aria-invalid={Boolean(errors.correo)}
+                      autoComplete="email"
+                      maxLength={254}
                       placeholder="Correo electrónico"
                       value={formData.correo}
                       onChange={handleChange}
@@ -156,10 +184,14 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
 
                 <div className="space-y-1">
                   <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} />
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40" size={18} aria-hidden="true" />
                     <input
                       type="tel"
                       name="telefono"
+                      aria-label="Número de WhatsApp"
+                      aria-invalid={Boolean(errors.telefono)}
+                      autoComplete="tel"
+                      maxLength={25}
                       placeholder="Número de WhatsApp"
                       value={formData.telefono}
                       onChange={handleChange}
@@ -175,7 +207,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
 
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
+                  className="mt-4 w-full cursor-pointer rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
                   style={{
                     backgroundColor: 'var(--accent)',
                     color: 'var(--text-inverse)',
@@ -190,15 +222,17 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
             <div className="text-center animate-in fade-in slide-in-from-right-4 duration-500">
               <div
                 className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full"
+                aria-hidden="true"
                 style={{
                   backgroundColor: 'var(--success-soft)',
                   color: '#22c55e',
                 }}
               >
-                <CheckCircle2 size={36} />
+                <CheckCircle2 size={36} aria-hidden="true" />
               </div>
               
               <h2
+                id="appointment-modal-title"
                 className="mb-4 text-3xl font-bold"
                 style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
               >
@@ -212,9 +246,10 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
 
               <div className="space-y-4">
                 <a
-                  href={`${CALENDAR_URL}?gv.firstname=${encodeURIComponent(formData.nombre)}&gv.emailaddress=${encodeURIComponent(formData.correo)}`}
+                  href={`${CALENDAR_URL}?gv.firstname=${encodeURIComponent(formData.nombre.trim())}&gv.emailaddress=${encodeURIComponent(formData.correo.trim())}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  referrerPolicy="no-referrer"
                   onClick={() => track('reserva_calendario_abierto')}
                   className="flex w-full items-center justify-center gap-3 rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
                   style={{
@@ -223,9 +258,9 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                     boxShadow: 'var(--shadow-accent)',
                   }}
                 >
-                  <Calendar size={20} />
+                  <Calendar size={20} aria-hidden="true" />
                   Ver Disponibilidad
-                  <ExternalLink size={16} className="opacity-70" />
+                  <ExternalLink size={16} className="opacity-70" aria-hidden="true" />
                 </a>
                 
                 <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: 'var(--text-muted)' }}>

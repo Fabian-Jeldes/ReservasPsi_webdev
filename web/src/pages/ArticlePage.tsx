@@ -102,7 +102,7 @@ export function ArticlePage() {
                 <>
                   <img
                     src={data.heroImage}
-                    alt={data.heroTitle}
+                    alt={`${data.heroTitle.trim()} ${data.heroAccent.trim()}`.trim()}
                     width={1280}
                     height={720}
                     fetchPriority="high"
@@ -129,6 +129,7 @@ export function ArticlePage() {
       <hr className="theme-divider mx-auto max-w-4xl" />
 
       {/* Article Content */}
+      <main id="contenido-principal">
       <article
         id="contenido"
         className="editorial-prose mx-auto max-w-3xl px-6 py-20"
@@ -196,12 +197,12 @@ export function ArticlePage() {
             {section.lists?.map((list, lIdx) => (
               <div key={lIdx} className="mt-8 clinical-callout max-w-prose">
                 {list.title && (
-                  <h4
+                  <h3
                     className="text-xl font-bold mb-4"
                     style={{ color: 'var(--text-primary)' }}
                   >
                     {list.title}
-                  </h4>
+                  </h3>
                 )}
                 <ul className="space-y-4">
                   {list.items.map((item, iIdx) => (
@@ -212,6 +213,7 @@ export function ArticlePage() {
                     >
                       <ChevronRight
                         size={20}
+                        aria-hidden="true"
                         className="mt-1 shrink-0"
                         style={{ color: 'var(--accent)' }}
                       />
@@ -222,7 +224,11 @@ export function ArticlePage() {
               </div>
             ))}
 
-            {section.images?.map((img, iIdx) => (
+            {section.images?.map((img, iIdx) => {
+              const sectionHeadingText = section.title
+                ? section.title.replace(/<[^>]+>/g, '').trim()
+                : `${data.heroTitle.trim()} ${data.heroAccent.trim()}`.trim()
+              return (
               <figure key={iIdx} className="my-12 max-w-prose">
                 <ElasticBorderCard
                   className="group w-full"
@@ -234,7 +240,7 @@ export function ArticlePage() {
                 >
                   <img
                     src={img.url}
-                    alt={img.caption || ''}
+                    alt={img.caption || `Ilustración editorial sobre ${sectionHeadingText}`}
                     width={img.width}
                     height={img.height}
                     loading="lazy"
@@ -251,7 +257,8 @@ export function ArticlePage() {
                   </figcaption>
                 )}
               </figure>
-            ))}
+              )
+            })}
 
             {section.clinicalNote && (
               <aside
@@ -323,6 +330,7 @@ export function ArticlePage() {
               </span>
               <ChevronRight
                 size={20}
+                aria-hidden="true"
                 className="bullet-reveal-chevron shrink-0"
                 style={{ color: 'var(--accent)' }}
               />
@@ -360,7 +368,7 @@ export function ArticlePage() {
         >
           <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-accent to-transparent" />
           <div className="relative z-10">
-            <h3
+            <h2
               className="text-3xl md:text-4xl mb-6"
               style={{
                 fontFamily: 'var(--font-heading)',
@@ -370,7 +378,7 @@ export function ArticlePage() {
               }}
             >
               {data.ctaTitle}
-            </h3>
+            </h2>
             <p
               className="text-lg mb-10 max-w-xl mx-auto"
               style={{ color: 'var(--text-secondary)' }}
@@ -387,11 +395,12 @@ export function ArticlePage() {
                 boxShadow: 'var(--shadow-accent)',
               }}
             >
-              {data.ctaLabel} <ArrowRight size={18} />
+              {data.ctaLabel} <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
     </div>

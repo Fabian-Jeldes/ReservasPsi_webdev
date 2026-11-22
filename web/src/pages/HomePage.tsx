@@ -38,6 +38,7 @@ export function HomePage() {
       }}
     >
       <Navbar onLogoClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} onAgendarClick={openBooking} />
+      <main id="contenido-principal">
       <HeroSection onContactClick={() => {
         const section = document.getElementById('reserva');
         section?.scrollIntoView({ behavior: 'smooth' });
@@ -60,6 +61,7 @@ export function HomePage() {
         >
           <div 
             className="absolute inset-0 opacity-10 transition-opacity duration-500 group-hover:opacity-20"
+            aria-hidden="true"
             style={{ 
               background: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)' 
             }}
@@ -105,6 +107,7 @@ export function HomePage() {
 
       <BlogSection posts={BLOG_POSTS} />
       <FaqSection />
+      </main>
       <SiteFooter />
 
       <AppointmentModal 

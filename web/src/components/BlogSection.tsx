@@ -76,7 +76,8 @@ export function BlogSection({ posts }: Props) {
           <div className="mb-4 flex items-center gap-4">
             <img
               src={iconPsicoeducacionUrl}
-              alt="Icono Psicoeducación y Bienestar"
+              alt=""
+              aria-hidden="true"
               className="h-14 w-14 shrink-0 object-contain transition-transform duration-300 hover:scale-105"
             />
             <h2
@@ -253,7 +254,7 @@ export function BlogSection({ posts }: Props) {
                         >
                           {post.category}
                         </div>
-                        <h4
+                        <h3
                           className="bullet-reveal-title text-lg font-bold leading-snug transition-colors md:text-xl"
                           style={{ color: '#F8FAFC' }}
                         >
@@ -279,7 +280,7 @@ export function BlogSection({ posts }: Props) {
                               post.title
                             )}
                           </span>
-                        </h4>
+                        </h3>
                       </div>
                     </ElasticBorderCard>
 

@@ -3,6 +3,7 @@ import {
   BLOG_POSTS,
   BREADCRUMB_LABELS,
   DEFAULT_OG_IMAGE,
+  FAQ_DATA,
   PRACTICE_LOCATION,
   PROFESSIONAL,
   PROFILE_IMAGE_URL,
@@ -47,9 +48,21 @@ const person = {
   name: PROFESSIONAL.name,
   jobTitle: PROFESSIONAL.jobTitle,
   description: PROFESSIONAL.description,
+  email: `mailto:${PROFESSIONAL.email}`,
   image: abs(PROFILE_IMAGE_URL),
   url: abs('/sobre-mi'),
   alumniOf: PROFESSIONAL.alumniOf.map((name) => ({ '@type': 'CollegeOrUniversity', name })),
+  hasCredential: PROFESSIONAL.credentials.map((cred) => ({
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'degree',
+    name: cred.name,
+    recognizedBy: { '@type': 'Organization', name: cred.recognizedBy },
+  })),
+  worksFor: PROFESSIONAL.affiliations.map((org) => ({
+    '@type': 'MedicalClinic',
+    name: org.name,
+    url: org.url,
+  })),
   knowsAbout: PROFESSIONAL.knowsAbout,
   ...(PROFESSIONAL.sameAs.length ? { sameAs: PROFESSIONAL.sameAs } : {}),
 }
@@ -60,8 +73,10 @@ const business = {
   name: SITE_NAME,
   description: SEO_PAGES.home.description,
   url: abs('/'),
+  email: `mailto:${PROFESSIONAL.email}`,
   image: abs(DEFAULT_OG_IMAGE),
   areaServed: { '@type': 'Country', name: 'Chile' },
+  availableLanguage: 'es',
   address: {
     '@type': 'PostalAddress',
     addressLocality: PRACTICE_LOCATION.addressLocality,
@@ -74,8 +89,26 @@ const business = {
     opens: PRACTICE_LOCATION.opens,
     closes: PRACTICE_LOCATION.closes,
   },
+  ...(PROFESSIONAL.sameAs.length ? { sameAs: PROFESSIONAL.sameAs } : {}),
   founder: { '@id': PERSON_ID },
   employee: { '@id': PERSON_ID },
+}
+
+const homeFaqPage = {
+  '@type': 'FAQPage',
+  '@id': abs('/#preguntas'),
+  url: abs('/#preguntas'),
+  inLanguage: 'es-CL',
+  mainEntity: FAQ_DATA.flatMap((category) =>
+    category.items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: plainText(item.answer),
+      },
+    })),
+  ),
 }
 
 const website = {
@@ -229,7 +262,7 @@ export function getSeo(pathname: string): SeoData {
       canonical: abs('/'),
       ogImage: abs(DEFAULT_OG_IMAGE),
       ogType: 'website',
-      jsonLd: [graph(website, business, person)],
+      jsonLd: [graph(website, business, person, homeFaqPage)],
     }
   }
 
@@ -243,6 +276,81 @@ export function getSeo(pathname: string): SeoData {
         graph(
           { '@type': 'ProfilePage', url: abs('/sobre-mi'), name: SEO_PAGES.about.title, mainEntity: { '@id': PERSON_ID } },
           person,
+        ),
+      ],
+    }
+  }
+
+  if (path === '/privacidad') {
+    return {
+      ...SEO_PAGES.privacy,
+      canonical: abs('/privacidad'),
+      ogImage: abs(DEFAULT_OG_IMAGE),
+      ogType: 'website',
+      jsonLd: [
+        graph(
+          {
+            '@type': 'WebPage',
+            url: abs('/privacidad'),
+            name: SEO_PAGES.privacy.title,
+            description: SEO_PAGES.privacy.description,
+            inLanguage: 'es-CL',
+            isPartOf: { '@id': WEBSITE_ID },
+          },
+          breadcrumbs([
+            { name: BREADCRUMB_LABELS.home, path: '/' },
+            { name: 'Privacidad', path: '/privacidad' },
+          ]),
+        ),
+      ],
+    }
+  }
+
+  if (path === '/practica-digital') {
+    return {
+      ...SEO_PAGES.digitalPractice,
+      canonical: abs('/practica-digital'),
+      ogImage: abs(DEFAULT_OG_IMAGE),
+      ogType: 'website',
+      jsonLd: [
+        graph(
+          {
+            '@type': 'WebPage',
+            url: abs('/practica-digital'),
+            name: SEO_PAGES.digitalPractice.title,
+            description: SEO_PAGES.digitalPractice.description,
+            inLanguage: 'es-CL',
+            isPartOf: { '@id': WEBSITE_ID },
+          },
+          breadcrumbs([
+            { name: BREADCRUMB_LABELS.home, path: '/' },
+            { name: 'Práctica Digital', path: '/practica-digital' },
+          ]),
+        ),
+      ],
+    }
+  }
+
+  if (path === '/terminos') {
+    return {
+      ...SEO_PAGES.terms,
+      canonical: abs('/terminos'),
+      ogImage: abs(DEFAULT_OG_IMAGE),
+      ogType: 'website',
+      jsonLd: [
+        graph(
+          {
+            '@type': 'WebPage',
+            url: abs('/terminos'),
+            name: SEO_PAGES.terms.title,
+            description: SEO_PAGES.terms.description,
+            inLanguage: 'es-CL',
+            isPartOf: { '@id': WEBSITE_ID },
+          },
+          breadcrumbs([
+            { name: BREADCRUMB_LABELS.home, path: '/' },
+            { name: 'Términos', path: '/terminos' },
+          ]),
         ),
       ],
     }
@@ -304,6 +412,8 @@ export function getSeo(pathname: string): SeoData {
             datePublished: post.datePublished,
             dateModified: modified,
             articleSection: post.category,
+            keywords: post.category,
+            url,
             inLanguage: 'es-CL',
             author: person,
             publisher: { '@id': BUSINESS_ID },
@@ -395,13 +505,21 @@ export function getSeo(pathname: string): SeoData {
   }
 }
 
+/** Rutas /especialidades/:slug que redirigen a su anexo canónico (no duplicar en sitemap ni prerender) */
+const REDIRECTED_SPECIALIZATION_SLUGS = new Set(['disfuncion-erectil-psicogena'])
+
 /** Rutas que se generan como HTML estático en build (además de 404.html) */
 export const PRERENDER_ROUTES = [
   '/',
   '/sobre-mi',
   '/articulos',
+  '/privacidad',
+  '/practica-digital',
+  '/terminos',
   ...BLOG_POSTS.map((p) => `/articulos/${p.slug}`),
-  ...SPECIALIZATIONS.map((s) => `/especialidades/${s.slug}`),
+  ...SPECIALIZATIONS.filter((s) => !REDIRECTED_SPECIALIZATION_SLUGS.has(s.slug)).map(
+    (s) => `/especialidades/${s.slug}`,
+  ),
   ...Object.keys(CLINICAL_SPECIALTY_SEO),
 ]
 
@@ -413,5 +531,5 @@ export function getLastModified(path: string): string | undefined {
     return post ? (post.dateModified ?? post.datePublished) : undefined
   }
   const dates = BLOG_POSTS.map((p) => p.dateModified ?? p.datePublished).sort()
-  return path === '/articulos' ? dates[dates.length - 1] : undefined
+  return path === '/' || path === '/articulos' ? dates[dates.length - 1] : undefined
 }

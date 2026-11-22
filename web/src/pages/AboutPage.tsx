@@ -122,7 +122,7 @@ export function AboutPage() {
       <hr className="theme-divider mx-auto max-w-5xl" />
 
       {/* ── Content Sections ── */}
-      <main className="editorial-prose mx-auto max-w-3xl px-6 py-16 md:py-24 space-y-16 md:space-y-24">
+      <main id="contenido-principal" className="editorial-prose mx-auto max-w-3xl px-6 py-16 md:py-24 space-y-16 md:space-y-24">
         {/* Mi enfoque */}
         <section>
           <div className="flex items-center gap-3 mb-6">

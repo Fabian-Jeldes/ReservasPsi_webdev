@@ -99,7 +99,10 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12 lg:gap-16">
               {/* Left column: title */}
               <div className="shrink-0 text-center md:text-left">
-                <div className="mb-4 flex justify-center gap-1.5 md:justify-start">
+                <div
+                  className="mb-4 flex justify-center gap-1.5 md:justify-start"
+                  aria-hidden="true"
+                >
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div
                       key={i}
@@ -130,7 +133,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
               </div>
 
               {/* Right column: review text */}
-              <div className="relative min-w-0 flex-1">
+              <div className="relative min-w-0 flex-1" aria-live="polite">
                 <div
                   className="min-h-[140px]"
                   style={{
@@ -184,7 +187,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                 className="reviews-nav-btn flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
                 aria-label="Reseña anterior"
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={16} aria-hidden="true" />
               </button>
 
               {/* Windowed dot indicators */}
@@ -248,7 +251,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                 className="reviews-nav-btn flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
                 aria-label="Siguiente reseña"
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={16} aria-hidden="true" />
               </button>
             </div>
           </div>

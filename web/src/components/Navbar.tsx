@@ -173,6 +173,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
   return (
     <nav
+      aria-label="Navegación principal"
       className="fixed top-0 left-0 right-0 z-50 w-full border-b transition-colors duration-300"
       style={{
         backgroundColor: 'var(--bg-nav)',
@@ -181,6 +182,16 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         WebkitBackdropFilter: 'var(--nav-backdrop)',
       }}
     >
+      <a
+        href="#contenido-principal"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-xs focus:font-bold"
+        style={{
+          backgroundColor: 'var(--accent)',
+          color: '#ffffff',
+        }}
+      >
+        Saltar al contenido principal
+      </a>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-4 sm:px-6 md:h-20 lg:px-8">
         <button
           type="button"
@@ -263,7 +274,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={isOpen}
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
         </button>
       </div>
 

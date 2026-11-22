@@ -37,9 +37,13 @@ export function SEO({
       element.setAttribute('content', content)
     }
 
+    const normalizedPathname =
+      typeof window !== 'undefined'
+        ? window.location.pathname.replace(/\/+$/, '') || '/'
+        : '/'
     const currentUrl =
       canonicalUrl ||
-      (typeof window !== 'undefined' ? `${SITE_URL}${window.location.pathname}` : SITE_URL)
+      `${SITE_URL}${normalizedPathname === '/' ? '/' : normalizedPathname}`
 
     const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`
 
@@ -78,7 +82,7 @@ export function SEO({
         script.type = 'application/ld+json'
         script.setAttribute('data-seo', '')
         script.setAttribute('data-seo-custom', 'true')
-        script.textContent = JSON.stringify(item)
+        script.textContent = JSON.stringify(item).replace(/</g, '\\u003c')
         document.head.appendChild(script)
       }
     }

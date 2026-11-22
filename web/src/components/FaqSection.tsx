@@ -41,6 +41,7 @@ export function FaqSection() {
         <div className="mb-14 text-center">
           <div
             className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl border"
+            aria-hidden="true"
             style={{
               backgroundColor: 'var(--accent-soft)',
               color: 'var(--accent)',
@@ -48,7 +49,7 @@ export function FaqSection() {
               boxShadow: '0 0 20px rgba(255, 77, 77, 0.15)',
             }}
           >
-            <MessageCircleQuestion size={22} />
+            <MessageCircleQuestion size={22} aria-hidden="true" />
           </div>
           <h2
             className="mb-4 text-3xl md:text-5xl"
@@ -85,6 +86,7 @@ export function FaqSection() {
               <button
                 key={tab.id}
                 type="button"
+                aria-pressed={isActive}
                 onClick={() => handleCategoryChange(tab.id)}
                 className="cursor-pointer border px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
                 style={{
@@ -186,7 +188,7 @@ export function FaqSection() {
                       transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                     }}
                   >
-                    <ChevronDown size={20} />
+                    <ChevronDown size={20} aria-hidden="true" />
                   </span>
                 </button>
 
@@ -255,6 +257,7 @@ export function FaqSection() {
                                   {hl.featured && (
                                     <Sparkles
                                       size={15}
+                                      aria-hidden="true"
                                       style={{ color: 'var(--accent)' }}
                                     />
                                   )}

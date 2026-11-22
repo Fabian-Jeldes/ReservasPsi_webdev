@@ -7,6 +7,7 @@ import { AboutPage } from './pages/AboutPage'
 import { ArticlePage } from './pages/ArticlePage'
 import { ArticlesPage } from './pages/ArticlesPage'
 import { SpecializationPage } from './pages/SpecializationPage'
+import { LegalPage } from './pages/LegalPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { BackgroundDecorations } from './components/BackgroundDecorations'
 import { IntroCurtainReveal } from './components/IntroCurtainReveal'
@@ -106,6 +107,10 @@ export default function App() {
           <Route path="/sobre-mi" element={<AboutPage />} />
           <Route path="/articulos" element={<ArticlesPage />} />
           <Route path="/articulos/:slug" element={<ArticlePage />} />
+          <Route path="/privacidad" element={<LegalPage pageId="privacidad" />} />
+          <Route path="/practica-digital" element={<LegalPage pageId="practica-digital" />} />
+          <Route path="/clinica-digital" element={<Navigate to="/practica-digital" replace />} />
+          <Route path="/terminos" element={<LegalPage pageId="terminos" />} />
           <Route path="/reserva-de-horas" element={<Navigate to="/#reserva" replace />} />
 
           {/* Anexos SEO: Problemas Sexuales Masculinos */}
