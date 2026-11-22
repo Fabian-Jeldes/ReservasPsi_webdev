@@ -95,7 +95,7 @@ export default function App() {
   }, [location])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-clip">
       <IntroCurtainReveal />
       <CustomCursor />
       <SeoSync />

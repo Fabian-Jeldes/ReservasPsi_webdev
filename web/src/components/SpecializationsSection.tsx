@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { ArrowUpRight, ChevronDown } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import type { ComponentType, KeyboardEvent } from 'react'
 import type { Specialization } from '../types/site'
 
 const masculinoIconModules = import.meta.glob<string>('../assets/*masculin*', {
@@ -40,7 +41,7 @@ type CategoryAccordion = {
   title: string
   highlightWord: string
   subtitle: string
-  icon?: any
+  icon?: ComponentType<{ size?: number; 'aria-hidden'?: boolean }>
   customIconSrc?: string
   areas: SubAreaItem[]
 }
@@ -101,7 +102,8 @@ const ACCORDION_CATEGORIES: CategoryAccordion[] = [
     id: 'femeninos',
     title: 'Problemas Sexuales Femeninos',
     highlightWord: 'Femeninos',
-    subtitle: 'Espacio seguro para reconectar con el deseo, la calma y el placer corporal',
+    subtitle:
+      'Espacio seguro para reconectar con el deseo, la calma y el placer corporal',
     customIconSrc: iconFemeninoUrl,
     areas: [
       {
@@ -145,11 +147,13 @@ const ACCORDION_CATEGORIES: CategoryAccordion[] = [
     id: 'animo-ansiedad',
     title: 'Problemáticas del Ánimo y Ansiedad',
     highlightWord: 'Ansiedad',
-    subtitle: 'Psicoterapia clínica enfocada en regulación emocional y bienestar integral',
+    subtitle:
+      'Psicoterapia clínica enfocada en regulación emocional y bienestar integral',
     customIconSrc: iconAnimoUrl,
     areas: [
       {
-        title: 'Trastornos de Ansiedad (Generalizada, social, crisis de pánico)',
+        title:
+          'Trastornos de Ansiedad (Generalizada, social, crisis de pánico)',
         subtitle: 'Desactivando la alarma permanente',
         description:
           'Estrategias clínicas basadas en evidencia para regular el sistema nervioso y recuperar la calma mental.',
@@ -180,245 +184,397 @@ const ACCORDION_CATEGORIES: CategoryAccordion[] = [
   },
 ]
 
-export function SpecializationsSection({ items: _items }: Props) {
-  const [openCategoryId, setOpenCategoryId] = useState<string | null>(null)
+function SubAreaCard({ area }: { area: SubAreaItem }) {
+  return (
+    <Link
+      to={area.path}
+      className="bullet-reveal-card area-subcard group flex flex-col justify-between rounded-xl p-5 text-left"
+    >
+      <div>
+        <h4
+          className="bullet-reveal-title mb-1.5 text-base font-bold leading-snug sm:text-[1.05rem]"
+          style={{
+            color: 'var(--editorial-ivory)',
+            fontFamily: 'var(--font-heading)',
+          }}
+        >
+          <span className="bullet-reveal-dot" aria-hidden />
+          <span className="bullet-reveal-text">{area.title}</span>
+        </h4>
+        <p
+          className="mb-2.5 text-xs font-medium uppercase tracking-wider"
+          style={{ color: 'var(--area-subcard-subtitle)' }}
+        >
+          {area.subtitle}
+        </p>
+        <p
+          className="text-sm leading-relaxed"
+          style={{ color: 'var(--editorial-ivory-muted)' }}
+        >
+          {area.description}
+        </p>
+      </div>
 
-  const toggleCategory = (id: string) => {
-    setOpenCategoryId((prev) => (prev === id ? null : id))
+      <div className="mt-4 flex justify-end">
+        <span className="area-subcard-cta inline-flex items-center gap-1 text-xs font-medium">
+          <span>Ver más</span>
+          <span aria-hidden="true" className="area-subcard-cta-arrow">
+            →
+          </span>
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+export function SpecializationsSection({ items: _items }: Props) {
+  void _items
+  const [activeTab, setActiveTab] = useState<string>(ACCORDION_CATEGORIES[0].id)
+  const [openMobileCategory, setOpenMobileCategory] = useState<string | null>(
+    null,
+  )
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  const activeCategory =
+    ACCORDION_CATEGORIES.find((cat) => cat.id === activeTab) ??
+    ACCORDION_CATEGORIES[0]
+
+  const ActiveIconComponent = activeCategory.icon
+  const activeTitleParts = activeCategory.title.split(
+    activeCategory.highlightWord,
+  )
+
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const total = ACCORDION_CATEGORIES.length
+    let nextIndex: number | null = null
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+      nextIndex = (index + 1) % total
+    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + total) % total
+    } else if (event.key === 'Home') {
+      nextIndex = 0
+    } else if (event.key === 'End') {
+      nextIndex = total - 1
+    }
+
+    if (nextIndex !== null) {
+      event.preventDefault()
+      const nextCategory = ACCORDION_CATEGORIES[nextIndex]
+      setActiveTab(nextCategory.id)
+      tabRefs.current[nextIndex]?.focus()
+    }
+  }
+
+  const toggleMobileCategory = (categoryId: string) => {
+    setOpenMobileCategory((prev) => (prev === categoryId ? null : categoryId))
   }
 
   return (
     <section
       id="especialidades"
-      className="py-32"
+      aria-labelledby="areas-atencion-heading"
+      className="py-24 lg:py-32"
       style={{ backgroundColor: 'var(--bg-section-alt)' }}
     >
-      <div className="mx-auto max-w-4xl px-6">
-        {/* Encabezado de la sección */}
-        <div className="text-center mb-16">
-          <h2
-            className="mb-4 text-4xl"
-            style={{
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-heading)',
-              fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
-              letterSpacing: 'var(--heading-spacing)',
-            }}
-          >
-            <span className="andi-hero-accent">
-              Áreas de{' '}
-              <span className="font-editorial-accent">atención:</span>
-            </span>
-          </h2>
-          <p
-            className="mx-auto max-w-2xl text-lg leading-relaxed"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Un enfoque{' '}
-            <span
-              className="font-editorial-accent"
-              style={{ color: 'var(--accent)' }}
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,38fr)_minmax(0,62fr)] lg:items-start lg:gap-12">
+          {/* Columna Izquierda — Encabezado + Tabs (Desktop) / Acordeón (Mobile) */}
+          <div className="text-left lg:sticky lg:top-32 lg:self-start">
+            <h2
+              id="areas-atencion-heading"
+              className="mb-4 text-4xl leading-tight sm:text-5xl"
+              style={{
+                color: 'var(--editorial-ivory)',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 'var(--heading-weight)',
+                textTransform: 'var(--heading-transform)' as
+                  | 'none'
+                  | 'uppercase',
+                letterSpacing: 'var(--heading-spacing)',
+              }}
             >
-              humano
-            </span>{' '}
-            <strong>y especializado</strong> para que vuelvas a{' '}
-            <span
-              className="font-editorial-accent"
-              style={{ color: 'var(--accent)' }}
+              <span className="andi-hero-accent">
+                Áreas de{' '}
+                <span className="font-editorial-accent">atención:</span>
+              </span>
+            </h2>
+
+            <p
+              className="max-w-lg text-base leading-relaxed sm:text-lg"
+              style={{ color: 'var(--editorial-ivory-muted)' }}
             >
-              conectar contigo mismo
-            </span>{' '}
-            de una forma auténtica y libre de juicios.
-          </p>
-        </div>
-
-        {/* Menú Acordeón de 3 grandes categorías */}
-        <div className="space-y-5">
-          {ACCORDION_CATEGORIES.map((category) => {
-            const isOpen = openCategoryId === category.id
-            const IconComponent = category.icon
-            const titleParts = category.title.split(category.highlightWord)
-
-            return (
-              <div
-                key={category.id}
-                className="border transition-all duration-300 overflow-hidden"
-                style={{
-                  borderRadius: 'var(--radius-card)',
-                  borderColor: isOpen
-                    ? 'var(--accent)'
-                    : 'color-mix(in srgb, var(--accent) 70%, transparent)',
-                  borderWidth: '1px',
-                  backgroundColor: 'var(--bg-card)',
-                  boxShadow: isOpen
-                    ? 'var(--shadow-accent)'
-                    : '0 12px 35px -12px rgba(255, 77, 77, 0.18), var(--shadow-card)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent)'
-                  e.currentTarget.style.boxShadow =
-                    '0 16px 45px -10px rgba(255, 77, 77, 0.32), 0 0 20px rgba(255, 77, 77, 0.18)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = isOpen
-                    ? 'var(--accent)'
-                    : 'color-mix(in srgb, var(--accent) 70%, transparent)'
-                  e.currentTarget.style.boxShadow = isOpen
-                    ? 'var(--shadow-accent)'
-                    : '0 12px 35px -12px rgba(255, 77, 77, 0.18), var(--shadow-card)'
-                }}
+              Un enfoque{' '}
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--editorial-coral)' }}
               >
-                {/* Botón Cabecera del Acordeón */}
-                <button
-                  type="button"
-                  onClick={() => toggleCategory(category.id)}
-                  aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between p-6 md:p-8 text-left transition-colors gap-4"
-                >
-                  <div className="flex items-center gap-5">
+                humano
+              </span>{' '}
+              <strong>y especializado</strong> para que vuelvas a{' '}
+              <span
+                className="font-editorial-accent"
+                style={{ color: 'var(--editorial-coral)' }}
+              >
+                conectar contigo mismo
+              </span>{' '}
+              de una forma auténtica y libre de juicios.
+            </p>
+
+            {/* Vista Desktop (lg >= 1024px): Selector Vertical de 3 Pestañas */}
+            <div
+              role="tablist"
+              aria-label="Categorías de áreas de atención"
+              className="mt-8 hidden flex-col gap-3 lg:flex"
+            >
+              {ACCORDION_CATEGORIES.map((category, index) => {
+                const isActive = category.id === activeCategory.id
+                const TabIconComponent = category.icon
+
+                return (
+                  <button
+                    key={category.id}
+                    ref={(el) => {
+                      tabRefs.current[index] = el
+                    }}
+                    id={`tab-${category.id}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`tabpanel-${category.id}`}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={() => setActiveTab(category.id)}
+                    onKeyDown={(e) => handleTabKeyDown(e, index)}
+                    className={`area-tab-btn flex w-full cursor-pointer items-center gap-4 rounded-xl px-5 py-4 text-left ${
+                      isActive ? 'is-active' : ''
+                    }`}
+                  >
                     {category.customIconSrc ? (
                       <img
                         src={category.customIconSrc}
                         alt={`Icono ${category.title}`}
-                        className="h-14 w-14 shrink-0 object-contain transition-transform duration-300"
-                        style={{
-                          transform: isOpen ? 'scale(1.05)' : 'scale(1)',
-                        }}
+                        className="h-11 w-11 shrink-0 rounded-lg object-contain transition-opacity duration-200"
+                        style={{ opacity: isActive ? 1 : 0.78 }}
                       />
                     ) : (
-                      <div
-                        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-inner transition-transform duration-300"
+                      <span
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
                         style={{
                           backgroundColor: 'var(--accent-soft)',
-                          color: 'var(--accent)',
-                          transform: isOpen ? 'scale(1.05)' : 'scale(1)',
+                          color: 'var(--editorial-coral)',
                         }}
                       >
-                        {IconComponent && <IconComponent size={26} aria-hidden />}
-                      </div>
-                    )}
-                    <div>
-                      <h3
-                        className="text-xl md:text-2xl font-bold"
-                        style={{
-                          color: 'var(--text-primary)',
-                          fontFamily: 'var(--font-heading)',
-                        }}
-                      >
-                        {titleParts.length > 1 ? (
-                          <>
-                            {titleParts[0]}
-                            <span
-                              className="font-editorial-accent"
-                              style={{ color: 'var(--accent)' }}
-                            >
-                              {category.highlightWord}
-                            </span>
-                            {titleParts[1]}
-                          </>
-                        ) : (
-                          category.title
+                        {TabIconComponent && (
+                          <TabIconComponent size={20} aria-hidden />
                         )}
-                      </h3>
-                      <p
-                        className="mt-1 text-sm md:text-base"
-                        style={{ color: 'var(--text-secondary)' }}
+                      </span>
+                    )}
+
+                    <span
+                      className="min-w-0 flex-1 text-base font-semibold leading-snug"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {category.title}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Vista Mobile (< 1024px): Acordeón limpio sin duplicación de encabezados */}
+            <div className="mt-8 flex flex-col gap-4 lg:hidden">
+              {ACCORDION_CATEGORIES.map((category) => {
+                const isOpen = openMobileCategory === category.id
+                const MobileIconComponent = category.icon
+                const titleParts = category.title.split(category.highlightWord)
+
+                return (
+                  <div
+                    key={category.id}
+                    className={`area-card area-card-mobile-frame overflow-hidden rounded-[1.35rem] transition-all duration-300 ${
+                      isOpen ? 'is-open' : ''
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileCategory(category.id)}
+                      aria-expanded={isOpen}
+                      aria-controls={`mobile-panel-${category.id}`}
+                      className="flex w-full cursor-pointer items-center justify-between gap-3 border-0 bg-transparent p-4 text-left sm:p-5"
+                    >
+                      <div className="flex min-w-0 items-center gap-3.5">
+                        {category.customIconSrc ? (
+                          <img
+                            src={category.customIconSrc}
+                            alt={`Icono ${category.title}`}
+                            className="h-11 w-11 shrink-0 rounded-xl object-contain"
+                          />
+                        ) : (
+                          <span
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                            style={{
+                              backgroundColor: 'var(--accent-soft)',
+                              color: 'var(--editorial-coral)',
+                            }}
+                          >
+                            {MobileIconComponent && (
+                              <MobileIconComponent size={22} aria-hidden />
+                            )}
+                          </span>
+                        )}
+
+                        <h3
+                          className="font-editorial text-lg leading-snug sm:text-xl"
+                          style={{ color: 'var(--editorial-ivory)' }}
+                        >
+                          {titleParts.length > 1 ? (
+                            <>
+                              {titleParts[0]}
+                              <span
+                                className="font-editorial-accent"
+                                style={{ color: 'var(--editorial-coral)' }}
+                              >
+                                {category.highlightWord}
+                              </span>
+                              {titleParts[1]}
+                            </>
+                          ) : (
+                            category.title
+                          )}
+                        </h3>
+                      </div>
+
+                      <span
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-transform duration-300"
+                        style={{
+                          borderColor: isOpen
+                            ? 'var(--area-subcard-border-hover)'
+                            : 'var(--area-card-border)',
+                          backgroundColor: isOpen
+                            ? 'var(--area-tab-active-bg)'
+                            : 'transparent',
+                          color: isOpen
+                            ? 'var(--editorial-coral)'
+                            : 'var(--editorial-ivory-muted)',
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        }}
+                        aria-hidden="true"
                       >
-                        {category.subtitle}
-                      </p>
+                        <ChevronDown size={18} />
+                      </span>
+                    </button>
+
+                    {/* Contenido desplegable inmediato debajo del botón */}
+                    <div
+                      id={`mobile-panel-${category.id}`}
+                      className="grid"
+                      style={{
+                        gridTemplateRows: isOpen ? '1fr' : '0fr',
+                        opacity: isOpen ? 1 : 0,
+                        transition:
+                          'grid-template-rows 340ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease',
+                      }}
+                    >
+                      <div className="overflow-hidden">
+                        <div
+                          className="border-t px-4 pb-5 pt-4 sm:px-5 sm:pb-6"
+                          style={{ borderColor: 'var(--area-card-divider)' }}
+                        >
+                          <p
+                            className="text-sm leading-relaxed sm:text-base"
+                            style={{ color: 'var(--editorial-ivory-muted)' }}
+                          >
+                            {category.subtitle}
+                          </p>
+
+                          <div className="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                            {category.areas.map((area) => (
+                              <SubAreaCard key={area.path} area={area} />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                )
+              })}
+            </div>
+          </div>
 
-                  <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300"
+          {/* Columna Derecha — Vista Desktop (lg >= 1024px): Panel de Contenido Activo */}
+          <div className="hidden min-w-0 lg:block lg:min-h-[680px]">
+            <article
+              key={activeCategory.id}
+              id={`tabpanel-${activeCategory.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${activeCategory.id}`}
+              className="area-card area-card-hero-frame area-tabpanel-enter rounded-[1.75rem] p-6 sm:p-8"
+            >
+              {/* Cabecera de la categoría activa (ícono + título + subtítulo originales) */}
+              <div className="flex items-start gap-4 sm:items-center sm:gap-5">
+                {activeCategory.customIconSrc ? (
+                  <img
+                    src={activeCategory.customIconSrc}
+                    alt={`Icono ${activeCategory.title}`}
+                    className="h-14 w-14 shrink-0 rounded-xl object-contain"
+                  />
+                ) : (
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-inner"
                     style={{
-                      backgroundColor: isOpen ? 'var(--accent-soft)' : 'transparent',
-                      color: isOpen ? 'var(--accent)' : 'var(--text-muted)',
-                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      backgroundColor: 'var(--accent-soft)',
+                      color: 'var(--editorial-coral)',
                     }}
                   >
-                    <ChevronDown size={22} />
-                  </span>
-                </button>
-
-                {/* Contenido Desplegable */}
-                <div
-                  className="grid transition-all duration-300 ease-in-out"
-                  style={{
-                    gridTemplateRows: isOpen ? '1fr' : '0fr',
-                    opacity: isOpen ? 1 : 0,
-                  }}
-                >
-                  <div className="overflow-hidden">
-                    <div
-                      className="stagger-grid-areas border-t p-6 md:px-8 md:pt-6 md:pb-10 grid gap-4 md:grid-cols-2"
-                      style={{ borderColor: 'var(--border-primary)' }}
-                    >
-                      {category.areas.map((area) => (
-                        <Link
-                          key={area.path}
-                          to={area.path}
-                          className="bullet-reveal-card group rounded-xl border p-5 text-left transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
-                          style={{
-                            borderColor: 'color-mix(in srgb, var(--accent) 45%, transparent)',
-                            backgroundColor: 'var(--bg-primary)',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = 'var(--accent)'
-                            e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor =
-                              'color-mix(in srgb, var(--accent) 45%, transparent)'
-                            e.currentTarget.style.boxShadow = 'none'
-                          }}
-                        >
-                          <div>
-                            <div className="flex items-start justify-between gap-3">
-                              <h4
-                                className="bullet-reveal-title text-base md:text-lg font-bold mb-1 leading-snug"
-                                style={{
-                                  color: 'var(--text-primary)',
-                                  fontFamily: 'var(--font-heading)',
-                                }}
-                              >
-                                <span className="bullet-reveal-dot" aria-hidden />
-                                <span className="bullet-reveal-text">
-                                  {area.title}
-                                </span>
-                              </h4>
-                              <span
-                                className="bullet-reveal-arrow-btn mt-0.5"
-                                aria-hidden
-                              >
-                                <ArrowUpRight
-                                  size={15}
-                                  className="bullet-reveal-arrow-icon"
-                                />
-                              </span>
-                            </div>
-                            <p
-                              className="mb-2 text-xs font-bold uppercase tracking-wider"
-                              style={{ color: 'var(--accent-text)' }}
-                            >
-                              {area.subtitle}
-                            </p>
-                            <p
-                              className="text-sm leading-relaxed"
-                              style={{ color: 'var(--text-secondary)' }}
-                            >
-                              {area.description}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                    {ActiveIconComponent && (
+                      <ActiveIconComponent size={26} aria-hidden />
+                    )}
                   </div>
+                )}
+
+                <div className="min-w-0">
+                  <h3
+                    className="font-editorial text-xl leading-snug sm:text-2xl"
+                    style={{ color: 'var(--editorial-ivory)' }}
+                  >
+                    {activeTitleParts.length > 1 ? (
+                      <>
+                        {activeTitleParts[0]}
+                        <span
+                          className="font-editorial-accent"
+                          style={{ color: 'var(--editorial-coral)' }}
+                        >
+                          {activeCategory.highlightWord}
+                        </span>
+                        {activeTitleParts[1]}
+                      </>
+                    ) : (
+                      activeCategory.title
+                    )}
+                  </h3>
+                  <p
+                    className="mt-1.5 text-sm sm:text-base"
+                    style={{ color: 'var(--editorial-ivory-muted)' }}
+                  >
+                    {activeCategory.subtitle}
+                  </p>
                 </div>
               </div>
-            )
-          })}
+
+              {/* Grilla de tarjetas de problemáticas (2 columnas en desktop) */}
+              <div
+                className="mt-6 grid grid-cols-1 gap-4 border-t pt-6 sm:grid-cols-2"
+                style={{ borderColor: 'var(--area-card-divider)' }}
+              >
+                {activeCategory.areas.map((area) => (
+                  <SubAreaCard key={area.path} area={area} />
+                ))}
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>

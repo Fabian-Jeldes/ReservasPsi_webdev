@@ -71,75 +71,58 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
   }, [activeIndex, reviews.length])
 
   return (
-    <section id="reviews" className="overflow-hidden px-6 py-20">
-      <div className="mx-auto max-w-4xl">
-        <div
-          className="relative overflow-hidden border transition-all duration-500"
-          style={{
-            borderRadius: 'var(--radius-card-lg)',
-            borderColor: 'var(--accent)',
-            borderWidth: '1.5px',
-            backgroundColor: 'var(--bg-card-solid)',
-            boxShadow:
-              '0 20px 55px -12px rgba(255, 77, 77, 0.28), 0 8px 30px -6px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 77, 77, 0.14)',
-          }}
-        >
+    <section
+      id="reviews"
+      className="relative z-10 w-full overflow-x-clip py-20 lg:py-28"
+      style={{
+        background: 'var(--reviews-band-bg)',
+        color: 'var(--reviews-ink)',
+      }}
+    >
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="reviews-editorial-card relative overflow-hidden rounded-[1.35rem] md:rounded-[1.75rem]">
           {/* Inner content — padded so nothing overflows */}
-          <div className="p-8 md:p-12">
+          <div className="p-8 md:p-12 lg:p-14">
             {/* Badge — inside card, top-right */}
-            <div className="mb-6 flex justify-end">
+            <div className="mb-8 flex justify-end">
               <a
                 href="https://www.doctoralia.cl/perfil/andrei-andrusco-fidalgo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full px-5 py-1.5 text-xs font-bold shadow-lg transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 cursor-pointer"
-                style={{
-                  backgroundColor: 'var(--accent)',
-                  color: 'var(--text-inverse)',
-                  boxShadow: 'var(--shadow-accent)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = 'var(--shadow-accent-lg)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'var(--shadow-accent)'
-                }}
+                className="reviews-doctoralia-btn inline-flex cursor-pointer items-center gap-1.5 rounded-full px-5 py-2 text-xs font-bold tracking-wide active:scale-95"
                 aria-label="Ver perfil verificado en Doctoralia de Andrei Andrusco Fidalgo"
               >
                 Doctoralia Verified
               </a>
             </div>
 
-            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12 lg:gap-16">
               {/* Left column: title */}
               <div className="shrink-0 text-center md:text-left">
-                <div className="mb-4 flex justify-center gap-1 md:justify-start">
+                <div className="mb-4 flex justify-center gap-1.5 md:justify-start">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div
                       key={i}
                       className="h-6 w-1.5 animate-pulse rounded-full"
                       style={{
-                        backgroundColor: 'var(--accent)',
+                        backgroundColor: 'var(--reviews-accent)',
                         animationDelay: `${i * 150}ms`,
                       }}
                     />
                   ))}
                 </div>
                 <h2
-                  className="text-3xl leading-tight"
+                  className="font-editorial text-3xl leading-tight sm:text-4xl"
                   style={{
-                    color: 'var(--text-primary)',
-                    fontFamily: 'var(--font-heading)',
-                    fontWeight: 'var(--heading-weight)',
-                    textTransform: 'var(--heading-transform)' as any,
-                    letterSpacing: 'var(--heading-spacing)',
+                    color: 'var(--reviews-ink)',
+                    letterSpacing: '-0.02em',
                   }}
                 >
                   Lo que dicen <br />
                   mis{' '}
                   <span
                     className="font-editorial-accent"
-                    style={{ color: 'var(--accent)' }}
+                    style={{ color: 'var(--reviews-accent)' }}
                   >
                     pacientes
                   </span>
@@ -152,34 +135,39 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                   className="min-h-[140px]"
                   style={{
                     transition: 'opacity 0.5s ease, transform 0.5s ease',
-                    opacity: isAnimating ? 0 : (fade ? 1 : 0),
+                    opacity: isAnimating ? 0 : fade ? 1 : 0,
                     transform: isAnimating
                       ? `translateX(${direction === 'right' ? '20px' : '-20px'})`
-                      : (fade ? 'translateX(0)' : `translateX(${direction === 'right' ? '20px' : '-20px'})`),
+                      : fade
+                        ? 'translateX(0)'
+                        : `translateX(${direction === 'right' ? '20px' : '-20px'})`,
                   }}
                 >
                   <div className="relative">
                     <p
                       className="font-editorial relative z-10 text-lg leading-relaxed md:text-xl"
-                      style={{ color: 'var(--text-secondary)', fontWeight: 500 }}
+                      style={{
+                        color: 'var(--reviews-ink-body)',
+                        fontWeight: 500,
+                      }}
                     >
                       <span
-                        className="mr-1 inline-block text-3xl font-bold not-italic leading-none align-top"
-                        style={{ color: 'var(--accent)' }}
+                        className="mr-1 inline-block align-top text-3xl font-bold not-italic leading-none"
+                        style={{ color: 'var(--reviews-accent)' }}
                       >
                         &ldquo;
                       </span>
                       {current.content}
                       <span
-                        className="ml-1 inline-block text-3xl font-bold not-italic leading-none align-bottom"
-                        style={{ color: 'var(--accent)' }}
+                        className="ml-1 inline-block align-bottom text-3xl font-bold not-italic leading-none"
+                        style={{ color: 'var(--reviews-accent)' }}
                       >
                         &rdquo;
                       </span>
                     </p>
                     <p
-                      className="mt-4 font-bold tracking-wide"
-                      style={{ color: 'var(--accent-text)' }}
+                      className="mt-5 text-sm font-semibold tracking-wide sm:text-base"
+                      style={{ color: 'var(--reviews-ink-muted)' }}
                     >
                       — {current.author}
                     </p>
@@ -189,36 +177,23 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
             </div>
 
             {/* Navigation: arrows + windowed dots — all inside the card */}
-            <div className="mt-8 flex items-center justify-center gap-4">
+            <div className="mt-10 flex items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={goPrev}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110"
-                style={{
-                  borderColor: 'var(--border-card)',
-                  backgroundColor: 'var(--bg-card)',
-                  color: 'var(--text-secondary)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent)'
-                  e.currentTarget.style.color = 'var(--accent)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-card)'
-                  e.currentTarget.style.color = 'var(--text-secondary)'
-                }}
+                className="reviews-nav-btn flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
                 aria-label="Reseña anterior"
               >
                 <ChevronLeft size={16} />
               </button>
 
               {/* Windowed dot indicators */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 {/* Leading ellipsis if there are hidden dots before */}
                 {visibleDots[0] > 0 && (
                   <span
                     className="mx-1 text-xs tracking-widest"
-                    style={{ color: 'var(--text-muted)' }}
+                    style={{ color: 'var(--reviews-ink-muted)' }}
                   >
                     ···
                   </span>
@@ -237,12 +212,19 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                   return (
                     <button
                       key={i}
-                      onClick={() => goTo(i, i > activeIndex ? 'right' : 'left')}
-                      className={`${dotSize} rounded-full transition-all duration-300`}
+                      type="button"
+                      onClick={() =>
+                        goTo(i, i > activeIndex ? 'right' : 'left')
+                      }
+                      className={`${dotSize} cursor-pointer rounded-full border-0 p-0 transition-all duration-300`}
                       style={{
-                        backgroundColor: isActive ? 'var(--accent)' : 'var(--border-card)',
-                        boxShadow: isActive ? '0 0 8px var(--accent)' : 'none',
-                        opacity: isActive ? 1 : distFromActive <= 1 ? 0.7 : 0.4,
+                        backgroundColor: isActive
+                          ? 'var(--reviews-accent)'
+                          : 'var(--reviews-dot-inactive)',
+                        boxShadow: isActive
+                          ? '0 0 8px rgba(238, 75, 53, 0.45)'
+                          : 'none',
+                        opacity: isActive ? 1 : distFromActive <= 1 ? 0.85 : 0.55,
                       }}
                       aria-label={`Ir a reseña ${i + 1}`}
                     />
@@ -253,7 +235,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
                 {visibleDots[visibleDots.length - 1] < reviews.length - 1 && (
                   <span
                     className="mx-1 text-xs tracking-widest"
-                    style={{ color: 'var(--text-muted)' }}
+                    style={{ color: 'var(--reviews-ink-muted)' }}
                   >
                     ···
                   </span>
@@ -263,20 +245,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
               <button
                 type="button"
                 onClick={goNext}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110"
-                style={{
-                  borderColor: 'var(--border-card)',
-                  backgroundColor: 'var(--bg-card)',
-                  color: 'var(--text-secondary)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--accent)'
-                  e.currentTarget.style.color = 'var(--accent)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-card)'
-                  e.currentTarget.style.color = 'var(--text-secondary)'
-                }}
+                className="reviews-nav-btn flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
                 aria-label="Siguiente reseña"
               >
                 <ChevronRight size={16} />

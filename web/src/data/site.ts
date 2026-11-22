@@ -12,6 +12,36 @@ import type {
 export const PROFILE_IMAGE_URL = '/portada-andi.webp'
 export const ABOUT_IMAGE_URL = '/sobre-mi-andi.webp'
 
+export const TRUST_BAR_DATA = {
+  eyebrow: 'FORMACIÓN Y PRÁCTICA CLÍNICA',
+  institutions: [
+    {
+      name: 'Universidad Adolfo Ibáñez',
+      url: 'https://www.uai.cl/postgrados/diplomados/diplomados-area-psicologia-salud-y-bienestar',
+    },
+    {
+      name: 'UDD',
+      url: 'https://psicologia.udd.cl/carrera/psicologia/',
+    },
+    {
+      name: 'INCHISEX',
+      url: 'https://inchisex.cl/',
+    },
+    {
+      name: 'Clínica Mediterra',
+      url: 'https://www.clinicamediterra.cl/',
+    },
+    {
+      name: 'Clínica Uromed',
+      url: 'https://www.uromed.cl/psicologia-y-urologia',
+    },
+    {
+      name: 'ADIPA',
+      url: 'https://adipa.cl/',
+    },
+  ] as const,
+}
+
 /* ── SEO ─────────────────────────────────────────────────────────── */
 
 /** Dominio canónico (sin barra final). Se usa en canonical, sitemap, OG y JSON-LD. */
