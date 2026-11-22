@@ -124,8 +124,14 @@ export function ArticlesPage() {
                       style={{ objectPosition: '50% 40%' }}
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-slate-800">
-                      <span className="text-4xl font-black opacity-10 text-white italic">
+                    <div
+                      className="flex h-full w-full items-center justify-center"
+                      style={{ backgroundColor: 'var(--bg-section-alt)' }}
+                    >
+                      <span
+                        className="text-4xl font-black opacity-20 italic"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
                         Andi
                       </span>
                     </div>

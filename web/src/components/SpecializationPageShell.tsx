@@ -178,11 +178,13 @@ export function SpecializationPageShell({
         {/* Llamada a la Acción (CTA con H2) */}
         <section
           aria-labelledby="cta-heading"
-          className="mt-16 text-center p-10 md:p-12 border shadow-2xl relative overflow-hidden"
+          className="mt-16 text-center p-10 md:p-12 border relative overflow-hidden"
           style={{
             backgroundColor: 'var(--bg-card-solid)',
-            borderColor: 'var(--border-card)',
+            borderColor: 'var(--accent)',
+            borderWidth: '1.5px',
             borderRadius: 'var(--radius-card-lg)',
+            boxShadow: 'var(--cta-card-shadow)',
           }}
         >
           <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-accent to-transparent pointer-events-none" />
@@ -191,6 +193,7 @@ export function SpecializationPageShell({
               id="cta-heading"
               className="text-3xl md:text-4xl mb-4"
               style={{
+                color: 'var(--text-primary)',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
               }}
@@ -199,18 +202,19 @@ export function SpecializationPageShell({
             </h2>
             <p
               className="text-lg mb-8 max-w-xl mx-auto leading-relaxed"
-              style={{ color: 'var(--text-muted)' }}
+              style={{ color: 'var(--text-secondary)' }}
             >
               {ctaDescription}
             </p>
             <button
               type="button"
               onClick={() => setIsBookingOpen(true)}
-              className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 inline-flex items-center gap-3 shadow-lg"
+              className="cursor-pointer px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 inline-flex items-center gap-3 shadow-lg"
               style={{
                 backgroundColor: 'var(--accent)',
-                color: 'var(--text-inverse)',
+                color: '#ffffff',
                 borderRadius: 'var(--radius-btn)',
+                boxShadow: 'var(--shadow-accent)',
               }}
             >
               Agendar consulta <ArrowRight size={18} />

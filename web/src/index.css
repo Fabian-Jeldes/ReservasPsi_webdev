@@ -414,16 +414,11 @@ article blockquote,
   margin-top: 2rem;
   margin-bottom: 2rem;
   padding: 1.75rem 2rem;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 77, 77, 0.11) 0%,
-    rgba(15, 23, 42, 0.65) 100%
-  );
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: var(--blockquote-bg);
+  border: 1px solid var(--blockquote-border);
   border-left: 5px solid var(--accent);
   border-radius: 0 1.25rem 1.25rem 0;
-  box-shadow: 0 12px 32px -10px rgba(255, 77, 77, 0.18),
-    0 4px 16px -4px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--blockquote-shadow);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-style: normal;
@@ -453,14 +448,9 @@ article blockquote,
 article > section:first-of-type > div:has(> h3) {
   padding: 1.75rem 2rem;
   border-radius: 1.25rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  background: linear-gradient(
-    145deg,
-    rgba(15, 23, 42, 0.72) 0%,
-    rgba(255, 77, 77, 0.06) 100%
-  );
-  box-shadow: 0 14px 36px -12px rgba(255, 77, 77, 0.16),
-    0 4px 20px -4px rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--callout-border);
+  background: var(--callout-bg);
+  box-shadow: var(--callout-shadow);
 }
 
 .clinical-callout-link {
@@ -478,15 +468,18 @@ article > section:first-of-type > div:has(> h3) {
 .clinical-callout-link:focus-visible {
   transform: translateY(-4px);
   border-color: var(--accent);
-  background: linear-gradient(
-    145deg,
-    rgba(20, 30, 55, 0.88) 0%,
-    rgba(255, 77, 77, 0.15) 100%
-  );
-  box-shadow:
-    0 20px 44px -10px rgba(255, 77, 77, 0.32),
-    0 0 20px rgba(255, 77, 77, 0.18),
-    0 6px 22px -4px rgba(0, 0, 0, 0.38);
+  background: var(--callout-bg-hover);
+  box-shadow: var(--callout-shadow-hover);
+}
+
+/* En tema claro, suavizar marcas de agua coral y asegurar alto contraste en negritas editoriales */
+html[data-theme="light"] .wm-float-wrapper {
+  opacity: 0.08 !important;
+}
+
+html[data-theme="light"] .editorial-prose strong,
+html[data-theme="light"] article strong {
+  color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -817,7 +810,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 .reviews-nav-btn {
   border: 1px solid var(--reviews-nav-border);
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: var(--reviews-nav-bg);
   color: var(--reviews-ink);
   transition:
     background-color 200ms ease,
@@ -1115,5 +1108,143 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
   .blog-marquee-group-duplicate {
     display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  NAVBAR — INDICADOR DE SECCIÓN ACTIVA (DESKTOP Y MÓVIL)
+ * ═══════════════════════════════════════════════════════════════════ */
+.nav-link-desktop {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  color: var(--text-primary);
+  transition: color 240ms ease, text-shadow 260ms ease;
+}
+
+.nav-link-desktop .brand-initial {
+  color: var(--accent);
+  transition: color 240ms ease, text-shadow 260ms ease;
+}
+
+.nav-link-desktop::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: var(--nav-active-color, #FF6B5B);
+  box-shadow: 0 0 10px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease;
+  pointer-events: none;
+}
+
+.nav-link-desktop:hover,
+.nav-link-desktop:focus-visible {
+  color: var(--nav-active-color, var(--accent-text));
+}
+
+.nav-link-desktop.is-active {
+  color: var(--nav-active-color, #FF6B5B);
+  text-shadow: 0 0 18px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+}
+
+.nav-link-desktop.is-active .brand-initial {
+  color: var(--nav-active-color, #FF6B5B);
+  text-shadow: 0 0 14px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+}
+
+.nav-link-desktop.is-active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Indicador activo en el menú móvil (drawer) sin provocar layout shift */
+.nav-link-mobile {
+  color: var(--text-primary);
+}
+
+.nav-link-mobile .brand-initial {
+  color: var(--accent);
+  transition: color 240ms ease, text-shadow 260ms ease;
+}
+
+.nav-link-mobile-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 0.25rem;
+}
+
+.nav-link-mobile-dot {
+  position: absolute;
+  left: -1.15rem;
+  top: calc(50% - 2px);
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--nav-active-color, #FF6B5B);
+  box-shadow: 0 0 10px var(--nav-active-glow, rgba(255, 107, 91, 0.55));
+  opacity: 0;
+  transform: translateY(-50%) scale(0);
+  transition:
+    opacity 240ms ease,
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.nav-link-mobile-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: var(--nav-active-color, #FF6B5B);
+  box-shadow: 0 0 12px var(--nav-active-glow, rgba(255, 107, 91, 0.5));
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease;
+  pointer-events: none;
+}
+
+.nav-link-mobile.is-active {
+  color: var(--nav-active-color, #FF6B5B);
+  text-shadow: 0 0 22px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+}
+
+.nav-link-mobile.is-active .brand-initial {
+  color: var(--nav-active-color, #FF6B5B);
+  text-shadow: 0 0 16px var(--nav-active-glow, rgba(255, 107, 91, 0.5));
+}
+
+.nav-link-mobile.is-active .nav-link-mobile-dot {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.nav-link-mobile.is-active .nav-link-mobile-label::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-desktop::after,
+  .nav-link-mobile-dot,
+  .nav-link-mobile-label::after {
+    transition: opacity 150ms ease;
   }
 }

@@ -1,12 +1,68 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.jpeg'
+import { useActiveNavSection, type NavSectionId } from '../hooks/useActiveNavSection'
 
 type Props = {
   onLogoClick: () => void
   onAgendarClick: () => void
 }
+
+type NavItem = {
+  id: NavSectionId
+  to: string
+  label: ReactNode
+}
+
+const NAV_ITEMS: readonly NavItem[] = [
+  {
+    id: 'sobre-mi',
+    to: '/sobre-mi',
+    label: (
+      <>
+        <span className="brand-initial">S</span>obre{' '}
+        <span className="brand-initial">M</span>í
+      </>
+    ),
+  },
+  {
+    id: 'especialidades',
+    to: '/#especialidades',
+    label: (
+      <>
+        <span className="brand-initial">E</span>specialidades
+      </>
+    ),
+  },
+  {
+    id: 'reviews',
+    to: '/#reviews',
+    label: (
+      <>
+        <span className="brand-initial">R</span>eseñas
+      </>
+    ),
+  },
+  {
+    id: 'blog',
+    to: '/articulos',
+    label: (
+      <>
+        <span className="brand-initial">P</span>sicoeducación
+      </>
+    ),
+  },
+  {
+    id: 'preguntas',
+    to: '/#preguntas',
+    label: (
+      <>
+        <span className="brand-initial">P</span>reguntas
+      </>
+    ),
+  },
+]
 
 function easeOutLiquid(t: number): number {
   return 1 - Math.pow(1 - t, 3.4)
@@ -16,6 +72,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const { activeSection, selectSection } = useActiveNavSection()
 
   const drawerFillRef = useRef<SVGPathElement>(null)
   const drawerStrokeRef = useRef<SVGPathElement>(null)
@@ -113,68 +171,6 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
     }
   }, [])
 
-  const mobileLinks = [
-    {
-      label: (
-        <>
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            S
-          </span>
-          obre{' '}
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            M
-          </span>
-          í
-        </>
-      ),
-      to: '/sobre-mi',
-    },
-    {
-      label: (
-        <>
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            E
-          </span>
-          specialidades
-        </>
-      ),
-      to: '/#especialidades',
-    },
-    {
-      label: (
-        <>
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            R
-          </span>
-          eseñas
-        </>
-      ),
-      to: '/#reviews',
-    },
-    {
-      label: (
-        <>
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            P
-          </span>
-          sicoeducación
-        </>
-      ),
-      to: '/articulos',
-    },
-    {
-      label: (
-        <>
-          <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-            P
-          </span>
-          reguntas
-        </>
-      ),
-      to: '/#preguntas',
-    },
-  ]
-
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 w-full border-b transition-colors duration-300"
@@ -190,6 +186,9 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           type="button"
           className="relative z-50 flex min-w-0 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-left md:gap-3"
           onClick={() => {
+            if (location.pathname === '/') {
+              selectSection('sobre-mi')
+            }
             if (isOpen) {
               closeMenuWithAction(onLogoClick)
             } else {
@@ -217,70 +216,26 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
         {/* Desktop Menu */}
         <div className="hidden items-center gap-5 text-sm font-semibold md:flex lg:gap-7 xl:gap-8">
-          <Link
-            to="/sobre-mi"
-            className="whitespace-nowrap transition-colors"
-            style={{ color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-          >
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              S
-            </span>
-            obre{' '}
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              M
-            </span>
-            í
-          </Link>
-          <Link
-            to="/#especialidades"
-            className="whitespace-nowrap transition-colors"
-            style={{ color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-          >
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              E
-            </span>
-            specialidades
-          </Link>
-          <Link
-            to="/#reviews"
-            className="whitespace-nowrap transition-colors"
-            style={{ color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-          >
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              R
-            </span>
-            eseñas
-          </Link>
-          <Link
-            to="/articulos"
-            className="whitespace-nowrap transition-colors"
-            style={{ color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-          >
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              P
-            </span>
-            sicoeducación
-          </Link>
-          <Link
-            to="/#preguntas"
-            className="whitespace-nowrap transition-colors"
-            style={{ color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-          >
-            <span className="brand-initial" style={{ color: 'var(--accent)' }}>
-              P
-            </span>
-            reguntas
-          </Link>
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.id
+            return (
+              <Link
+                key={item.id}
+                to={item.to}
+                aria-current={isActive ? 'location' : undefined}
+                onClick={() => {
+                  if (item.to.startsWith('/#') && location.pathname === '/') {
+                    selectSection(item.id)
+                  }
+                }}
+                className={`nav-link-desktop whitespace-nowrap ${
+                  isActive ? 'is-active' : ''
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
           <button
             type="button"
             onClick={onAgendarClick}
@@ -320,7 +275,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             pointerEvents: isOpen ? 'auto' : 'none',
           }}
         >
-          {/* Capa de desenfoque de fondo sincronizada con mayor opacidad para evitar transparencias */}
+          {/* Capa de fondo sólida/opaca sincronizada para evitar que el contenido debajo compita con el menú */}
           <div
             ref={backdropRef}
             className="pointer-events-none absolute inset-0 backdrop-blur-md"
@@ -328,7 +283,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               opacity: 0,
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
-              backgroundColor: 'rgba(18, 40, 62, 0.94)',
+              backgroundColor: 'var(--nav-drawer-backdrop)',
             }}
           />
 
@@ -343,7 +298,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               ref={drawerFillRef}
               d="M 100,0 L 100,0 Q 100,42 100,100 L 100,100 Z"
               fill="var(--bg-primary)"
-              fillOpacity="0.97"
+              fillOpacity="1"
             />
             <path
               ref={drawerGlowRef}
@@ -384,29 +339,40 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             className="relative z-10 flex flex-1 flex-col justify-center gap-6 border-t pt-6 text-center"
             style={{ borderColor: 'var(--border-primary)' }}
           >
-            {mobileLinks.map((item, idx) => (
-              <button
-                key={item.to}
-                type="button"
-                onClick={() =>
-                  closeMenuWithAction(() => {
-                    navigate(item.to)
-                  })
-                }
-                className="cursor-pointer border-0 bg-transparent py-2.5 text-3xl font-bold tracking-tight"
-                style={{
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-heading)',
-                  opacity: isOpen ? 1 : 0,
-                  transform: isOpen ? 'translateX(0px)' : 'translateX(24px)',
-                  transition:
-                    'opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1), color 250ms ease',
-                  transitionDelay: isOpen ? `${90 + idx * 60}ms` : '0ms',
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
+            {NAV_ITEMS.map((item, idx) => {
+              const isActive = activeSection === item.id
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-current={isActive ? 'location' : undefined}
+                  onClick={() => {
+                    if (item.to.startsWith('/#') && location.pathname === '/') {
+                      selectSection(item.id)
+                    }
+                    closeMenuWithAction(() => {
+                      navigate(item.to)
+                    })
+                  }}
+                  className={`nav-link-mobile cursor-pointer border-0 bg-transparent py-2.5 text-3xl font-bold tracking-tight ${
+                    isActive ? 'is-active' : ''
+                  }`}
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen ? 'translateX(0px)' : 'translateX(24px)',
+                    transition:
+                      'opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1), color 250ms ease, text-shadow 250ms ease',
+                    transitionDelay: isOpen ? `${90 + idx * 60}ms` : '0ms',
+                  }}
+                >
+                  <span className="nav-link-mobile-label">
+                    <span className="nav-link-mobile-dot" aria-hidden="true" />
+                    {item.label}
+                  </span>
+                </button>
+              )
+            })}
           </div>
 
           {/* Botón Agendar Cita destacado en la parte inferior */}
@@ -418,7 +384,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               transition:
                 'opacity 440ms cubic-bezier(0.22, 1, 0.36, 1), transform 440ms cubic-bezier(0.22, 1, 0.36, 1)',
               transitionDelay: isOpen
-                ? `${90 + mobileLinks.length * 60}ms`
+                ? `${90 + NAV_ITEMS.length * 60}ms`
                 : '0ms',
             }}
           >

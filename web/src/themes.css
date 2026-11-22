@@ -1,15 +1,13 @@
 /*
  * ═══════════════════════════════════════════════════════════
  *  SISTEMA DE TEMAS — Proyecto Andi
- *  4 variantes visuales controladas por data-theme en <html>
- *  Solo para desarrollo; en producción se usa el estándar.
+ *  2 variantes visuales controladas por data-theme en <html>:
+ *  - standard (tema oscuro original)
+ *  - light (tema claro editorial de alto contraste con coral #FF6B5B)
  * ═══════════════════════════════════════════════════════════
  */
 
-/* ── Tema 1: Standar (dark / rose / neon glow) ── default ──
- *  Cyberpunk-inspired. Very rounded pills, neon glow borders,
- *  gradient accents, dark deep blue base.
- * ─────────────────────────────────────────────────────────── */
+/* ── Tema 1: Oscuro original (default) ───────────────────── */
 :root,
 html[data-theme="standard"] {
   --bg-primary: #0a0f1d;
@@ -24,6 +22,7 @@ html[data-theme="standard"] {
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
   --text-inverse: #0f172a;
+  --brand-text-color: #ffffff;
 
   --accent: #FF4D4D; /* Rojo Coral */
   --accent-hover: #E63E3E;
@@ -40,6 +39,7 @@ html[data-theme="standard"] {
   --shadow-accent-lg: 0 12px 35px -4px rgba(255, 77, 77, 0.65), 0 0 28px rgba(255, 77, 77, 0.45);
   --shadow-photo-frame: 0 24px 60px -12px rgba(255, 77, 77, 0.4), 0 10px 30px -6px rgba(255, 115, 77, 0.25), 0 0 25px rgba(255, 77, 77, 0.2);
   --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --cta-card-shadow: 0 20px 55px -12px rgba(255, 77, 77, 0.28), 0 8px 30px -6px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 77, 77, 0.14);
 
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -60,6 +60,7 @@ html[data-theme="standard"] {
   --divider-height: 1px;
   --card-border-width: 1px;
   --nav-backdrop: blur(12px);
+  --hero-dot-inactive: rgba(255, 255, 255, 0.25);
 
   --selection-bg: rgba(244, 63, 94, 0.3);
 
@@ -69,13 +70,27 @@ html[data-theme="standard"] {
   --success: #22c55e;
   --success-soft: rgba(34, 197, 94, 0.1);
   --success-glow: rgba(34, 197, 94, 0.4);
+  --error: #f87171;
 
-  /* Article-specific */
+  /* Article-specific & editorial surfaces */
   --article-max-width: 48rem;
   --article-heading-size: clamp(2rem, 5vw, 3.5rem);
   --article-body-size: 1.125rem;
   --article-quote-size: 1.5rem;
   --article-section-gap: 4rem;
+
+  --blockquote-bg: linear-gradient(135deg, rgba(255, 77, 77, 0.11) 0%, rgba(15, 23, 42, 0.65) 100%);
+  --blockquote-border: color-mix(in srgb, var(--accent) 35%, transparent);
+  --blockquote-shadow: 0 12px 32px -10px rgba(255, 77, 77, 0.18), 0 4px 16px -4px rgba(0, 0, 0, 0.3);
+
+  --callout-bg: linear-gradient(145deg, rgba(15, 23, 42, 0.72) 0%, rgba(255, 77, 77, 0.06) 100%);
+  --callout-bg-hover: linear-gradient(145deg, rgba(20, 30, 55, 0.88) 0%, rgba(255, 77, 77, 0.15) 100%);
+  --callout-border: color-mix(in srgb, var(--accent) 55%, transparent);
+  --callout-shadow: 0 14px 36px -12px rgba(255, 77, 77, 0.16), 0 4px 20px -4px rgba(0, 0, 0, 0.28);
+  --callout-shadow-hover: 0 20px 44px -10px rgba(255, 77, 77, 0.32), 0 0 20px rgba(255, 77, 77, 0.18), 0 6px 22px -4px rgba(0, 0, 0, 0.38);
+
+  --faq-tab-active-text: #ffffff;
+  --faq-featured-bg: linear-gradient(145deg, rgba(255, 77, 77, 0.14) 0%, rgba(15, 23, 42, 0.85) 100%);
 
   /* Áreas de Atención — Vertical Tabs en 2 Columnas */
   --editorial-ivory: #F7F3EB;
@@ -117,6 +132,7 @@ html[data-theme="standard"] {
   --reviews-accent-hover: #D63D28;
   --reviews-dot-inactive: rgba(247, 243, 235, 0.26);
   --reviews-nav-border: rgba(247, 243, 235, 0.22);
+  --reviews-nav-bg: rgba(255, 255, 255, 0.03);
   --reviews-nav-bg-hover: rgba(238, 75, 53, 0.14);
 
   /* Barra de Respaldo Clínico (Trust Bar) */
@@ -134,347 +150,160 @@ html[data-theme="standard"] {
   --hero-frame-shadow-hover: 0 24px 58px -12px rgba(255, 77, 77, 0.34), 0 12px 32px -8px rgba(0, 0, 0, 0.55), 0 0 28px rgba(255, 77, 77, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   --hero-frame-mobile-border: rgba(255, 107, 91, 0.58);
   --hero-frame-mobile-shadow: 0 12px 32px -12px rgba(255, 77, 77, 0.20), 0 6px 18px -6px rgba(0, 0, 0, 0.44), 0 0 14px rgba(255, 77, 77, 0.10);
+
+  /* Navbar y Drawer móvil */
+  --nav-drawer-backdrop: rgba(18, 40, 62, 0.94);
+  --nav-active-color: #FF6B5B;
+  --nav-active-glow: rgba(255, 107, 91, 0.45);
 }
 
 
-/* ── Tema 2: Bold Darkness (artículo 1 — black / red / angular) ──
- *  High-contrast editorial. Sharp corners, heavy uppercase headings,
- *  minimal decoration, compact typography. Magazine/clinical journal feel.
- * ──────────────────────────────────────────────────────────────────── */
-html[data-theme="bold-dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-card: rgba(20, 20, 20, 0.7);
-  --bg-card-solid: #141414;
-  --bg-nav: rgba(10, 10, 10, 0.95);
-  --bg-input: rgba(5, 5, 5, 0.6);
-  --bg-section-alt: rgba(18, 18, 18, 0.5);
+/* ── Tema 2: Light Theme (Crema / Azul Marino Profundo / Coral #FF6B5B) ── */
+html[data-theme="light"] {
+  --bg-primary: #FBF8F3;
+  --bg-secondary: #F3ECE1;
+  --bg-card: #FFFFFF;
+  --bg-card-solid: #FFFFFF;
+  --bg-nav: rgba(251, 248, 243, 0.94);
+  --bg-input: #FFFFFF;
+  --bg-section-alt: #F4EFE6;
 
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --text-muted: #666666;
-  --text-inverse: #0a0a0a;
+  --text-primary: #13233A;
+  --text-secondary: #334155;
+  --text-muted: #526075;
+  --text-inverse: #FFFFFF;
+  --brand-text-color: #13233A;
 
-  --accent: #c41e2a;
-  --accent-hover: #a01820;
-  --accent-glow: rgba(196, 30, 42, 0.35);
-  --accent-soft: rgba(196, 30, 42, 0.08);
-  --accent-text: #e85d6a;
-  --accent-text-strong: #c41e2a;
+  --accent: #FF6B5B; /* Rojo Coral definido */
+  --accent-hover: #E54D3D;
+  --accent-glow: rgba(255, 107, 91, 0.22);
+  --accent-soft: rgba(255, 107, 91, 0.11);
+  --accent-text: #D64133; /* Coral de alto contraste AA sobre fondos claros */
+  --accent-text-strong: #C53629;
 
-  --border-primary: rgba(60, 60, 60, 0.5);
-  --border-card: #2a2a2a;
-  --border-accent: rgba(196, 30, 42, 0.4);
+  --border-primary: rgba(19, 35, 58, 0.13);
+  --border-card: rgba(19, 35, 58, 0.14);
+  --border-accent: rgba(255, 107, 91, 0.52);
 
-  --shadow-accent: 0 0 20px rgba(196, 30, 42, 0.3);
-  --shadow-accent-lg: 0 0 35px rgba(196, 30, 42, 0.45);
-  --shadow-card: 0 2px 0 rgba(196, 30, 42, 0.15); /* Hard offset shadow */
+  --shadow-accent: 0 8px 22px -6px rgba(255, 107, 91, 0.40), 0 2px 8px -2px rgba(255, 107, 91, 0.22);
+  --shadow-accent-lg: 0 12px 30px -6px rgba(255, 107, 91, 0.50), 0 4px 12px -2px rgba(255, 107, 91, 0.28);
+  --shadow-photo-frame: 0 18px 42px -12px rgba(255, 107, 91, 0.24), 0 8px 24px -8px rgba(19, 35, 58, 0.12);
+  --shadow-card: 0 8px 26px -8px rgba(19, 35, 58, 0.08), 0 2px 8px -2px rgba(19, 35, 58, 0.04);
+  --cta-card-shadow: 0 18px 44px -12px rgba(255, 107, 91, 0.22), 0 8px 22px -8px rgba(19, 35, 58, 0.10);
 
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  --radius-card: 0.75rem;
-  --radius-card-lg: 1rem;
-  --radius-btn: 0.5rem;
-  --radius-input: 0.5rem;
-
-  --heading-weight: 900;
-  --heading-transform: uppercase;
-  --heading-spacing: 0.04em;
-  --body-size: 0.95rem;
-  --body-line-height: 1.65;
-
-  --divider-style: linear-gradient(to right, var(--accent), transparent);
-  --divider-height: 2px;
-  --card-border-width: 1px;
-  --nav-backdrop: blur(4px);
-
-  --selection-bg: rgba(196, 30, 42, 0.3);
-
-  --bg-footer: #080808;
-  --border-footer: rgba(60, 60, 60, 0.3);
-
-  --success: #22c55e;
-  --success-soft: rgba(34, 197, 94, 0.1);
-  --success-glow: rgba(34, 197, 94, 0.4);
-
-  --article-max-width: 44rem;
-  --article-heading-size: clamp(1.8rem, 4.5vw, 3rem);
-  --article-body-size: 1rem;
-  --article-quote-size: 1.35rem;
-  --article-section-gap: 3rem;
-
-  --editorial-ivory: #F7F3EB;
-  --editorial-ivory-muted: rgba(247, 243, 235, 0.78);
-  --editorial-coral: #EE4B35;
-  --area-card-bg: rgba(255, 255, 255, 0.03);
-  --area-card-bg-hover: rgba(255, 255, 255, 0.05);
-  --area-card-border: rgba(247, 243, 235, 0.12);
-  --area-card-border-hover: rgba(238, 75, 53, 0.5);
-  --area-card-divider: rgba(247, 243, 235, 0.10);
-  --area-subcard-bg: rgba(255, 255, 255, 0.025);
-  --area-subcard-bg-hover: rgba(255, 255, 255, 0.055);
-  --area-subcard-border: rgba(247, 243, 235, 0.12);
-  --area-subcard-border-hover: rgba(238, 75, 53, 0.45);
-  --area-subcard-shadow-hover: 0 10px 26px -14px rgba(0, 0, 0, 0.45), 0 0 14px -4px rgba(238, 75, 53, 0.22);
-  --area-subcard-subtitle: #FF7866;
-  --area-subcard-cta: rgba(247, 243, 235, 0.5);
-  --area-card-shadow-hover: 0 16px 36px -20px rgba(0, 0, 0, 0.6);
-  --area-tab-bg: rgba(255, 255, 255, 0.02);
-  --area-tab-bg-hover: rgba(255, 255, 255, 0.05);
-  --area-tab-border: rgba(247, 243, 235, 0.10);
-  --area-tab-text-inactive: rgba(247, 243, 235, 0.70);
-  --area-tab-active-bg: rgba(238, 75, 53, 0.10);
-  --area-tab-active-border: #EE4B35;
-  --area-tab-active-shadow: 0 8px 24px -10px rgba(238, 75, 53, 0.35);
-}
-
-
-/* ── Tema 3: Warm Delight (artículo 2 — cream / amber / organic) ──
- *  Warm organic editorial. Generous whitespace, serif headings,
- *  natural paper textures via subtle gradients, soft rounded corners,
- *  teal accents in footer. Artisanal/author blog feel.
- * ─────────────────────────────────────────────────────────────────── */
-html[data-theme="warm-editorial"] {
-  --bg-primary: #f5eede;
-  --bg-secondary: #efe5d0;
-  --bg-card: #faf7f0;
-  --bg-card-solid: #f8f3e8;
-  --bg-nav: rgba(245, 238, 222, 0.92);
-  --bg-input: #ffffff;
-  --bg-section-alt: #f0e8d8;
-
-  --text-primary: #2c1810;
-  --text-secondary: #5a4a3a;
-  --text-muted: #8a7a6a;
-  --text-inverse: #faf7f0;
-
-  --accent: #c47628;
-  --accent-hover: #a86020;
-  --accent-glow: rgba(196, 118, 40, 0.25);
-  --accent-soft: rgba(196, 118, 40, 0.08);
-  --accent-text: #b06820;
-  --accent-text-strong: #c47628;
-
-  --border-primary: rgba(180, 160, 130, 0.25);
-  --border-card: rgba(180, 160, 130, 0.2);
-  --border-accent: rgba(196, 118, 40, 0.4);
-
-  --shadow-accent: 0 0 20px rgba(196, 118, 40, 0.15);
-  --shadow-accent-lg: 0 0 35px rgba(196, 118, 40, 0.25);
-  --shadow-card: 0 8px 32px rgba(140, 120, 80, 0.08); /* Warm diffused shadow */
-
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-
-  --radius-card: 1.25rem;
-  --radius-card-lg: 1.5rem;
-  --radius-btn: 9999px;
-  --radius-input: 0.75rem;
-
-  --heading-weight: 700;
-  --heading-transform: none;
-  --heading-spacing: -0.03em;
-  --body-size: 1.05rem;
-  --body-line-height: 1.85;
-
-  --divider-style: linear-gradient(to right, transparent 10%, var(--border-primary) 50%, transparent 90%);
-  --divider-height: 1px;
-  --card-border-width: 0px; /* No borders — relies on shadows */
-  --nav-backdrop: blur(8px);
-
-  --selection-bg: rgba(196, 118, 40, 0.2);
-
-  --bg-footer: #1a5c5c;
-  --border-footer: rgba(255, 255, 255, 0.1);
-
-  --success: #16a34a;
-  --success-soft: rgba(22, 163, 74, 0.1);
-  --success-glow: rgba(22, 163, 74, 0.3);
-
-  --article-max-width: 42rem;
-  --article-heading-size: clamp(2rem, 5vw, 3.5rem);
-  --article-body-size: 1.15rem;
-  --article-quote-size: 1.6rem;
-  --article-section-gap: 5rem;
-
-  --editorial-ivory: var(--text-primary);
-  --editorial-ivory-muted: var(--text-secondary);
-  --editorial-coral: var(--accent);
-  --area-card-bg: rgba(250, 247, 240, 0.88);
-  --area-card-bg-hover: #faf7f0;
-  --area-card-border: rgba(180, 160, 130, 0.28);
-  --area-card-border-hover: rgba(196, 118, 40, 0.5);
-  --area-card-divider: rgba(180, 160, 130, 0.22);
-  --area-subcard-bg: rgba(245, 238, 222, 0.55);
-  --area-subcard-bg-hover: #ffffff;
-  --area-subcard-border: rgba(180, 160, 130, 0.22);
-  --area-subcard-border-hover: rgba(196, 118, 40, 0.45);
-  --area-subcard-shadow-hover: 0 10px 24px -12px rgba(140, 120, 80, 0.18);
-  --area-subcard-subtitle: var(--accent-text);
-  --area-subcard-cta: var(--text-muted);
-  --area-card-shadow-hover: 0 12px 32px rgba(140, 120, 80, 0.12);
-  --area-tab-bg: rgba(250, 247, 240, 0.55);
-  --area-tab-bg-hover: #faf7f0;
-  --area-tab-border: rgba(180, 160, 130, 0.25);
-  --area-tab-text-inactive: var(--text-secondary);
-  --area-tab-active-bg: rgba(196, 118, 40, 0.10);
-  --area-tab-active-border: var(--accent);
-  --area-tab-active-shadow: 0 8px 20px -10px rgba(196, 118, 40, 0.25);
-
-  --reviews-band-bg: transparent;
-  --reviews-card-bg: rgba(250, 247, 240, 0.85);
-  --reviews-card-bg-hover: #faf7f0;
-  --reviews-card-border: rgba(180, 160, 130, 0.28);
-  --reviews-card-border-hover: rgba(196, 118, 40, 0.45);
-  --reviews-card-shadow: var(--shadow-card);
-  --reviews-card-shadow-hover: 0 14px 34px -12px rgba(140, 120, 80, 0.16);
-  --reviews-ink: var(--text-primary);
-  --reviews-ink-body: var(--text-secondary);
-  --reviews-ink-muted: var(--text-muted);
-  --reviews-accent: var(--accent);
-  --reviews-accent-hover: var(--accent-hover);
-  --reviews-dot-inactive: rgba(140, 120, 80, 0.28);
-  --reviews-nav-border: rgba(180, 160, 130, 0.35);
-  --reviews-nav-bg-hover: var(--accent-soft);
-
-  --trust-bar-border: rgba(180, 160, 130, 0.25);
-  --trust-bar-label: var(--text-muted);
-  --trust-bar-item: var(--text-secondary);
-  --trust-bar-item-hover: var(--text-primary);
-  --trust-bar-underline: rgba(196, 118, 40, 0.7);
-  --trust-bar-dot: rgba(196, 118, 40, 0.6);
-
-  --hero-frame-border: rgba(196, 118, 40, 0.55);
-  --hero-frame-border-hover: var(--accent);
-  --hero-frame-shadow: 0 18px 42px -14px rgba(196, 118, 40, 0.18), 0 8px 24px -8px rgba(140, 120, 80, 0.14);
-  --hero-frame-shadow-hover: 0 22px 48px -12px rgba(196, 118, 40, 0.25), 0 10px 28px -8px rgba(140, 120, 80, 0.18);
-  --hero-frame-mobile-border: rgba(196, 118, 40, 0.45);
-  --hero-frame-mobile-shadow: 0 10px 26px -10px rgba(196, 118, 40, 0.16);
-}
-
-
-/* ── Tema 4: Lavender Light (artículo 3 — cream / purple / airy) ──
- *  Minimal wellness app. Maximum whitespace, no visible borders,
- *  barely-there shadows, pill buttons, soft lavender gradients.
- *  Zen/mindfulness feel.
- * ─────────────────────────────────────────────────────────────────── */
-html[data-theme="lavender"] {
-  --bg-primary: #faf5ef;
-  --bg-secondary: #f3e8f9;
-  --bg-card: #ffffff;
-  --bg-card-solid: #fefcfa;
-  --bg-nav: rgba(250, 245, 239, 0.85);
-  --bg-input: #ffffff;
-  --bg-section-alt: #f5f0ea;
-
-  --text-primary: #3d2952;
-  --text-secondary: #6b5a7a;
-  --text-muted: #9b8aaa;
-  --text-inverse: #faf5ef;
-
-  --accent: #9b7bb8;
-  --accent-hover: #7d5fa0;
-  --accent-glow: rgba(155, 123, 184, 0.2);
-  --accent-soft: rgba(155, 123, 184, 0.08);
-  --accent-text: #8a68a8;
-  --accent-text-strong: #9b7bb8;
-
-  --border-primary: rgba(200, 180, 220, 0.15);
-  --border-card: rgba(200, 180, 220, 0.12);
-  --border-accent: rgba(155, 123, 184, 0.25);
-
-  --shadow-accent: 0 0 30px rgba(155, 123, 184, 0.12);
-  --shadow-accent-lg: 0 0 50px rgba(155, 123, 184, 0.18);
-  --shadow-card: 0 4px 20px rgba(155, 123, 184, 0.06); /* Almost invisible */
-
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-
-  --radius-card: 2rem;
-  --radius-card-lg: 2.5rem;
+  --radius-card: 2.5rem;
+  --radius-card-lg: 3rem;
   --radius-btn: 9999px;
   --radius-input: 1rem;
 
-  --heading-weight: 400;
+  --heading-weight: 800;
   --heading-transform: none;
-  --heading-spacing: 0;
+  --heading-spacing: -0.02em;
   --body-size: 1rem;
-  --body-line-height: 1.8;
+  --body-line-height: 1.7;
 
-  --divider-style: linear-gradient(to right, transparent, var(--accent-soft), transparent);
+  --divider-style: linear-gradient(to right, transparent, rgba(255, 107, 91, 0.65), transparent);
   --divider-height: 1px;
-  --card-border-width: 0px; /* Borderless — zen/clean */
-  --nav-backdrop: blur(16px) saturate(1.2);
+  --card-border-width: 1px;
+  --nav-backdrop: blur(14px);
+  --hero-dot-inactive: rgba(19, 35, 58, 0.22);
 
-  --selection-bg: rgba(155, 123, 184, 0.2);
+  --selection-bg: rgba(255, 107, 91, 0.22);
 
-  --bg-footer: #f3e8f9;
-  --border-footer: rgba(200, 180, 220, 0.15);
+  --bg-footer: #F1EAE0;
+  --border-footer: rgba(19, 35, 58, 0.12);
 
   --success: #16a34a;
-  --success-soft: rgba(22, 163, 74, 0.1);
-  --success-glow: rgba(22, 163, 74, 0.3);
+  --success-soft: rgba(22, 163, 74, 0.10);
+  --success-glow: rgba(22, 163, 74, 0.28);
+  --error: #dc2626;
 
-  --article-max-width: 40rem;
-  --article-heading-size: clamp(1.8rem, 4.5vw, 3rem);
-  --article-body-size: 1.1rem;
+  /* Article-specific & editorial surfaces (todas claras y de alto contraste) */
+  --article-max-width: 48rem;
+  --article-heading-size: clamp(2rem, 5vw, 3.5rem);
+  --article-body-size: 1.125rem;
   --article-quote-size: 1.5rem;
-  --article-section-gap: 5rem;
+  --article-section-gap: 4rem;
 
-  --editorial-ivory: var(--text-primary);
-  --editorial-ivory-muted: var(--text-secondary);
-  --editorial-coral: var(--accent);
-  --area-card-bg: rgba(255, 255, 255, 0.88);
-  --area-card-bg-hover: #ffffff;
-  --area-card-border: rgba(200, 180, 220, 0.28);
-  --area-card-border-hover: rgba(155, 123, 184, 0.5);
-  --area-card-divider: rgba(200, 180, 220, 0.22);
-  --area-subcard-bg: rgba(250, 245, 239, 0.7);
-  --area-subcard-bg-hover: #ffffff;
-  --area-subcard-border: rgba(200, 180, 220, 0.22);
-  --area-subcard-border-hover: rgba(155, 123, 184, 0.45);
-  --area-subcard-shadow-hover: 0 10px 24px -12px rgba(155, 123, 184, 0.16);
-  --area-subcard-subtitle: var(--accent-text);
-  --area-subcard-cta: var(--text-muted);
-  --area-card-shadow-hover: 0 10px 28px rgba(155, 123, 184, 0.12);
-  --area-tab-bg: rgba(255, 255, 255, 0.6);
-  --area-tab-bg-hover: #ffffff;
-  --area-tab-border: rgba(200, 180, 220, 0.25);
-  --area-tab-text-inactive: var(--text-secondary);
-  --area-tab-active-bg: rgba(155, 123, 184, 0.12);
-  --area-tab-active-border: var(--accent);
-  --area-tab-active-shadow: 0 8px 20px -10px rgba(155, 123, 184, 0.22);
+  --blockquote-bg: linear-gradient(135deg, rgba(255, 107, 91, 0.09) 0%, #FFFFFF 100%);
+  --blockquote-border: rgba(255, 107, 91, 0.45);
+  --blockquote-shadow: 0 10px 28px -10px rgba(255, 107, 91, 0.16), 0 4px 14px -4px rgba(19, 35, 58, 0.06);
 
-  --reviews-band-bg: transparent;
-  --reviews-card-bg: rgba(255, 255, 255, 0.85);
-  --reviews-card-bg-hover: #ffffff;
-  --reviews-card-border: rgba(200, 180, 220, 0.28);
-  --reviews-card-border-hover: rgba(155, 123, 184, 0.45);
-  --reviews-card-shadow: var(--shadow-card);
-  --reviews-card-shadow-hover: 0 12px 30px -10px rgba(155, 123, 184, 0.16);
-  --reviews-ink: var(--text-primary);
-  --reviews-ink-body: var(--text-secondary);
-  --reviews-ink-muted: var(--text-muted);
-  --reviews-accent: var(--accent);
-  --reviews-accent-hover: var(--accent-hover);
-  --reviews-dot-inactive: rgba(155, 123, 184, 0.28);
-  --reviews-nav-border: rgba(155, 123, 184, 0.32);
-  --reviews-nav-bg-hover: var(--accent-soft);
+  --callout-bg: linear-gradient(145deg, #FFFFFF 0%, rgba(255, 107, 91, 0.05) 100%);
+  --callout-bg-hover: linear-gradient(145deg, #FFFFFF 0%, rgba(255, 107, 91, 0.11) 100%);
+  --callout-border: rgba(255, 107, 91, 0.48);
+  --callout-shadow: 0 10px 28px -10px rgba(19, 35, 58, 0.08), 0 2px 10px -4px rgba(255, 107, 91, 0.10);
+  --callout-shadow-hover: 0 16px 36px -10px rgba(255, 107, 91, 0.22), 0 6px 18px -6px rgba(19, 35, 58, 0.10);
 
-  --trust-bar-border: rgba(200, 180, 220, 0.25);
-  --trust-bar-label: var(--text-muted);
-  --trust-bar-item: var(--text-secondary);
-  --trust-bar-item-hover: var(--text-primary);
-  --trust-bar-underline: rgba(155, 123, 184, 0.7);
-  --trust-bar-dot: rgba(155, 123, 184, 0.6);
+  --faq-tab-active-text: #C53629;
+  --faq-featured-bg: linear-gradient(145deg, rgba(255, 107, 91, 0.10) 0%, #FFFFFF 100%);
 
-  --hero-frame-border: rgba(155, 123, 184, 0.55);
-  --hero-frame-border-hover: var(--accent);
-  --hero-frame-shadow: 0 18px 42px -14px rgba(155, 123, 184, 0.18), 0 8px 24px -8px rgba(61, 41, 82, 0.10);
-  --hero-frame-shadow-hover: 0 22px 48px -12px rgba(155, 123, 184, 0.25), 0 10px 28px -8px rgba(61, 41, 82, 0.14);
-  --hero-frame-mobile-border: rgba(155, 123, 184, 0.45);
-  --hero-frame-mobile-shadow: 0 10px 26px -10px rgba(155, 123, 184, 0.16);
+  /* Áreas de Atención — Superficies claras con acento coral #FF6B5B */
+  --editorial-ivory: #13233A;
+  --editorial-ivory-muted: #334155;
+  --editorial-coral: #FF6B5B;
+  --area-card-bg: #FFFFFF;
+  --area-card-bg-hover: #FFFFFF;
+  --area-card-border: rgba(255, 107, 91, 0.45);
+  --area-card-border-hover: #FF6B5B;
+  --area-card-divider: rgba(19, 35, 58, 0.10);
+  --area-subcard-bg: #FBF8F3;
+  --area-subcard-bg-hover: #FFFFFF;
+  --area-subcard-border: rgba(19, 35, 58, 0.13);
+  --area-subcard-border-hover: rgba(255, 107, 91, 0.65);
+  --area-subcard-shadow-hover: 0 10px 24px -10px rgba(255, 107, 91, 0.18), 0 4px 12px -4px rgba(19, 35, 58, 0.08);
+  --area-subcard-subtitle: #D64133;
+  --area-subcard-cta: #526075;
+  --area-card-shadow-hover: 0 16px 36px -16px rgba(19, 35, 58, 0.12);
+  --area-tab-bg: rgba(255, 255, 255, 0.78);
+  --area-tab-bg-hover: #FFFFFF;
+  --area-tab-border: rgba(19, 35, 58, 0.13);
+  --area-tab-text-inactive: #334155;
+  --area-tab-active-bg: rgba(255, 107, 91, 0.10);
+  --area-tab-active-border: #FF6B5B;
+  --area-tab-active-shadow: 0 8px 22px -10px rgba(255, 107, 91, 0.28);
+
+  /* Sección Reseñas — Tarjeta blanca limpia sobre banda crema suave */
+  --reviews-band-bg: linear-gradient(180deg, transparent 0%, rgba(243, 236, 225, 0.65) 50%, transparent 100%);
+  --reviews-card-bg: #FFFFFF;
+  --reviews-card-bg-hover: #FFFFFF;
+  --reviews-card-border: rgba(255, 107, 91, 0.48);
+  --reviews-card-border-hover: #FF6B5B;
+  --reviews-card-shadow: 0 14px 36px -14px rgba(19, 35, 58, 0.10), 0 4px 14px -6px rgba(255, 107, 91, 0.10);
+  --reviews-card-shadow-hover: 0 18px 42px -14px rgba(19, 35, 58, 0.12), 0 0 18px -6px rgba(255, 107, 91, 0.18);
+  --reviews-ink: #13233A;
+  --reviews-ink-body: #24344B;
+  --reviews-ink-muted: #526075;
+  --reviews-accent: #FF6B5B;
+  --reviews-accent-hover: #E54D3D;
+  --reviews-dot-inactive: rgba(19, 35, 58, 0.22);
+  --reviews-nav-border: rgba(19, 35, 58, 0.22);
+  --reviews-nav-bg: #FFFFFF;
+  --reviews-nav-bg-hover: rgba(255, 107, 91, 0.12);
+
+  /* Barra de Respaldo Clínico (Trust Bar) */
+  --trust-bar-border: rgba(19, 35, 58, 0.12);
+  --trust-bar-label: #526075;
+  --trust-bar-item: #334155;
+  --trust-bar-item-hover: #13233A;
+  --trust-bar-underline: #FF6B5B;
+  --trust-bar-dot: rgba(255, 107, 91, 0.70);
+
+  /* Enmarcado cohesivo tipo Hero (Especialidades y Reseñas) */
+  --hero-frame-border: rgba(255, 107, 91, 0.68);
+  --hero-frame-border-hover: #FF6B5B;
+  --hero-frame-shadow: 0 16px 40px -14px rgba(255, 107, 91, 0.20), 0 8px 22px -8px rgba(19, 35, 58, 0.10);
+  --hero-frame-shadow-hover: 0 20px 46px -12px rgba(255, 107, 91, 0.28), 0 10px 26px -8px rgba(19, 35, 58, 0.12);
+  --hero-frame-mobile-border: rgba(255, 107, 91, 0.55);
+  --hero-frame-mobile-shadow: 0 10px 26px -10px rgba(255, 107, 91, 0.18), 0 4px 14px -6px rgba(19, 35, 58, 0.08);
+
+  /* Navbar y Drawer móvil (opaco para evitar superposición visual) */
+  --nav-drawer-backdrop: #FBF8F3;
+  --nav-active-color: #D64133;
+  --nav-active-glow: rgba(255, 107, 91, 0.28);
 }
 
 
@@ -530,5 +359,5 @@ html[data-theme="lavender"] {
 }
 
 .brand-text {
-  color: #ffffff; /* Explicitly white for branding */
+  color: var(--brand-text-color, var(--text-primary));
 }

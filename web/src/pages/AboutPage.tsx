@@ -405,8 +405,7 @@ export function AboutPage() {
             borderColor: 'var(--accent)',
             borderWidth: '1.5px',
             backgroundColor: 'var(--bg-card)',
-            boxShadow:
-              '0 20px 55px -12px rgba(255, 77, 77, 0.28), 0 8px 30px -6px rgba(0, 0, 0, 0.45)',
+            boxShadow: 'var(--cta-card-shadow)',
           }}
         >
           <div

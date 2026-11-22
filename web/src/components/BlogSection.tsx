@@ -255,7 +255,7 @@ export function BlogSection({ posts }: Props) {
                         </div>
                         <h4
                           className="bullet-reveal-title text-lg font-bold leading-snug transition-colors md:text-xl"
-                          style={{ color: 'var(--text-primary)' }}
+                          style={{ color: '#F8FAFC' }}
                         >
                           <span className="bullet-reveal-dot" aria-hidden />
                           <span className="bullet-reveal-text">
@@ -266,7 +266,7 @@ export function BlogSection({ posts }: Props) {
                                   keyword.toLowerCase() ? (
                                     <span
                                       key={i}
-                                      style={{ color: 'var(--accent)' }}
+                                      style={{ color: '#FF6B5B' }}
                                     >
                                       {part}
                                     </span>
@@ -325,9 +325,9 @@ export function BlogSection({ posts }: Props) {
             onClick={() => setPinnedCardKey(null)}
             className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-medium transition-colors duration-200"
             style={{
-              borderColor: 'rgba(255, 107, 91, 0.45)',
-              backgroundColor: 'rgba(255, 107, 91, 0.1)',
-              color: '#F7F3EB',
+              borderColor: 'var(--border-accent)',
+              backgroundColor: 'var(--accent-soft)',
+              color: 'var(--text-primary)',
             }}
           >
             <Play size={12} style={{ color: '#FF6B5B' }} aria-hidden />

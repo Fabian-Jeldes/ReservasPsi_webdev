@@ -142,7 +142,7 @@ export function HeroSection({ onContactClick }: Props) {
                   width: isActive ? '20px' : '6px',
                   backgroundColor: isActive
                     ? 'var(--accent)'
-                    : 'rgba(255, 255, 255, 0.25)',
+                    : 'var(--hero-dot-inactive)',
                   boxShadow: isActive
                     ? '0 0 10px var(--accent), 0 0 4px rgba(255, 77, 77, 0.55)'
                     : 'none',
@@ -165,8 +165,8 @@ export function HeroSection({ onContactClick }: Props) {
             <span className="brand-initial">F</span>idalgo
           </span>
           , psicólogo y sexólogo clínico. Te invito a que juntos entendamos tu{' '}
-          <strong className="font-bold text-white">cuerpo</strong> y tu{' '}
-          <strong className="font-bold text-white">sexualidad</strong> desde una
+          <strong className="font-bold theme-text">cuerpo</strong> y tu{' '}
+          <strong className="font-bold theme-text">sexualidad</strong> desde una
           mirada distinta: más libre, sin juicios ni presiones. Busquemos una
           forma que te funcione y, sobre todo, que te haga{' '}
           <strong className="font-bold" style={{ color: 'var(--accent)' }}>

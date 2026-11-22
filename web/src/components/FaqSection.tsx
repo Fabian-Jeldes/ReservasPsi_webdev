@@ -95,7 +95,7 @@ export function FaqSection() {
                     ? 'var(--accent)'
                     : 'color-mix(in srgb, var(--accent) 42%, transparent)',
                   borderWidth: isActive ? '1.5px' : '1px',
-                  color: isActive ? '#ffffff' : 'var(--text-secondary)',
+                  color: isActive ? 'var(--faq-tab-active-text)' : 'var(--text-secondary)',
                   borderRadius: 'var(--radius-btn)',
                   boxShadow: isActive
                     ? '0 8px 25px -4px rgba(255, 77, 77, 0.35), 0 0 14px rgba(255, 77, 77, 0.2)'
@@ -233,8 +233,8 @@ export function FaqSection() {
                                   : 'color-mix(in srgb, var(--accent) 40%, transparent)',
                                 borderWidth: hl.featured ? '1.5px' : '1px',
                                 background: hl.featured
-                                  ? 'linear-gradient(145deg, rgba(255, 77, 77, 0.14) 0%, rgba(15, 23, 42, 0.85) 100%)'
-                                  : 'var(--bg-primary)',
+                                  ? 'var(--faq-featured-bg)'
+                                  : 'var(--bg-card-solid)',
                                 boxShadow: hl.featured
                                   ? '0 12px 30px -10px rgba(255, 77, 77, 0.28)'
                                   : 'none',

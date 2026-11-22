@@ -132,7 +132,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                       }}
                     />
                   </div>
-                  {errors.nombre && <p className="px-2 text-xs font-medium text-red-400">{errors.nombre}</p>}
+                  {errors.nombre && <p className="px-2 text-xs font-medium" style={{ color: 'var(--accent-text)' }}>{errors.nombre}</p>}
                 </div>
 
                 <div className="space-y-1">
@@ -151,7 +151,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                       }}
                     />
                   </div>
-                  {errors.correo && <p className="px-2 text-xs font-medium text-red-400">{errors.correo}</p>}
+                  {errors.correo && <p className="px-2 text-xs font-medium" style={{ color: 'var(--accent-text)' }}>{errors.correo}</p>}
                 </div>
 
                 <div className="space-y-1">
@@ -170,7 +170,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                       }}
                     />
                   </div>
-                  {errors.telefono && <p className="px-2 text-xs font-medium text-red-400">{errors.telefono}</p>}
+                  {errors.telefono && <p className="px-2 text-xs font-medium" style={{ color: 'var(--accent-text)' }}>{errors.telefono}</p>}
                 </div>
 
                 <button
@@ -205,7 +205,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                 ¡Datos recibidos!
               </h2>
               <p className="mb-8 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Gracias, <span className="font-bold text-white">{formData.nombre}</span>. 
+                Gracias, <span className="font-bold theme-text">{formData.nombre}</span>. 
                 Ahora puedes seleccionar el horario que más te acomode en el calendario de Andrei. 
                 Al finalizar, recibirás la confirmación por correo.
               </p>
@@ -225,10 +225,10 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                 >
                   <Calendar size={20} />
                   Ver Disponibilidad
-                  <ExternalLink size={16} className="opacity-50" />
+                  <ExternalLink size={16} className="opacity-70" />
                 </a>
                 
-                <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">
+                <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: 'var(--text-muted)' }}>
                   Se abrirá en una nueva pestaña
                 </p>
               </div>

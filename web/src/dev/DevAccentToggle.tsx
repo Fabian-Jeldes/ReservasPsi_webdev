@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react'
-import { Palette } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 
 const THEMES = [
-  { id: 'standard', label: 'Standar', dot: '#f43f5e' },
-  { id: 'bold-dark', label: 'Bold darkness', dot: '#c41e2a' },
-  { id: 'warm-editorial', label: 'Warm delight', dot: '#c47628' },
-  { id: 'lavender', label: 'Lavender light', dot: '#9b7bb8' },
+  { id: 'standard', label: 'Oscuro', dot: '#FF6B5B' },
+  { id: 'light', label: 'Claro', dot: '#FF6B5B' },
 ] as const
 
+type ThemeId = (typeof THEMES)[number]['id']
 
 const STORAGE_KEY = 'andi-dev-theme'
 
+function resolveStoredTheme(stored: string | null): number {
+  if (!stored) return 0
+  if (stored === 'light' || stored === 'warm-editorial' || stored === 'lavender') {
+    return 1
+  }
+  const idx = THEMES.findIndex((t) => t.id === stored)
+  return idx >= 0 ? idx : 0
+}
+
 /**
- * Solo en desarrollo: cicla entre 4 temas de diseño.
- * Persiste en localStorage para no perder la selección al recargar.
- * No debe mostrarse en producción.
+ * Selector entre el tema oscuro original (`standard`) y el tema claro (`light`).
+ * Persiste en localStorage para mantener la elección al recargar.
  */
 export function DevAccentToggle() {
   const [themeIndex, setThemeIndex] = useState(() => {
     if (typeof window === 'undefined') return 0
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      const idx = THEMES.findIndex((t) => t.id === stored)
-      return idx >= 0 ? idx : 0
-    }
-    return 0
+    return resolveStoredTheme(localStorage.getItem(STORAGE_KEY))
   })
 
   const [expanded, setExpanded] = useState(false)
@@ -32,11 +34,9 @@ export function DevAccentToggle() {
   const current = THEMES[themeIndex]
 
   useEffect(() => {
-
     document.documentElement.dataset.theme = current.id
     localStorage.setItem(STORAGE_KEY, current.id)
 
-    // Limpiar data-dev-accent legacy
     if (current.id !== 'standard') {
       delete document.documentElement.dataset.devAccent
     }
@@ -46,79 +46,77 @@ export function DevAccentToggle() {
     }
   }, [current.id])
 
-
-
   const selectTheme = (idx: number) => {
     setThemeIndex(idx)
     setExpanded(false)
   }
 
+  const renderIcon = (id: ThemeId, active: boolean) => {
+    const color = active ? 'var(--accent)' : 'var(--text-muted)'
+    return id === 'light' ? <Sun size={15} style={{ color }} /> : <Moon size={15} style={{ color }} />
+  }
+
   return (
     <div className="fixed bottom-3 left-3 z-[200] flex flex-col items-start gap-2 md:bottom-4 md:left-4">
-      {/* Panel expandido */}
+      {/* Panel expandido (2 opciones: Oscuro y Claro) */}
       {expanded && (
         <div
           className="flex flex-col gap-1 rounded-2xl border p-2 shadow-2xl backdrop-blur-xl"
           style={{
             backgroundColor: 'var(--bg-card-solid)',
-            borderColor: 'var(--border-card)',
+            borderColor: 'var(--border-accent)',
+            boxShadow: 'var(--shadow-card)',
           }}
         >
-          {THEMES.map((theme, idx) => (
-            <button
-              key={theme.id}
-              type="button"
-              onClick={() => selectTheme(idx)}
-              className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wide transition-all hover:scale-[1.02]"
-              style={{
-                color:
-                  idx === themeIndex
-                    ? 'var(--text-primary)'
-                    : 'var(--text-muted)',
-                backgroundColor:
-                  idx === themeIndex ? 'var(--accent-soft)' : 'transparent',
-              }}
-            >
-              <span
-                className="h-3 w-3 shrink-0 rounded-full"
+          {THEMES.map((theme, idx) => {
+            const isSelected = idx === themeIndex
+            return (
+              <button
+                key={theme.id}
+                type="button"
+                onClick={() => selectTheme(idx)}
+                className="flex cursor-pointer items-center gap-3 rounded-xl px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wide transition-all hover:scale-[1.02]"
                 style={{
-                  backgroundColor: theme.dot,
-                  boxShadow:
-                    idx === themeIndex
-                      ? `0 0 8px ${theme.dot}`
-                      : 'none',
+                  color: isSelected
+                    ? 'var(--text-primary)'
+                    : 'var(--text-secondary)',
+                  backgroundColor: isSelected
+                    ? 'var(--accent-soft)'
+                    : 'transparent',
                 }}
-              />
-              {theme.label}
-              {idx === themeIndex && (
-                <span className="ml-auto text-[10px] opacity-60">✓</span>
-              )}
-            </button>
-          ))}
+              >
+                {renderIcon(theme.id, isSelected)}
+                <span>{theme.label}</span>
+                {isSelected && (
+                  <span
+                    className="ml-auto text-[11px] font-black"
+                    style={{ color: 'var(--accent-text)' }}
+                  >
+                    ✓
+                  </span>
+                )}
+              </button>
+            )
+          })}
         </div>
       )}
 
-      {/* Botón principal (compacto circular en móvil, píldora completa en desktop) */}
+      {/* Botón principal (compacto circular en móvil, píldora en desktop) */}
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
-        className="flex h-10 w-10 items-center justify-center rounded-full border p-0 text-xs font-bold uppercase tracking-wide shadow-lg backdrop-blur-xl transition-all hover:scale-105 md:h-auto md:w-auto md:gap-2.5 md:px-4 md:py-2.5"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border p-0 text-xs font-bold uppercase tracking-wide shadow-lg backdrop-blur-xl transition-all hover:scale-105 md:h-auto md:w-auto md:gap-2.5 md:px-4 md:py-2.5"
         style={{
           backgroundColor: 'var(--bg-card-solid)',
-          borderColor: 'var(--border-card)',
+          borderColor: 'var(--border-accent)',
           color: 'var(--text-primary)',
+          boxShadow: 'var(--shadow-card)',
         }}
-        title="Cambiar tema de diseño (solo dev)"
-        aria-label={`Cambiar tema de diseño: ${current.label}`}
+        title="Cambiar entre modo oscuro y claro"
+        aria-label={`Cambiar tema: ${current.label}`}
+        aria-expanded={expanded}
       >
-        <Palette size={15} style={{ color: current.dot }} />
-        <span
-          className="hidden h-2.5 w-2.5 rounded-full md:inline-block"
-          style={{
-            backgroundColor: current.dot,
-            boxShadow: `0 0 8px ${current.dot}`,
-          }}
-        />
+        {renderIcon(current.id, true)}
         <span className="hidden md:inline">{current.label}</span>
       </button>
     </div>
