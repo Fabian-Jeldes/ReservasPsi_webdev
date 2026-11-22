@@ -1,70 +1,15 @@
 // Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function DispareuniaPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La Dispareunia se define como el dolor genital persistente o recurrente que se experimenta antes, durante o después del coito o de la penetración sexual. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'dispareunia Chile, dolor durante las relaciones sexuales, tratamiento dispareunia, dolor coital, sexólogo clínico Santiago, CIE-11 dispareunia, DSM-5-TR dolor genitopélvico'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-femenina/dispareunia-dolor-relaciones`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Dispareunia',
-        alternateName: 'Dolor durante las Relaciones Sexuales / Dolor Coital',
-        description:
-          'Dolor genital persistente o recurrente que se experimenta antes, durante o después del coito o de la penetración sexual.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal sentir leve molestia o dolor durante las relaciones sexuales?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'No, el placer nunca debería doler. Cualquier dolor persistente durante la penetración es una señal de que el cuerpo y el sistema nervioso están activando un mecanismo de defensa, por lo que requiere una evaluación médica y sexológica integral para identificar su origen físico o funcional.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Cómo puedo hablar con mi pareja sobre el dolor sin generar distancia afectiva?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'La clave radica en desvincular el dolor del afecto hacia la pareja, explicando que se trata de una respuesta física involuntaria del cuerpo ante la cual ambos pueden colaborar modificando las prácticas eróticas y eliminando la presión de la penetración temporalmente.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function DispareuniaPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -514,6 +453,7 @@ export function DispareuniaPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

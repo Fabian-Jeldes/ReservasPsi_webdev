@@ -1,70 +1,15 @@
 // Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function AnorgasmiaPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La Anorgasmia y las dificultades en el alcance del clímax comprenden la ausencia o el retraso significativo del orgasmo, así como una reducción marcada en la intensidad de las sensaciones orgásmicas. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'anorgasmia Chile, tratamiento anorgasmia femenina, dificultad del orgasmo, trastorno orgásmico femenino, sexólogo clínico Santiago, CIE-11 anorgasmia, DSM-5-TR trastorno orgásmico'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-femenina/anorgasmia-dificultad-orgasmo`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Anorgasmia y Dificultad del Orgasmo',
-        alternateName: 'Trastorno Orgásmico Femenino',
-        description:
-          'Ausencia o retraso significativo del orgasmo, así como una reducción marcada en la intensidad de las sensaciones orgásmicas, tras una fase de excitación e intensidad erótica adecuada.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal no alcanzar el orgasmo solo con la penetración sin estimular el clítoris?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, es absolutamente normal. Anatómica e histológicamente, el clítoris es el único órgano del cuerpo humano destinado exclusivamente al placer y cuenta con más de 8.000 terminaciones nerviosas. Solo una minoría de mujeres alcanza el clímax mediante la penetración vaginal aislada (generalmente por la tracción indirecta que el coito ejerce sobre los pilares del clítoris). Requerir estimulación clitoridiana directa es la norma fisiológica y no constituye ningún tipo de disfunción.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Pueden los antidepresivos o anticonceptivos bloquear la capacidad de tener orgasmos?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí. Los antidepresivos de la familia ISRS (como la fluoxetina, sertralina o escitalopram) incrementan los niveles de serotonina central, lo que eleva el umbral necesario para desencadenar el clímax. Asimismo, ciertos anticonceptivos hormonales pueden disminuir la testosterona libre y la lubricación. En la consulta trabajamos en coordinación interdisciplinaria con la médica o médico tratante para evaluar ajustes de dosis o alternativas sin comprometer el tratamiento de base.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function AnorgasmiaPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -569,6 +508,7 @@ export function AnorgasmiaPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

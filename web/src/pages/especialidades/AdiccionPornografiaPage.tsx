@@ -1,70 +1,15 @@
 // Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function AdiccionPornografiaPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'El uso problemático o compulsivo de pornografía se caracteriza por un patrón persistente de incapacidad para controlar los impulsos o conductas de consumo de material erótico explícito. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'uso problemático de pornografía Chile, adicción a la pornografía tratamiento, disfunción eréctil por pornografía EDID PIED, sexólogo clínico Santiago, CIE-11 6C72 CSBD, comportamiento sexual compulsivo'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/uso-problematico-de-pornografia`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Uso Problemático de Pornografía',
-        alternateName: 'Trastorno por Comportamiento Sexual Compulsivo (CSBD / CIE-11 6C72)',
-        description:
-          'Patrón persistente de incapacidad para controlar los impulsos o conductas de consumo de material erótico explícito, manteniéndose a pesar de generar consecuencias negativas relevantes en la vida personal, laboral, afectiva o sexual.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿El consumo de pornografía destruye permanentemente la capacidad eréctil o el deseo?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'No. La neuroplasticidad del cerebro permite revertir los efectos de la desensibilización dopaminérgica y el condicionamiento visual. A través de la pautación del consumo, la reestructuración cognitiva y el reentrenamiento de la atención erótica, el sistema de recompensa recupera su sensibilidad natural hacia la estimulación interpersonal y los ritmos orgánicos reales.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Es necesario el ayuno dopaminérgico o la abstinencia total para recuperarse?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Los enfoques extremistas que exigen un "ayuno absoluto" o cero contacto con la sexualidad suelen incrementar la ansiedad, la rumiación obsesiva y el ciclo de recaída por culpa. En la consulta clínica se prioriza un modelo de autorregulación progresiva, donde el objetivo es desarticular el uso compulsivo como mecanismo de fuga emocional y restaurar una sexualidad saludable, consciente y gratificante.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function AdiccionPornografiaPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -571,6 +510,7 @@ export function AdiccionPornografiaPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

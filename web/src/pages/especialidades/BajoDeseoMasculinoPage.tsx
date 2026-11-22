@@ -1,70 +1,15 @@
 // Tratamiento del Deseo Sexual Hipoactivo en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function BajoDeseoMasculinoPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'El Deseo Sexual Hipoactivo Masculino se define como una disminución o ausencia persistente o recurrente de pensamientos, fantasías eróticas y motivación para iniciar o responder a la actividad íntima. Enfoque sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'deseo sexual hipoactivo masculino Chile, bajo deseo sexual masculino, tratamiento baja libido hombre, sexólogo clínico Santiago, CIE-11 deseo sexual hipoactivo, DSM-5-TR deseo hipoactivo, deseo reactivo'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/bajo-deseo-sexual-masculino`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Deseo Sexual Hipoactivo Masculino',
-        alternateName: 'Bajo Deseo Sexual Masculino',
-        description:
-          'Disminución o ausencia persistente o recurrente de pensamientos, fantasías eróticas y motivación para iniciar o responder a la actividad íntima, generando un malestar personal significativo o dificultades en la dinámica de pareja.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal que el deseo sexual disminuya tras varios años de relación?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí. Es un proceso natural en el que el deseo espontáneo inicial transiciona hacia el deseo reactivo. La habituación requiere cultivar deliberadamente la complicidad y el juego erótico.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿El bajo deseo sexual significa que mi relación de pareja está rota?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'No necesariamente. En la gran mayoría de los casos, la disminución de la libido responde a agotamiento físico, estrés crónico, sobrecarga mental o dinámicas de comunicación no resueltas, las cuales pueden abordarse eficazmente en psicoterapia sexológica.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function BajoDeseoMasculinoPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -559,6 +498,7 @@ export function BajoDeseoMasculinoPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

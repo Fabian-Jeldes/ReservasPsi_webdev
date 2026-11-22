@@ -26,6 +26,9 @@ export function getHeadTags(seo: SeoData): HeadTag[] {
     { tag: 'meta', attrs: { name: 'twitter:description', content: seo.description } },
     { tag: 'meta', attrs: { name: 'twitter:image', content: seo.ogImage } },
   ]
+  if (seo.keywords) {
+    tags.push({ tag: 'meta', attrs: { name: 'keywords', content: seo.keywords } })
+  }
   if (seo.publishedTime) {
     tags.push({ tag: 'meta', attrs: { property: 'article:published_time', content: seo.publishedTime } })
   }

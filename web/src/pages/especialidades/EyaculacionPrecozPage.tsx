@@ -1,94 +1,15 @@
 // Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function EyaculacionPrecozPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'Abordaje sexológico clínico e integrativo para la eyaculación precoz o prematura en Chile. Reentrenamiento del reflejo eyaculatorio, manejo de la ansiedad de desempeño y técnicas conductuales.'
-  const seoKeywords =
-    'eyaculación precoz Chile, tratamiento eyaculación prematura, sexólogo clínico Santiago, parada-arranque compresión, control eyaculatorio CIE-11 DSM-5-TR'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/eyaculacion-precoz`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Eyaculación Precoz',
-        alternateName: 'Eyaculación Prematura',
-        description:
-          'Dificultad persistente o recurrente para ejercer un control voluntario sobre el reflejo eyaculatorio, donde la eyaculación se produce antes, durante o inmediatamente después de la penetración con estimulación mínima y antes de que la persona lo desee.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Por qué eyaculo tan rápido incluso cuando intento pensar en otra cosa o distraerme?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Intentar distraer la mente suele tener el efecto contrario. Al desconectarte de tu cuerpo, pierdes la capacidad de registrar las sensaciones físicas que te avisan que te estás acercando al clímax (el punto de no retorno). Además, el enorme esfuerzo mental que haces para no sentir placer genera estrés y tensión muscular en tu zona pélvica, lo cual acelera biológicamente el reflejo eyaculatorio. En terapia aprendes a conectar con tu cuerpo desde la calma para poder regularlo.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Sirven las cremas retardantes, los preservativos especiales o las pastillas si no hago terapia?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Las cremas anestésicas o preservativos especiales solo adormecen la piel, quitándote el disfrute sin enseñarte el control voluntario. Los fármacos recetados pueden ser un apoyo temporal, pero no resuelven la ansiedad de desempeño ni la falta de registro corporal. La terapia sexológica entrega el control definitivo, devolviéndole a tu sistema nervioso su capacidad de autorregulación.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Siento mucha vergüenza con mi pareja y prefiero evitar tener intimidad. ¿Cómo le explico lo que me pasa?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'En nuestro espacio terapéutico te ayudamos a encontrar una forma cálida y asertiva de expresarlo, por ejemplo: "Te deseo mucho, pero estoy sintiendo una presión enorme que hace que mi cuerpo se acelere, y me angustia no poder disfrutar juntos como me gustaría". Ponerlo en palabras suele ser el primer gran alivio para tu sistema nervioso.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Si me masturbaba muy rápido cuando era joven por falta de privacidad, ¿arruiné mi cuerpo para siempre?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'En absoluto. No hay un daño permanente en ti; tu cuerpo está perfectamente sano y solo tiene un hábito muy arraigado. Gracias a la neuroplasticidad, podemos reentrenar ese arco reflejo mediante ejercicios sexológicos específicos para que aprendas a pausar y extender el disfrute.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Es posible curarse realmente o tendré que vivir cuidándome de esto toda la vida?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'El pronóstico terapéutico para la eyaculación precoz es sumamente favorable. Con compromiso en los ejercicios de focalización y el abordaje de la ansiedad, llega un punto donde el control se vuelve intuitivo y natural, permitiéndote vivir tu sexualidad de forma espontánea.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -105,18 +26,12 @@ export function EyaculacionPrecozPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -654,6 +569,7 @@ export function EyaculacionPrecozPage() {
           </ul>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

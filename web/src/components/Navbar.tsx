@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.jpeg'
 import { useActiveNavSection, type NavSectionId } from '../hooks/useActiveNavSection'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 
 type Props = {
   onLogoClick: () => void
@@ -79,6 +80,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   const drawerStrokeRef = useRef<SVGPathElement>(null)
   const drawerGlowRef = useRef<SVGPathElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
+  const mobileDrawerRef = useRef<HTMLDivElement>(null)
+  const mobileToggleRef = useRef<HTMLButtonElement>(null)
   const rafRef = useRef<number>(0)
   const progressRef = useRef(0)
 
@@ -162,6 +165,13 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
       openMenu()
     }
   }
+
+  useFocusTrap({
+    containerRef: mobileDrawerRef,
+    includeRef: mobileToggleRef,
+    isActive: isOpen,
+    onEscape: () => closeMenuWithAction(),
+  })
 
   useEffect(() => {
     return () => {
@@ -266,6 +276,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
         {/* Mobile Menu Button */}
         <button
+          ref={mobileToggleRef}
           type="button"
           onClick={toggleMenu}
           className={`mobile-menu-toggle relative z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border transition-colors duration-300 md:hidden ${
@@ -273,6 +284,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           }`}
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={isOpen}
+          aria-controls="mobile-nav-drawer"
         >
           {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
         </button>
@@ -281,6 +293,11 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
       {/* Mobile Drawer Overlay con Despliegue Orgánico Curvo */}
       {isRendered && (
         <div
+          id="mobile-nav-drawer"
+          ref={mobileDrawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
           className="fixed inset-0 top-0 left-0 z-40 flex h-screen w-screen flex-col justify-between px-6 pt-28 pb-12 md:hidden"
           style={{
             pointerEvents: isOpen ? 'auto' : 'none',

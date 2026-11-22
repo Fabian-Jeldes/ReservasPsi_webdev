@@ -1,94 +1,15 @@
 // Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function DisfuncionErectilPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La disfunción eréctil psicógena no es un fracaso, sino una respuesta neurobiológica frente a la ansiedad de desempeño. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'disfunción eréctil psicógena Chile, tratamiento psicológico disfunción eréctil, sexólogo clínico Santiago, ansiedad de desempeño erección, CIE-11 DSM-5-TR disfunción eréctil'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/disfuncion-erectil-psicogena`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Disfunción Eréctil Psicógena',
-        alternateName: 'Trastorno de la Erección de Origen Psicógeno',
-        description:
-          'Dificultad persistente o recurrente para obtener o mantener una erección suficiente que permita un desempeño sexual satisfactorio, cuyo origen obedece a factores psicofisiológicos, emocionales y de ansiedad de evaluación.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Por qué mantengo la erección al masturbarme, pero la pierdo con mi pareja?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Cuando estás a solas, estás en un entorno cien por ciento seguro donde tu cerebro no se siente evaluado; solo hay conexión con tus sensaciones. Al estar con tu pareja, entra a jugar el miedo a "no dar la talla" o a decepcionarla, y esa autoexigencia dispara una alerta de estrés en tu cuerpo que corta la respuesta eréctil. Esto es la prueba física irrefutable de que tu cuerpo está sano y tu capacidad vascular está intacta.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Siento mucha vergüenza y siento que estoy decepcionando a mi pareja, ¿cómo le hablo de esto?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'En nuestro espacio te damos herramientas para abrir esa conversación desde tu vulnerabilidad, no desde el defecto, pudiendo expresar: "Quiero estar contigo, pero estoy sintiendo mucha presión y ansiedad, y mi cuerpo se está bloqueando". Compartir esta carga trae un alivio inmenso para ambos y transforma la intimidad en un refugio de apoyo mutuo.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Soy demasiado joven (o demasiado mayor) para que me pase esto?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'El estrés, la ansiedad, la autoexigencia y el miedo a fallar no discriminan por fecha de nacimiento. Tu valor personal no se mide por una respuesta física puntual; tu cuerpo simplemente está reaccionando de manera natural a tus emociones, tengas la edad que tengas.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿En qué momento debo considerar ir al urólogo?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Si tienes antecedentes familiares o personales de hipertensión, diabetes, colesterol alto, o si notas un cambio físico generalizado, siempre es recomendable realizar un chequeo médico. Si durante nuestra evaluación sentimos que tu cuerpo necesita apoyo médico para descartar cualquier factor metabólico u orgánico, te acompañaré y orientaré para realizar esa derivación.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Cuánto tiempo toma la terapia para que todo vuelva a la normalidad?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Cada persona, cada cuerpo y cada historia tiene su propio ritmo. Desde las primeras sesiones empezarás a sentir cómo disminuye la presión asfixiante; al quitar el peso del éxito obligatorio y aprender a reconectar con el placer sin juzgarte, los cambios físicos comienzan a darse por sí solos.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -105,18 +26,12 @@ export function DisfuncionErectilPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -646,6 +561,7 @@ export function DisfuncionErectilPage() {
           </ul>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

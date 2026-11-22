@@ -1,9 +1,10 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { X, Calendar, Mail, Phone, User, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { kycSchema } from '../types/site'
 import type { KycFormState } from '../types/site'
 import { EMPTY_KYC } from '../data/site'
 import { track } from '../lib/posthog'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 
 type Props = {
   isOpen: boolean
@@ -16,6 +17,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
   const [step, setStep] = useState<1 | 2>(1)
   const [formData, setFormData] = useState<KycFormState>(EMPTY_KYC)
   const [errors, setErrors] = useState<Partial<Record<keyof KycFormState, string>>>({})
+  const dialogRef = useRef<HTMLDivElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -50,19 +52,17 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
     }, 300)
   }, [onClose])
 
-  useEffect(() => {
-    if (!isOpen) return
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') handleClose()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, handleClose])
+  useFocusTrap({
+    containerRef: dialogRef,
+    isActive: isOpen,
+    onEscape: handleClose,
+  })
 
   if (!isOpen) return null
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-[60] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"

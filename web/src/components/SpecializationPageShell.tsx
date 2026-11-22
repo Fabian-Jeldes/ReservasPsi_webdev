@@ -129,7 +129,7 @@ export function SpecializationPageShell({
       <hr className="theme-divider mx-auto max-w-5xl" />
 
       {/* Cuerpo del Anexo SEO (Secciones H2 inyectadas desde cada página) */}
-      <main className="mx-auto max-w-3xl px-6 py-16 space-y-14">
+      <main id="contenido-principal" className="mx-auto max-w-3xl px-6 py-16 space-y-14">
         {children}
 
         {/* Apartado de Referencias Institucionales y Científicas (H2) */}

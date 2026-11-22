@@ -1,0 +1,27 @@
+# Redirecciones permanentes (301) en el borde (Cloudflare Workers Static Assets)
+# Evita respuestas 404 en accesos directos o rastreadores a URLs legacy
+
+/reserva-de-horas /#reserva 301
+/clinica-digital /practica-digital 301
+
+# Problemas Sexuales Masculinos
+/especialidades/disfuncion-erectil /sexualidad-masculina/disfuncion-erectil-psicogena 301
+/especialidades/disfuncion-erectil-psicogena /sexualidad-masculina/disfuncion-erectil-psicogena 301
+/especialidades/eyaculacion-precoz /sexualidad-masculina/eyaculacion-precoz 301
+/especialidades/eyaculacion-retardada /sexualidad-masculina/eyaculacion-retardada 301
+/especialidades/bajo-deseo-sexual-masculino /sexualidad-masculina/bajo-deseo-sexual-masculino 301
+/especialidades/ansiedad-desempeno-sexual /sexualidad-masculina/ansiedad-de-desempeno 301
+/especialidades/adiccion-pornografia /sexualidad-masculina/uso-problematico-de-pornografia 301
+
+# Problemas Sexuales Femeninos
+/especialidades/vaginismo-dolor-pelvico /sexualidad-femenina/vaginismo-dolor-genitopelvico 301
+/especialidades/dispareunia /sexualidad-femenina/dispareunia-dolor-relaciones 301
+/especialidades/anorgasmia /sexualidad-femenina/anorgasmia-dificultad-orgasmo 301
+/especialidades/bajo-deseo-sexual-femenino /sexualidad-femenina/deseo-sexual-hipoactivo-femenino 301
+/especialidades/aversion-al-sexo /sexualidad-femenina/aversion-al-sexo 301
+
+# Problemáticas del Ánimo y Ansiedad
+/especialidades/trastornos-de-ansiedad /salud-emocional/trastornos-ansiedad-panico 301
+/especialidades/cuadros-depresivos /salud-emocional/cuadros-depresivos-alteraciones-animo 301
+/especialidades/estres-cronico-burnout /salud-emocional/estres-cronico-burnout 301
+/especialidades/regulacion-emocional-autoestima /salud-emocional/regulacion-emocional-autoestima 301

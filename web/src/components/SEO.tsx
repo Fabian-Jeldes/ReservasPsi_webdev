@@ -73,7 +73,8 @@ export function SEO({
     canonical.setAttribute('href', currentUrl.split('#')[0])
 
     if (jsonLd) {
-      const existingScripts = document.head.querySelectorAll('script[type="application/ld+json"][data-seo-custom]')
+      // Reemplazar bloques JSON-LD gestionados previos para evitar duplicados de MedicalWebPage
+      const existingScripts = document.head.querySelectorAll('script[type="application/ld+json"][data-seo]')
       existingScripts.forEach((s) => s.remove())
 
       const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd]

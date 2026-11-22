@@ -1,70 +1,15 @@
 // Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function EstresCronicoBurnoutPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'El estrés crónico y el síndrome de burnout (desgaste profesional) se caracterizan por agotamiento extremo, distanciamiento mental y sobrecarga alostática. Tratamiento psicológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'estrés crónico Chile, tratamiento síndrome de burnout, estrés laboral psicólogo Santiago, desgaste profesional CIE-11, sobrecarga alostática, psicólogo clínico Santiago'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/salud-emocional/estres-cronico-burnout`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Estrés Crónico y Síndrome de Burnout',
-        alternateName: 'Síndrome de Desgaste Profesional y Sobrecarga Alostática Crónica',
-        description:
-          'Estado de agotamiento físico, mental y emocional derivado de demandas laborales o vitales sostenidas que superan los recursos de afrontamiento y recuperación del organismo.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal que el cansancio del burnout no se pase ni durmiendo todo el fin de semana?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, es completamente característico del estrés crónico severo. Cuando el organismo lleva meses o años operando en modo de supervivencia, las reservas neurobiológicas se agotan a un nivel profundo. El descanso físico convencional (como dormir el fin de semana) es insuficiente porque el sistema nervioso sigue atrapado en la hipervigilancia y no logra activar el descanso reparador. Se requiere un proceso de desaceleración clínica y reestructuración de estilo de vida.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Cómo puedo saber si lo que tengo es estrés laboral o un cuadro depresivo?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Aunque comparten síntomas como la fatiga y la pérdida de interés, el estrés crónico y el burnout suelen estar estrechamente vinculados a contextos de alta demanda y sobrecarga donde la persona experimenta un desgaste por "exceso de esfuerzo". La depresión, en cambio, suele manifestarse con un sentido de desesperanza generalizado y una pérdida de placer que trasciende el ámbito laboral. No obstante, el burnout no tratado puede derivar en un cuadro depresivo secundario, por lo que una evaluación clínica oportuna es clave.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function EstresCronicoBurnoutPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -524,6 +463,7 @@ export function EstresCronicoBurnoutPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

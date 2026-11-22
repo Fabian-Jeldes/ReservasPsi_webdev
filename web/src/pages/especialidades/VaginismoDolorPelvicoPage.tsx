@@ -1,70 +1,15 @@
 // Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function VaginismoDolorPelvicoPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'El Vaginismo y las condiciones de Dolor Genitopélvico comprenden dificultades caracterizadas por la imposibilidad o dificultad recurrente para permitir la penetración vaginal, acompañada de espasmos musculares involuntarios del suelo pélvico. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'vaginismo Chile, tratamiento vaginismo, dolor genitopélvico, dispareunia, hipertonía suelo pélvico, sexólogo clínico Santiago, CIE-11 vaginismo, DSM-5-TR dolor genitopélvico'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-femenina/vaginismo-dolor-genitopelvico`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Vaginismo y Dolor Genitopélvico',
-        alternateName: 'Trastorno de Dolor Genito-Pélvico/Penetración',
-        description:
-          'Dificultad o imposibilidad recurrente para permitir la penetración vaginal, acompañada de espasmos musculares involuntarios del suelo pélvico, hipertonía y/o dolor penetrativo.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿El vaginismo tiene cura o tendré que vivir con dolor para siempre?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'El vaginismo sí tiene solución definitiva. No es una malformación anatómica ni una condición irreversible. Al tratarse de una respuesta muscular involuntaria y una memoria defensiva del dolor, el tratamiento combinado de psicoterapia sexológica y kinesiología pélvico permite descondicionar el reflejo de cierre, logrando una penetración completamente placentera y libre de dolor.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Es necesario usar dilatadores y cómo se complementa la kinesiología pélvica con la terapia?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'El uso de dilatadores vaginales no es una "fuerza bruta", sino una herramienta de desensibilización sistemática que la paciente maneja a su propio ritmo para que el cerebro y los músculos comprueben que la zona es elástica y segura. La kinesiología pélvica flexibiliza el músculo hipertónico, mientras que la psicoterapia sexológica desarticula la ansiedad, el miedo al dolor y las dinámicas de evitación en la pareja.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function VaginismoDolorPelvicoPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -590,6 +529,7 @@ export function VaginismoDolorPelvicoPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

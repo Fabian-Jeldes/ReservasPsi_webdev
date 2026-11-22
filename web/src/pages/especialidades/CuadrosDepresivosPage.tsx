@@ -1,70 +1,15 @@
 // Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function CuadrosDepresivosPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'Los cuadros depresivos y las alteraciones del estado de ánimo configuran una compleja red de síntomas somáticos, cognitivos y relacionales que erosionan la vitalidad. Tratamiento psicológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'cuadros depresivos Chile, tratamiento depresión Santiago, trastornos del ánimo, anhedonia, activación conductual, psicólogo clínico Santiago, CIE-11 depresión, DSM-5-TR episodio depresivo'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/salud-emocional/cuadros-depresivos-alteraciones-animo`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Cuadros Depresivos y Alteraciones del Ánimo',
-        alternateName: 'Trastornos del Estado de Ánimo y Depresión Clínica',
-        description:
-          'Condición clínica caracterizada por estado de ánimo deprimido persistente, pérdida de interés o placer (anhedonia), agotamiento físico y cognitivo, y alteraciones neurovegetativas.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal sentir que ya nada me importa y que he perdido la ilusión por todo?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, es uno de los síntomas cardinales de la anhedonia depresiva. Cuando el sistema emocional se sobrecarga o se deprime, apaga temporalmente la capacidad de sentir entusiasmo como un mecanismo de protección ante el desgaste. No significa que hayas perdido tu esencia para siempre; significa que tu capacidad de disfrute está temporalmente adormecida y requiere un espacio clínico seguro para reactivarse.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Cómo puedo diferenciar un cuadro depresivo de un bajón de ánimo transitorio?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Un bajón de ánimo responde a un evento específico del día y suele ceder tras unas horas o días de descanso. Un cuadro depresivo, en cambio, se instala de forma persistente durante semanas o meses, alterando profundamente el sueño, la energía, la concentración y la capacidad de disfrutar de la vida cotidiana, interfiriendo de manera real en tus vínculos y tu bienestar.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function CuadrosDepresivosPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -462,6 +401,7 @@ export function CuadrosDepresivosPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

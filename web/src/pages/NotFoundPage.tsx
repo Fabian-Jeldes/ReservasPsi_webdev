@@ -10,7 +10,7 @@ export function NotFoundPage() {
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
       <Navbar onLogoClick={() => navigate('/')} onAgendarClick={() => navigate('/#reserva')} />
 
-      <main className="mx-auto max-w-3xl px-6 pt-40 pb-32 text-center">
+      <main id="contenido-principal" className="mx-auto max-w-3xl px-6 pt-40 pb-32 text-center">
         <p className="mb-6 text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-text)' }}>
           {NOT_FOUND_PAGE.code}
         </p>

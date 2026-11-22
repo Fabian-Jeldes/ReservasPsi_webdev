@@ -1,70 +1,15 @@
 // Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function RegulacionEmocionalAutoestimaPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'Abordaje psicoterapéutico clínico e integrativo para la regulación emocional, superación de la autocrítica severa, autocompasión y fortalecimiento de la autoestima en Chile.'
-  const seoKeywords =
-    'regulación emocional Chile, fortalecer autoestima psicólogo, autocompasión psicoterapia, desregulación emocional tratamiento, límites y asertividad, psicólogo clínico Santiago'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/salud-emocional/regulacion-emocional-autoestima`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Dificultades de Regulación Emocional y Autoestima',
-        alternateName: 'Desregulación Afectiva, Alexitimia y Autoestima Contingente',
-        description:
-          'Dificultades en la identificación, procesamiento y modulación adaptativa del mundo afectivo, asociadas a esquemas de autocrítica severa, perfeccionismo y fragilidad en la autoimagen.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es posible dejar de ser tan duro conmigo mismo cuando cometo un error?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, absolutamente. La autocrítica severa suele ser un mecanismo de defensa antiguo que aprendimos en la infancia o adolescencia para intentar encajar o protegernos de la desaprobación. En psicoterapia trabajamos para desmontar ese juez interno punitivo y transformarlo en una voz aliada y compasiva. No se trata de "ser alcahuete" con uno mismo, sino de aprender a tratarse con la misma decencia y firmeza amorosa con la que tratarías a alguien a quien de verdad quieres.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Por qué me cuesta tanto poner límites sin sentir culpa?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'La dificultad para poner límites suele estar arraigada en el miedo al rechazo y en la creencia inconsciente de que nuestras necesidades importan menos que las de los demás. A través del trabajo en autoestima y asertividad, aprendemos a soltar la culpa neurótica y a comprender que decir "no" a los demás es, en realidad, decir "sí" a tu propia salud mental y a tu dignidad personal.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function RegulacionEmocionalAutoestimaPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -507,6 +446,7 @@ export function RegulacionEmocionalAutoestimaPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

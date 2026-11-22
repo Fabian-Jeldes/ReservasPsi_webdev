@@ -1,70 +1,15 @@
 // Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function BajoDeseoFemeninoPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'El Deseo Sexual Hipoactivo Femenino se define como una disminución o ausencia persistente o recurrente del interés erótico, pensamientos, fantasías sexuales y motivación para iniciar o responder a la actividad íntima. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'deseo sexual hipoactivo femenino Chile, bajo deseo sexual femenino, falta de deseo mujer, modelo circular Basson, deseo responsivo, sexólogo clínico Santiago, CIE-11 deseo hipoactivo, DSM-5-TR interés excitación sexual femenino'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-femenina/deseo-sexual-hipoactivo-femenino`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Deseo Sexual Hipoactivo Femenino',
-        alternateName: 'Trastorno del Interés/Excitación Sexual Femenino',
-        description:
-          'Disminución o ausencia persistente o recurrente del interés erótico, pensamientos, fantasías sexuales y motivación para iniciar o responder a la actividad íntima.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Es normal que no sienta ganas espontáneas de tener sexo aunque ame a mi pareja?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, es absolutamente normal. En relaciones estables de mediana o larga duración, el deseo espontáneo suele disminuir de forma natural. Las mujeres experimentan frecuentemente deseo reactivo, lo que significa que las "ganas" no aparecen solas de la nada, sino como respuesta a la estimulación, el afecto, la relajación y el juego erótico adecuado. Sentir bajo deseo espontáneo no significa que hayas dejado de querer a tu pareja.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Los anticonceptivos hormonales, la lactancia o la menopausia pueden apagar el deseo sexual?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí. Tanto la píldora anticonceptiva (que puede reducir la testosterona libre) como la prolactina elevada durante la lactancia y la disminución de estrógenos en la menopausia alteran directamente la lubricación y la receptividad neuroquímica del deseo. En la consulta realizamos un trabajo interdisciplinario con ginecología para evaluar alternativas hormonales o complementos locales sin descuidar el abordaje sexológico.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function BajoDeseoFemeninoPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -572,6 +511,7 @@ export function BajoDeseoFemeninoPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

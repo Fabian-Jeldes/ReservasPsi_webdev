@@ -1,70 +1,15 @@
 // Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function AnsiedadDesempenoPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La Ansiedad de Desempeño Sexual se define como un estado de aprensión, tensión psicofisiológica y miedo anticipatorio focalizado en la capacidad de obtener, mantener o regular la respuesta sexual. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'ansiedad de desempeño sexual Chile, tratamiento ansiedad de desempeño, espectadorismo sexual, sexólogo clínico Santiago, CIE-11 ansiedad sexual, DSM-5-TR ansiedad desempeño, miedo a fallar en la cama'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/ansiedad-de-desempeno`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Ansiedad de Desempeño Sexual',
-        alternateName: 'Espectadorismo Sexual y Ansiedad de Evaluación Erótica',
-        description:
-          'Estado de aprensión, tensión psicofisiológica y miedo anticipatorio focalizado en la capacidad de obtener, mantener o regular la respuesta sexual durante la interacción íntima.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Cómo saber si mi dificultad de erección o control es causada por ansiedad de desempeño o por un problema orgánico?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'El indicador más claro es la presencia de erecciones espontáneas e involuntarias al despertar o durante la masturbación solitaria. Si la erección o el control eyaculatorio funcionan adecuadamente en privado pero se dificultan al estar con una pareja, el origen es predominantemente psicógeno y situacional, causado por la activación del sistema nervioso simpático ante la ansiedad de evaluación.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Tomar fármacos o tranquilizantes ayuda a superar la ansiedad de desempeño sexual?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Los ansiolíticos tradicionales (como las benzodiacepinas) o el alcohol suelen empeorar la respuesta sexual, ya que deprimen el sistema nervioso central e inhiben los reflejos vasculares. Por su parte, los fármacos inductores de la erección (como el sildenafil) pueden actuar como una "muleta" temporal, pero no resuelven la causa cognitiva de fondo. La solución definitiva radica en la psicoterapia sexológica para desactivar el espectadorismo y restaurar la autorregulación emocional.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function AnsiedadDesempenoPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -565,6 +504,7 @@ export function AnsiedadDesempenoPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

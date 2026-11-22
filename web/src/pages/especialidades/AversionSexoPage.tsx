@@ -1,49 +1,15 @@
 // Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function AversionSexoPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La Aversión al Sexo se caracteriza por una respuesta fóbica, de rechazo persistente o evitación extrema y activa de cualquier tipo de contacto íntimo o cercanía erótica compartida. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'aversión al sexo Chile, tratamiento aversión sexual, rechazo al contacto íntimo, fobia sexual, evitación fóbica intimidad, sexólogo clínico Santiago, CIE-11 aversión sexual, DSM-5-TR evitación sexual'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-femenina/aversion-al-sexo`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Aversión al Sexo',
-        alternateName: 'Evitación Fóbica del Contacto Sexual',
-        description:
-          'Respuesta fóbica, de rechazo persistente o evitación extrema y activa de cualquier tipo de contacto íntimo o cercanía erótica compartida.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -60,18 +26,12 @@ export function AversionSexoPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -315,6 +275,42 @@ export function AversionSexoPage() {
 
         <hr className="theme-divider" />
 
+        {/* 4. Preguntas Frecuentes */}
+        <section className="space-y-8">
+          <h2
+            className="text-2xl md:text-3xl font-bold"
+            style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+          >
+            4. Preguntas Frecuentes
+          </h2>
+
+          <div className="space-y-4">
+            <h3
+              className="text-xl md:text-2xl font-bold"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+            >
+              1. ¿Cuál es la diferencia entre la aversión al sexo y el deseo sexual hipoactivo?
+            </h3>
+            <p>
+              Mientras que en el bajo deseo predomina la indiferencia o la ausencia de motivación, en la aversión sexual existe una respuesta activa de rechazo, miedo, ansiedad intensa o necesidad de evitar el contacto físico e íntimo por temor a que derive en una demanda sexual.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3
+              className="text-xl md:text-2xl font-bold"
+              style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
+            >
+              2. ¿Cómo se aborda terapéuticamente la aversión al sexo sin presiones?
+            </h3>
+            <p>
+              El primer paso en terapia es detener cualquier práctica vivida desde la obligación. Trabajamos en procesar las emociones asociadas, restablecer límites seguros de afecto no demandante y avanzar con desensibilización graduada para recuperar la sensación de control, calma y soberanía corporal.
+            </p>
+          </div>
+        </section>
+
+        <hr className="theme-divider" />
+
         {/* Referencias Bibliográficas */}
         <section
           aria-labelledby="referencias-bibliograficas"
@@ -404,6 +400,7 @@ export function AversionSexoPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

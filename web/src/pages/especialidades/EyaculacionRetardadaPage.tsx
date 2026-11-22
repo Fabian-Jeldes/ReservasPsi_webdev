@@ -1,70 +1,15 @@
 // Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function EyaculacionRetardadaPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'La Eyaculación Retardada se caracteriza por un retraso significativo o una ausencia recurrente del reflejo eyaculatorio a pesar de la presencia de una estimulación sexual adecuada. Tratamiento sexológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'eyaculación retardada Chile, tratamiento eyaculación retardada, aneyaculación psicógena, sexólogo clínico Santiago, CIE-11 eyaculación retardada, DSM-5-TR eyaculación retardada, anorgasmia masculina'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/sexualidad-masculina/eyaculacion-retardada`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Eyaculación Retardada',
-        alternateName: 'Aneyaculación o Inhibición Eyaculatoria',
-        description:
-          'Retraso significativo o ausencia recurrente del reflejo eyaculatorio a pesar de la presencia de una estimulación sexual adecuada, deseo erótico y una fase de excitación o erección conservada.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Por qué puedo eyacular solo al masturbarme y no durante la penetración con mi pareja?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Esto sucede habitualmente debido a la combinación de dos factores: por un lado, el cerebro se ha habituado a la estimulación táctil e intensidad específica de la propia mano (estilo masturbatorio idiosincrásico); por otro lado, el encuentro en pareja suele activar la ansiedad de desempeño, la necesidad de control y el temor a defraudar, factores que bloquean la respuesta reflexógena que sí fluye en privado.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Los antidepresivos o tratamientos farmacológicos pueden provocar eyaculación retardada?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí. Medicamentos como los antidepresivos (especialmente los ISRS como la sertralina, paroxetina o escitalopram) elevan los niveles de serotonina central, lo que eleva significativamente el umbral necesario para desencadenar el orgasmo y la eyaculación. Si este es el caso, en la consulta trabajamos en coordinación interdisciplinaria con el médico tratante o psiquiatra para evaluar opciones sin suspender abruptamente el tratamiento farmacológico.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function EyaculacionRetardadaPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -560,6 +499,7 @@ export function EyaculacionRetardadaPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 

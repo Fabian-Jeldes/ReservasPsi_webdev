@@ -1,70 +1,15 @@
 // Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
-import { SEO } from '../../components/SEO'
 
 export function TrastornosAnsiedadPage() {
   const navigate = useNavigate()
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-
-  const seoTitle =
-    'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco'
-  const seoDescription =
-    'Los Trastornos de Ansiedad y Pánico comprenden un conjunto de condiciones caracterizadas por una activación neurofisiológica desproporcionada, miedo intenso o aprensión anticipatoria. Tratamiento psicológico clínico e integrativo en Chile.'
-  const seoKeywords =
-    'trastornos de ansiedad Chile, tratamiento crisis de pánico, trastorno de ansiedad generalizada TAG, ansiedad social, psicólogo clínico Santiago, CIE-11 ansiedad, DSM-5-TR trastorno de pánico'
-
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'MedicalWebPage',
-      name: 'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo',
-      description: seoDescription,
-      url: `https://psandrei.com/salud-emocional/trastornos-ansiedad-panico`,
-      inLanguage: 'es-CL',
-      aspect: ['diagnosis', 'treatment', 'psychophysiology'],
-      about: {
-        '@type': 'MedicalCondition',
-        name: 'Trastornos de Ansiedad y Pánico',
-        alternateName: 'Trastorno de Ansiedad Generalizada (TAG) y Trastorno de Pánico',
-        description:
-          'Conjunto de condiciones caracterizadas por una activación neurofisiológica desproporcionada, miedo intenso o aprensión anticipatoria ante estímulos internos o externos, manifestándose mediante crisis repentinas de angustia o un estado sostenido de preocupación incontrolable.',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Ps. Andrei Andrusco Fidalgo',
-        jobTitle: 'Psicólogo Clínico y Sexólogo',
-        url: `https://psandrei.com/sobre-mi`,
-      },
-      mainEntity: {
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: '¿Un ataque de pánico me puede causar un infarto, la muerte o hacerme enloquecer?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Es la pregunta más frecuente en mi consulta, y la respuesta clínica es categórica: no, de ninguna manera. Aunque las sensaciones físicas son aterradoras, una crisis de pánico es una descarga temporal y completamente inofensiva del sistema de supervivencia. El cuerpo está diseñado para soportar esa activación; siempre alcanza un pico y desciende de forma natural por sí sola. Nadie ha muerto ni ha enloquecido por un ataque de pánico.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: '¿Es posible superar los trastornos de ansiedad sin depender de medicamentos de por vida?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Sí, absolutamente. Si bien los fármacos pueden ser un apoyo médico válido en momentos de crisis muy severas, la psicoterapia basada en evidencia te otorga herramientas autónomas y definitivas para desactivar el miedo al miedo, modificar los sesgos cognitivos y recuperar la libertad de acción a largo plazo.',
-            },
-          },
-        ],
-      },
-    }),
-    [seoDescription]
-  )
 
   const linkStyle = {
     color: 'var(--accent-text)',
@@ -81,18 +26,12 @@ export function TrastornosAnsiedadPage() {
         fontFamily: 'var(--font-body)',
       }}
     >
-      <SEO
-        title={seoTitle}
-        description={seoDescription}
-        keywords={seoKeywords}
-        jsonLd={jsonLd}
-      />
-
       <Navbar
         onLogoClick={() => navigate('/')}
         onAgendarClick={() => setIsBookingOpen(true)}
       />
 
+      <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
         <button
@@ -511,6 +450,7 @@ export function TrastornosAnsiedadPage() {
           </ol>
         </section>
       </article>
+      </main>
 
       <SiteFooter />
 
