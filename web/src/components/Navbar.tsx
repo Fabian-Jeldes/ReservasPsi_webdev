@@ -65,8 +65,12 @@ const NAV_ITEMS: readonly NavItem[] = [
   },
 ]
 
-function easeOutLiquid(t: number): number {
-  return 1 - Math.pow(1 - t, 3.4)
+function easeOutSmooth(t: number): number {
+  return 1 - Math.pow(1 - t, 3)
+}
+
+function easeInOutSmooth(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
 }
 
 export function Navbar({ onLogoClick, onAgendarClick }: Props) {
@@ -84,130 +88,200 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   const mobileDrawerRef = useRef<HTMLDivElement>(null)
   const mobileToggleRef = useRef<HTMLButtonElement>(null)
   const rafRef = useRef<number>(0)
+  const mountRafRef = useRef<number>(0)
   const actionTimerRef = useRef<number | null>(null)
   const progressRef = useRef(0)
 
-  const clearActionTimer = useCallback(() => {
+  const clearPendingAnimations = useCallback(() => {
     if (actionTimerRef.current !== null) {
       window.clearTimeout(actionTimerRef.current)
       actionTimerRef.current = null
     }
+    if (mountRafRef.current) {
+      cancelAnimationFrame(mountRafRef.current)
+      mountRafRef.current = 0
+    }
   }, [])
 
-  const animateDrawer = useCallback((target: 0 | 1, onComplete?: () => void) => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current)
-    }
+  const animateDrawer = useCallback(
+    (
+      target: 0 | 1,
+      onComplete?: () => void,
+      options?: { durationMs?: number; onThreshold?: { at: number; fn: () => void } },
+    ) => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = 0
+      }
 
-    const startVal = progressRef.current
-    const delta = target - startVal
-    if (Math.abs(delta) < 0.005) {
-      progressRef.current = target
-      onComplete?.()
-      return
-    }
+      const startVal = progressRef.current
+      const delta = target - startVal
+      if (Math.abs(delta) < 0.004) {
+        progressRef.current = target
+        options?.onThreshold?.fn()
+        onComplete?.()
+        return
+      }
 
-    const prefersReducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const clampPct = (v: number) => Math.max(0, Math.min(100, v))
+      const clampPct = (v: number) => Math.max(0, Math.min(100, v))
 
-    const applyFrame = (p: number, bend: number) => {
-      const edgeX = 100 * (1 - p)
-      const ctrlX = edgeX + bend
-      const fillD = `M 100,0 L ${edgeX.toFixed(2)},0 Q ${ctrlX.toFixed(2)},42 ${edgeX.toFixed(2)},100 L 100,100 Z`
-      const strokeD = `M ${edgeX.toFixed(2)},0 Q ${ctrlX.toFixed(2)},42 ${edgeX.toFixed(2)},100`
+      const applyFrame = (p: number, bend: number) => {
+        const clampedP = Math.max(0, Math.min(1, p))
+        const edgeX = 100 * (1 - clampedP)
+        const ctrlX = edgeX + bend
+        const fillD = `M 100,0 L ${edgeX.toFixed(2)},0 Q ${ctrlX.toFixed(2)},44 ${edgeX.toFixed(2)},100 L 100,100 Z`
+        const strokeD = `M ${edgeX.toFixed(2)},0 Q ${ctrlX.toFixed(2)},44 ${edgeX.toFixed(2)},100`
 
-      drawerFillRef.current?.setAttribute('d', fillD)
-      drawerStrokeRef.current?.setAttribute('d', strokeD)
-      drawerGlowRef.current?.setAttribute('d', strokeD)
+        drawerFillRef.current?.setAttribute('d', fillD)
+        drawerStrokeRef.current?.setAttribute('d', strokeD)
+        drawerGlowRef.current?.setAttribute('d', strokeD)
 
-      // Sincroniza el recorte del contenido exactamente con la curva de la línea roja
-      if (drawerContentRef.current) {
-        if (p >= 0.998) {
-          drawerContentRef.current.style.clipPath = 'none'
-          drawerContentRef.current.style.opacity = '1'
-        } else if (p <= 0.002) {
-          drawerContentRef.current.style.clipPath = 'inset(0 0 0 100%)'
-          drawerContentRef.current.style.opacity = '0'
-        } else {
-          // Puntos sobre la curva Bézier cuadrática P(t) para que la materialización/desmaterialización siga la línea roja
-          const e = clampPct(edgeX)
-          const p20 = clampPct(edgeX + 2 * 0.2 * 0.8 * bend)
-          const p42 = clampPct(edgeX + 2 * 0.5 * 0.5 * bend)
-          const p72 = clampPct(edgeX + 2 * 0.78 * 0.22 * bend)
-          drawerContentRef.current.style.clipPath = `polygon(${e.toFixed(2)}% 0%, 100% 0%, 100% 100%, ${e.toFixed(2)}% 100%, ${p72.toFixed(2)}% 72%, ${p42.toFixed(2)}% 42%, ${p20.toFixed(2)}% 18%)`
-          drawerContentRef.current.style.opacity = '1'
+        // Enciende y atenúa suavemente la línea roja en los extremos para evitar cortes secos al 0% o 100%
+        const frontierIntensity = Math.sin(clampedP * Math.PI)
+        const strokeAlpha = clampedP <= 0.002 || clampedP >= 0.998 ? 0 : Math.min(0.96, 0.25 + frontierIntensity * 0.75)
+        const glowAlpha = clampedP <= 0.002 || clampedP >= 0.998 ? 0 : frontierIntensity * 0.58
+        drawerStrokeRef.current?.setAttribute('stroke-opacity', strokeAlpha.toFixed(3))
+        drawerGlowRef.current?.setAttribute('stroke-opacity', glowAlpha.toFixed(3))
+
+        // Sincroniza el recorte del contenido exactamente con la curva de la línea roja
+        if (drawerContentRef.current) {
+          if (clampedP >= 0.998) {
+            drawerContentRef.current.style.clipPath = 'none'
+            drawerContentRef.current.style.opacity = '1'
+          } else if (clampedP <= 0.002) {
+            drawerContentRef.current.style.clipPath = 'inset(0 0 0 100%)'
+            drawerContentRef.current.style.opacity = '0'
+          } else {
+            const e = clampPct(edgeX)
+            const p18 = clampPct(edgeX + 2 * 0.2 * 0.8 * bend)
+            const p44 = clampPct(edgeX + 2 * 0.5 * 0.5 * bend)
+            const p74 = clampPct(edgeX + 2 * 0.78 * 0.22 * bend)
+            drawerContentRef.current.style.clipPath = `polygon(${e.toFixed(2)}% 0%, 100% 0%, 100% 100%, ${e.toFixed(2)}% 100%, ${p74.toFixed(2)}% 74%, ${p44.toFixed(2)}% 44%, ${p18.toFixed(2)}% 18%)`
+            drawerContentRef.current.style.opacity = Math.min(1, clampedP * 2.4).toFixed(3)
+          }
+        }
+
+        if (backdropRef.current) {
+          backdropRef.current.style.opacity = (clampedP * 0.42).toFixed(3)
         }
       }
 
-      if (backdropRef.current) {
-        backdropRef.current.style.opacity = p.toFixed(3)
-      }
-    }
-
-    if (prefersReducedMotion) {
-      progressRef.current = target
-      applyFrame(target, 0)
-      onComplete?.()
-      return
-    }
-
-    const duration = target === 1 ? 420 : 360
-    const startTime = performance.now()
-
-    const step = (now: number) => {
-      const rawT = Math.min(1, Math.max(0, (now - startTime) / duration))
-      const eased = easeOutLiquid(rawT)
-      const p = startVal + delta * eased
-      progressRef.current = p
-
-      // Arco Bézier de la ola roja al abrir (materializa) y al cerrar (desmaterializa)
-      const bend =
-        target === 1
-          ? -Math.sin(rawT * Math.PI) * 26
-          : Math.sin(rawT * Math.PI) * 24
-      applyFrame(p, bend)
-
-      if (rawT < 1) {
-        rafRef.current = requestAnimationFrame(step)
-      } else {
+      if (prefersReducedMotion) {
         progressRef.current = target
         applyFrame(target, 0)
-        rafRef.current = 0
+        options?.onThreshold?.fn()
         onComplete?.()
+        return
       }
-    }
 
-    rafRef.current = requestAnimationFrame(step)
-  }, [])
+      const baseDuration = options?.durationMs ?? (target === 1 ? 380 : 340)
+      const duration = Math.max(120, Math.round(baseDuration * Math.abs(delta)))
+      const startTime = performance.now()
+      let thresholdFired = false
+
+      const step = (now: number) => {
+        const rawT = Math.min(1, Math.max(0, (now - startTime) / duration))
+        const eased = target === 1 ? easeOutSmooth(rawT) : easeInOutSmooth(rawT)
+        const p = startVal + delta * eased
+        progressRef.current = p
+
+        // Arco Bézier contenido para un barrido fluido a 60 fps
+        const bend =
+          target === 1
+            ? -Math.sin(rawT * Math.PI) * 20
+            : Math.sin(rawT * Math.PI) * 18
+        applyFrame(p, bend)
+
+        if (
+          options?.onThreshold &&
+          !thresholdFired &&
+          ((delta < 0 && p <= options.onThreshold.at) ||
+            (delta > 0 && p >= options.onThreshold.at))
+        ) {
+          thresholdFired = true
+          options.onThreshold.fn()
+        }
+
+        if (rawT < 1) {
+          rafRef.current = requestAnimationFrame(step)
+        } else {
+          progressRef.current = target
+          applyFrame(target, 0)
+          rafRef.current = 0
+          if (options?.onThreshold && !thresholdFired) {
+            thresholdFired = true
+            options.onThreshold.fn()
+          }
+          onComplete?.()
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(step)
+    },
+    [],
+  )
 
   const openMenu = () => {
-    clearActionTimer()
-    progressRef.current = 0
-    setIsRendered(true)
+    clearPendingAnimations()
+    const wasAlreadyRendered = isRendered
+    if (!wasAlreadyRendered) {
+      progressRef.current = 0
+      setIsRendered(true)
+    }
     setIsOpen(true)
-    requestAnimationFrame(() => {
+
+    // Si recién se monta, espera un frame de pintura inicial para arrancar la ola desde 0% sin saltos
+    if (!wasAlreadyRendered) {
+      mountRafRef.current = requestAnimationFrame(() => {
+        mountRafRef.current = requestAnimationFrame(() => {
+          mountRafRef.current = 0
+          animateDrawer(1)
+        })
+      })
+    } else {
       animateDrawer(1)
-    })
+    }
   }
 
   const closeMenuWithAction = useCallback(
-    (action?: () => void) => {
-      clearActionTimer()
+    (
+      action?: () => void,
+      options?: { durationMs?: number; overlapAt?: number },
+    ) => {
+      clearPendingAnimations()
       setIsOpen(false)
-      animateDrawer(0, () => {
-        setIsRendered(false)
-        action?.()
-      })
+      if (action && options?.overlapAt !== undefined) {
+        animateDrawer(
+          0,
+          () => {
+            setIsRendered(false)
+          },
+          {
+            durationMs: options.durationMs,
+            onThreshold: { at: options.overlapAt, fn: action },
+          },
+        )
+        return
+      }
+      animateDrawer(
+        0,
+        () => {
+          setIsRendered(false)
+          action?.()
+        },
+        { durationMs: options?.durationMs },
+      )
     },
-    [animateDrawer, clearActionTimer],
+    [animateDrawer, clearPendingAnimations],
   )
 
   const handleMobileNavSelect = useCallback(
     (item: NavItem) => {
-      clearActionTimer()
+      clearPendingAnimations()
       const isSamePageAnchor = item.to.startsWith('/#') && location.pathname === '/'
       const isSameRoute = !item.to.startsWith('/#') && location.pathname === item.to
 
@@ -217,16 +291,16 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         return
       }
 
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+      const confirmDelay = prefersReducedMotion ? 0 : 100
+
       if (isSamePageAnchor) {
         const targetId = item.to.slice(2)
         selectSection(item.id)
 
-        const prefersReducedMotion = window.matchMedia(
-          '(prefers-reduced-motion: reduce)',
-        ).matches
-        const confirmDelay = prefersReducedMotion ? 0 : 120
-
-        // 1) Breve pausa para encender el LED "REC", 2) posiciona en segundo plano bajo el telón opaco,
+        // 1) Enciende brevemente el LED "REC", 2) posiciona en segundo plano bajo el telón opaco,
         // 3) barre la ola roja desmaterializando el taskbar y revelando la sección ya ubicada
         actionTimerRef.current = window.setTimeout(() => {
           actionTimerRef.current = null
@@ -237,7 +311,6 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               0,
               Math.round(targetEl.getBoundingClientRect().top + window.scrollY - headerOffset),
             )
-            // Habilita temporalmente el scroll programático bajo el telón opaco (iOS/Safari ignora scrollTo con overflow:hidden)
             document.documentElement.style.overflow = ''
             document.body.style.overflow = ''
             window.scrollTo({ top: targetTop, behavior: 'auto' })
@@ -246,7 +319,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           }
           navigate(item.to, { state: { skipScroll: true } })
 
-          requestAnimationFrame(() => {
+          mountRafRef.current = requestAnimationFrame(() => {
+            mountRafRef.current = 0
             setIsOpen(false)
             animateDrawer(0, () => {
               setIsRendered(false)
@@ -256,16 +330,22 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         return
       }
 
-      // Cambio hacia otra página (ej. /sobre-mi): enciende el LED, cierra en ola y aterriza sin tirones
+      // Cambio hacia otra página (ej. /sobre-mi): confirma el LED, recoge la ola con agilidad y cruza limpio
       selectSection(item.id)
-      closeMenuWithAction(() => {
-        navigate(item.to, { state: { instantScroll: true } })
-      })
+      actionTimerRef.current = window.setTimeout(() => {
+        actionTimerRef.current = null
+        closeMenuWithAction(
+          () => {
+            navigate(item.to, { state: { instantScroll: true } })
+          },
+          { durationMs: 260 },
+        )
+      }, confirmDelay)
     },
     [
       activeSection,
       animateDrawer,
-      clearActionTimer,
+      clearPendingAnimations,
       closeMenuWithAction,
       location.pathname,
       navigate,
@@ -298,12 +378,12 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
-      clearActionTimer()
+      clearPendingAnimations()
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current)
       }
     }
-  }, [clearActionTimer])
+  }, [clearPendingAnimations])
 
   // Bloqueo de scroll sin alterar position: fixed del body ni modificar window.scrollY
   useEffect(() => {
@@ -323,8 +403,23 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
       event.preventDefault()
     }
 
+    const desktopMedia = window.matchMedia('(min-width: 768px)')
+    const handleViewportChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        clearPendingAnimations()
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current)
+          rafRef.current = 0
+        }
+        progressRef.current = 0
+        setIsOpen(false)
+        setIsRendered(false)
+      }
+    }
+
     window.addEventListener('touchmove', blockScrollGesture, { passive: false })
     window.addEventListener('wheel', blockScrollGesture, { passive: false })
+    desktopMedia.addEventListener('change', handleViewportChange)
 
     return () => {
       html.style.overflow = prevHtmlOverflow
@@ -332,8 +427,9 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
       body.style.overflow = prevBodyOverflow
       window.removeEventListener('touchmove', blockScrollGesture)
       window.removeEventListener('wheel', blockScrollGesture)
+      desktopMedia.removeEventListener('change', handleViewportChange)
     }
-  }, [isRendered])
+  }, [isRendered, clearPendingAnimations])
 
   return (
     <nav
@@ -456,15 +552,14 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             touchAction: 'none',
           }}
         >
-          {/* Capa de fondo sólida/opaca sincronizada para evitar que el contenido debajo compita con el menú */}
+          {/* Velo sutil de contraste sin backdrop-filter pesado durante la animación para mantener 60 fps */}
           <div
             ref={backdropRef}
-            className="pointer-events-none absolute inset-0 backdrop-blur-md"
+            className="pointer-events-none absolute inset-0"
             style={{
               opacity: 0,
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
               backgroundColor: 'var(--nav-drawer-backdrop)',
+              willChange: 'opacity',
             }}
           />
 
@@ -477,30 +572,30 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           >
             <path
               ref={drawerFillRef}
-              d="M 100,0 L 100,0 Q 100,42 100,100 L 100,100 Z"
+              d="M 100,0 L 100,0 Q 100,44 100,100 L 100,100 Z"
               fill="var(--bg-primary)"
               fillOpacity="1"
             />
             <path
               ref={drawerGlowRef}
-              d="M 100,0 Q 100,42 100,100"
+              d="M 100,0 Q 100,44 100,100"
               fill="none"
               stroke="var(--accent)"
               strokeWidth="3"
-              strokeOpacity="0.65"
+              strokeOpacity="0"
               vectorEffect="non-scaling-stroke"
               style={{ filter: 'blur(6px)' }}
             />
             <path
               ref={drawerStrokeRef}
-              d="M 100,0 Q 100,42 100,100"
+              d="M 100,0 Q 100,44 100,100"
               fill="none"
               stroke="var(--accent)"
               strokeWidth="2.2"
-              strokeOpacity="0.98"
+              strokeOpacity="0"
               vectorEffect="non-scaling-stroke"
               style={{
-                filter: 'drop-shadow(0 0 12px rgba(255, 77, 77, 0.6))',
+                filter: 'drop-shadow(0 0 10px rgba(255, 77, 77, 0.55))',
               }}
             />
           </svg>
@@ -552,9 +647,12 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                 <button
                   type="button"
                   onClick={() =>
-                    closeMenuWithAction(() => {
-                      onAgendarClick()
-                    })
+                    closeMenuWithAction(
+                      () => {
+                        onAgendarClick()
+                      },
+                      { durationMs: 260, overlapAt: 0.3 },
+                    )
                   }
                   className="nav-link-mobile nav-mobile-cta mt-1 cursor-pointer text-lg font-bold sm:text-xl"
                   style={{ fontFamily: 'var(--font-heading)' }}
