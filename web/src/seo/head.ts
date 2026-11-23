@@ -55,13 +55,18 @@ const escapeAttr = (v: string) =>
 /** HTML del <head> para el prerender */
 export function renderHeadHtml(seo: SeoData): string {
   const title = `<title>${escapeAttr(seo.title)}</title>`
+  const preload = seo.preloadImage
+    ? [
+        `<link rel="preload" as="image" type="image/webp" href="${escapeAttr(seo.preloadImage)}" fetchpriority="high" />`,
+      ]
+    : []
   const tags = getHeadTags(seo).map(({ tag, attrs, content }) => {
     const a = Object.entries({ ...attrs, 'data-seo': '' })
       .map(([k, v]) => (v === '' ? k : `${k}="${escapeAttr(v)}"`))
       .join(' ')
     return tag === 'script' ? `<script ${a}>${content ?? ''}</script>` : `<${tag} ${a} />`
   })
-  return [title, ...tags].join('\n    ')
+  return [title, ...preload, ...tags].join('\n    ')
 }
 
 /** Reemplaza los metadatos del documento al navegar en el cliente */

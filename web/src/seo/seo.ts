@@ -35,6 +35,8 @@ export type SeoData = {
   /** Para <meta property="article:*"> */
   publishedTime?: string
   modifiedTime?: string
+  /** Imagen LCP crítica a precargar en el HTML prerenderizado */
+  preloadImage?: string
 }
 
 const abs = (path: string) => `${SITE_URL}${path}`
@@ -153,6 +155,7 @@ export function getSeo(pathname: string): SeoData {
       canonical: abs('/'),
       ogImage: abs(DEFAULT_OG_IMAGE),
       ogType: 'website',
+      preloadImage: PROFILE_IMAGE_URL,
       jsonLd: [graph(website, business, person, homeFaqPage)],
     }
   }

@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.webp'
 import { useActiveNavSection, type NavSectionId } from '../hooks/useActiveNavSection'
 import { useFocusTrap } from '../hooks/useFocusTrap'
+import { prefetchRoute } from '../lib/route-loaders'
 
 type Props = {
   onLogoClick: () => void
@@ -499,6 +500,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                   key={item.id}
                   to={item.to}
                   aria-current={isActive ? 'location' : undefined}
+                  onMouseEnter={() => prefetchRoute(item.to)}
+                  onFocus={() => prefetchRoute(item.to)}
                   onClick={() => {
                     if (item.to.startsWith('/#') && location.pathname === '/') {
                       selectSection(item.id)
@@ -631,6 +634,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                       key={item.id}
                       type="button"
                       aria-current={isActive ? 'location' : undefined}
+                      onFocus={() => prefetchRoute(item.to)}
+                      onTouchStart={() => prefetchRoute(item.to)}
                       onClick={() => handleMobileNavSelect(item)}
                       className={`nav-link-mobile cursor-pointer text-lg font-semibold sm:text-xl ${
                         isActive ? 'is-active' : ''

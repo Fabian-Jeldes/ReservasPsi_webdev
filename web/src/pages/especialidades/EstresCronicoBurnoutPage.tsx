@@ -7,6 +7,7 @@ import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
+import { ClinicalToc } from '../../components/ClinicalToc'
 
 export function EstresCronicoBurnoutPage() {
   const navigate = useNavigate()
@@ -73,13 +74,15 @@ export function EstresCronicoBurnoutPage() {
 
       <hr className="theme-divider mx-auto max-w-4xl" />
 
+      <ClinicalToc />
+
       {/* Contenido Clínico Estructurado */}
       <article
         className="mx-auto max-w-4xl px-6 py-16 space-y-16 text-lg leading-relaxed"
         style={{ color: 'var(--text-secondary)' }}
       >
         {/* 1. Definición Clínica y Marco Diagnóstico */}
-        <section className="space-y-8">
+        <section id="definicion" className="scroll-mt-24 space-y-8">
           <h2
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
@@ -180,7 +183,7 @@ export function EstresCronicoBurnoutPage() {
         <hr className="theme-divider" />
 
         {/* 2. Mecanismos Psicofisiológicos: Del Modo Supervivencia al Colapso */}
-        <section className="space-y-8">
+        <section id="mecanismos" className="scroll-mt-24 space-y-8">
           <h2
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
@@ -240,7 +243,7 @@ export function EstresCronicoBurnoutPage() {
         <hr className="theme-divider" />
 
         {/* 3. Abordaje Terapéutico Psicológico e Integrativo */}
-        <section className="space-y-8">
+        <section id="tratamiento" className="scroll-mt-24 space-y-8">
           <h2
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
@@ -299,7 +302,7 @@ export function EstresCronicoBurnoutPage() {
         <hr className="theme-divider" />
 
         {/* 4. Preguntas Frecuentes en la Consulta */}
-        <section className="space-y-8">
+        <section id="preguntas-frecuentes" className="scroll-mt-24 space-y-8">
           <h2
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
@@ -336,8 +339,9 @@ export function EstresCronicoBurnoutPage() {
 
         {/* Referencias Institucionales, Guías Clínicas y Literatura Científica */}
         <section
+          id="referencias"
           aria-labelledby="referencias-bibliograficas"
-          className="border rounded-2xl p-6 md:p-8 space-y-4"
+          className="scroll-mt-24 border rounded-2xl p-6 md:p-8 space-y-4"
           style={{
             borderColor: 'var(--border-card)',
             backgroundColor: 'var(--bg-card)',

@@ -8,101 +8,40 @@ import { IntroCurtainReveal } from './components/IntroCurtainReveal'
 import { CustomCursor } from './components/CustomCursor'
 import { getSeo } from './seo/seo'
 import { applySeoToDocument } from './seo/head'
+import { routeLoaders } from './lib/route-loaders'
 
 type ViewTransitionDoc = Document & {
   startViewTransition?: (callback: () => void) => { finished: Promise<void> }
 }
 
 // Subpáginas cargadas bajo demanda (code-splitting por ruta; HomePage permanece estática)
-const AboutPage = lazy(() => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })))
-const ArticlePage = lazy(() =>
-  import('./pages/ArticlePage').then((m) => ({ default: m.ArticlePage })),
-)
-const ArticlesPage = lazy(() =>
-  import('./pages/ArticlesPage').then((m) => ({ default: m.ArticlesPage })),
-)
-const SpecializationPage = lazy(() =>
-  import('./pages/SpecializationPage').then((m) => ({ default: m.SpecializationPage })),
-)
-const LegalPage = lazy(() => import('./pages/LegalPage').then((m) => ({ default: m.LegalPage })))
-const NotFoundPage = lazy(() =>
-  import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
-)
+const AboutPage = lazy(routeLoaders.about)
+const ArticlePage = lazy(routeLoaders.article)
+const ArticlesPage = lazy(routeLoaders.articles)
+const SpecializationPage = lazy(routeLoaders.specialization)
+const LegalPage = lazy(routeLoaders.legal)
+const NotFoundPage = lazy(routeLoaders.notFound)
 
 // Problemas Sexuales Masculinos
-const DisfuncionErectilPage = lazy(() =>
-  import('./pages/especialidades/DisfuncionErectilPage').then((m) => ({
-    default: m.DisfuncionErectilPage,
-  })),
-)
-const EyaculacionPrecozPage = lazy(() =>
-  import('./pages/especialidades/EyaculacionPrecozPage').then((m) => ({
-    default: m.EyaculacionPrecozPage,
-  })),
-)
-const EyaculacionRetardadaPage = lazy(() =>
-  import('./pages/especialidades/EyaculacionRetardadaPage').then((m) => ({
-    default: m.EyaculacionRetardadaPage,
-  })),
-)
-const BajoDeseoMasculinoPage = lazy(() =>
-  import('./pages/especialidades/BajoDeseoMasculinoPage').then((m) => ({
-    default: m.BajoDeseoMasculinoPage,
-  })),
-)
-const AnsiedadDesempenoPage = lazy(() =>
-  import('./pages/especialidades/AnsiedadDesempenoPage').then((m) => ({
-    default: m.AnsiedadDesempenoPage,
-  })),
-)
-const AdiccionPornografiaPage = lazy(() =>
-  import('./pages/especialidades/AdiccionPornografiaPage').then((m) => ({
-    default: m.AdiccionPornografiaPage,
-  })),
-)
+const DisfuncionErectilPage = lazy(routeLoaders.disfuncionErectil)
+const EyaculacionPrecozPage = lazy(routeLoaders.eyaculacionPrecoz)
+const EyaculacionRetardadaPage = lazy(routeLoaders.eyaculacionRetardada)
+const BajoDeseoMasculinoPage = lazy(routeLoaders.bajoDeseoMasculino)
+const AnsiedadDesempenoPage = lazy(routeLoaders.ansiedadDesempeno)
+const AdiccionPornografiaPage = lazy(routeLoaders.adiccionPornografia)
 
 // Problemas Sexuales Femeninos
-const VaginismoDolorPelvicoPage = lazy(() =>
-  import('./pages/especialidades/VaginismoDolorPelvicoPage').then((m) => ({
-    default: m.VaginismoDolorPelvicoPage,
-  })),
-)
-const DispareuniaPage = lazy(() =>
-  import('./pages/especialidades/DispareuniaPage').then((m) => ({ default: m.DispareuniaPage })),
-)
-const AnorgasmiaPage = lazy(() =>
-  import('./pages/especialidades/AnorgasmiaPage').then((m) => ({ default: m.AnorgasmiaPage })),
-)
-const BajoDeseoFemeninoPage = lazy(() =>
-  import('./pages/especialidades/BajoDeseoFemeninoPage').then((m) => ({
-    default: m.BajoDeseoFemeninoPage,
-  })),
-)
-const AversionSexoPage = lazy(() =>
-  import('./pages/especialidades/AversionSexoPage').then((m) => ({ default: m.AversionSexoPage })),
-)
+const VaginismoDolorPelvicoPage = lazy(routeLoaders.vaginismoDolorPelvico)
+const DispareuniaPage = lazy(routeLoaders.dispareunia)
+const AnorgasmiaPage = lazy(routeLoaders.anorgasmia)
+const BajoDeseoFemeninoPage = lazy(routeLoaders.bajoDeseoFemenino)
+const AversionSexoPage = lazy(routeLoaders.aversionSexo)
 
 // Problemáticas del Ánimo y Ansiedad
-const TrastornosAnsiedadPage = lazy(() =>
-  import('./pages/especialidades/TrastornosAnsiedadPage').then((m) => ({
-    default: m.TrastornosAnsiedadPage,
-  })),
-)
-const CuadrosDepresivosPage = lazy(() =>
-  import('./pages/especialidades/CuadrosDepresivosPage').then((m) => ({
-    default: m.CuadrosDepresivosPage,
-  })),
-)
-const EstresCronicoBurnoutPage = lazy(() =>
-  import('./pages/especialidades/EstresCronicoBurnoutPage').then((m) => ({
-    default: m.EstresCronicoBurnoutPage,
-  })),
-)
-const RegulacionEmocionalAutoestimaPage = lazy(() =>
-  import('./pages/especialidades/RegulacionEmocionalAutoestimaPage').then((m) => ({
-    default: m.RegulacionEmocionalAutoestimaPage,
-  })),
-)
+const TrastornosAnsiedadPage = lazy(routeLoaders.trastornosAnsiedad)
+const CuadrosDepresivosPage = lazy(routeLoaders.cuadrosDepresivos)
+const EstresCronicoBurnoutPage = lazy(routeLoaders.estresCronicoBurnout)
+const RegulacionEmocionalAutoestimaPage = lazy(routeLoaders.regulacionEmocionalAutoestima)
 
 /** Actualiza <title>, meta y JSON-LD al navegar (la carga inicial ya viene prerenderizada) */
 function SeoSync() {

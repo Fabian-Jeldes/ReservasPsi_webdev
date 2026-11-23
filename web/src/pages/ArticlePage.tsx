@@ -4,7 +4,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { Breadcrumbs } from '../components/Breadcrumbs'
-import { getArticleDataBySlug } from '../data/site'
+import { getArticleDataBySlug } from '../data/articles'
 import { NotFoundPage } from './NotFoundPage'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
 

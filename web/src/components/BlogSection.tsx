@@ -4,6 +4,7 @@ import { BookOpen, ChevronRight, Pin, Play } from 'lucide-react'
 import type { MouseEvent } from 'react'
 import type { BlogPost } from '../types/site'
 import { ElasticBorderCard } from './ElasticBorderCard'
+import { prefetchRoute } from '../lib/route-loaders'
 
 const psicoeducacionIconModules = import.meta.glob<string>(
   '../assets/*psicoeducacion*',
@@ -122,6 +123,8 @@ export function BlogSection({ posts }: Props) {
         </div>
         <Link
           to="/articulos"
+          onMouseEnter={() => prefetchRoute('/articulos')}
+          onFocus={() => prefetchRoute('/articulos')}
           className="hidden items-center gap-2 rounded-full px-6 py-3 font-bold transition-all hover:scale-105 active:scale-95 md:flex"
           style={{
             backgroundColor: 'var(--accent)',
@@ -177,7 +180,9 @@ export function BlogSection({ posts }: Props) {
                         ? '0 20px 48px -10px rgba(255, 107, 91, 0.36), 0 0 22px rgba(255, 107, 91, 0.24)'
                         : '0 12px 35px -12px rgba(255, 77, 77, 0.16), var(--shadow-card)',
                     }}
+                    onFocus={() => prefetchRoute(`/articulos/${post.slug}`)}
                     onMouseEnter={(e) => {
+                      prefetchRoute(`/articulos/${post.slug}`)
                       if (isPinned) return
                       e.currentTarget.style.borderColor = 'var(--accent)'
                       e.currentTarget.style.boxShadow =

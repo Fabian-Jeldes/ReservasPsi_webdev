@@ -1,7 +1,7 @@
 import { useState, useCallback, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight, ArrowUpRight } from 'lucide-react'
-import { ABOUT_PAGE_DATA } from '../data/site'
+import { ABOUT_PAGE_DATA } from '../data/about'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'

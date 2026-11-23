@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { PROFILE_IMAGE_URL } from '../data/site'
 import { ElasticBorderCard } from './ElasticBorderCard'
+import { prefetchRoute } from '../lib/route-loaders'
 import instagramBotonImg from '../assets/InstagramBoton.webp'
 
 const HERO_ROTATING_PHRASES = [
@@ -42,15 +43,31 @@ export function HeroSection({ onContactClick }: Props) {
   }, [leavingPhraseIdx])
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActivePhraseIdx((currentIdx) => {
-        const nextIdx = (currentIdx + 1) % HERO_ROTATING_PHRASES.length
-        setLeavingPhraseIdx(currentIdx)
-        return nextIdx
-      })
-    }, HERO_ROTATION_INTERVAL_MS)
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let timer: number | null = null
 
-    return () => window.clearInterval(timer)
+    const startRotation = () => {
+      if (timer !== null) window.clearInterval(timer)
+      if (mediaQuery.matches) {
+        timer = null
+        return
+      }
+      timer = window.setInterval(() => {
+        setActivePhraseIdx((currentIdx) => {
+          const nextIdx = (currentIdx + 1) % HERO_ROTATING_PHRASES.length
+          setLeavingPhraseIdx(currentIdx)
+          return nextIdx
+        })
+      }, HERO_ROTATION_INTERVAL_MS)
+    }
+
+    startRotation()
+    mediaQuery.addEventListener('change', startRotation)
+
+    return () => {
+      mediaQuery.removeEventListener('change', startRotation)
+      if (timer !== null) window.clearInterval(timer)
+    }
   }, [timerResetKey])
   return (
     <header
@@ -262,6 +279,8 @@ export function HeroSection({ onContactClick }: Props) {
 
         <Link
           to="/sobre-mi"
+          onMouseEnter={() => prefetchRoute('/sobre-mi')}
+          onFocus={() => prefetchRoute('/sobre-mi')}
           className="bullet-reveal-card hero-about-link mt-6 inline-flex items-center gap-3 rounded-full border py-2.5 pl-5 pr-2.5 text-sm font-semibold backdrop-blur-md"
         >
           <span className="tracking-wide" style={{ color: 'var(--text-primary)' }}>

@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ComponentType, KeyboardEvent } from 'react'
 import type { Specialization } from '../types/site'
+import { prefetchRoute } from '../lib/route-loaders'
 
 const masculinoIconModules = import.meta.glob<string>('../assets/*masculin*', {
   eager: true,
@@ -188,6 +189,8 @@ function SubAreaCard({ area }: { area: SubAreaItem }) {
   return (
     <Link
       to={area.path}
+      onMouseEnter={() => prefetchRoute(area.path)}
+      onFocus={() => prefetchRoute(area.path)}
       className="bullet-reveal-card area-subcard group flex flex-col justify-between rounded-xl p-5 text-left"
     >
       <div>
