@@ -20,10 +20,11 @@ if ((template.match(/<title>/g) ?? []).length !== 1 || !template.includes('<div 
   throw new Error('index.html debe tener exactamente un <title> y <div id="root"></div>')
 }
 
-function page(url) {
+async function page(url) {
+  const html = await render(url)
   return template
     .replace(/<title>[\s\S]*?<\/title>/, renderHeadHtml(getSeo(url)))
-    .replace('<div id="root"></div>', `<div id="root">${render(url)}</div>`)
+    .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
 }
 
 for (const url of PRERENDER_ROUTES) {
@@ -32,11 +33,11 @@ for (const url of PRERENDER_ROUTES) {
   const file = url === '/' ? 'index.html' : `${url.slice(1)}.html`
   const out = path.join(CLIENT_DIR, file)
   await mkdir(path.dirname(out), { recursive: true })
-  await writeFile(out, page(url))
+  await writeFile(out, await page(url))
   console.log(`prerender ${url} → ${path.relative(ROOT, out)}`)
 }
 
-await writeFile(path.join(CLIENT_DIR, '404.html'), page('/404'))
+await writeFile(path.join(CLIENT_DIR, '404.html'), await page('/404'))
 console.log('prerender 404.html')
 
 const siteUrl = getSeo('/').canonical.replace(/\/$/, '')

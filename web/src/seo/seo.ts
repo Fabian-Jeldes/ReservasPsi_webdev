@@ -422,7 +422,13 @@ export function getSeo(pathname: string): SeoData {
 }
 
 /** Rutas /especialidades/:slug que redirigen a su anexo canónico (no duplicar en sitemap ni prerender) */
-const REDIRECTED_SPECIALIZATION_SLUGS = new Set(['disfuncion-erectil-psicogena'])
+const REDIRECTED_SPECIALIZATION_SLUGS = new Set([
+  'disfuncion-erectil-psicogena',
+  'control-eyaculatorio',
+  'cambios-deseo-sexual',
+  'ansiedad-desempeno',
+  'impacto-pornografia',
+])
 
 /** Rutas que se generan como HTML estático en build (además de 404.html) */
 export const PRERENDER_ROUTES = [
