@@ -922,6 +922,7 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
         modality: 'Online',
         since: 'Desde 2021',
         description: 'Terapia remota a través de plataformas seguras, desde la comodidad de tu propia casa y con horarios flexibles.',
+        opensBooking: true,
       },
       {
         name: 'Clínica Mediterra',

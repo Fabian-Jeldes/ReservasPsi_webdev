@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
@@ -16,7 +17,7 @@ export function NotFoundPage() {
         </p>
         <h1
           className="mb-8 text-5xl md:text-6xl"
-          style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as any, letterSpacing: 'var(--heading-spacing)' }}
+          style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'], letterSpacing: 'var(--heading-spacing)' }}
         >
           {NOT_FOUND_PAGE.title}
         </h1>

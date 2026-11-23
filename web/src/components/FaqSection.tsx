@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, type CSSProperties } from 'react'
 import { ChevronDown, MessageCircleQuestion, Sparkles } from 'lucide-react'
 import { FAQ_DATA } from '../data/site'
 import type { FaqCategory, FaqItem } from '../types/site'
@@ -35,7 +35,7 @@ export function FaqSection() {
   )
 
   return (
-    <section id="preguntas" className="scroll-mt-24 px-6 py-32">
+    <section id="preguntas" className="scroll-mt-16 px-6 py-32 md:scroll-mt-20">
       <div className="mx-auto max-w-4xl">
         {/* Encabezado cercano y transparente */}
         <div className="mb-14 text-center">
@@ -57,7 +57,7 @@ export function FaqSection() {
               color: 'var(--text-primary)',
               fontFamily: 'var(--font-heading)',
               fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
+              textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
               letterSpacing: 'var(--heading-spacing)',
             }}
           >

@@ -277,7 +277,7 @@ export function SpecializationsSection({ items: _items }: Props) {
     <section
       id="especialidades"
       aria-labelledby="areas-atencion-heading"
-      className="py-24 lg:py-32"
+      className="scroll-mt-16 py-24 md:scroll-mt-20 lg:py-32"
       style={{ backgroundColor: 'var(--bg-section-alt)' }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -357,6 +357,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                         src={category.customIconSrc}
                         alt=""
                         aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
                         className="h-11 w-11 shrink-0 rounded-lg object-contain transition-opacity duration-200"
                         style={{ opacity: isActive ? 1 : 0.78 }}
                       />
@@ -412,6 +414,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                             src={category.customIconSrc}
                             alt=""
                             aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
                             className="h-11 w-11 shrink-0 rounded-xl object-contain"
                           />
                         ) : (
@@ -522,6 +526,8 @@ export function SpecializationsSection({ items: _items }: Props) {
                     src={activeCategory.customIconSrc}
                     alt=""
                     aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
                     className="h-14 w-14 shrink-0 rounded-xl object-contain"
                   />
                 ) : (

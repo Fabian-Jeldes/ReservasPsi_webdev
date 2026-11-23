@@ -1,7 +1,9 @@
+import type { CSSProperties } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { ArrowRight, Calendar, Tag } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { BLOG_POSTS } from '../data/site'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
@@ -32,12 +34,14 @@ export function ArticlesPage() {
       <Navbar onLogoClick={goHome} onAgendarClick={goKyc} />
 
       {/* Header Section */}
-      <header className="mx-auto max-w-6xl px-6 pt-40 pb-20 text-center">
+      <header className="mx-auto max-w-6xl px-6 pt-36 pb-20 text-center">
+        <Breadcrumbs align="center" />
         <div className="mb-5 flex justify-center">
           <img
             src={iconPsicoeducacionUrl}
             alt=""
             aria-hidden="true"
+            decoding="async"
             className="h-16 w-16 shrink-0 object-contain transition-transform duration-300 hover:scale-105"
           />
         </div>
@@ -56,7 +60,7 @@ export function ArticlesPage() {
           style={{
             fontFamily: 'var(--font-heading)',
             fontWeight: 'var(--heading-weight)',
-            textTransform: 'var(--heading-transform)' as any,
+            textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
             letterSpacing: 'var(--heading-spacing)',
           }}
         >

@@ -48,7 +48,7 @@ export function HomePage() {
       <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
       
       {/* CTA Agendamiento Bajo Demanda */}
-      <section id="reserva" className="py-20 px-6 text-center">
+      <section id="reserva" className="scroll-mt-16 py-20 px-6 text-center md:scroll-mt-20">
         <div 
           className="max-w-4xl mx-auto p-12 border relative overflow-hidden group transition-all duration-500"
           style={{

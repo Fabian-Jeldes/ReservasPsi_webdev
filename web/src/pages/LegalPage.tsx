@@ -6,6 +6,7 @@ import type { LegalPageId } from '../types/site'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 
 type Props = {
   pageId: LegalPageId
@@ -53,6 +54,7 @@ export function LegalPage({ pageId }: Props) {
         />
 
         <div className="relative mx-auto max-w-4xl px-6">
+          <Breadcrumbs className="mb-5" />
           <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
             <Link
               to="/"

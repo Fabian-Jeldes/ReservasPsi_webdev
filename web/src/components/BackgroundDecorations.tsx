@@ -216,6 +216,7 @@ export function BackgroundDecorations() {
                       {
                         '--float-duration': item.floatDuration,
                         '--float-delay': item.floatDelay,
+                        '--wm-opacity': item.peakOpacity,
                         opacity: item.peakOpacity,
                       } as CSSProperties
                     }
@@ -225,6 +226,7 @@ export function BackgroundDecorations() {
                       src={item.src}
                       alt=""
                       aria-hidden="true"
+                      loading="lazy"
                       decoding="async"
                       className="watermark-icon h-14 w-14 md:h-18 md:w-18 object-contain"
                       style={

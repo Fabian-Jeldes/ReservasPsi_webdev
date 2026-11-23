@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FileText, Lock, ShieldCheck } from 'lucide-react'
-import logoPsAndrei from '../assets/logo-psandrei.jpeg'
-import instagramBotonImg from '../assets/InstagramBoton.jpeg'
+import logoPsAndrei from '../assets/logo-psandrei.webp'
+import instagramBotonImg from '../assets/InstagramBoton.webp'
 import { LEGAL_NAV_LINKS } from '../data/site'
 import type { LegalPageId } from '../types/site'
 
@@ -27,6 +27,8 @@ export function SiteFooter() {
               <img
                 src={logoPsAndrei}
                 alt="Logo Ps. Andrei Andrusco"
+                loading="lazy"
+                decoding="async"
                 className="h-10 w-10 shrink-0 rounded-lg object-contain"
               />
               <span

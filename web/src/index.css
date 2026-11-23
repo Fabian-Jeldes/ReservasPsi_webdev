@@ -58,30 +58,34 @@ body {
 @keyframes vtFadeOut {
   from {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
   to {
     opacity: 0;
+    transform: translate3d(0, -6px, 0);
   }
 }
 
 @keyframes vtFadeIn {
   from {
     opacity: 0;
+    transform: translate3d(0, 10px, 0);
   }
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 ::view-transition-old(root) {
-  animation: vtFadeOut 180ms ease-out both;
+  animation: vtFadeOut 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 ::view-transition-new(root) {
-  animation: vtFadeIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: vtFadeIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Fade-in limpio y rápido para el contenedor principal de la vista (sin blur ni scale) */
+/* Fundido limpio para el contenedor de la vista (sin transform para no romper position: fixed del Navbar) */
 @keyframes viewEnter {
   from {
     opacity: 0;
@@ -108,8 +112,25 @@ body {
 }
 
 .view-enter {
-  animation: viewEnter 280ms ease-out both;
+  animation: viewEnter 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  .view-enter,
+  .view-enter > div.min-h-screen > header > *:nth-child(1),
+  .view-enter > div.min-h-screen > header > div > *:nth-child(1),
+  .view-enter > div.min-h-screen > header > *:nth-child(2),
+  .view-enter > div.min-h-screen > header > div > *:nth-child(2),
+  .view-enter > div.min-h-screen > header > *:nth-child(3),
+  .view-enter > div.min-h-screen > header > div > *:nth-child(3),
+  .view-enter > div.min-h-screen > main,
+  .view-enter > div.min-h-screen > article,
+  .view-enter > div.min-h-screen > section:first-of-type {
+    animation: none !important;
+  }
 }
 
 /* Micro-cascada escalonada (0ms, 60ms, 120ms, 180ms) para los bloques hijos de cada vista */
@@ -472,9 +493,13 @@ article > section:first-of-type > div:has(> h3) {
   box-shadow: var(--callout-shadow-hover);
 }
 
-/* En tema claro, suavizar marcas de agua coral y asegurar alto contraste en negritas editoriales */
+/* En tema claro, realzar visibilidad y contraste de los SVG flotantes de fondo sin competir con el texto */
 html[data-theme="light"] .wm-float-wrapper {
-  opacity: 0.08 !important;
+  opacity: calc(var(--wm-opacity, 0.2) * 1.15) !important;
+}
+
+html[data-theme="light"] .watermark-icon {
+  filter: brightness(0.82) saturate(1.18) contrast(1.06);
 }
 
 html[data-theme="light"] .editorial-prose strong,
@@ -650,12 +675,14 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   border-left-width: 3px;
   border-left-color: transparent;
   color: var(--area-tab-text-inactive);
+  box-shadow: var(--area-tab-shadow);
+  transform: translate3d(0, 0, 0);
   transition:
-    background-color 260ms ease,
-    border-color 260ms ease,
-    color 240ms ease,
-    box-shadow 260ms ease,
-    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 260ms ease,
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .area-tab-btn:hover,
@@ -663,6 +690,8 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   background-color: var(--area-tab-bg-hover);
   border-color: var(--area-card-border-hover);
   color: var(--editorial-ivory);
+  box-shadow: var(--area-tab-shadow-hover);
+  transform: translate3d(4px, 0, 0);
 }
 
 .area-tab-btn.is-active {
@@ -671,6 +700,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   border-left-color: var(--area-tab-active-border);
   color: var(--editorial-ivory);
   box-shadow: var(--area-tab-active-shadow);
+  transform: translate3d(0, 0, 0);
 }
 
 .area-card {
@@ -679,9 +709,9 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition:
-    border-color 300ms ease,
-    background-color 300ms ease,
-    box-shadow 300ms ease;
+    border-color 360ms ease,
+    background-color 360ms ease,
+    box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .area-card-hero-frame {
@@ -705,33 +735,61 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 .area-subcard {
+  position: relative;
+  overflow: hidden;
   background-color: var(--area-subcard-bg);
   border: 1px solid var(--area-subcard-border);
+  box-shadow: var(--area-subcard-shadow);
   transform: translate3d(0, 0, 0);
   transition:
-    border-color 200ms ease,
-    background-color 200ms ease,
-    transform 200ms ease,
-    box-shadow 200ms ease;
+    border-color 320ms ease,
+    background-color 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.area-subcard::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--editorial-coral) 85%, transparent) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
 }
 
 .area-subcard:hover,
 .area-subcard:focus-visible {
   border-color: var(--area-subcard-border-hover);
   background-color: var(--area-subcard-bg-hover);
-  transform: translate3d(0, -2px, 0);
+  transform: translate3d(0, -4px, 0);
   box-shadow: var(--area-subcard-shadow-hover);
+}
+
+.area-subcard:hover::before,
+.area-subcard:focus-visible::before {
+  opacity: 1;
+}
+
+.area-subcard:active {
+  transform: translate3d(0, -1px, 0);
 }
 
 .area-subcard-cta {
   color: var(--area-subcard-cta);
-  transition: color 200ms ease;
+  transition: color 260ms ease;
 }
 
 .area-subcard-cta-arrow {
   display: inline-block;
   transform: translateX(0);
-  transition: transform 200ms ease;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .area-subcard:hover .area-subcard-cta,
@@ -741,7 +799,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 .area-subcard:hover .area-subcard-cta-arrow,
 .area-subcard:focus-visible .area-subcard-cta-arrow {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 /* Evitar que el ancho editorial 68ch o line-height de artículos altere descripciones de tarjetas */
@@ -759,8 +817,11 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
     animation: none;
   }
 
+  .area-tab-btn:hover,
+  .area-tab-btn:focus-visible,
   .area-subcard:hover,
   .area-subcard:focus-visible,
+  .area-subcard:active,
   .area-subcard:hover .area-subcard-cta-arrow,
   .area-subcard:focus-visible .area-subcard-cta-arrow {
     transform: none;
@@ -1009,6 +1070,69 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   }
 }
 
+/* Enlace secundario estético a "Sobre mí" bajo el retrato del Hero */
+.hero-about-link {
+  background-color: var(--bg-card);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  box-shadow: var(--shadow-card);
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms ease,
+    background-color 260ms ease,
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-about-link:hover,
+.hero-about-link:focus-visible {
+  border-color: var(--accent);
+  background-color: var(--bg-card-solid);
+  box-shadow: var(--callout-shadow-hover);
+  transform: translate3d(0, -3px, 0);
+}
+
+.hero-about-link:active {
+  transform: translate3d(0, -1px, 0);
+}
+
+@keyframes heroAboutBreathe {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.94;
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.09);
+    opacity: 1;
+  }
+}
+
+.hero-about-accent {
+  transform-origin: left center;
+  animation: heroAboutBreathe 4.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  will-change: transform, opacity;
+}
+
+.hero-about-link:hover .hero-about-accent,
+.hero-about-link:focus-visible .hero-about-accent {
+  animation-play-state: paused;
+  transform: translate3d(0, 0, 0) scale(1.07);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-about-link:hover,
+  .hero-about-link:focus-visible,
+  .hero-about-link:active,
+  .hero-about-link:hover .hero-about-accent,
+  .hero-about-link:focus-visible .hero-about-accent {
+    transform: none;
+  }
+
+  .hero-about-accent {
+    animation: none;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
  *  PSICOEDUCACIÓN Y BIENESTAR — CARRUSEL INFINITO (SEAMLESS LOOP)
  * ═══════════════════════════════════════════════════════════════════ */
@@ -1112,139 +1236,476 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
- *  NAVBAR — INDICADOR DE SECCIÓN ACTIVA (DESKTOP Y MÓVIL)
+ *  NAVBAR — BOTONERA ANALÓGICA CONTINUA (DESKTOP Y MÓVIL)
  * ═══════════════════════════════════════════════════════════════════ */
+.nav-rail-desktop {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 3.5px;
+  border-radius: 1rem;
+  background: var(--nav-rail-bg);
+  border: 1px solid var(--nav-rail-border);
+  box-shadow: var(--nav-rail-shadow);
+}
+
 .nav-link-desktop {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding-top: 0.35rem;
-  padding-bottom: 0.35rem;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.48rem 0.86rem 0.54rem;
+  border-radius: 0.26rem;
+  border: 1px solid var(--nav-key-border);
+  background-image: var(--nav-key-grooves), var(--nav-key-bg);
+  box-shadow: var(--nav-key-shadow);
+  letter-spacing: 0.025em;
+  word-spacing: 0.22em;
   color: var(--text-primary);
-  transition: color 240ms ease, text-shadow 260ms ease;
+  -webkit-font-smoothing: antialiased;
+  transform: translate3d(0, 0, 0);
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-desktop:first-child {
+  border-top-left-radius: 0.76rem;
+  border-bottom-left-radius: 0.76rem;
+}
+
+.nav-link-desktop:last-child {
+  border-top-right-radius: 0.76rem;
+  border-bottom-right-radius: 0.76rem;
+}
+
+@media (min-width: 1024px) {
+  .nav-link-desktop {
+    padding: 0.5rem 1.05rem 0.56rem;
+  }
+
+  .nav-link-desktop.nav-key-cta {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
 }
 
 .nav-link-desktop .brand-initial {
-  color: var(--accent);
-  transition: color 240ms ease, text-shadow 260ms ease;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text-primary));
+  font-weight: 700;
+  margin-right: 0.03em;
+  transition: color 200ms ease;
 }
 
+/* Filo inferior coral: oculto en reposo (sin rayitas grises), se ilumina solo en hover/activo */
 .nav-link-desktop::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  border-radius: 9999px;
-  background-color: var(--nav-active-color, #FF6B5B);
-  box-shadow: 0 0 10px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+  height: 2.5px;
+  background-color: var(--nav-key-bar);
+  box-shadow: 0 0 10px var(--nav-active-glow);
   opacity: 0;
   transform: scaleX(0);
   transform-origin: center;
   transition:
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 220ms ease;
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease;
   pointer-events: none;
 }
 
 .nav-link-desktop:hover,
 .nav-link-desktop:focus-visible {
-  color: var(--nav-active-color, var(--accent-text));
+  z-index: 1;
+  color: var(--text-primary);
+  background-image: var(--nav-key-grooves), var(--nav-key-hover-bg);
+  border-color: var(--nav-key-hover-border);
+  box-shadow: var(--nav-key-hover-shadow);
+  transform: translate3d(0, -0.5px, 0);
+}
+
+.nav-link-desktop:hover .brand-initial,
+.nav-link-desktop:focus-visible .brand-initial {
+  color: var(--nav-active-color);
+}
+
+.nav-link-desktop:hover::after,
+.nav-link-desktop:focus-visible::after {
+  opacity: 0.6;
+  transform: scaleX(0.55);
+}
+
+.nav-link-desktop:active {
+  transform: translate3d(0, 1.5px, 0);
+  box-shadow: var(--nav-key-press-shadow);
+}
+
+/* Micro-ola muy lenta (ida y vuelta suave) sobre relieves y ranuras solo en el botón activo */
+@keyframes navActiveGrooveWave {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.nav-link-desktop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background-image: linear-gradient(
+    105deg,
+    transparent 18%,
+    var(--nav-wave-sheen) 44%,
+    var(--nav-wave-core) 50%,
+    var(--nav-wave-sheen) 56%,
+    transparent 82%
+  );
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-mask-image: repeating-linear-gradient(
+    180deg,
+    #000 0px,
+    #000 1px,
+    rgba(0, 0, 0, 0.24) 1px,
+    rgba(0, 0, 0, 0.24) 3px
+  );
+  mask-image: repeating-linear-gradient(
+    180deg,
+    #000 0px,
+    #000 1px,
+    rgba(0, 0, 0, 0.24) 1px,
+    rgba(0, 0, 0, 0.24) 3px
+  );
+  transition: opacity 380ms ease;
 }
 
 .nav-link-desktop.is-active {
-  color: var(--nav-active-color, #FF6B5B);
-  text-shadow: 0 0 18px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+  z-index: 2;
+  color: var(--nav-key-active-text);
+  background-image: var(--nav-key-grooves), var(--nav-key-active-bg);
+  border-color: var(--nav-key-active-border);
+  box-shadow: var(--nav-key-active-shadow);
+  transform: translate3d(0, 1px, 0);
+}
+
+.nav-link-desktop.is-active::before {
+  opacity: 1;
+  animation: navActiveGrooveWave 9.5s ease-in-out infinite;
 }
 
 .nav-link-desktop.is-active .brand-initial {
-  color: var(--nav-active-color, #FF6B5B);
-  text-shadow: 0 0 14px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+  color: var(--nav-active-color);
 }
 
 .nav-link-desktop.is-active::after {
   opacity: 1;
   transform: scaleX(1);
+  background-image: linear-gradient(
+    90deg,
+    var(--nav-key-bar) 0%,
+    var(--nav-wave-bar-peak) 50%,
+    var(--nav-key-bar) 100%
+  );
+  background-size: 240% 100%;
+  animation: navActiveGrooveWave 9.5s ease-in-out infinite;
 }
 
-/* Indicador activo en el menú móvil (drawer) sin provocar layout shift */
+/* Destello diagonal discreto con larga pausa + respiración cálida exclusiva para "Agendar Cita" */
+@keyframes navCtaGlint {
+  0%, 72% {
+    transform: translate3d(-135%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.72;
+  }
+  94% {
+    transform: translate3d(155%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(155%, 0, 0) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+@keyframes navCtaWarmGlow {
+  0%, 100% {
+    box-shadow: var(--nav-key-cta-shadow);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 240, 236, 0.52),
+      inset 0 -2px 0 rgba(105, 20, 15, 0.68),
+      0 6px 22px -3px rgba(255, 107, 91, 0.62);
+  }
+}
+
+/* Tecla principal "Agendar Cita" integrada en la botonera analógica (estilo tecla roja REC) */
+.nav-link-desktop.nav-key-cta {
+  color: #ffffff;
+  background-image: var(--nav-key-grooves), var(--nav-key-cta-bg);
+  border-color: var(--nav-key-cta-border);
+  box-shadow: var(--nav-key-cta-shadow);
+  text-shadow: 0 1px 2px rgba(90, 16, 12, 0.45);
+  animation: navCtaWarmGlow 6.2s ease-in-out infinite;
+}
+
+/* Reflejo diagonal sutil y periódico, distinto a la micro-ola de la sección activa */
+.nav-link-desktop.nav-key-cta::before {
+  inset: -10% 0;
+  width: 58%;
+  opacity: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 244, 240, 0.24) 48%,
+    rgba(255, 255, 255, 0.42) 52%,
+    transparent 100%
+  );
+  background-size: 100% 100%;
+  animation: navCtaGlint 8.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
+
+.nav-link-desktop.nav-key-cta::after {
+  opacity: 0;
+  transform: scaleX(0);
+  background-color: rgba(255, 245, 243, 0.9);
+  background-image: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: none;
+}
+
+.nav-link-desktop.nav-key-cta:hover,
+.nav-link-desktop.nav-key-cta:focus-visible {
+  color: #ffffff;
+  background-image: var(--nav-key-grooves), var(--nav-key-cta-hover-bg);
+  border-color: var(--nav-key-cta-border);
+  box-shadow: var(--nav-key-cta-hover-shadow);
+  transform: translate3d(0, -0.5px, 0);
+  animation-play-state: paused;
+}
+
+.nav-link-desktop.nav-key-cta:hover::after,
+.nav-link-desktop.nav-key-cta:focus-visible::after {
+  opacity: 0.85;
+  transform: scaleX(0.8);
+}
+
+.nav-link-desktop.nav-key-cta:active {
+  transform: translate3d(0, 1.5px, 0);
+  box-shadow: var(--nav-key-cta-press-shadow);
+  animation-play-state: paused;
+}
+
+/* Botonera vertical móvil con ADN táctil de escritorio e indicador LED circular tipo "REC" */
+@keyframes navRecLedOn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.72;
+  }
+  55% {
+    transform: scale(1.16);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.nav-rail-mobile {
+  padding: 6px;
+  border-radius: 1.15rem;
+  background: var(--nav-rail-bg);
+  border: 1px solid var(--nav-rail-border);
+  box-shadow: var(--nav-rail-shadow);
+}
+
 .nav-link-mobile {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.72rem;
+  border: 1px solid var(--nav-key-border);
+  background-image: var(--nav-key-grooves), var(--nav-key-bg);
+  box-shadow: var(--nav-key-shadow);
   color: var(--text-primary);
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.nav-link-mobile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background-image: linear-gradient(
+    105deg,
+    transparent 18%,
+    var(--nav-wave-sheen) 44%,
+    var(--nav-wave-core) 50%,
+    var(--nav-wave-sheen) 56%,
+    transparent 82%
+  );
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-mask-image: repeating-linear-gradient(
+    180deg,
+    #000 0px,
+    #000 1px,
+    rgba(0, 0, 0, 0.24) 1px,
+    rgba(0, 0, 0, 0.24) 3px
+  );
+  mask-image: repeating-linear-gradient(
+    180deg,
+    #000 0px,
+    #000 1px,
+    rgba(0, 0, 0, 0.24) 1px,
+    rgba(0, 0, 0, 0.24) 3px
+  );
+  transition: opacity 380ms ease;
+}
+
+.nav-link-mobile:hover,
+.nav-link-mobile:focus-visible {
+  background-image: var(--nav-key-grooves), var(--nav-key-hover-bg);
+  border-color: var(--nav-key-hover-border);
+  box-shadow: var(--nav-key-hover-shadow);
+}
+
+.nav-link-mobile:active {
+  box-shadow: var(--nav-key-press-shadow);
 }
 
 .nav-link-mobile .brand-initial {
-  color: var(--accent);
-  transition: color 240ms ease, text-shadow 260ms ease;
+  color: color-mix(in srgb, var(--accent) 88%, var(--text-primary));
+  font-weight: 700;
+  margin-right: 0.03em;
+  transition: color 220ms ease;
 }
 
 .nav-link-mobile-label {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding-bottom: 0.25rem;
+  z-index: 1;
+  display: inline-block;
+  letter-spacing: 0.025em;
+  word-spacing: 0.2em;
 }
 
-.nav-link-mobile-dot {
-  position: absolute;
-  left: -1.15rem;
-  top: calc(50% - 2px);
-  width: 7px;
-  height: 7px;
+/* Indicador circular tipo "REC": círculo grisáceo en reposo → luz roja/coral encendida en activo */
+.nav-mobile-led {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 11px;
+  height: 11px;
   border-radius: 9999px;
-  background-color: var(--nav-active-color, #FF6B5B);
-  box-shadow: 0 0 10px var(--nav-active-glow, rgba(255, 107, 91, 0.55));
-  opacity: 0;
-  transform: translateY(-50%) scale(0);
+  flex-shrink: 0;
+  background: var(--nav-led-idle-bg);
+  border: 1px solid var(--nav-led-idle-border);
+  box-shadow: var(--nav-led-idle-shadow);
   transition:
-    opacity 240ms ease,
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
+    background 260ms ease,
+    border-color 260ms ease,
+    box-shadow 280ms ease,
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nav-link-mobile-label::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  border-radius: 9999px;
-  background-color: var(--nav-active-color, #FF6B5B);
-  box-shadow: 0 0 12px var(--nav-active-glow, rgba(255, 107, 91, 0.5));
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition:
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 220ms ease;
-  pointer-events: none;
+.nav-link-mobile:hover .nav-mobile-led,
+.nav-link-mobile:focus-visible .nav-mobile-led {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 .nav-link-mobile.is-active {
-  color: var(--nav-active-color, #FF6B5B);
-  text-shadow: 0 0 22px var(--nav-active-glow, rgba(255, 107, 91, 0.45));
+  color: var(--nav-key-active-text);
+  background-image: var(--nav-key-grooves), var(--nav-key-active-bg);
+  border-color: var(--nav-key-active-border);
+  box-shadow: var(--nav-key-active-shadow);
+}
+
+.nav-link-mobile.is-active::before {
+  opacity: 1;
+  animation: navActiveGrooveWave 9.5s ease-in-out infinite;
 }
 
 .nav-link-mobile.is-active .brand-initial {
-  color: var(--nav-active-color, #FF6B5B);
-  text-shadow: 0 0 16px var(--nav-active-glow, rgba(255, 107, 91, 0.5));
+  color: var(--nav-active-color);
 }
 
-.nav-link-mobile.is-active .nav-link-mobile-dot {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
+.nav-link-mobile.is-active .nav-mobile-led {
+  background: var(--nav-led-active-bg);
+  border-color: var(--nav-led-active-border);
+  box-shadow: var(--nav-led-active-shadow);
+  animation: navRecLedOn 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.nav-link-mobile.is-active .nav-link-mobile-label::after {
-  opacity: 1;
-  transform: scaleX(1);
+/* Tecla coral "Agendar Cita" integrada en el cierre de la botonera móvil */
+.nav-link-mobile.nav-mobile-cta {
+  color: #ffffff;
+  background-image: var(--nav-key-grooves), var(--nav-key-cta-bg);
+  border-color: var(--nav-key-cta-border);
+  box-shadow: var(--nav-key-cta-shadow);
+  text-shadow: 0 1px 2px rgba(90, 16, 12, 0.45);
+}
+
+.nav-link-mobile.nav-mobile-cta:hover,
+.nav-link-mobile.nav-mobile-cta:focus-visible {
+  background-image: var(--nav-key-grooves), var(--nav-key-cta-hover-bg);
+  border-color: var(--nav-key-cta-border);
+  box-shadow: var(--nav-key-cta-hover-shadow);
+}
+
+.nav-link-mobile.nav-mobile-cta:active {
+  box-shadow: var(--nav-key-cta-press-shadow);
+}
+
+.nav-mobile-led.nav-mobile-led-cta {
+  background: radial-gradient(circle at 35% 32%, #FFFFFF 0%, #FFE4E0 52%, rgba(255, 200, 194, 0.9) 100%);
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.65);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .nav-link-desktop::after,
-  .nav-link-mobile-dot,
-  .nav-link-mobile-label::after {
-    transition: opacity 150ms ease;
+  .nav-mobile-led {
+    transition: opacity 150ms ease, background 150ms ease, border-color 150ms ease;
+  }
+
+  .nav-link-desktop.nav-key-cta,
+  .nav-link-mobile.is-active .nav-mobile-led {
+    animation: none;
+  }
+
+  .nav-link-desktop.is-active::before,
+  .nav-link-desktop.nav-key-cta::before,
+  .nav-link-mobile.is-active::before {
+    animation: none;
+    opacity: 0;
+  }
+
+  .nav-link-desktop.is-active::after,
+  .nav-link-desktop.nav-key-cta::after {
+    animation: none;
+    background-image: none;
   }
 }

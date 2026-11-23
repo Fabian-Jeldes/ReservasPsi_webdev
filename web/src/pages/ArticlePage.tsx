@@ -1,7 +1,9 @@
+import type { CSSProperties } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { getArticleDataBySlug } from '../data/site'
 import { NotFoundPage } from './NotFoundPage'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
@@ -29,6 +31,7 @@ export function ArticlePage() {
 
       {/* Hero Section */}
       <header className="mx-auto max-w-6xl px-6 pt-32 pb-20">
+        <Breadcrumbs />
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 items-center">
           <div>
             <div
@@ -46,7 +49,7 @@ export function ArticlePage() {
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
@@ -147,7 +150,7 @@ export function ArticlePage() {
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
@@ -178,7 +181,7 @@ export function ArticlePage() {
                 style={{
                   fontFamily: 'var(--font-heading)',
                   fontWeight: 'var(--heading-weight)',
-                  textTransform: 'var(--heading-transform)' as any,
+                  textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                   letterSpacing: 'var(--heading-spacing)',
                 }}
                 dangerouslySetInnerHTML={{ __html: section.title || '' }}
@@ -373,7 +376,7 @@ export function ArticlePage() {
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >

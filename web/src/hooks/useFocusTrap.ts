@@ -65,7 +65,7 @@ export function useFocusTrap({
         const target = previousFocusRef.current
         previousFocusRef.current = null
         if (target && target.isConnected) {
-          target.focus()
+          target.focus({ preventScroll: true })
         }
       }
       wasActiveRef.current = false
@@ -81,7 +81,7 @@ export function useFocusTrap({
         container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
       ).filter((el) => el.offsetParent !== null)
       if (inside.length > 0 && !container.contains(document.activeElement)) {
-        inside[0].focus()
+        inside[0].focus({ preventScroll: true })
       }
     })
 

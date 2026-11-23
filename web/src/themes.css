@@ -104,18 +104,21 @@ html[data-theme="standard"] {
   --area-subcard-bg: rgba(255, 255, 255, 0.025);
   --area-subcard-bg-hover: rgba(255, 255, 255, 0.055);
   --area-subcard-border: rgba(247, 243, 235, 0.12);
-  --area-subcard-border-hover: rgba(238, 75, 53, 0.45);
-  --area-subcard-shadow-hover: 0 10px 26px -14px rgba(0, 0, 0, 0.45), 0 0 14px -4px rgba(238, 75, 53, 0.22);
+  --area-subcard-border-hover: rgba(238, 75, 53, 0.52);
+  --area-subcard-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --area-subcard-shadow-hover: 0 16px 34px -14px rgba(0, 0, 0, 0.62), 0 6px 20px -8px rgba(238, 75, 53, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --area-subcard-subtitle: #FF7866;
   --area-subcard-cta: rgba(247, 243, 235, 0.5);
-  --area-card-shadow-hover: 0 16px 36px -20px rgba(0, 0, 0, 0.55);
+  --area-card-shadow-hover: 0 18px 40px -18px rgba(0, 0, 0, 0.60);
   --area-tab-bg: rgba(255, 255, 255, 0.02);
-  --area-tab-bg-hover: rgba(255, 255, 255, 0.05);
+  --area-tab-bg-hover: rgba(255, 255, 255, 0.055);
   --area-tab-border: rgba(247, 243, 235, 0.10);
+  --area-tab-shadow: 0 2px 10px -6px rgba(0, 0, 0, 0.35);
+  --area-tab-shadow-hover: 0 10px 24px -12px rgba(0, 0, 0, 0.50), 0 0 14px -6px rgba(238, 75, 53, 0.22);
   --area-tab-text-inactive: rgba(247, 243, 235, 0.70);
-  --area-tab-active-bg: rgba(238, 75, 53, 0.10);
+  --area-tab-active-bg: rgba(238, 75, 53, 0.11);
   --area-tab-active-border: #EE4B35;
-  --area-tab-active-shadow: 0 8px 24px -10px rgba(238, 75, 53, 0.32);
+  --area-tab-active-shadow: 0 10px 28px -10px rgba(238, 75, 53, 0.36), 0 4px 12px -6px rgba(0, 0, 0, 0.45);
 
   /* Sección Reseñas — Transición oscura editorial (sin corte brusco) */
   --reviews-band-bg: linear-gradient(180deg, transparent 0%, rgba(22, 45, 69, 0.38) 50%, transparent 100%);
@@ -151,10 +154,43 @@ html[data-theme="standard"] {
   --hero-frame-mobile-border: rgba(255, 107, 91, 0.58);
   --hero-frame-mobile-shadow: 0 12px 32px -12px rgba(255, 77, 77, 0.20), 0 6px 18px -6px rgba(0, 0, 0, 0.44), 0 0 14px rgba(255, 77, 77, 0.10);
 
-  /* Navbar y Drawer móvil */
+  /* Navbar y Drawer móvil — Botonera analógica cohesiva (Dark) */
   --nav-drawer-backdrop: rgba(18, 40, 62, 0.94);
   --nav-active-color: #FF6B5B;
-  --nav-active-glow: rgba(255, 107, 91, 0.45);
+  --nav-active-glow: rgba(255, 107, 91, 0.40);
+  --nav-border-scrolled: rgba(255, 107, 91, 0.24);
+  --nav-rail-bg: linear-gradient(180deg, rgba(8, 13, 26, 0.86) 0%, rgba(13, 21, 40, 0.84) 100%);
+  --nav-rail-border: rgba(255, 107, 91, 0.26);
+  --nav-rail-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.62), 0 6px 20px -10px rgba(0, 0, 0, 0.55), 0 0 16px -8px rgba(255, 107, 91, 0.20);
+  --nav-key-grooves: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.022) 0px, rgba(255, 255, 255, 0.022) 1px, rgba(0, 0, 0, 0.065) 1px, rgba(0, 0, 0, 0.065) 3px);
+  --nav-key-bg: linear-gradient(180deg, rgba(28, 39, 62, 0.90) 0%, rgba(16, 25, 43, 0.95) 78%, rgba(11, 18, 33, 0.98) 100%);
+  --nav-key-border: rgba(247, 243, 235, 0.09);
+  --nav-key-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 0 rgba(2, 6, 23, 0.78), 0 2px 4px rgba(0, 0, 0, 0.36);
+  --nav-key-hover-bg: linear-gradient(180deg, rgba(37, 51, 78, 0.94) 0%, rgba(21, 32, 54, 0.97) 78%, rgba(14, 22, 40, 0.99) 100%);
+  --nav-key-hover-border: rgba(255, 107, 91, 0.38);
+  --nav-key-hover-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -2px 0 rgba(2, 6, 23, 0.82), 0 4px 10px -3px rgba(0, 0, 0, 0.48);
+  --nav-key-press-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  --nav-key-active-bg: linear-gradient(180deg, rgba(255, 107, 91, 0.22) 0%, rgba(214, 65, 51, 0.14) 76%, rgba(140, 34, 28, 0.24) 100%);
+  --nav-key-active-border: rgba(255, 107, 91, 0.56);
+  --nav-key-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 168, 158, 0.20), 0 0 14px -4px rgba(255, 107, 91, 0.36);
+  --nav-key-active-text: #FFF7F5;
+  --nav-key-cta-bg: linear-gradient(180deg, #FF6959 0%, #EA4A3B 74%, #C73326 100%);
+  --nav-key-cta-hover-bg: linear-gradient(180deg, #FF796B 0%, #F25546 74%, #D43B2E 100%);
+  --nav-key-cta-border: rgba(255, 178, 168, 0.45);
+  --nav-key-cta-shadow: inset 0 1px 0 rgba(255, 232, 228, 0.40), inset 0 -2px 0 rgba(105, 20, 15, 0.72), 0 6px 18px -4px rgba(255, 77, 77, 0.52);
+  --nav-key-cta-hover-shadow: inset 0 1px 0 rgba(255, 240, 236, 0.50), inset 0 -2px 0 rgba(105, 20, 15, 0.78), 0 8px 22px -4px rgba(255, 77, 77, 0.66);
+  --nav-key-cta-press-shadow: inset 0 2px 5px rgba(90, 16, 12, 0.68), inset 0 -1px 0 rgba(255, 200, 194, 0.16);
+  --nav-key-bar: #FF6B5B;
+  --nav-key-bar-idle: rgba(247, 243, 235, 0.18);
+  --nav-led-idle-bg: radial-gradient(circle at 35% 30%, rgba(148, 163, 184, 0.42) 0%, rgba(71, 85, 105, 0.55) 68%, rgba(30, 41, 59, 0.85) 100%);
+  --nav-led-idle-border: rgba(247, 243, 235, 0.16);
+  --nav-led-idle-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.65), 0 1px 0 rgba(255, 255, 255, 0.08);
+  --nav-led-active-bg: radial-gradient(circle at 35% 32%, #FFD6D1 0%, #FF6B5B 42%, #D63428 100%);
+  --nav-led-active-border: rgba(255, 165, 155, 0.85);
+  --nav-led-active-shadow: 0 0 10px rgba(255, 107, 91, 0.85), 0 0 20px rgba(255, 77, 77, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+  --nav-wave-sheen: rgba(255, 138, 124, 0.10);
+  --nav-wave-core: rgba(255, 206, 198, 0.22);
+  --nav-wave-bar-peak: #FFB2A8;
 }
 
 
@@ -253,18 +289,21 @@ html[data-theme="light"] {
   --area-subcard-bg: #FBF8F3;
   --area-subcard-bg-hover: #FFFFFF;
   --area-subcard-border: rgba(19, 35, 58, 0.13);
-  --area-subcard-border-hover: rgba(255, 107, 91, 0.65);
-  --area-subcard-shadow-hover: 0 10px 24px -10px rgba(255, 107, 91, 0.18), 0 4px 12px -4px rgba(19, 35, 58, 0.08);
+  --area-subcard-border-hover: rgba(255, 107, 91, 0.68);
+  --area-subcard-shadow: 0 4px 14px -8px rgba(19, 35, 58, 0.08), 0 1px 3px rgba(19, 35, 58, 0.04);
+  --area-subcard-shadow-hover: 0 16px 32px -12px rgba(19, 35, 58, 0.14), 0 6px 18px -8px rgba(255, 107, 91, 0.24), 0 1px 3px rgba(19, 35, 58, 0.05);
   --area-subcard-subtitle: #D64133;
   --area-subcard-cta: #526075;
-  --area-card-shadow-hover: 0 16px 36px -16px rgba(19, 35, 58, 0.12);
-  --area-tab-bg: rgba(255, 255, 255, 0.78);
+  --area-card-shadow-hover: 0 18px 40px -14px rgba(19, 35, 58, 0.14);
+  --area-tab-bg: rgba(255, 255, 255, 0.82);
   --area-tab-bg-hover: #FFFFFF;
   --area-tab-border: rgba(19, 35, 58, 0.13);
+  --area-tab-shadow: 0 3px 12px -6px rgba(19, 35, 58, 0.07), 0 1px 2px rgba(19, 35, 58, 0.03);
+  --area-tab-shadow-hover: 0 10px 24px -10px rgba(19, 35, 58, 0.13), 0 4px 12px -6px rgba(255, 107, 91, 0.18);
   --area-tab-text-inactive: #334155;
-  --area-tab-active-bg: rgba(255, 107, 91, 0.10);
+  --area-tab-active-bg: rgba(255, 107, 91, 0.11);
   --area-tab-active-border: #FF6B5B;
-  --area-tab-active-shadow: 0 8px 22px -10px rgba(255, 107, 91, 0.28);
+  --area-tab-active-shadow: 0 10px 26px -10px rgba(255, 107, 91, 0.30), 0 4px 12px -6px rgba(19, 35, 58, 0.08);
 
   /* Sección Reseñas — Tarjeta blanca limpia sobre banda crema suave */
   --reviews-band-bg: linear-gradient(180deg, transparent 0%, rgba(243, 236, 225, 0.65) 50%, transparent 100%);
@@ -300,10 +339,43 @@ html[data-theme="light"] {
   --hero-frame-mobile-border: rgba(255, 107, 91, 0.55);
   --hero-frame-mobile-shadow: 0 10px 26px -10px rgba(255, 107, 91, 0.18), 0 4px 14px -6px rgba(19, 35, 58, 0.08);
 
-  /* Navbar y Drawer móvil (opaco para evitar superposición visual) */
+  /* Navbar y Drawer móvil — Botonera analógica cohesiva (Light) */
   --nav-drawer-backdrop: #FBF8F3;
   --nav-active-color: #D64133;
   --nav-active-glow: rgba(255, 107, 91, 0.28);
+  --nav-border-scrolled: rgba(255, 107, 91, 0.28);
+  --nav-rail-bg: linear-gradient(180deg, #EDE5D7 0%, #F4EEE3 100%);
+  --nav-rail-border: rgba(255, 107, 91, 0.34);
+  --nav-rail-shadow: inset 0 2px 4px rgba(19, 35, 58, 0.08), 0 4px 14px -8px rgba(19, 35, 58, 0.12), 0 1px 0 rgba(255, 255, 255, 0.95);
+  --nav-key-grooves: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0px, rgba(255, 255, 255, 0.34) 1px, rgba(19, 35, 58, 0.022) 1px, rgba(19, 35, 58, 0.022) 3px);
+  --nav-key-bg: linear-gradient(180deg, #FFFFFF 0%, #FAF6F0 78%, #F2EBE0 100%);
+  --nav-key-border: rgba(19, 35, 58, 0.12);
+  --nav-key-shadow: inset 0 1px 0 #FFFFFF, inset 0 -2px 0 rgba(19, 35, 58, 0.10), 0 1px 3px rgba(19, 35, 58, 0.06);
+  --nav-key-hover-bg: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 80%, #F6EFE5 100%);
+  --nav-key-hover-border: rgba(255, 107, 91, 0.44);
+  --nav-key-hover-shadow: inset 0 1px 0 #FFFFFF, inset 0 -2px 0 rgba(19, 35, 58, 0.12), 0 3px 8px -2px rgba(19, 35, 58, 0.10);
+  --nav-key-press-shadow: inset 0 2px 4px rgba(19, 35, 58, 0.14), inset 0 -1px 0 rgba(255, 255, 255, 0.6);
+  --nav-key-active-bg: linear-gradient(180deg, rgba(255, 107, 91, 0.15) 0%, rgba(255, 107, 91, 0.08) 76%, rgba(255, 107, 91, 0.14) 100%);
+  --nav-key-active-border: rgba(214, 65, 51, 0.50);
+  --nav-key-active-shadow: inset 0 2px 4px rgba(19, 35, 58, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 1px 8px -3px rgba(255, 107, 91, 0.24);
+  --nav-key-active-text: #B83125;
+  --nav-key-cta-bg: linear-gradient(180deg, #FF7466 0%, #F25546 74%, #D43C2E 100%);
+  --nav-key-cta-hover-bg: linear-gradient(180deg, #FF8174 0%, #F76052 74%, #DE4436 100%);
+  --nav-key-cta-border: rgba(214, 65, 51, 0.55);
+  --nav-key-cta-shadow: inset 0 1px 0 rgba(255, 236, 232, 0.48), inset 0 -2px 0 rgba(145, 32, 24, 0.48), 0 4px 14px -4px rgba(255, 107, 91, 0.48);
+  --nav-key-cta-hover-shadow: inset 0 1px 0 rgba(255, 244, 242, 0.58), inset 0 -2px 0 rgba(145, 32, 24, 0.54), 0 6px 18px -4px rgba(255, 107, 91, 0.60);
+  --nav-key-cta-press-shadow: inset 0 2px 5px rgba(130, 26, 20, 0.48), inset 0 -1px 0 rgba(255, 224, 220, 0.24);
+  --nav-key-bar: #FF6B5B;
+  --nav-key-bar-idle: rgba(19, 35, 58, 0.15);
+  --nav-led-idle-bg: radial-gradient(circle at 35% 30%, #DCE2EA 0%, #B3BECA 68%, #8F9CAE 100%);
+  --nav-led-idle-border: rgba(19, 35, 58, 0.20);
+  --nav-led-idle-shadow: inset 0 1px 2px rgba(19, 35, 58, 0.22), 0 1px 0 rgba(255, 255, 255, 0.9);
+  --nav-led-active-bg: radial-gradient(circle at 35% 32%, #FFE2DE 0%, #FF6B5B 42%, #C93125 100%);
+  --nav-led-active-border: rgba(214, 65, 51, 0.85);
+  --nav-led-active-shadow: 0 0 9px rgba(255, 107, 91, 0.72), 0 0 16px rgba(255, 107, 91, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.65);
+  --nav-wave-sheen: rgba(255, 107, 91, 0.09);
+  --nav-wave-core: rgba(255, 107, 91, 0.20);
+  --nav-wave-bar-peak: #FFA399;
 }
 
 

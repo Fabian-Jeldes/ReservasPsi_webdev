@@ -61,11 +61,20 @@ export default function App() {
   const prevPathRef = useRef(location.pathname)
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const navState = (location.state ?? null) as
+      | { instantScroll?: boolean; skipScroll?: boolean }
+      | null
+
     const scrollAfterNav = () => {
+      if (navState?.skipScroll) return
       if (location.hash) {
         const target = document.getElementById(location.hash.slice(1))
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth' })
+          target.scrollIntoView({
+            behavior: prefersReducedMotion || navState?.instantScroll ? 'auto' : 'smooth',
+            block: 'start',
+          })
           return
         }
       }
@@ -73,14 +82,12 @@ export default function App() {
     }
 
     if (location.pathname === prevPathRef.current) {
-      setDisplayLocation(location)
       scrollAfterNav()
       return
     }
 
     prevPathRef.current = location.pathname
     const doc = document as ViewTransitionDoc
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (doc.startViewTransition && !prefersReducedMotion) {
       doc.startViewTransition(() => {
@@ -89,11 +96,18 @@ export default function App() {
         })
         scrollAfterNav()
       })
-    } else {
+      return
+    }
+
+    const rafId = window.requestAnimationFrame(() => {
       setDisplayLocation(location)
       scrollAfterNav()
-    }
+    })
+    return () => window.cancelAnimationFrame(rafId)
   }, [location])
+
+  const activeLocation =
+    displayLocation.pathname === location.pathname ? location : displayLocation
 
   return (
     <div className="relative min-h-screen overflow-x-clip">
@@ -101,8 +115,8 @@ export default function App() {
       <CustomCursor />
       <SeoSync />
       <BackgroundDecorations />
-      <div key={displayLocation.pathname} className="view-enter relative z-10">
-        <Routes location={displayLocation}>
+      <div key={activeLocation.pathname} className="view-enter relative z-10">
+        <Routes location={activeLocation}>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre-mi" element={<AboutPage />} />
           <Route path="/articulos" element={<ArticlesPage />} />

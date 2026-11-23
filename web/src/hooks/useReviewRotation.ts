@@ -33,14 +33,20 @@ export function useReviewRotation(total: number, options?: Options) {
   const [fade, setFade] = useState(true)
 
   useEffect(() => {
-    if (total > 0) setOrder(shuffle(Array.from({ length: total }, (_, i) => i)))
+    if (total <= 0) return
+    const rafId = window.requestAnimationFrame(() => {
+      setOrder(shuffle(Array.from({ length: total }, (_, i) => i)))
+    })
+    return () => window.cancelAnimationFrame(rafId)
   }, [total])
 
   const positionRef = useRef(position)
-  positionRef.current = position
-
   const orderRef = useRef(order)
-  orderRef.current = order
+
+  useEffect(() => {
+    positionRef.current = position
+    orderRef.current = order
+  }, [position, order])
 
   // Reshuffle when we exhaust the current order
   const advance = useCallback(() => {
@@ -48,7 +54,7 @@ export function useReviewRotation(total: number, options?: Options) {
     if (nextPos >= orderRef.current.length) {
       // Reshuffle, avoiding the last shown review at position 0
       const lastShown = orderRef.current[orderRef.current.length - 1]
-      let newOrder = shuffle(Array.from({ length: total }, (_, i) => i))
+      const newOrder = shuffle(Array.from({ length: total }, (_, i) => i))
       // If the new first element is the same as the last shown, swap it
       if (newOrder[0] === lastShown && newOrder.length > 1) {
         const swapIdx = 1 + Math.floor(Math.random() * (newOrder.length - 1))

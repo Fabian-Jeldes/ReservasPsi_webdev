@@ -6,6 +6,7 @@ import { ArrowLeft, BookOpen } from 'lucide-react'
 import { Navbar } from '../../components/Navbar'
 import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
+import { Breadcrumbs } from '../../components/Breadcrumbs'
 
 export function DispareuniaPage() {
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ export function DispareuniaPage() {
       <main id="contenido-principal">
       {/* Encabezado Principal (H1) */}
       <header className="mx-auto max-w-4xl px-6 pt-32 pb-14">
+        <Breadcrumbs className="mb-5" />
         <button
           type="button"
           onClick={() => navigate('/#especialidades')}

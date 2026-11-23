@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { useState, useEffect, useCallback, type CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { PROFILE_IMAGE_URL } from '../data/site'
 import { ElasticBorderCard } from './ElasticBorderCard'
-import instagramBotonImg from '../assets/InstagramBoton.jpeg'
+import instagramBotonImg from '../assets/InstagramBoton.webp'
 
 const HERO_ROTATING_PHRASES = [
   'bienestar sexual',
@@ -89,7 +90,7 @@ export function HeroSection({ onContactClick }: Props) {
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-heading)',
             fontWeight: 'var(--heading-weight)',
-            textTransform: 'var(--heading-transform)' as any,
+            textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
             fontSize: 'clamp(2.2rem, 3.6vw, 3.25rem)',
             letterSpacing: '-0.02em',
           }}
@@ -214,47 +215,68 @@ export function HeroSection({ onContactClick }: Props) {
         </div>
       </div>
 
-      {/* Fotografía con marco rojo coral corporativo, sombra difusa cálida y borde elástico reactivo al cursor */}
-      <div className="group relative shrink-0">
-        <div
-          className="pointer-events-none absolute -inset-3 rounded-full blur-[65px] transition-all duration-700 group-hover:blur-[80px]"
-          style={{ backgroundColor: 'var(--accent-glow)' }}
-        />
-        <ElasticBorderCard
-          className="h-64 w-64 md:h-96 md:w-96"
-          cornerRadius={28}
-          maxPull={20}
-          borderWidth={2}
-          restingStrokeOpacity={0.9}
-          innerPadding={12}
-          backgroundColor="var(--bg-card)"
-          boxShadow="var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.4), 0 10px 30px -6px rgba(255, 115, 77, 0.25), 0 0 25px rgba(255, 77, 77, 0.2))"
-        >
-          <img
-            src={PROFILE_IMAGE_URL}
-            alt="Andrei Andrusco Fidalgo, psicólogo clínico"
-            width={1200}
-            height={1052}
-            fetchPriority="high"
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+      {/* Fotografía con marco rojo coral corporativo, sombra difusa cálida y enlace directo a Sobre mí */}
+      <div className="flex shrink-0 flex-col items-center">
+        <div className="group relative">
+          <div
+            className="pointer-events-none absolute -inset-3 rounded-full blur-[65px] transition-all duration-700 group-hover:blur-[80px]"
+            aria-hidden="true"
+            style={{ backgroundColor: 'var(--accent-glow)' }}
           />
-          {/* Acceso directo a Instagram centrado en la parte baja del marco coral */}
-          <a
-            href="https://www.instagram.com/ps.aandrusco"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Seguir a Ps. Andrei Andrusco en Instagram"
-            title="Instagram @ps.aandrusco"
-            className="hero-ig-btn absolute bottom-3 left-1/2 z-10 block h-11 w-11 overflow-hidden rounded-xl md:bottom-4 md:h-14 md:w-14 md:rounded-2xl"
+          <ElasticBorderCard
+            className="h-64 w-64 md:h-96 md:w-96"
+            cornerRadius={28}
+            maxPull={20}
+            borderWidth={2}
+            restingStrokeOpacity={0.9}
+            innerPadding={12}
+            backgroundColor="var(--bg-card)"
+            boxShadow="var(--shadow-photo-frame, 0 24px 60px -12px rgba(255, 77, 77, 0.4), 0 10px 30px -6px rgba(255, 115, 77, 0.25), 0 0 25px rgba(255, 77, 77, 0.2))"
           >
             <img
-              src={instagramBotonImg}
-              alt="Instagram @ps.aandrusco"
-              className="h-full w-full object-cover"
-              decoding="async"
+              src={PROFILE_IMAGE_URL}
+              alt="Andrei Andrusco Fidalgo, psicólogo clínico"
+              width={1200}
+              height={1052}
+              fetchPriority="high"
+              className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             />
-          </a>
-        </ElasticBorderCard>
+            {/* Acceso directo a Instagram centrado en la parte baja del marco coral */}
+            <a
+              href="https://www.instagram.com/ps.aandrusco"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Seguir a Ps. Andrei Andrusco en Instagram"
+              title="Instagram @ps.aandrusco"
+              className="hero-ig-btn absolute bottom-3 left-1/2 z-10 block h-11 w-11 overflow-hidden rounded-xl md:bottom-4 md:h-14 md:w-14 md:rounded-2xl"
+            >
+              <img
+                src={instagramBotonImg}
+                alt="Instagram @ps.aandrusco"
+                className="h-full w-full object-cover"
+                decoding="async"
+              />
+            </a>
+          </ElasticBorderCard>
+        </div>
+
+        <Link
+          to="/sobre-mi"
+          className="bullet-reveal-card hero-about-link mt-6 inline-flex items-center gap-3 rounded-full border py-2.5 pl-5 pr-2.5 text-sm font-semibold backdrop-blur-md"
+        >
+          <span className="tracking-wide" style={{ color: 'var(--text-primary)' }}>
+            Conoce más
+            <span
+              className="hero-about-accent font-editorial-accent ml-1.5 inline-block pr-1 font-normal"
+              style={{ color: 'var(--accent-text)' }}
+            >
+              sobre mí
+            </span>
+          </span>
+          <span className="bullet-reveal-arrow-btn" aria-hidden="true">
+            <ArrowUpRight size={15} className="bullet-reveal-arrow-icon" />
+          </span>
+        </Link>
       </div>
     </header>
   )

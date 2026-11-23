@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapPin, GraduationCap, Heart, Briefcase, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ABOUT_PAGE_DATA } from '../data/site'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { ElasticBorderCard } from '../components/ElasticBorderCard'
 
 export function AboutPage() {
@@ -42,6 +43,7 @@ export function AboutPage() {
         />
 
         <div className="relative mx-auto max-w-5xl px-6">
+          <Breadcrumbs />
           {/* Title */}
           <div className="mb-4">
             <span
@@ -61,7 +63,7 @@ export function AboutPage() {
               color: 'var(--text-primary)',
               fontFamily: 'var(--font-heading)',
               fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
+              textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
               letterSpacing: 'var(--heading-spacing)',
             }}
           >
@@ -142,7 +144,7 @@ export function AboutPage() {
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
@@ -196,7 +198,7 @@ export function AboutPage() {
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
@@ -246,7 +248,7 @@ export function AboutPage() {
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >
@@ -272,6 +274,7 @@ export function AboutPage() {
 
           <div className="space-y-5 max-w-prose">
             {data.donde.workplaces.map((wp, i) => {
+              const isInteractive = Boolean(wp.url || wp.opensBooking)
               const cardContent = (
                 <div className="relative z-10">
                   <div className="flex items-start justify-between gap-3 mb-2.5">
@@ -280,7 +283,7 @@ export function AboutPage() {
                         className="bullet-reveal-title text-lg font-bold leading-snug"
                         style={{ color: 'var(--text-primary)' }}
                       >
-                        <span className="bullet-reveal-dot" aria-hidden />
+                        <span className="bullet-reveal-dot" aria-hidden="true" />
                         <span className="bullet-reveal-text">{wp.name}</span>
                       </h3>
                       <span
@@ -301,10 +304,10 @@ export function AboutPage() {
                       </span>
                     </div>
 
-                    {wp.url && (
+                    {isInteractive && (
                       <span
                         className="bullet-reveal-arrow-btn mt-0.5"
-                        aria-hidden
+                        aria-hidden="true"
                       >
                         <ArrowUpRight
                           size={15}
@@ -321,6 +324,20 @@ export function AboutPage() {
                   </p>
                 </div>
               )
+
+              if (wp.opensBooking) {
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={openBooking}
+                    aria-label={`Agendar cita en ${wp.name}`}
+                    className="bullet-reveal-card clinical-callout clinical-callout-link group relative w-full text-left"
+                  >
+                    {cardContent}
+                  </button>
+                )
+              }
 
               return wp.url ? (
                 <a
@@ -366,7 +383,7 @@ export function AboutPage() {
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 'var(--heading-weight)',
-                textTransform: 'var(--heading-transform)' as any,
+                textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
                 letterSpacing: 'var(--heading-spacing)',
               }}
             >

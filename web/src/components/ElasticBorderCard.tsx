@@ -34,7 +34,7 @@ function anchorAlongSegment(
  * como las 4 esquinas (hasta `12px`) se desplazan suavemente hacia el cursor (mx, my),
  * usando 8 curvas Bézier cuadráticas continuas sin esquinas clavadas ni vértices rígidos.
  */
-export function buildLiquidPath(
+function buildLiquidPath(
   w: number,
   h: number,
   r: number,
@@ -231,64 +231,65 @@ export function ElasticBorderCard({
     }
   }, [cornerRadius, maxPull, restingStrokeOpacity, innerPadding])
 
-  const tick = useCallback(() => {
-    const s = stateRef.current
-
-    // Interpolación continua y sedosa (lerp 0.07) para coordenadas, intensidad y desplazamiento magnético
-    const lerp = 0.07
-    s.x += (s.targetX - s.x) * lerp
-    s.y += (s.targetY - s.y) * lerp
-    s.intensity += (s.targetIntensity - s.intensity) * lerp
-    s.offsetX += (s.targetOffsetX - s.offsetX) * lerp
-    s.offsetY += (s.targetOffsetY - s.offsetY) * lerp
-
-    applyGeometry()
-
-    const posDelta = Math.hypot(s.targetX - s.x, s.targetY - s.y)
-    const offsetDelta = Math.hypot(
-      s.targetOffsetX - s.offsetX,
-      s.targetOffsetY - s.offsetY,
-    )
-
-    if (
-      s.targetIntensity > 0 ||
-      s.intensity >= 0.004 ||
-      offsetDelta > 0.05 ||
-      (s.active && posDelta > 0.25)
-    ) {
-      s.rafId = requestAnimationFrame(tick)
-    } else {
-      s.intensity = 0
-      s.offsetX = 0
-      s.offsetY = 0
-      s.active = false
-      s.rafId = 0
-      applyGeometry()
-    }
-  }, [applyGeometry])
-
   const startLoop = useCallback(() => {
-    if (!stateRef.current.rafId) {
-      stateRef.current.rafId = requestAnimationFrame(tick)
+    if (stateRef.current.rafId) return
+
+    const step = () => {
+      const s = stateRef.current
+
+      // Interpolación continua y sedosa (lerp 0.07) para coordenadas, intensidad y desplazamiento magnético
+      const lerp = 0.07
+      s.x += (s.targetX - s.x) * lerp
+      s.y += (s.targetY - s.y) * lerp
+      s.intensity += (s.targetIntensity - s.intensity) * lerp
+      s.offsetX += (s.targetOffsetX - s.offsetX) * lerp
+      s.offsetY += (s.targetOffsetY - s.offsetY) * lerp
+
+      applyGeometry()
+
+      const posDelta = Math.hypot(s.targetX - s.x, s.targetY - s.y)
+      const offsetDelta = Math.hypot(
+        s.targetOffsetX - s.offsetX,
+        s.targetOffsetY - s.offsetY,
+      )
+
+      if (
+        s.targetIntensity > 0 ||
+        s.intensity >= 0.004 ||
+        offsetDelta > 0.05 ||
+        (s.active && posDelta > 0.25)
+      ) {
+        s.rafId = requestAnimationFrame(step)
+      } else {
+        s.intensity = 0
+        s.offsetX = 0
+        s.offsetY = 0
+        s.active = false
+        s.rafId = 0
+        applyGeometry()
+      }
     }
-  }, [tick])
+
+    stateRef.current.rafId = requestAnimationFrame(step)
+  }, [applyGeometry])
 
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
+    const state = stateRef.current
 
     const updateSize = () => {
       const rect = el.getBoundingClientRect()
       const w = Math.round(rect.width)
       const h = Math.round(rect.height)
       if (w > 0 && h > 0) {
-        stateRef.current.w = w
-        stateRef.current.h = h
-        if (!stateRef.current.active) {
-          stateRef.current.x = w / 2
-          stateRef.current.y = h / 2
-          stateRef.current.targetX = w / 2
-          stateRef.current.targetY = h / 2
+        state.w = w
+        state.h = h
+        if (!state.active) {
+          state.x = w / 2
+          state.y = h / 2
+          state.targetX = w / 2
+          state.targetY = h / 2
         }
         if (svgRef.current) {
           svgRef.current.setAttribute('viewBox', `0 0 ${w} ${h}`)
@@ -304,9 +305,9 @@ export function ElasticBorderCard({
 
     return () => {
       ro.disconnect()
-      if (stateRef.current.rafId) {
-        cancelAnimationFrame(stateRef.current.rafId)
-        stateRef.current.rafId = 0
+      if (state.rafId) {
+        cancelAnimationFrame(state.rafId)
+        state.rafId = 0
       }
     }
   }, [applyGeometry])

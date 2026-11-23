@@ -1,7 +1,9 @@
+import type { CSSProperties } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Navbar } from '../components/Navbar'
 import { SiteFooter } from '../components/SiteFooter'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { getSpecializationBySlug } from '../data/site'
 import { NotFoundPage } from './NotFoundPage'
 
@@ -28,6 +30,7 @@ export function SpecializationPage() {
 
       {/* Hero Section */}
       <header className="mx-auto max-w-6xl px-6 pt-32 pb-20">
+        <Breadcrumbs />
         <div className="max-w-3xl">
           <div
             className="mb-4 inline-block px-3.5 py-1 text-xs font-bold uppercase tracking-widest rounded-full"
@@ -44,7 +47,7 @@ export function SpecializationPage() {
             style={{
               fontFamily: 'var(--font-heading)',
               fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
+              textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
               letterSpacing: 'var(--heading-spacing)',
             }}
           >

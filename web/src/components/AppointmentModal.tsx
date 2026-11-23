@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { X, Calendar, Mail, Phone, User, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { kycSchema } from '../types/site'
 import type { KycFormState } from '../types/site'
@@ -18,6 +18,7 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
   const [formData, setFormData] = useState<KycFormState>(EMPTY_KYC)
   const [errors, setErrors] = useState<Partial<Record<keyof KycFormState, string>>>({})
   const dialogRef = useRef<HTMLDivElement>(null)
+  const step2HeadingRef = useRef<HTMLHeadingElement>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -28,10 +29,11 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
     e.preventDefault()
     const result = kycSchema.safeParse(formData)
     if (!result.success) {
-      const fieldErrors: any = {}
+      const fieldErrors: Partial<Record<keyof KycFormState, string>> = {}
       result.error.issues.forEach(issue => {
-        if (issue.path[0]) {
-          fieldErrors[issue.path[0]] = issue.message
+        const field = issue.path[0]
+        if (typeof field === 'string' && field in formData) {
+          fieldErrors[field as keyof KycFormState] = issue.message
         }
       })
       setErrors(fieldErrors)
@@ -41,6 +43,12 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
     setStep(2)
     track('reserva_datos_completados')
   }
+
+  useEffect(() => {
+    if (isOpen && step === 2) {
+      step2HeadingRef.current?.focus()
+    }
+  }, [isOpen, step])
 
   const handleClose = useCallback(() => {
     onClose()
@@ -232,8 +240,10 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
               </div>
               
               <h2
+                ref={step2HeadingRef}
+                tabIndex={-1}
                 id="appointment-modal-title"
-                className="mb-4 text-3xl font-bold"
+                className="mb-4 text-3xl font-bold focus:outline-none"
                 style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}
               >
                 ¡Datos recibidos!

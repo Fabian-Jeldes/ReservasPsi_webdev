@@ -9,7 +9,6 @@ export type NavSectionId =
   | 'preguntas'
 
 export const HOME_SECTION_IDS: readonly NavSectionId[] = [
-  'sobre-mi',
   'especialidades',
   'reviews',
   'blog',
@@ -21,7 +20,7 @@ function isHomeSectionId(value: string): value is NavSectionId {
 }
 
 function getRouteSection(pathname: string): NavSectionId | null {
-  if (pathname === '/') return 'sobre-mi'
+  if (pathname === '/') return null
   if (pathname === '/sobre-mi') return 'sobre-mi'
   if (pathname === '/articulos' || pathname.startsWith('/articulos/')) return 'blog'
   if (
@@ -37,15 +36,15 @@ function getRouteSection(pathname: string): NavSectionId | null {
 
 /**
  * Detecta la sección activa en la barra de navegación superior:
- * - En la página principal (`/`): sigue el scroll vertical (combinando IntersectionObserver
- *   y cálculo determinista por posición con rAF) para evitar fallos en secciones altas.
- * - En páginas internas (`/sobre-mi`, `/articulos`, especialidades): resalta la sección de ruta.
+ * - En la página principal (`/`): en el hero inicial no marca ningún enlace (evitando
+ *   que "Sobre Mí" parezca ya abierto); al bajar destaca la sección visible en scroll.
+ * - En páginas internas (`/sobre-mi`, `/articulos`, especialidades): resalta la ruta activa.
  * - Al hacer clic en un enlace de ancla, bloquea brevemente la sección destino durante el
  *   scroll suave para evitar parpadeos intermedios.
  */
 export function useActiveNavSection() {
   const location = useLocation()
-  const [homeSection, setHomeSection] = useState<NavSectionId>('sobre-mi')
+  const [homeSection, setHomeSection] = useState<NavSectionId | null>(null)
 
   const lockedSectionRef = useRef<NavSectionId | null>(null)
   const lockTimerRef = useRef<number | null>(null)
@@ -58,7 +57,7 @@ export function useActiveNavSection() {
     }
   }, [])
 
-  const computeVisibleSection = useCallback((): NavSectionId => {
+  const computeVisibleSection = useCallback((): NavSectionId | null => {
     const navHeight = window.innerWidth >= 768 ? 80 : 64
     const activationLine = Math.max(navHeight + 48, window.innerHeight * 0.32)
 
@@ -74,7 +73,7 @@ export function useActiveNavSection() {
       }
     }
 
-    let current: NavSectionId = HOME_SECTION_IDS[0]
+    let current: NavSectionId | null = null
     for (const id of HOME_SECTION_IDS) {
       const el = document.getElementById(id)
       if (!el) continue
@@ -101,11 +100,16 @@ export function useActiveNavSection() {
   )
 
   const selectSection = useCallback(
-    (section: NavSectionId) => {
+    (section: NavSectionId | null) => {
+      if (section === null) {
+        clearLock()
+        setHomeSection(null)
+        return
+      }
       armLock(section)
       setHomeSection(section)
     },
-    [armLock],
+    [armLock, clearLock],
   )
 
   useEffect(() => {

@@ -1,9 +1,10 @@
-import { useState, useMemo, type ReactNode } from 'react'
+import { useState, useMemo, type CSSProperties, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react'
 import { Navbar } from './Navbar'
 import { SiteFooter } from './SiteFooter'
 import { AppointmentModal } from './AppointmentModal'
+import { Breadcrumbs } from './Breadcrumbs'
 import { SEO } from './SEO'
 
 export type InstitutionalReference = {
@@ -83,6 +84,7 @@ export function SpecializationPageShell({
 
       {/* Encabezado Principal con H1 */}
       <header className="mx-auto max-w-5xl px-6 pt-32 pb-16">
+        <Breadcrumbs />
         <button
           type="button"
           onClick={() => navigate('/#especialidades')}
@@ -110,7 +112,7 @@ export function SpecializationPageShell({
             style={{
               fontFamily: 'var(--font-heading)',
               fontWeight: 'var(--heading-weight)',
-              textTransform: 'var(--heading-transform)' as any,
+              textTransform: 'var(--heading-transform)' as CSSProperties['textTransform'],
               letterSpacing: 'var(--heading-spacing)',
             }}
           >

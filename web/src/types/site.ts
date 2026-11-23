@@ -126,6 +126,7 @@ export type AboutWorkplace = {
   since: string
   description: string
   url?: string
+  opensBooking?: boolean
 }
 
 export type AboutPageData = {

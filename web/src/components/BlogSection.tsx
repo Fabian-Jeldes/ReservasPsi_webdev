@@ -70,7 +70,7 @@ export function BlogSection({ posts }: Props) {
   }
 
   return (
-    <section id="blog" className="mx-auto max-w-6xl px-6 pt-32 pb-32 lg:pb-44">
+    <section id="blog" className="mx-auto max-w-6xl scroll-mt-16 px-6 pt-32 pb-32 md:scroll-mt-20 lg:pb-44">
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="mb-4 flex items-center gap-4">
@@ -78,6 +78,8 @@ export function BlogSection({ posts }: Props) {
               src={iconPsicoeducacionUrl}
               alt=""
               aria-hidden="true"
+              loading="lazy"
+              decoding="async"
               className="h-14 w-14 shrink-0 object-contain transition-transform duration-300 hover:scale-105"
             />
             <h2

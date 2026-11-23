@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Review } from '../types/site'
 
@@ -12,16 +12,52 @@ type Props = {
 const MAX_VISIBLE_DOTS = 7
 
 export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
-  const [activeIndex, setActiveIndex] = useState(currentIndex)
+  const [manualSelection, setManualSelection] = useState<{
+    parentIndex: number
+    index: number
+  } | null>(null)
   const [direction, setDirection] = useState<'left' | 'right'>('right')
   const [isAnimating, setIsAnimating] = useState(false)
+  const timeoutRef = useRef<number | undefined>(undefined)
 
-  // Sync with auto-rotation whenever the parent advances the index
   useEffect(() => {
-    if (!isAnimating) {
-      setActiveIndex(currentIndex)
+    return () => {
+      if (timeoutRef.current !== undefined) {
+        window.clearTimeout(timeoutRef.current)
+      }
     }
-  }, [currentIndex])
+  }, [])
+
+  const activeIndex =
+    manualSelection && manualSelection.parentIndex === currentIndex
+      ? manualSelection.index
+      : currentIndex
+
+  const totalReviews = reviews.length
+
+  // Windowed dots: show at most MAX_VISIBLE_DOTS centered on activeIndex
+  const visibleDots = useMemo(() => {
+    if (totalReviews <= MAX_VISIBLE_DOTS) {
+      const all: number[] = []
+      for (let i = 0; i < totalReviews; i++) all.push(i)
+      return all
+    }
+    const half = Math.floor(MAX_VISIBLE_DOTS / 2)
+    let start = activeIndex - half
+    let end = activeIndex + half
+
+    if (start < 0) {
+      start = 0
+      end = MAX_VISIBLE_DOTS - 1
+    } else if (end >= totalReviews) {
+      end = totalReviews - 1
+      start = totalReviews - MAX_VISIBLE_DOTS
+    }
+
+    const indices: number[] = []
+    for (let i = start; i <= end; i++) indices.push(i)
+    return indices
+  }, [activeIndex, totalReviews])
 
   const current = reviews[activeIndex]
   if (!current) return null
@@ -31,9 +67,13 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
     setIsAnimating(true)
     setDirection(dir)
 
-    setTimeout(() => {
-      setActiveIndex(idx)
+    if (timeoutRef.current !== undefined) {
+      window.clearTimeout(timeoutRef.current)
+    }
+    timeoutRef.current = window.setTimeout(() => {
+      setManualSelection({ parentIndex: currentIndex, index: idx })
       setIsAnimating(false)
+      timeoutRef.current = undefined
     }, 350)
   }
 
@@ -47,33 +87,10 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
     goTo(next, 'right')
   }
 
-  // Windowed dots: show at most MAX_VISIBLE_DOTS centered on activeIndex
-  const visibleDots = useMemo(() => {
-    const total = reviews.length
-    if (total <= MAX_VISIBLE_DOTS) {
-      return reviews.map((_, i) => i)
-    }
-    const half = Math.floor(MAX_VISIBLE_DOTS / 2)
-    let start = activeIndex - half
-    let end = activeIndex + half
-
-    if (start < 0) {
-      start = 0
-      end = MAX_VISIBLE_DOTS - 1
-    } else if (end >= total) {
-      end = total - 1
-      start = total - MAX_VISIBLE_DOTS
-    }
-
-    const indices: number[] = []
-    for (let i = start; i <= end; i++) indices.push(i)
-    return indices
-  }, [activeIndex, reviews.length])
-
   return (
     <section
       id="reviews"
-      className="relative z-10 w-full overflow-x-clip py-20 lg:py-28"
+      className="relative z-10 w-full scroll-mt-16 overflow-x-clip py-20 md:scroll-mt-20 lg:py-28"
       style={{
         background: 'var(--reviews-band-bg)',
         color: 'var(--reviews-ink)',

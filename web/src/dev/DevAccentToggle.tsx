@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { Moon, Sun } from 'lucide-react'
 
 const THEMES = [
@@ -9,6 +9,7 @@ const THEMES = [
 type ThemeId = (typeof THEMES)[number]['id']
 
 const STORAGE_KEY = 'andi-dev-theme'
+const themeListeners = new Set<() => void>()
 
 function resolveStoredTheme(stored: string | null): number {
   if (!stored) return 0
@@ -19,15 +20,50 @@ function resolveStoredTheme(stored: string | null): number {
   return idx >= 0 ? idx : 0
 }
 
+function subscribeTheme(callback: () => void) {
+  themeListeners.add(callback)
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY) callback()
+  }
+  window.addEventListener('storage', onStorage)
+  return () => {
+    themeListeners.delete(callback)
+    window.removeEventListener('storage', onStorage)
+  }
+}
+
+function getClientThemeIndex(): number {
+  try {
+    return resolveStoredTheme(localStorage.getItem(STORAGE_KEY))
+  } catch {
+    return 0
+  }
+}
+
+function getServerThemeIndex(): number {
+  return 0
+}
+
+function persistTheme(id: ThemeId) {
+  try {
+    localStorage.setItem(STORAGE_KEY, id)
+  } catch {
+    // Ignore storage quota or private-mode restrictions
+  }
+  themeListeners.forEach((listener) => listener())
+}
+
 /**
  * Selector entre el tema oscuro original (`standard`) y el tema claro (`light`).
- * Persiste en localStorage para mantener la elección al recargar.
+ * Persiste en localStorage para mantener la elección al recargar, usando
+ * useSyncExternalStore para evitar discrepancias de hidratación con el SSR.
  */
 export function DevAccentToggle() {
-  const [themeIndex, setThemeIndex] = useState(() => {
-    if (typeof window === 'undefined') return 0
-    return resolveStoredTheme(localStorage.getItem(STORAGE_KEY))
-  })
+  const themeIndex = useSyncExternalStore(
+    subscribeTheme,
+    getClientThemeIndex,
+    getServerThemeIndex,
+  )
 
   const [expanded, setExpanded] = useState(false)
 
@@ -35,7 +71,6 @@ export function DevAccentToggle() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = current.id
-    localStorage.setItem(STORAGE_KEY, current.id)
 
     if (current.id !== 'standard') {
       delete document.documentElement.dataset.devAccent
@@ -47,13 +82,20 @@ export function DevAccentToggle() {
   }, [current.id])
 
   const selectTheme = (idx: number) => {
-    setThemeIndex(idx)
+    const nextTheme = THEMES[idx]
+    if (nextTheme) {
+      persistTheme(nextTheme.id)
+    }
     setExpanded(false)
   }
 
   const renderIcon = (id: ThemeId, active: boolean) => {
     const color = active ? 'var(--accent)' : 'var(--text-muted)'
-    return id === 'light' ? <Sun size={15} style={{ color }} /> : <Moon size={15} style={{ color }} />
+    return id === 'light' ? (
+      <Sun size={15} aria-hidden="true" style={{ color }} />
+    ) : (
+      <Moon size={15} aria-hidden="true" style={{ color }} />
+    )
   }
 
   return (
