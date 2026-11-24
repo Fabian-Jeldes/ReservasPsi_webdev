@@ -852,23 +852,6 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   transform: translate3d(0, -2px, 0);
 }
 
-.reviews-doctoralia-btn {
-  background-color: var(--reviews-accent);
-  color: #F7F3EB;
-  box-shadow: 0 8px 22px -8px rgba(238, 75, 53, 0.48);
-  transition:
-    background-color 200ms ease,
-    transform 200ms ease,
-    box-shadow 200ms ease;
-}
-
-.reviews-doctoralia-btn:hover,
-.reviews-doctoralia-btn:focus-visible {
-  background-color: var(--reviews-accent-hover);
-  box-shadow: 0 10px 26px -6px rgba(238, 75, 53, 0.58);
-  transform: translateY(-1px);
-}
-
 .reviews-nav-btn {
   border: 1px solid var(--reviews-nav-border);
   background-color: var(--reviews-nav-bg);
@@ -890,7 +873,6 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 @media (prefers-reduced-motion: reduce) {
   .reviews-editorial-card:hover,
-  .reviews-doctoralia-btn:hover,
   .reviews-nav-btn:hover {
     transform: none;
   }

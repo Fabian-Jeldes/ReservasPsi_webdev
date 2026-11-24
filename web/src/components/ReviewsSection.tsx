@@ -100,19 +100,6 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
         <div className="reviews-editorial-card relative overflow-hidden rounded-[1.35rem] md:rounded-[1.75rem]">
           {/* Inner content — padded so nothing overflows */}
           <div className="p-8 md:p-12 lg:p-14">
-            {/* Badge — inside card, top-right */}
-            <div className="mb-8 flex justify-end">
-              <a
-                href="https://www.doctoralia.cl/perfil/andrei-andrusco-fidalgo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="reviews-doctoralia-btn inline-flex cursor-pointer items-center gap-1.5 rounded-full px-5 py-2 text-xs font-bold tracking-wide active:scale-95"
-                aria-label="Ver perfil verificado en Doctoralia de Andrei Andrusco Fidalgo"
-              >
-                Doctoralia Verified
-              </a>
-            </div>
-
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12 lg:gap-16">
               {/* Left column: title */}
               <div className="shrink-0 text-center md:text-left">

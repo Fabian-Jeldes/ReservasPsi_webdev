@@ -83,11 +83,8 @@ export const PROFESSIONAL = {
     'Ansiedad de rendimiento',
     'Terapia de pareja',
   ],
-  /** Perfiles públicos reales presentes en el sitio (Doctoralia e Instagram) */
-  sameAs: [
-    'https://www.doctoralia.cl/perfil/andrei-andrusco-fidalgo',
-    'https://www.instagram.com/ps.aandrusco',
-  ],
+  /** Perfiles públicos reales presentes en el sitio */
+  sameAs: ['https://www.instagram.com/ps.aandrusco'],
 }
 
 export const SEO_PAGES = {

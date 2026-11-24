@@ -140,7 +140,7 @@ export const LEGAL_PAGES_DATA: Record<LegalPageId, LegalPageData> = {
         title: '4. Propiedad intelectual y enlaces a terceros',
         paragraphs: [
           'Los contenidos originales, estructura editorial y material divulgativo de este sitio pertenecen a <strong>Ps. Andrei Andrusco Fidalgo</strong>. Pueden citarse con fines educativos mencionando explícitamente la fuente.',
-          'Los enlaces externos hacia instituciones académicas, artículos científicos, clínicas, Doctoralia, Instagram o Google Calendar se incluyen como referencia y se rigen por los términos y políticas de cada plataforma externa.',
+          'Los enlaces externos hacia instituciones académicas, artículos científicos, clínicas, Instagram o Google Calendar se incluyen como referencia y se rigen por los términos y políticas de cada plataforma externa.',
         ],
       },
     ],
