@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function CuadrosDepresivosPage() {
   const navigate = useNavigate()
@@ -122,14 +123,14 @@ export function CuadrosDepresivosPage() {
               1.2. Marco Diagnóstico según el DSM-5-TR (APA, 2022)
             </h3>
             <p>
-              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychological Association (APA) (puedes revisar sus parámetros en{' '}
+              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychiatric Association (APA) (puedes revisar sus parámetros en{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ) en 2022, establece los criterios formales para la evaluación de los episodios depresivos y trastornos relacionados:
             </p>
@@ -322,6 +323,13 @@ export function CuadrosDepresivosPage() {
 
         <hr className="theme-divider" />
 
+        <ClinicalBookingCta
+          topicLabel="un cuadro depresivo o alteraciones del ánimo"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
+
+        <hr className="theme-divider" />
+
         {/* Referencias Bibliográficas */}
         <section
           id="referencias"
@@ -345,15 +353,15 @@ export function CuadrosDepresivosPage() {
 
           <ol className="list-decimal pl-6 space-y-3 text-base">
             <li>
-              American Psychological Association. (2022).{' '}
+              American Psychiatric Association. (2022).{' '}
               <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5th ed., text rev.; DSM-5-TR). Sitio web oficial:{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               .
             </li>

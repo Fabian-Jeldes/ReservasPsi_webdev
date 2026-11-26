@@ -14,6 +14,7 @@ import { SiteFooter } from '../components/SiteFooter'
 import { AppointmentModal } from '../components/AppointmentModal'
 import { useReviewRotation } from '../hooks/useReviewRotation'
 import { FaqSection } from '../components/FaqSection'
+import { HowItWorksSection } from '../components/HowItWorksSection'
 
 export function HomePage() {
   const DISPLAY_REVIEWS = useMemo(() => {
@@ -46,11 +47,12 @@ export function HomePage() {
       <TrustBarSection />
       <SpecializationsSection items={SPECIALIZATIONS} />
       <ReviewsSection reviews={DISPLAY_REVIEWS} currentIndex={currentReview} fade={fade} />
-      
+      <HowItWorksSection />
+
       {/* CTA Agendamiento Bajo Demanda */}
-      <section id="reserva" className="scroll-mt-16 py-20 px-6 text-center md:scroll-mt-20">
+      <section id="reserva" className="scroll-mt-16 px-4 pt-4 pb-12 text-center sm:px-6 md:scroll-mt-20 md:pt-6 md:pb-16">
         <div 
-          className="max-w-4xl mx-auto p-12 border relative overflow-hidden group transition-all duration-500"
+          className="max-w-4xl mx-auto p-7 sm:p-10 md:p-12 border relative overflow-hidden group transition-all duration-500"
           style={{
             borderRadius: 'var(--radius-card-lg)',
             borderColor: 'var(--accent)',
@@ -67,7 +69,7 @@ export function HomePage() {
             }}
           />
           <h2 
-            className="text-3xl md:text-4xl mb-8 relative z-10"
+            className="text-2xl sm:text-3xl md:text-4xl mb-4 md:mb-8 relative z-10"
             style={{ 
               color: 'var(--text-primary)', 
               fontFamily: 'var(--font-heading)',
@@ -84,7 +86,7 @@ export function HomePage() {
             ?
           </h2>
           <p 
-            className="text-xl mb-10 relative z-10 max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl mb-7 md:mb-10 relative z-10 max-w-2xl mx-auto"
             style={{ color: 'var(--text-secondary)' }}
           >
             Reserva un espacio seguro para explorar tu bienestar sin juicios ni presiones.
@@ -92,10 +94,10 @@ export function HomePage() {
           <button
             type="button"
             onClick={openBooking}
-            className="relative z-10 px-10 py-5 font-bold text-lg transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 cursor-pointer"
+            className="relative z-10 px-8 py-4 md:px-10 md:py-5 font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 cursor-pointer"
             style={{
-              backgroundColor: 'var(--accent)',
-              color: '#ffffff',
+              backgroundColor: 'var(--btn-accent-bg)',
+              color: 'var(--btn-accent-text)',
               borderRadius: 'var(--radius-btn)',
               boxShadow: 'var(--shadow-accent)',
             }}

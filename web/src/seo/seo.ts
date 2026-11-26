@@ -72,15 +72,18 @@ const person = {
 }
 
 const business = {
-  '@type': 'ProfessionalService',
+  '@type': ['MedicalBusiness', 'ProfessionalService'],
   '@id': BUSINESS_ID,
   name: SITE_NAME,
   description: SEO_PAGES.home.description,
   url: abs('/'),
   email: `mailto:${PROFESSIONAL.email}`,
   image: abs(DEFAULT_OG_IMAGE),
+  priceRange: '$30.000 - $35.000 CLP',
+  currenciesAccepted: 'CLP',
+  paymentAccepted: 'Transferencia bancaria',
   areaServed: { '@type': 'Country', name: 'Chile' },
-  availableLanguage: 'es',
+  availableLanguage: 'es-CL',
   address: {
     '@type': 'PostalAddress',
     addressLocality: PRACTICE_LOCATION.addressLocality,
@@ -92,6 +95,51 @@ const business = {
     dayOfWeek: PRACTICE_LOCATION.openingDays,
     opens: PRACTICE_LOCATION.opens,
     closes: PRACTICE_LOCATION.closes,
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Sesiones de Psicología Clínica y Sexología Online',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        name: 'Sesión Inicial de Evaluación (60 min online)',
+        price: '30000',
+        priceCurrency: 'CLP',
+        availability: 'https://schema.org/InStock',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Sesión Inicial de Evaluación en Psicología y Sexología Clínica',
+          serviceType: 'Psicoterapia clínica y sexología online',
+          areaServed: { '@type': 'Country', name: 'Chile' },
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Sesión de Seguimiento Individual (60 min online)',
+        price: '35000',
+        priceCurrency: 'CLP',
+        availability: 'https://schema.org/InStock',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Sesión de Seguimiento en Psicoterapia y Sexología Clínica',
+          serviceType: 'Psicoterapia clínica y sexología online',
+          areaServed: { '@type': 'Country', name: 'Chile' },
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Pack 3 Sesiones de Seguimiento (al contado)',
+        price: '90000',
+        priceCurrency: 'CLP',
+        availability: 'https://schema.org/InStock',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Pack de 3 Sesiones de Seguimiento Clínico Online',
+          serviceType: 'Psicoterapia clínica y sexología online',
+          areaServed: { '@type': 'Country', name: 'Chile' },
+        },
+      },
+    ],
   },
   ...(PROFESSIONAL.sameAs.length ? { sameAs: PROFESSIONAL.sameAs } : {}),
   founder: { '@id': PERSON_ID },
@@ -448,13 +496,15 @@ export const PRERENDER_ROUTES = [
   ...Object.keys(CLINICAL_SPECIALTY_SEO),
 ]
 
+/** Fecha de última revisión de páginas clínicas y estáticas */
+const SITE_LAST_UPDATED = '2026-11-25'
+
 /** lastmod por ruta para sitemap.xml */
-export function getLastModified(path: string): string | undefined {
+export function getLastModified(path: string): string {
   const m = path.match(/^\/articulos\/([^/]+)$/)
   if (m) {
     const post = getBlogPostBySlug(m[1])
-    return post ? (post.dateModified ?? post.datePublished) : undefined
+    return post ? (post.dateModified ?? post.datePublished) : SITE_LAST_UPDATED
   }
-  const dates = BLOG_POSTS.map((p) => p.dateModified ?? p.datePublished).sort()
-  return path === '/' || path === '/articulos' ? dates[dates.length - 1] : undefined
+  return SITE_LAST_UPDATED
 }

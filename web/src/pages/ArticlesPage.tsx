@@ -115,7 +115,7 @@ export function ArticlesPage() {
                   maxPull={20}
                   borderWidth={1.5}
                   restingStrokeOpacity={0.6}
-                  backgroundColor="var(--bg-section-alt)"
+                  backgroundColor="var(--bg-card-solid)"
                 >
                   {post.imageUrl ? (
                     <img
@@ -131,7 +131,7 @@ export function ArticlesPage() {
                   ) : (
                     <div
                       className="flex h-full w-full items-center justify-center"
-                      style={{ backgroundColor: 'var(--bg-section-alt)' }}
+                      style={{ backgroundColor: 'var(--bg-card-solid)' }}
                     >
                       <span
                         className="text-4xl font-black opacity-20 italic"

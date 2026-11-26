@@ -11,7 +11,7 @@ export const ABOUT_PAGE_DATA: AboutPageData = {
     ],
   },
   formacion: {
-    title: 'La ciencia detrás de la sesión sexología',
+    title: 'La ciencia detrás de la sesión sexológica',
     paragraphs: [
       'Para darte la tranquilidad de que estás en buenas manos, te cuento que mi trabajo se basa en evidencia científica y formación rigurosa. Tengo un <strong class="theme-text">Magíster en Psicología Clínica</strong> (Universidad Adolfo Ibáñez), además de especializaciones avanzadas con un <strong class="theme-text">Diplomado Internacional en Sexología y Terapia Sexual</strong> (ADIPA) y un <strong class="theme-text">Diplomado en Sexología Clínica</strong> (Universidad del Desarrollo / INCHISEX).',
     ],

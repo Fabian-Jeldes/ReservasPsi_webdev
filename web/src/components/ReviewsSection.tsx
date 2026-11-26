@@ -90,7 +90,7 @@ export function ReviewsSection({ reviews, currentIndex, fade }: Props) {
   return (
     <section
       id="reviews"
-      className="relative z-10 w-full scroll-mt-16 overflow-x-clip py-20 md:scroll-mt-20 lg:py-28"
+      className="relative z-10 w-full scroll-mt-16 overflow-x-clip py-12 md:scroll-mt-20 md:py-16"
       style={{
         background: 'var(--reviews-band-bg)',
         color: 'var(--reviews-ink)',

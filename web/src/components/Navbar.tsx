@@ -449,8 +449,8 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
         href="#contenido-principal"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-xs focus:font-bold"
         style={{
-          backgroundColor: 'var(--accent)',
-          color: '#ffffff',
+          backgroundColor: 'var(--btn-accent-bg)',
+          color: 'var(--btn-accent-text)',
         }}
       >
         Saltar al contenido principal

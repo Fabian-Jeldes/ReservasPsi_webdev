@@ -52,7 +52,7 @@ export const DEFAULT_OG_IMAGE = '/og/home.jpg'
 export const PROFESSIONAL = {
   name: 'Andrei Andrusco Fidalgo',
   jobTitle: 'Psicólogo clínico y sexólogo',
-  email: 'contacto@psandrei.com',
+  email: 'ps.aandrusco@gmail.com',
   description:
     'Psicólogo clínico y sexólogo. Terapia sexual y psicológica online y presencial en Chile, enfocada en disfunciones sexuales psicógenas y ansiedad de rendimiento.',
   alumniOf: ['Universidad Adolfo Ibáñez', 'Universidad del Desarrollo'],
@@ -89,9 +89,9 @@ export const PROFESSIONAL = {
 
 export const SEO_PAGES = {
   home: {
-    title: 'Ps. Andrei Andrusco | Psicólogo y Sexólogo Clínico en Santiago',
+    title: 'Ps. Andrei Andrusco | Sexólogo y Psicólogo Online Chile',
     description:
-      'Consulta especializada en sexología clínica y terapia sexual en Santiago de Chile. Tratamiento humano para disfunción eréctil, eyaculación precoz y ansiedad de desempeño.',
+      'Psicólogo y sexólogo clínico online en Chile y presencial en Santiago. Terapia para disfunción eréctil, eyaculación precoz y ansiedad. Evaluación $30.000.',
   },
   about: {
     title: 'Sobre mí | Ps. Andrei Andrusco - Formación y Enfoque Clínico',
@@ -189,7 +189,7 @@ export const REVIEWS_DATA: Review[] = [
   {
     id: 6,
     author: "A. S.",
-    content: "Llegué con muchas dudas e inseguridades, ya que no es fácil hablar de estos temas; sin embargo, Andrei me generó de inmediato confianza. Ya estoy como enla 5ta sesión y su diagnóstico fue súper certero, me ha ayudado mucho con mi situación actual y espero que siga mejorando.",
+    content: "Llegué con muchas dudas e inseguridades, ya que no es fácil hablar de estos temas; sin embargo, Andrei me generó de inmediato confianza. Ya estoy como en la 5ta sesión y su diagnóstico fue súper certero, me ha ayudado mucho con mi situación actual y espero que siga mejorando.",
     rating: 5,
   },
   {
@@ -300,70 +300,52 @@ export const REVIEWS_DATA: Review[] = [
     content: "Excelente profesional, buena atención, puntual, muy cercano y empático.",
     rating: 5
   },
-  {
-    id: 25,
-    author: "L. A.",
-    content: "Recomiendo al profesional; es simpático, agradable, resolutivo y competente.",
-    rating: 5
-  },
-  {
-    id: 26,
-    author: "R. Z.",
-    content: "Muy eficaz en el tratamiento. Muy amable y dedicado en cada sesión. Agradecido de las herramientas entregadas y del trabajo realizado.",
-    rating: 5
-  },
 
   {
-    id: 27,
+    id: 25,
     author: "L. V. R.",
     content: "Me gustó mucho cómo Andrei trató mi problema; fue cercano y se dio el tiempo de responder todas las preguntas que me fueron surgiendo en la sesión. Me hizo sentir cómodo y que mi problema era algo que iba a poder sacar adelante, dándome esperanza.",
     rating: 5
   },
 
   {
-    id: 28,
+    id: 26,
     author: "J. M.",
     content: "Buena experiencia con Andrei, muy dedicado y enfocado en el paciente.",
     rating: 5
   },
 
   {
-    id: 29,
+    id: 27,
     author: "H.",
     content: "Explicación clara y una orientación hacia el objetivo de mejorar mi conducta errónea.",
     rating: 5
   },
 
   {
-    id: 30,
+    id: 28,
     author: "S. C.",
     content: "Muy atento y puntual, genera buen lazo en la atención dando espacios para una comunicación fluida entre el paciente y el profesional. El tratamiento ha sido eficaz mediante las herramientas entregadas.",
     rating: 5
   },
 
   {
-    id: 31,
+    id: 29,
     author: "Anónimo",
     content: "Excelente especialista. Confianza y puntualidad. Lo recomiendo.",
     rating: 5
   },
   {
-    id: 32,
+    id: 30,
     author: "D.",
     content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
     rating: 5
   },
 
   {
-    id: 33,
+    id: 31,
     author: "F. N.",
     content: "Encuentro que presenta un interés genuino por el paciente, disposición y adaptabilidad a sus necesidades, y una empatía tal que te invita a abrirte y a expresar de una forma más simple todo lo que estás pensando o sintiendo. En mi caso particular, siendo yo una persona muy compleja de llevar, puedo decir que Andrei genera el espacio y la confianza necesaria para poder verbalizar de mejor manera y expresar lo que estoy viviendo y sintiendo. Creo que es un excelente profesional.",
-    rating: 5
-  },
-  {
-    id: 34,
-    author: "D.",
-    content: "Excelente profesional, analiza el problema y le da un enfoque integral. Recomendable 100%.",
     rating: 5
   },
 ]
@@ -427,7 +409,7 @@ export const SPECIALIZATIONS: Specialization[] = [
       'Te acompaño a entender que estas fluctuaciones son reacciones normales y no una enfermedad, para reincorporar la sexualidad a tu vida de forma más amable y compasiva.',
     detailedContent: [
       'Existe un mito cultural muy pesado y silencioso: la idea tóxica de que el hombre debe estar "siempre listo" y con ganas, como si el deseo masculino fuera un motor inagotable que no se apaga jamás. Por eso, cuando notas que tu interés por la intimidad disminuye o simplemente desaparece, es muy fácil caer en la culpa, sentir que estás perdiendo tu masculinidad o pensar que algo dentro de ti se "rompió".',
-      'Pero la reality humana es muy distinta. El deseo sexual no es un interruptor automático, sino un <strong class="theme-text">sistema altamente sensible a tu entorno, a tus emociones y a tus niveles de energía</strong> (explicado mediante el modelo circular de <a href="https://pubmed.ncbi.nlm.nih.gov/11107297/" target="_blank" rel="noopener noreferrer" class="editorial-link">Rosemary Basson</a>). Imagina que tu respuesta sexual tiene un acelerador y un freno. Las presiones del trabajo, el cansancio crónico o las tensiones no resueltas actúan como un <strong class="theme-text">freno de mano puesto a fondo</strong>.',
+      'Pero la realidad humana es muy distinta. El deseo sexual no es un interruptor automático, sino un <strong class="theme-text">sistema altamente sensible a tu entorno, a tus emociones y a tus niveles de energía</strong> (explicado mediante el modelo circular de <a href="https://pubmed.ncbi.nlm.nih.gov/11107297/" target="_blank" rel="noopener noreferrer" class="editorial-link">Rosemary Basson</a>). Imagina que tu respuesta sexual tiene un acelerador y un freno. Las presiones del trabajo, el cansancio crónico o las tensiones no resueltas actúan como un <strong class="theme-text">freno de mano puesto a fondo</strong>.',
       'Fisiológicamente, cuando estás sobrecargado por la rutina o las preocupaciones, tu cerebro interpreta que estás en <strong class="theme-text">modo de "supervivencia"</strong>. Y biológicamente, cuando el sistema nervioso está intentando sobrevivir al estrés diario, <strong class="theme-text">la reproducción y el placer pasan a ser la última prioridad</strong>. Tu cuerpo, literalmente, apaga el deseo para ahorrar energía.',
       'Por lo tanto, una baja en tu libido no significa que estés enfermo, que seas defectuoso o que tu relación esté arruinada. Al contrario, tu cuerpo está teniendo una <strong class="theme-text">reacción completamente normal, lógica y sana</strong> frente a un nivel de agotamiento o presión que tu mente ya no puede procesar.',
       'En nuestra terapia no vamos a juzgarte, ni mucho menos a forzarte a "tener ganas"... Obligarse a desear solo genera más riesgo y frustración. Lo que haremos será <strong class="theme-text">quitarle a la intimidad el peso de ser "otra obligación más"</strong> en tu lista de tareas, para que puedas reencontrarte con tu sexualidad de una forma mucho más <strong class="theme-text">amable, compasiva y humana</strong>.',
@@ -643,6 +625,16 @@ export const FAQ_DATA: FaqCategory[] = [
           },
         ],
       },
+      {
+        badge: 'Boleta y Pagos',
+        question: '¿Se entrega boleta reembolsable en Isapre y cómo se paga?',
+        answer:
+          'Sí. Todas las sesiones corresponden a atención particular y se emite boleta de honorarios electrónica reembolsable en todas las Isapres y seguros complementarios de salud en Chile (no se trabaja con bono Fonasa). El pago se realiza mediante transferencia bancaria.',
+        paragraphs: [
+          'Sí. La consulta corresponde a <strong>atención particular</strong> y emito <strong>boleta de honorarios electrónica reembolsable en todas las Isapres y seguros complementarios de salud en Chile</strong> (actualmente no se atiende con bono Fonasa).',
+          'El pago se realiza de manera simple y segura vía <strong>transferencia bancaria</strong>, cuyos datos recibirás junto con la confirmación de tu horario.',
+        ],
+      },
     ],
   },
   {
@@ -650,18 +642,113 @@ export const FAQ_DATA: FaqCategory[] = [
     title: 'Agenda y Contacto',
     items: [
       {
-        badge: 'Coordinación Directa',
-        question: '¿Cómo se coordina el agendamiento y las comunicaciones?',
+        badge: 'Agendamiento Directo',
+        question: '¿Cómo se agenda una hora y cómo nos conectamos a la sesión?',
         answer:
-          'Tras ingresar tus datos de contacto y firmar el consentimiento informado en la plataforma, el flujo redirige directamente al correo electrónico. A través de ese canal coordinamos los horarios definitivos, mantenemos comunicación continua entre sesiones, te envío los ejercicios o recursos correspondientes, y gestionamos los recordatorios y confirmaciones.',
+          'Al hacer clic en "Ver horas disponibles" o "Agendar Cita", ingresas tus datos básicos de contacto y accedes directamente al calendario oficial en Google Calendar para elegir el día y horario que más te acomode. Al confirmar la reserva, recibes automáticamente en tu correo la confirmación de la cita, los datos de transferencia y el enlace privado de videollamada en Google Meet.',
         paragraphs: [
-          'El proceso es muy simple y directo: tras ingresar tus datos de contacto y aceptar el <strong>Consentimiento Informado</strong> aquí en la plataforma, el flujo te conectará directamente vía <strong>correo electrónico</strong>.',
-          'A través del correo electrónico coordinamos tus horarios definitivos, mantenemos una <strong>comunicación continua y cercana entre sesiones</strong>, te envío los ejercicios prácticos o lecturas correspondientes a tu proceso, y gestionamos todos los recordatorios y confirmaciones de manera ordenada y privada.',
+          'El proceso es directo y 100% gestionado por mí: al presionar <strong>Ver horas disponibles</strong> o <strong>Agendar Cita</strong>, ingresas tus datos básicos de contacto y accedes directamente al <strong>calendario oficial de Google Calendar</strong> para elegir el día y hora que mejor se ajuste a tu rutina.',
+          'Una vez reservada la hora, recibirás automáticamente en tu <strong>correo electrónico</strong> la confirmación, el <strong>enlace privado de videollamada (Google Meet)</strong> y la información de transferencia bancaria. A través del correo también coordinamos recordatorios y el material clínico entre sesiones.',
+        ],
+      },
+      {
+        badge: 'Reagendamiento',
+        question: '¿Cuál es la política de cancelación o reagendamiento?',
+        answer:
+          'Puedes reagendar o cancelar tu sesión sin costo avisando con al menos 24 horas de anticipación, para así liberar el bloque horario a otro paciente que lo necesite.',
+        paragraphs: [
+          'Entiendo que pueden surgir imprevistos. Puedes <strong>reagendar o cancelar tu hora sin ningún cobro avisando con al menos 24 horas de anticipación</strong>.',
+          'Dar aviso dentro de ese plazo permite reasignar el bloque horario a otra persona que esté esperando atención. Para cualquier cambio solo debes responder al correo de confirmación o escribir a <a href="mailto:ps.aandrusco@gmail.com" class="editorial-link">ps.aandrusco@gmail.com</a>.',
         ],
       },
     ],
   },
 ]
+
+export const CLINICAL_BOOKING_CTA = {
+  eyebrow: 'Atención Online en todo Chile',
+  titlePrefix: '¿Damos el primer paso',
+  titleAccent: 'juntos?',
+  defaultDescription:
+    'Agenda una sesión confidencial de evaluación para abordar tu caso con calma, sin juicios y con herramientas clínicas basadas en evidencia.',
+  sessionInfo: '60 min online · Evaluación $30.000',
+  isapreInfo: 'Boleta reembolsable en Isapre',
+  policyInfo: 'Reagendamiento sin cobro (24h)',
+  buttonLabel: 'Ver horas disponibles',
+  footnote:
+    'Atención particular · Pago vía transferencia bancaria · Enlace privado por Google Meet.',
+} as const
+
+export const HOW_IT_WORKS_DATA = {
+  eyebrow: 'TRANSPARENCIA Y PROCESO',
+  titlePrefix: 'Cómo funciona',
+  titleAccent: 'la consulta',
+  subtitle:
+    'Sin letra chica ni trámites complejos. Conoce el paso a paso, los valores y las condiciones antes de reservar.',
+  steps: [
+    {
+      number: '01',
+      title: 'Eliges tu horario',
+      description:
+        'Revisas los bloques disponibles en el calendario oficial y seleccionas el día y hora que más te acomode.',
+    },
+    {
+      number: '02',
+      title: 'Recibes tu enlace privado',
+      description:
+        'Llega a tu correo la confirmación de la cita, los datos de transferencia bancaria y el link exclusivo de Google Meet.',
+    },
+    {
+      number: '03',
+      title: 'Sesión confidencial de 60 min',
+      description:
+        'Nos conectamos 100% online desde la privacidad de tu espacio, en un ambiente cercano, clínico y libre de juicios.',
+    },
+  ],
+  pricing: [
+    {
+      label: 'Sesión Inicial de Evaluación',
+      value: '$30.000',
+      detail: '60 minutos · 100% online',
+      note: 'Entrevista clínica, comprensión del motivo de consulta y ruta de trabajo.',
+      featured: false,
+    },
+    {
+      label: 'Sesión de Seguimiento',
+      value: '$35.000',
+      detail: '60 minutos · Tarifa individual',
+      note: 'Proceso terapéutico continuo con herramientas prácticas basadas en evidencia.',
+      featured: false,
+    },
+    {
+      label: 'Pack 3 Sesiones de Seguimiento',
+      value: '$90.000',
+      detail: '$30.000 por sesión al contado',
+      note: 'Ahorras $15.000 en tu proceso de seguimiento terapéutico.',
+      featured: true,
+    },
+  ],
+  guarantees: [
+    {
+      title: 'Boleta reembolsable en Isapre',
+      shortNote: 'Atención particular (sin bono Fonasa) · Seguros complementarios',
+      description:
+        'Atención particular (sin bono Fonasa). Emito boleta de honorarios electrónica reembolsable en todas las Isapres y seguros complementarios.',
+    },
+    {
+      title: 'Pago por transferencia bancaria',
+      shortNote: 'Simple y directo · Datos llegan con tu confirmación',
+      description:
+        'Proceso simple, directo y sin intermediarios. Recibes los datos de transferencia junto con la confirmación de tu cita.',
+    },
+    {
+      title: 'Reagendamiento con 24h de aviso',
+      shortNote: 'Cambia o cancela sin cobro avisando con 24 horas',
+      description:
+        'Puedes cambiar o cancelar tu hora sin cobro avisando con al menos 24 horas de anticipación.',
+    },
+  ],
+} as const
 
 export const LEGAL_NAV_LINKS: readonly {
   id: LegalPageId

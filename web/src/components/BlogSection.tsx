@@ -71,7 +71,7 @@ export function BlogSection({ posts }: Props) {
   }
 
   return (
-    <section id="blog" className="mx-auto max-w-6xl scroll-mt-16 px-6 pt-32 pb-32 md:scroll-mt-20 lg:pb-44">
+    <section id="blog" className="mx-auto max-w-6xl scroll-mt-16 px-6 py-12 md:scroll-mt-20 md:py-16">
       <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="mb-4 flex items-center gap-4">
@@ -127,8 +127,8 @@ export function BlogSection({ posts }: Props) {
           onFocus={() => prefetchRoute('/articulos')}
           className="hidden items-center gap-2 rounded-full px-6 py-3 font-bold transition-all hover:scale-105 active:scale-95 md:flex"
           style={{
-            backgroundColor: 'var(--accent)',
-            color: '#ffffff',
+            backgroundColor: 'var(--btn-accent-bg)',
+            color: 'var(--btn-accent-text)',
             boxShadow: 'var(--shadow-accent)',
             borderRadius: 'var(--radius-btn)',
           }}
@@ -202,7 +202,7 @@ export function BlogSection({ posts }: Props) {
                       maxPull={20}
                       borderWidth={1.5}
                       restingStrokeOpacity={isPinned ? 0.95 : 0.6}
-                      backgroundColor="var(--bg-section-alt)"
+                      backgroundColor="var(--bg-card-solid)"
                     >
                       <div className="absolute inset-0 flex items-center justify-center p-8">
                         {post.imageUrl ? (
@@ -255,8 +255,8 @@ export function BlogSection({ posts }: Props) {
                         <div
                           className="mb-2.5 inline-block rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg"
                           style={{
-                            backgroundColor: 'var(--accent)',
-                            color: '#ffffff',
+                            backgroundColor: 'var(--btn-accent-bg)',
+                            color: 'var(--btn-accent-text)',
                           }}
                         >
                           {post.category}

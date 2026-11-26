@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { FileText, Lock, ShieldCheck } from 'lucide-react'
+import { FileText, Lock, Mail, ShieldCheck } from 'lucide-react'
 import logoPsAndrei from '../assets/logo-psandrei.webp'
 import instagramBotonImg from '../assets/InstagramBoton.webp'
-import { LEGAL_NAV_LINKS } from '../data/site'
+import { LEGAL_NAV_LINKS, PROFESSIONAL } from '../data/site'
 import type { LegalPageId } from '../types/site'
 
 const SECURITY_ICONS: Record<LegalPageId, typeof ShieldCheck> = {
@@ -14,7 +14,7 @@ const SECURITY_ICONS: Record<LegalPageId, typeof ShieldCheck> = {
 export function SiteFooter() {
   return (
     <footer
-      className="border-t px-6 py-20"
+      className="border-t px-6 py-14"
       style={{
         borderColor: 'var(--border-footer)',
         backgroundColor: 'var(--bg-footer)',
@@ -46,8 +46,8 @@ export function SiteFooter() {
               to="/#reserva"
               className="rounded-full px-4 py-2 text-xs font-bold transition-all hover:scale-105"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: 'var(--text-inverse)',
+                backgroundColor: 'var(--btn-accent-bg)',
+                color: 'var(--btn-accent-text)',
                 boxShadow: 'var(--shadow-accent)',
               }}
             >
@@ -80,62 +80,50 @@ export function SiteFooter() {
 
         <div>
           <h2
-            className="mb-5 text-base font-bold"
+            className="mb-4 text-sm font-bold uppercase tracking-widest"
             style={{ color: 'var(--text-primary)' }}
           >
             Seguridad
           </h2>
-          <div className="flex items-center gap-3">
-            {LEGAL_NAV_LINKS.map((item) => {
-              const Icon = SECURITY_ICONS[item.id]
-              return (
-                <Link
-                  key={item.id}
-                  to={item.to}
-                  aria-label={`${item.label}: ${item.description}`}
-                  title={`${item.label} — ${item.description}`}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border transition-all hover:scale-105"
-                  style={{
-                    borderColor: 'var(--border-card)',
-                    backgroundColor: 'var(--bg-card)',
-                    color: 'var(--text-secondary)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--accent)'
-                    e.currentTarget.style.borderColor = 'var(--border-accent)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--text-secondary)'
-                    e.currentTarget.style.borderColor = 'var(--border-card)'
-                  }}
-                >
-                  <Icon size={19} aria-hidden />
-                </Link>
-              )
-            })}
-          </div>
-          <p
-            className="mt-4 text-xs leading-relaxed"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            Consulta nuestras condiciones de{' '}
-            <Link to="/privacidad" className="editorial-link">
-              privacidad
-            </Link>
-            ,{' '}
-            <Link to="/practica-digital" className="editorial-link">
-              práctica digital
-            </Link>{' '}
-            y{' '}
-            <Link to="/terminos" className="editorial-link">
-              términos de uso
-            </Link>
-            .
-          </p>
+          <nav aria-label="Enlaces legales y de seguridad">
+            <ul className="space-y-2.5">
+              {LEGAL_NAV_LINKS.map((item) => {
+                const Icon = SECURITY_ICONS[item.id]
+                return (
+                  <li key={item.id}>
+                    <Link
+                      to={item.to}
+                      className="group inline-flex items-center gap-2.5 text-sm font-medium transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'var(--accent-text)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'var(--text-secondary)'
+                      }}
+                    >
+                      <span
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors"
+                        aria-hidden="true"
+                        style={{
+                          borderColor: 'var(--border-card)',
+                          backgroundColor: 'var(--bg-card)',
+                          color: 'var(--accent-text)',
+                        }}
+                      >
+                        <Icon size={15} aria-hidden="true" />
+                      </span>
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
         </div>
       </div>
       <div
-        className="mx-auto mt-20 flex max-w-6xl flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row"
+        className="mx-auto mt-14 flex max-w-6xl flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row"
         style={{ borderColor: 'var(--border-primary)' }}
       >
         <p
@@ -144,24 +132,16 @@ export function SiteFooter() {
         >
           © 2026 Andrei Andrusco Fidalgo — Psicología Clínica
         </p>
-        <nav
-          aria-label="Enlaces legales y de seguridad"
-          className="flex flex-wrap items-center justify-center gap-6 text-[10px] font-bold uppercase tracking-widest md:gap-8"
+        <a
+          href={`mailto:${PROFESSIONAL.email}`}
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide transition-colors"
           style={{ color: 'var(--text-muted)' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
         >
-          {LEGAL_NAV_LINKS.map((item) => (
-            <Link
-              key={item.id}
-              to={item.to}
-              className="transition-colors"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          <Mail size={14} aria-hidden="true" style={{ color: 'var(--accent-text)' }} />
+          <span>{PROFESSIONAL.email}</span>
+        </a>
       </div>
     </footer>
   )

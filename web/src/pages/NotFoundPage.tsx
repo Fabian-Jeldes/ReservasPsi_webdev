@@ -28,7 +28,7 @@ export function NotFoundPage() {
           <Link
             to="/"
             className="px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:scale-105"
-            style={{ backgroundColor: 'var(--accent)', color: 'var(--text-inverse)', borderRadius: 'var(--radius-btn)' }}
+            style={{ backgroundColor: 'var(--btn-accent-bg)', color: 'var(--btn-accent-text)', borderRadius: 'var(--radius-btn)' }}
           >
             {NOT_FOUND_PAGE.homeLabel}
           </Link>

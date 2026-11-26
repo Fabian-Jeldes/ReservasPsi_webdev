@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function EyaculacionPrecozPage() {
   const navigate = useNavigate()
@@ -144,12 +145,12 @@ export function EyaculacionPrecozPage() {
             <p>
               El <strong style={{ color: 'var(--text-primary)' }}>Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR)</strong> de la <em>American Psychiatric Association</em> (
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ) delimita esta condición a través de parámetros objetivos y subjetivos:
             </p>
@@ -456,6 +457,13 @@ export function EyaculacionPrecozPage() {
 
         <hr className="theme-divider" />
 
+        <ClinicalBookingCta
+          topicLabel="eyaculación precoz o falta de control eyaculatorio"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
+
+        <hr className="theme-divider" />
+
         {/* 5. Referencias Clínicas y Científicas Integradas */}
         <section
           id="referencias"
@@ -486,12 +494,12 @@ export function EyaculacionPrecozPage() {
               American Psychiatric Association (APA). (2022).{' '}
               <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5th ed., text rev.; DSM-5-TR). Washington, DC: APA. (Sitio oficial:{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               )
             </li>

@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function RegulacionEmocionalAutoestimaPage() {
   const navigate = useNavigate()
@@ -122,14 +123,14 @@ export function RegulacionEmocionalAutoestimaPage() {
               1.2. Marco Diagnóstico según el DSM-5-TR (APA, 2022)
             </h3>
             <p>
-              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychological Association (APA) (puedes revisar sus parámetros en{' '}
+              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychiatric Association (APA) (puedes revisar sus parámetros en{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ) en 2022, evalúa cómo los problemas en la regulación emocional y los esquemas de autoimagen disfuncionales inciden de manera transversal en la salud mental:
             </p>
@@ -326,6 +327,13 @@ export function RegulacionEmocionalAutoestimaPage() {
             </p>
           </div>
         </section>
+
+        <hr className="theme-divider" />
+
+        <ClinicalBookingCta
+          topicLabel="desregulación emocional o autocrítica severa"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
 
         <hr className="theme-divider" />
 

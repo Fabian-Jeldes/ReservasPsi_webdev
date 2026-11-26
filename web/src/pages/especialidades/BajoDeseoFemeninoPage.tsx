@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function BajoDeseoFemeninoPage() {
   const navigate = useNavigate()
@@ -122,14 +123,14 @@ export function BajoDeseoFemeninoPage() {
               1.2. Marco Diagnóstico según el DSM-5-TR (APA, 2022)
             </h3>
             <p>
-              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychological Association (APA) (puedes revisar sus parámetros en{' '}
+              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychiatric Association (APA) (puedes revisar sus parámetros en{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ) en 2022, unificó las antiguas categorías de deseo e interacción física en el Trastorno del Interés/Excitación Sexual Femenino:
             </p>
@@ -414,6 +415,13 @@ export function BajoDeseoFemeninoPage() {
 
         <hr className="theme-divider" />
 
+        <ClinicalBookingCta
+          topicLabel="bajo deseo sexual femenino"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
+
+        <hr className="theme-divider" />
+
         {/* Referencias Bibliográficas */}
         <section
           id="referencias"
@@ -440,12 +448,12 @@ export function BajoDeseoFemeninoPage() {
               American Psychiatric Association. (2022).{' '}
               <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5th ed., text rev.; DSM-5-TR). Sitio web oficial:{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               .
             </li>

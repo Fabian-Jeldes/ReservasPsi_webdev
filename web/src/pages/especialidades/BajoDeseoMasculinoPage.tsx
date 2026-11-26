@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function BajoDeseoMasculinoPage() {
   const navigate = useNavigate()
@@ -122,14 +123,14 @@ export function BajoDeseoMasculinoPage() {
               1.2. Marco Diagnóstico según el DSM-5-TR (APA, 2022)
             </h3>
             <p>
-              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychological Association (APA) (puedes revisar sus parámetros en{' '}
+              El Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR), publicado por la American Psychiatric Association (APA) (puedes revisar sus parámetros en{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ) en 2022, establece criterios rigurosos para la evaluación clínica del deseo hipoactivo:
             </p>
@@ -401,6 +402,13 @@ export function BajoDeseoMasculinoPage() {
 
         <hr className="theme-divider" />
 
+        <ClinicalBookingCta
+          topicLabel="bajo deseo sexual masculino"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
+
+        <hr className="theme-divider" />
+
         {/* Referencias Bibliográficas */}
         <section
           id="referencias"
@@ -427,12 +435,12 @@ export function BajoDeseoMasculinoPage() {
               American Psychiatric Association. (2022).{' '}
               <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5th ed., text rev.; DSM-5-TR). Sitio web oficial:{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               .
             </li>

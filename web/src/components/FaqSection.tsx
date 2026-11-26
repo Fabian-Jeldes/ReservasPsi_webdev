@@ -35,7 +35,7 @@ export function FaqSection() {
   )
 
   return (
-    <section id="preguntas" className="scroll-mt-16 px-6 py-32 md:scroll-mt-20">
+    <section id="preguntas" className="scroll-mt-16 px-6 py-12 md:scroll-mt-20 md:py-16">
       <div className="mx-auto max-w-4xl">
         {/* Encabezado cercano y transparente */}
         <div className="mb-14 text-center">

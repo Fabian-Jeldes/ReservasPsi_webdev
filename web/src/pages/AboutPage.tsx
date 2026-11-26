@@ -449,8 +449,8 @@ export function AboutPage() {
               onClick={openBooking}
               className="group/btn inline-flex items-center gap-2 px-10 py-5 font-bold text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: '#ffffff',
+                backgroundColor: 'var(--btn-accent-bg)',
+                color: 'var(--btn-accent-text)',
                 borderRadius: 'var(--radius-btn)',
                 boxShadow: 'var(--shadow-accent)',
               }}

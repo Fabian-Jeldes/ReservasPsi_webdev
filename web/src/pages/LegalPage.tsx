@@ -305,8 +305,8 @@ export function LegalPage({ pageId }: Props) {
                 onClick={openBooking}
                 className="inline-flex cursor-pointer items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95"
                 style={{
-                  backgroundColor: 'var(--accent)',
-                  color: '#ffffff',
+                  backgroundColor: 'var(--btn-accent-bg)',
+                  color: 'var(--btn-accent-text)',
                   borderRadius: 'var(--radius-btn)',
                   boxShadow: 'var(--shadow-accent)',
                 }}

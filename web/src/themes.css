@@ -10,13 +10,13 @@
 /* ── Tema 1: Oscuro original (default) ───────────────────── */
 :root,
 html[data-theme="standard"] {
-  --bg-primary: #0a0f1d;
-  --bg-secondary: #020617;
+  --bg-primary: #0A0E17;
+  --bg-secondary: #0A0E17;
   --bg-card: rgba(15, 23, 42, 0.4);
   --bg-card-solid: #0f172a;
-  --bg-nav: rgba(10, 15, 29, 0.8);
+  --bg-nav: rgba(10, 14, 23, 0.85);
   --bg-input: rgba(2, 6, 23, 0.5);
-  --bg-section-alt: rgba(15, 23, 42, 0.2);
+  --bg-section-alt: transparent;
 
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
@@ -28,8 +28,11 @@ html[data-theme="standard"] {
   --accent-hover: #E63E3E;
   --accent-glow: rgba(255, 77, 77, 0.3);
   --accent-soft: rgba(255, 77, 77, 0.1);
-  --accent-text: #FF6666;
+  --accent-text: #FF6B6B;
   --accent-text-strong: #FF4D4D;
+  --btn-accent-bg: #C73326; /* Contraste 5.38:1 con #FFFFFF (WCAG AA) */
+  --btn-accent-hover: #D63B2D;
+  --btn-accent-text: #FFFFFF;
 
   --border-primary: rgba(30, 41, 59, 0.5);
   --border-card: #1e293b;
@@ -64,8 +67,8 @@ html[data-theme="standard"] {
 
   --selection-bg: rgba(244, 63, 94, 0.3);
 
-  --bg-footer: rgba(2, 6, 23, 0.2);
-  --border-footer: rgba(30, 41, 59, 0.5);
+  --bg-footer: transparent;
+  --border-footer: transparent;
 
   --success: #22c55e;
   --success-soft: rgba(34, 197, 94, 0.1);
@@ -120,8 +123,8 @@ html[data-theme="standard"] {
   --area-tab-active-border: #EE4B35;
   --area-tab-active-shadow: 0 10px 28px -10px rgba(238, 75, 53, 0.36), 0 4px 12px -6px rgba(0, 0, 0, 0.45);
 
-  /* Sección Reseñas — Transición oscura editorial (sin corte brusco) */
-  --reviews-band-bg: linear-gradient(180deg, transparent 0%, rgba(22, 45, 69, 0.38) 50%, transparent 100%);
+  /* Sección Reseñas — Fondo continuo sin cortes ni bandas sobre #0A0E17 */
+  --reviews-band-bg: transparent;
   --reviews-card-bg: rgba(23, 49, 75, 0.45);
   --reviews-card-bg-hover: rgba(23, 49, 75, 0.56);
   --reviews-card-border: rgba(247, 243, 235, 0.12);
@@ -131,8 +134,8 @@ html[data-theme="standard"] {
   --reviews-ink: #F7F3EB;
   --reviews-ink-body: rgba(247, 243, 235, 0.85);
   --reviews-ink-muted: rgba(247, 243, 235, 0.68);
-  --reviews-accent: #EE4B35;
-  --reviews-accent-hover: #D63D28;
+  --reviews-accent: #FF6B5B;
+  --reviews-accent-hover: #FF8275;
   --reviews-dot-inactive: rgba(247, 243, 235, 0.26);
   --reviews-nav-border: rgba(247, 243, 235, 0.22);
   --reviews-nav-bg: rgba(255, 255, 255, 0.03);
@@ -140,8 +143,8 @@ html[data-theme="standard"] {
 
   /* Barra de Respaldo Clínico (Trust Bar) */
   --trust-bar-border: rgba(247, 243, 235, 0.10);
-  --trust-bar-label: rgba(247, 243, 235, 0.45);
-  --trust-bar-item: rgba(247, 243, 235, 0.60);
+  --trust-bar-label: rgba(247, 243, 235, 0.65);
+  --trust-bar-item: rgba(247, 243, 235, 0.72);
   --trust-bar-item-hover: #F7F3EB;
   --trust-bar-underline: rgba(238, 75, 53, 0.70);
   --trust-bar-dot: rgba(238, 75, 53, 0.60);
@@ -174,8 +177,8 @@ html[data-theme="standard"] {
   --nav-key-active-border: rgba(255, 107, 91, 0.56);
   --nav-key-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 168, 158, 0.20), 0 0 14px -4px rgba(255, 107, 91, 0.36);
   --nav-key-active-text: #FFF7F5;
-  --nav-key-cta-bg: linear-gradient(180deg, #FF6959 0%, #EA4A3B 74%, #C73326 100%);
-  --nav-key-cta-hover-bg: linear-gradient(180deg, #FF796B 0%, #F25546 74%, #D43B2E 100%);
+  --nav-key-cta-bg: linear-gradient(180deg, #D4382A 0%, #C22F23 74%, #A82419 100%);
+  --nav-key-cta-hover-bg: linear-gradient(180deg, #DC4032 0%, #CB3427 74%, #B2281C 100%);
   --nav-key-cta-border: rgba(255, 178, 168, 0.45);
   --nav-key-cta-shadow: inset 0 1px 0 rgba(255, 232, 228, 0.40), inset 0 -2px 0 rgba(105, 20, 15, 0.72), 0 6px 18px -4px rgba(255, 77, 77, 0.52);
   --nav-key-cta-hover-shadow: inset 0 1px 0 rgba(255, 240, 236, 0.50), inset 0 -2px 0 rgba(105, 20, 15, 0.78), 0 8px 22px -4px rgba(255, 77, 77, 0.66);
@@ -197,12 +200,12 @@ html[data-theme="standard"] {
 /* ── Tema 2: Light Theme (Crema / Azul Marino Profundo / Coral #FF6B5B) ── */
 html[data-theme="light"] {
   --bg-primary: #FBF8F3;
-  --bg-secondary: #F3ECE1;
+  --bg-secondary: #FBF8F3;
   --bg-card: #FFFFFF;
   --bg-card-solid: #FFFFFF;
   --bg-nav: rgba(251, 248, 243, 0.94);
   --bg-input: #FFFFFF;
-  --bg-section-alt: #F4EFE6;
+  --bg-section-alt: transparent;
 
   --text-primary: #13233A;
   --text-secondary: #334155;
@@ -210,12 +213,15 @@ html[data-theme="light"] {
   --text-inverse: #FFFFFF;
   --brand-text-color: #13233A;
 
-  --accent: #FF6B5B; /* Rojo Coral definido */
-  --accent-hover: #E54D3D;
-  --accent-glow: rgba(255, 107, 91, 0.22);
-  --accent-soft: rgba(255, 107, 91, 0.11);
-  --accent-text: #D64133; /* Coral de alto contraste AA sobre fondos claros */
-  --accent-text-strong: #C53629;
+  --accent: #C73326; /* Rojo Coral accesible WCAG AA (>= 5.1:1 en claro y con texto blanco) */
+  --accent-hover: #A82419;
+  --accent-glow: rgba(199, 51, 38, 0.20);
+  --accent-soft: rgba(199, 51, 38, 0.10);
+  --accent-text: #B42B1F; /* Contraste >= 5.3:1 sobre fondos claros y accent-soft */
+  --accent-text-strong: #9A2218;
+  --btn-accent-bg: #C73326;
+  --btn-accent-hover: #A82419;
+  --btn-accent-text: #FFFFFF;
 
   --border-primary: rgba(19, 35, 58, 0.13);
   --border-card: rgba(19, 35, 58, 0.14);
@@ -249,8 +255,8 @@ html[data-theme="light"] {
 
   --selection-bg: rgba(255, 107, 91, 0.22);
 
-  --bg-footer: #F1EAE0;
-  --border-footer: rgba(19, 35, 58, 0.12);
+  --bg-footer: transparent;
+  --border-footer: transparent;
 
   --success: #16a34a;
   --success-soft: rgba(22, 163, 74, 0.10);
@@ -277,22 +283,22 @@ html[data-theme="light"] {
   --faq-tab-active-text: #C53629;
   --faq-featured-bg: linear-gradient(145deg, rgba(255, 107, 91, 0.10) 0%, #FFFFFF 100%);
 
-  /* Áreas de Atención — Superficies claras con acento coral #FF6B5B */
+  /* Áreas de Atención — Superficies claras con acento coral accesible AA */
   --editorial-ivory: #13233A;
   --editorial-ivory-muted: #334155;
-  --editorial-coral: #FF6B5B;
+  --editorial-coral: #B92E22;
   --area-card-bg: #FFFFFF;
   --area-card-bg-hover: #FFFFFF;
-  --area-card-border: rgba(255, 107, 91, 0.45);
-  --area-card-border-hover: #FF6B5B;
+  --area-card-border: rgba(199, 51, 38, 0.35);
+  --area-card-border-hover: #C73326;
   --area-card-divider: rgba(19, 35, 58, 0.10);
   --area-subcard-bg: #FBF8F3;
   --area-subcard-bg-hover: #FFFFFF;
   --area-subcard-border: rgba(19, 35, 58, 0.13);
-  --area-subcard-border-hover: rgba(255, 107, 91, 0.68);
+  --area-subcard-border-hover: rgba(199, 51, 38, 0.62);
   --area-subcard-shadow: 0 4px 14px -8px rgba(19, 35, 58, 0.08), 0 1px 3px rgba(19, 35, 58, 0.04);
-  --area-subcard-shadow-hover: 0 16px 32px -12px rgba(19, 35, 58, 0.14), 0 6px 18px -8px rgba(255, 107, 91, 0.24), 0 1px 3px rgba(19, 35, 58, 0.05);
-  --area-subcard-subtitle: #D64133;
+  --area-subcard-shadow-hover: 0 16px 32px -12px rgba(19, 35, 58, 0.14), 0 6px 18px -8px rgba(199, 51, 38, 0.20), 0 1px 3px rgba(19, 35, 58, 0.05);
+  --area-subcard-subtitle: #B42B1F;
   --area-subcard-cta: #526075;
   --area-card-shadow-hover: 0 18px 40px -14px rgba(19, 35, 58, 0.14);
   --area-tab-bg: rgba(255, 255, 255, 0.82);
@@ -305,8 +311,8 @@ html[data-theme="light"] {
   --area-tab-active-border: #FF6B5B;
   --area-tab-active-shadow: 0 10px 26px -10px rgba(255, 107, 91, 0.30), 0 4px 12px -6px rgba(19, 35, 58, 0.08);
 
-  /* Sección Reseñas — Tarjeta blanca limpia sobre banda crema suave */
-  --reviews-band-bg: linear-gradient(180deg, transparent 0%, rgba(243, 236, 225, 0.65) 50%, transparent 100%);
+  /* Sección Reseñas — Fondo continuo transparente para mantener visibles los íconos de fondo */
+  --reviews-band-bg: transparent;
   --reviews-card-bg: #FFFFFF;
   --reviews-card-bg-hover: #FFFFFF;
   --reviews-card-border: rgba(255, 107, 91, 0.48);
@@ -316,8 +322,8 @@ html[data-theme="light"] {
   --reviews-ink: #13233A;
   --reviews-ink-body: #24344B;
   --reviews-ink-muted: #526075;
-  --reviews-accent: #FF6B5B;
-  --reviews-accent-hover: #E54D3D;
+  --reviews-accent: #C23225;
+  --reviews-accent-hover: #A82419;
   --reviews-dot-inactive: rgba(19, 35, 58, 0.22);
   --reviews-nav-border: rgba(19, 35, 58, 0.22);
   --reviews-nav-bg: #FFFFFF;
@@ -359,8 +365,8 @@ html[data-theme="light"] {
   --nav-key-active-border: rgba(214, 65, 51, 0.50);
   --nav-key-active-shadow: inset 0 2px 4px rgba(19, 35, 58, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 1px 8px -3px rgba(255, 107, 91, 0.24);
   --nav-key-active-text: #B83125;
-  --nav-key-cta-bg: linear-gradient(180deg, #FF7466 0%, #F25546 74%, #D43C2E 100%);
-  --nav-key-cta-hover-bg: linear-gradient(180deg, #FF8174 0%, #F76052 74%, #DE4436 100%);
+  --nav-key-cta-bg: linear-gradient(180deg, #D4382A 0%, #C22F23 74%, #A82419 100%);
+  --nav-key-cta-hover-bg: linear-gradient(180deg, #DC4032 0%, #CB3427 74%, #B2281C 100%);
   --nav-key-cta-border: rgba(214, 65, 51, 0.55);
   --nav-key-cta-shadow: inset 0 1px 0 rgba(255, 236, 232, 0.48), inset 0 -2px 0 rgba(145, 32, 24, 0.48), 0 4px 14px -4px rgba(255, 107, 91, 0.48);
   --nav-key-cta-hover-shadow: inset 0 1px 0 rgba(255, 244, 242, 0.58), inset 0 -2px 0 rgba(145, 32, 24, 0.54), 0 6px 18px -4px rgba(255, 107, 91, 0.60);

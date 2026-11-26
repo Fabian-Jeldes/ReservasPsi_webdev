@@ -81,8 +81,8 @@ export function ArticlePage() {
               }
               className="px-8 py-4 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 shadow-xl cursor-pointer"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: '#ffffff',
+                backgroundColor: 'var(--btn-accent-bg)',
+                color: 'var(--btn-accent-text)',
                 borderRadius: 'var(--radius-btn)',
                 boxShadow: 'var(--shadow-accent)',
               }}
@@ -392,8 +392,8 @@ export function ArticlePage() {
               to="/#reserva"
               className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 inline-flex items-center gap-3 mx-auto shadow-lg"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: '#ffffff',
+                backgroundColor: 'var(--btn-accent-bg)',
+                color: 'var(--btn-accent-text)',
                 borderRadius: 'var(--radius-btn)',
                 boxShadow: 'var(--shadow-accent)',
               }}

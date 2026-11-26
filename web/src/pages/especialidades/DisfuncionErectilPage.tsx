@@ -8,6 +8,7 @@ import { SiteFooter } from '../../components/SiteFooter'
 import { AppointmentModal } from '../../components/AppointmentModal'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ClinicalToc } from '../../components/ClinicalToc'
+import { ClinicalBookingCta } from '../../components/ClinicalBookingCta'
 
 export function DisfuncionErectilPage() {
   const navigate = useNavigate()
@@ -144,12 +145,12 @@ export function DisfuncionErectilPage() {
             <p>
               El <strong style={{ color: 'var(--text-primary)' }}>Manual Diagnóstico y Estadístico de los Trastornos Mentales (DSM-5-TR)</strong>, publicado por la <em>American Psychiatric Association</em> en 2022 (
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
               ), establece parámetros rigurosos para diferenciar una fluctuación normal de una disfunción clínica:
             </p>
@@ -454,6 +455,13 @@ export function DisfuncionErectilPage() {
 
         <hr className="theme-divider" />
 
+        <ClinicalBookingCta
+          topicLabel="dificultades de erección psicógena"
+          onBookClick={() => setIsBookingOpen(true)}
+        />
+
+        <hr className="theme-divider" />
+
         {/* 5. Referencias Clínicas y Científicas */}
         <section
           id="referencias"
@@ -480,12 +488,12 @@ export function DisfuncionErectilPage() {
               American Psychiatric Association. (2022).{' '}
               <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5th ed., text rev.; DSM-5-TR). Disponible en:{' '}
               <a
-                href="https://www.apa.org/"
+                href="https://www.psychiatry.org/psychiatrists/practice/dsm"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={linkStyle}
               >
-                apa.org
+                psychiatry.org
               </a>
             </li>
             <li>

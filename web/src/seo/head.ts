@@ -11,7 +11,7 @@ type HeadTag = {
 export function getHeadTags(seo: SeoData): HeadTag[] {
   const tags: HeadTag[] = [
     { tag: 'meta', attrs: { name: 'description', content: seo.description } },
-    { tag: 'link', attrs: { rel: 'canonical', href: seo.canonical } },
+    ...(seo.noindex ? [] : [{ tag: 'link' as const, attrs: { rel: 'canonical', href: seo.canonical } }]),
     { tag: 'meta', attrs: { property: 'og:type', content: seo.ogType } },
     { tag: 'meta', attrs: { property: 'og:site_name', content: SITE_NAME } },
     { tag: 'meta', attrs: { property: 'og:locale', content: 'es_CL' } },

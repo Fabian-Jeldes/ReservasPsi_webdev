@@ -40,7 +40,7 @@ export const LEGAL_PAGES_DATA: Record<LegalPageId, LegalPageData> = {
       {
         title: '4. Resguardo, derechos del titular y contacto',
         paragraphs: [
-          'En coherencia con el secreto profesional de la psicología clínica y la normativa de protección de datos personales en Chile, puedes consultar, actualizar o solicitar aclaraciones sobre tus datos de contacto escribiendo a <a href="mailto:contacto@psandrei.com" class="editorial-link">contacto@psandrei.com</a>.',
+          'En coherencia con el secreto profesional de la psicología clínica y la normativa de protección de datos personales en Chile, puedes consultar, actualizar o solicitar aclaraciones sobre tus datos de contacto escribiendo a <a href="mailto:ps.aandrusco@gmail.com" class="editorial-link">ps.aandrusco@gmail.com</a>.',
         ],
       },
     ],

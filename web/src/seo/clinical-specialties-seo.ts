@@ -20,10 +20,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/disfuncion-erectil-psicogena': {
     conditionName: 'Disfunción Eréctil Psicógena',
     alternateName: 'Trastorno de la Erección de Origen Psicógeno',
-    title:
-      'Tratamiento de la Disfunción Eréctil Psicógena en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Disfunción Eréctil Psicógena: Terapia Chile | Ps. Andrei',
     description:
-      'La disfunción eréctil psicógena no es un fracaso, sino una respuesta neurobiológica frente a la ansiedad de desempeño. Tratamiento sexológico clínico e integrativo en Chile.',
+      'Supera la disfunción eréctil psicógena y la ansiedad de desempeño. Terapia sexológica online en Chile con enfoque clínico e integrativo. Agenda tu hora.',
     keywords:
       'disfunción eréctil psicógena Chile, tratamiento psicológico disfunción eréctil, sexólogo clínico Santiago, ansiedad de desempeño erección, CIE-11 DSM-5-TR disfunción eréctil',
     faqs: [
@@ -57,10 +56,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/eyaculacion-precoz': {
     conditionName: 'Eyaculación Precoz',
     alternateName: 'Eyaculación Prematura',
-    title:
-      'Tratamiento de la Eyaculación Precoz en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Tratamiento Eyaculación Precoz Online Chile | Ps. Andrei',
     description:
-      'Abordaje sexológico clínico e integrativo para la eyaculación precoz o prematura en Chile. Reentrenamiento del reflejo eyaculatorio, manejo de la ansiedad de desempeño y técnicas conductuales.',
+      'Terapia sexológica para la eyaculación precoz en Chile. Reentrenamiento corporal y manejo de ansiedad de desempeño con enfoque clínico basado en evidencia.',
     keywords:
       'eyaculación precoz Chile, tratamiento eyaculación prematura, sexólogo clínico Santiago, parada-arranque compresión, control eyaculatorio CIE-11 DSM-5-TR',
     faqs: [
@@ -94,10 +92,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/eyaculacion-retardada': {
     conditionName: 'Eyaculación Retardada',
     alternateName: 'Aneyaculación o Inhibición Eyaculatoria',
-    title:
-      'Tratamiento de la Eyaculación Retardada en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Eyaculación Retardada: Terapia Online Chile | Ps. Andrei',
     description:
-      'La Eyaculación Retardada se caracteriza por un retraso significativo o una ausencia recurrente del reflejo eyaculatorio a pesar de la presencia de una estimulación sexual adecuada. Tratamiento sexológico clínico e integrativo en Chile.',
+      'Tratamiento psicológico y sexológico para la eyaculación retardada en Chile. Abordaje integrativo del hipercontrol y la ansiedad sexual en sesión online.',
     keywords:
       'eyaculación retardada Chile, tratamiento eyaculación retardada, aneyaculación psicógena, sexólogo clínico Santiago, CIE-11 eyaculación retardada, DSM-5-TR eyaculación retardada, anorgasmia masculina',
     faqs: [
@@ -116,10 +113,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/bajo-deseo-sexual-masculino': {
     conditionName: 'Deseo Sexual Hipoactivo Masculino',
     alternateName: 'Bajo Deseo Sexual Masculino',
-    title:
-      'Tratamiento del Deseo Sexual Hipoactivo Masculino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Bajo Deseo Sexual Masculino: Terapia Chile | Ps. Andrei',
     description:
-      'El Deseo Sexual Hipoactivo Masculino se define como una disminución o ausencia persistente o recurrente de pensamientos, fantasías eróticas y motivación para iniciar o responder a la actividad íntima.',
+      'Terapia sexológica online en Chile para el deseo sexual hipoactivo masculino. Abordamos estrés, rutina y presión de rendimiento sin juicios ni culpas.',
     keywords:
       'deseo sexual hipoactivo masculino Chile, bajo deseo sexual masculino, tratamiento baja libido hombre, sexólogo clínico Santiago, CIE-11 deseo sexual hipoactivo, DSM-5-TR deseo hipoactivo, deseo reactivo',
     faqs: [
@@ -138,10 +134,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/ansiedad-de-desempeno': {
     conditionName: 'Ansiedad de Desempeño Sexual',
     alternateName: 'Espectadorismo Sexual y Ansiedad de Evaluación Erótica',
-    title:
-      'Tratamiento de la Ansiedad de Desempeño Sexual en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Ansiedad de Desempeño Sexual: Terapia Chile | Ps. Andrei',
     description:
-      'La Ansiedad de Desempeño Sexual se define como un estado de aprensión, tensión psicofisiológica y miedo anticipatorio focalizado en la capacidad de obtener, mantener o regular la respuesta sexual.',
+      'Supera el miedo a fallar en la cama y el espectadorismo sexual. Psicoterapia sexológica online en Chile para recuperar tu calma y disfrute íntimo.',
     keywords:
       'ansiedad de desempeño sexual Chile, tratamiento ansiedad de desempeño, espectadorismo sexual, sexólogo clínico Santiago, CIE-11 ansiedad sexual, DSM-5-TR ansiedad desempeño, miedo a fallar en la cama',
     faqs: [
@@ -161,10 +156,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-masculina/uso-problematico-de-pornografia': {
     conditionName: 'Uso Problemático de Pornografía',
     alternateName: 'Trastorno por Comportamiento Sexual Compulsivo (CSBD / CIE-11 6C72)',
-    title:
-      'Tratamiento del Uso Problemático de Pornografía en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Uso Problemático de Pornografía: Terapia | Ps. Andrei',
     description:
-      'El uso problemático o compulsivo de pornografía se caracteriza por un patrón persistente de incapacidad para controlar los impulsos o conductas de consumo de material erótico explícito.',
+      'Tratamiento clínico en Chile para el uso compulsivo de pornografía y PIED. Recupera tu deseo real y bienestar sexual en terapia online confidencial.',
     keywords:
       'uso problemático de pornografía Chile, adicción a la pornografía tratamiento, disfunción eréctil por pornografía EDID PIED, sexólogo clínico Santiago, CIE-11 6C72 CSBD, comportamiento sexual compulsivo',
     faqs: [
@@ -183,17 +177,16 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-femenina/vaginismo-dolor-genitopelvico': {
     conditionName: 'Vaginismo y Dolor Genitopélvico',
     alternateName: 'Trastorno de Dolor Genito-Pélvico/Penetración',
-    title:
-      'Tratamiento del Vaginismo y Dolor Genitopélvico en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Tratamiento del Vaginismo Online en Chile | Ps. Andrei',
     description:
-      'El Vaginismo y las condiciones de Dolor Genitopélvico comprenden dificultades caracterizadas por la imposibilidad o dificultad recurrente para permitir la penetración vaginal.',
+      'Terapia sexológica online en Chile para vaginismo y dolor genitopélvico. Abordaje gradual, sin presiones y coordinado con kinesiología pélvica.',
     keywords:
       'vaginismo Chile, tratamiento vaginismo, dolor genitopélvico, dispareunia, hipertonía suelo pélvico, sexólogo clínico Santiago, CIE-11 vaginismo, DSM-5-TR dolor genitopélvico',
     faqs: [
       {
         question: '¿El vaginismo tiene cura o tendré que vivir con dolor para siempre?',
         answer:
-          'El vaginismo sí tiene solución definitiva. No es una malformación anatómica ni una condición irreversible. Al tratarse de una respuesta muscular involuntaria y una memoria defensiva del dolor, el tratamiento combinado de psicoterapia sexológica y kinesiología pélvico permite descondicionar el reflejo de cierre, logrando una penetración completamente placentera y libre de dolor.',
+          'El vaginismo sí tiene solución definitiva. No es una malformación anatómica ni una condición irreversible. Al tratarse de una respuesta muscular involuntaria y una memoria defensiva del dolor, el tratamiento combinado de psicoterapia sexológica y kinesiología pélvica permite descondicionar el reflejo de cierre, logrando una penetración completamente placentera y libre de dolor.',
       },
       {
         question: '¿Es necesario usar dilatadores y cómo se complementa la kinesiología pélvica con la terapia?',
@@ -205,10 +198,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-femenina/dispareunia-dolor-relaciones': {
     conditionName: 'Dispareunia y Dolor durante las Relaciones',
     alternateName: 'Dolor durante las Relaciones Sexuales / Dolor Coital',
-    title:
-      'Tratamiento de la Dispareunia y Dolor durante las Relaciones en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Dispareunia y Dolor Sexual: Terapia Chile | Ps. Andrei',
     description:
-      'La Dispareunia se define como el dolor genital persistente o recurrente que se experimenta antes, durante o después del coito o de la penetración sexual.',
+      'El placer no debería doler. Tratamiento sexológico clínico online en Chile para la dispareunia y el dolor en las relaciones sexuales. Sesión confidencial.',
     keywords:
       'dispareunia Chile, dolor durante las relaciones sexuales, tratamiento dispareunia, dolor coital, sexólogo clínico Santiago, CIE-11 dispareunia, DSM-5-TR dolor genitopélvico',
     faqs: [
@@ -227,10 +219,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-femenina/anorgasmia-dificultad-orgasmo': {
     conditionName: 'Anorgasmia y Dificultad del Orgasmo',
     alternateName: 'Trastorno Orgásmico Femenino',
-    title:
-      'Tratamiento de la Anorgasmia y Dificultad del Orgasmo en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Anorgasmia Femenina: Terapia Online Chile | Ps. Andrei',
     description:
-      'La Anorgasmia y las dificultades en el alcance del clímax comprenden la ausencia o el retraso significativo del orgasmo, así como una reducción marcada en la intensidad de las sensaciones orgásmicas.',
+      'Tratamiento sexológico online en Chile para la anorgasmia y dificultad para alcanzar el orgasmo. Enfoque clínico respetuoso y basado en evidencia.',
     keywords:
       'anorgasmia Chile, tratamiento anorgasmia femenina, dificultad del orgasmo, trastorno orgásmico femenino, sexólogo clínico Santiago, CIE-11 anorgasmia, DSM-5-TR trastorno orgásmico',
     faqs: [
@@ -249,10 +240,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-femenina/deseo-sexual-hipoactivo-femenino': {
     conditionName: 'Deseo Sexual Hipoactivo Femenino',
     alternateName: 'Trastorno del Interés/Excitación Sexual Femenino',
-    title:
-      'Tratamiento del Deseo Sexual Hipoactivo Femenino en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Bajo Deseo Sexual Femenino: Terapia Chile | Ps. Andrei',
     description:
-      'El Deseo Sexual Hipoactivo Femenino se define como una disminución o ausencia persistente o recurrente del interés erótico, pensamientos, fantasías sexuales y motivación íntima.',
+      'Terapia sexológica online en Chile para el deseo sexual hipoactivo femenino. Comprendemos el deseo responsivo, el estrés y el vínculo sin culpa.',
     keywords:
       'deseo sexual hipoactivo femenino Chile, bajo deseo sexual femenino, falta de deseo mujer, modelo circular Basson, deseo responsivo, sexólogo clínico Santiago, CIE-11 deseo hipoactivo, DSM-5-TR interés excitación sexual femenino',
     faqs: [
@@ -271,10 +261,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/sexualidad-femenina/aversion-al-sexo': {
     conditionName: 'Aversión al Sexo',
     alternateName: 'Evitación Fóbica del Contacto Sexual',
-    title:
-      'Tratamiento de la Aversión al Sexo y Evidencia Fóbica en Chile: Enfoque Sexológico Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Aversión al Sexo y Evitación Fóbica Chile | Ps. Andrei',
     description:
-      'La Aversión al Sexo se caracteriza por una respuesta fóbica, de rechazo persistente o evitación extrema y activa de cualquier tipo de contacto íntimo o cercanía erótica compartida.',
+      'Tratamiento sexológico compasivo en Chile para la aversión al sexo y evitación fóbica íntima. Recupera la seguridad corporal a tu ritmo, 100% online.',
     keywords:
       'aversión al sexo Chile, tratamiento aversión sexual, rechazo al contacto íntimo, fobia sexual, evitación fóbica intimidad, sexólogo clínico Santiago, CIE-11 aversión sexual, DSM-5-TR evitación sexual',
     faqs: [
@@ -293,10 +282,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/salud-emocional/trastornos-ansiedad-panico': {
     conditionName: 'Trastornos de Ansiedad y Pánico',
     alternateName: 'Trastorno de Ansiedad Generalizada (TAG) y Trastorno de Pánico',
-    title:
-      'Tratamiento de los Trastornos de Ansiedad y Pánico en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Psicólogo Ansiedad y Crisis de Pánico Chile | Ps. Andrei',
     description:
-      'Los Trastornos de Ansiedad y Pánico comprenden un conjunto de condiciones caracterizadas por una activación neurofisiológica desproporcionada, miedo intenso o aprensión anticipatoria.',
+      'Psicoterapia clínica online en Chile para ansiedad generalizada, ansiedad social y crisis de pánico. Herramientas basadas en evidencia. Agenda hoy.',
     keywords:
       'trastornos de ansiedad Chile, tratamiento crisis de pánico, trastorno de ansiedad generalizada TAG, ansiedad social, psicólogo clínico Santiago, CIE-11 ansiedad, DSM-5-TR trastorno de pánico',
     faqs: [
@@ -315,10 +303,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/salud-emocional/cuadros-depresivos-alteraciones-animo': {
     conditionName: 'Cuadros Depresivos y Alteraciones del Ánimo',
     alternateName: 'Trastornos del Estado de Ánimo y Depresión Clínica',
-    title:
-      'Tratamiento de los Cuadros Depresivos y Trastornos del Ánimo en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Psicólogo Depresión y Ánimo Online Chile | Ps. Andrei',
     description:
-      'Los cuadros depresivos y las alteraciones del estado de ánimo configuran una compleja red de síntomas somáticos, cognitivos y relacionales que erosionan la vitalidad.',
+      'Psicoterapia clínica online en Chile para cuadros depresivos, anhedonia y alteraciones del ánimo. Acompañamiento cálido, estructurado y confidencial.',
     keywords:
       'cuadros depresivos Chile, tratamiento depresión Santiago, trastornos del ánimo, anhedonia, activación conductual, psicólogo clínico Santiago, CIE-11 depresión, DSM-5-TR episodio depresivo',
     faqs: [
@@ -337,10 +324,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/salud-emocional/estres-cronico-burnout': {
     conditionName: 'Estrés Crónico y Síndrome de Burnout',
     alternateName: 'Síndrome de Desgaste Profesional y Sobrecarga Alostática Crónica',
-    title:
-      'Tratamiento del Estrés Crónico y Burnout en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Estrés Crónico y Burnout: Psicólogo Chile | Ps. Andrei',
     description:
-      'El estrés crónico y el síndrome de burnout se caracterizan por agotamiento extremo, distanciamiento mental y sobrecarga alostática.',
+      'Tratamiento psicológico online en Chile para el estrés crónico y síndrome de burnout laboral. Sal del agotamiento y recupera límites saludables.',
     keywords:
       'estrés crónico Chile, tratamiento síndrome de burnout, estrés laboral psicólogo Santiago, desgaste profesional CIE-11, sobrecarga alostática, psicólogo clínico Santiago',
     faqs: [
@@ -359,10 +345,9 @@ export const CLINICAL_SPECIALTY_SEO: Record<string, ClinicalSpecialtySeoEntry> =
   '/salud-emocional/regulacion-emocional-autoestima': {
     conditionName: 'Regulación Emocional y Autoestima',
     alternateName: 'Desregulación Afectiva, Alexitimia y Autoestima Contingente',
-    title:
-      'Tratamiento de la Regulación Emocional y Autoestima en Chile: Enfoque Clínico e Integrativo | Ps. Andrei Andrusco',
+    title: 'Regulación Emocional y Autoestima Chile | Ps. Andrei',
     description:
-      'Abordaje psicoterapéutico clínico e integrativo para la regulación emocional, superación de la autocrítica severa, autocompasión y fortalecimiento de la autoestima en Chile.',
+      'Psicoterapia online en Chile para regulación emocional, autocrítica severa, autocompasión y límites asertivos. Atención particular reembolsable Isapre.',
     keywords:
       'regulación emocional Chile, fortalecer autoestima psicólogo, autocompasión psicoterapia, desregulación emocional tratamiento, límites y asertividad, psicólogo clínico Santiago',
     faqs: [

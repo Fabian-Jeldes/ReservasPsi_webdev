@@ -201,9 +201,9 @@ export function HeroSection({ onContactClick }: Props) {
             className="group relative overflow-hidden flex items-center gap-3 px-9 py-4.5 text-base md:text-lg font-extrabold tracking-wide transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:brightness-110 active:scale-[0.98] cursor-pointer"
             style={{
               backgroundImage:
-                'linear-gradient(135deg, #FF5C5C 0%, var(--accent) 55%, var(--accent-hover) 100%)',
-              backgroundColor: 'var(--accent)',
-              color: '#ffffff',
+                'linear-gradient(135deg, #D93829 0%, var(--btn-accent-bg) 55%, #A82419 100%)',
+              backgroundColor: 'var(--btn-accent-bg)',
+              color: 'var(--btn-accent-text)',
               borderRadius: 'var(--radius-card)',
               boxShadow:
                 'var(--shadow-accent), inset 0 1px 1px rgba(255, 255, 255, 0.35)',

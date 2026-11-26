@@ -1,6 +1,7 @@
 # Cabeceras de seguridad globales (Workers Static Assets).
 # No se solapan con las reglas de Cache-Control de abajo (Cloudflare concatena cabeceras repetidas).
 /*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
@@ -31,5 +32,5 @@
 /Favicon2_PNG.png
   Cache-Control: public, max-age=604800
 
-/favicon.svg
-  Cache-Control: public, max-age=604800
+/llms.txt
+  Cache-Control: public, max-age=86400

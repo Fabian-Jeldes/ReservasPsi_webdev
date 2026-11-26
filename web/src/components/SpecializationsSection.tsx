@@ -280,7 +280,7 @@ export function SpecializationsSection({ items: _items }: Props) {
     <section
       id="especialidades"
       aria-labelledby="areas-atencion-heading"
-      className="scroll-mt-16 py-24 md:scroll-mt-20 lg:py-32"
+      className="scroll-mt-16 py-12 md:scroll-mt-20 md:py-16"
       style={{ backgroundColor: 'var(--bg-section-alt)' }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

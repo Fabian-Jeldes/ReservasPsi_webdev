@@ -179,8 +179,8 @@ export function SpecializationPage() {
               onClick={goKyc}
               className="px-10 py-5 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 flex items-center gap-3 mx-auto shadow-lg cursor-pointer"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: '#ffffff',
+                backgroundColor: 'var(--btn-accent-bg)',
+                color: 'var(--btn-accent-text)',
                 borderRadius: 'var(--radius-btn)',
                 boxShadow: 'var(--shadow-accent)',
               }}

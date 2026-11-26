@@ -217,8 +217,8 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                   type="submit"
                   className="mt-4 w-full cursor-pointer rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
                   style={{
-                    backgroundColor: 'var(--accent)',
-                    color: 'var(--text-inverse)',
+                    backgroundColor: 'var(--btn-accent-bg)',
+                    color: 'var(--btn-accent-text)',
                     boxShadow: 'var(--shadow-accent)',
                   }}
                 >
@@ -263,8 +263,8 @@ export function AppointmentModal({ isOpen, onClose }: Props) {
                   onClick={() => track('reserva_calendario_abierto')}
                   className="flex w-full items-center justify-center gap-3 rounded-2xl py-5 font-black uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95"
                   style={{
-                    backgroundColor: 'var(--accent)',
-                    color: 'var(--text-inverse)',
+                    backgroundColor: 'var(--btn-accent-bg)',
+                    color: 'var(--btn-accent-text)',
                     boxShadow: 'var(--shadow-accent)',
                   }}
                 >
