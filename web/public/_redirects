@@ -1,7 +1,6 @@
 # Redirecciones permanentes (301) en el borde (Cloudflare Workers Static Assets)
-# Consolidación canónica (www → non-www) y rutas legacy sin 404
-
-https://www.psandrei.com/* https://psandrei.com/:splat 301
+# Nota: Workers Static Assets solo permite rutas relativas aquí; la redirección
+# canónica www.psandrei.com → psandrei.com se configura en Cloudflare Redirect Rules.
 
 /reserva-de-horas /#reserva 301
 /clinica-digital /practica-digital 301
