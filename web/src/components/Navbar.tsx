@@ -475,17 +475,27 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
             src={logoPsAndrei}
             alt="Logo Ps. Andrei Andrusco"
             decoding="async"
-            className="h-8 w-8 shrink-0 rounded-xl border object-contain md:h-10 md:w-10"
+            className="h-9 w-9 shrink-0 rounded-xl border object-contain md:h-12 md:w-12"
             style={{ borderColor: 'var(--nav-rail-border)' }}
           />
-          <span
-            className="whitespace-nowrap text-[15px] font-bold tracking-tight sm:text-base md:text-xl"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            <span className="brand-text">
-              <span className="brand-initial">A</span>ndrei{' '}
-              <span className="brand-initial">A</span>ndrusco{' '}
-              <span className="brand-initial">F</span>idalgo
+          <span className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
+            <span className="brand-monogram text-[13px] sm:text-[14px] md:text-[16px] lg:text-[17px]">
+              <span className="brand-monogram-initial">A</span>
+              <span className="brand-monogram-rest">ndrei</span>
+              <span className="brand-monogram-initial">A</span>
+              <span className="brand-monogram-rest">ndrusco</span>
+              <span className="brand-monogram-initial">F</span>
+              <span className="brand-monogram-rest">idalgo</span>
+            </span>
+            <span className="brand-monogram-divider shrink-0" aria-hidden="true" />
+            <span className="brand-wordmark-subtitle flex flex-col whitespace-nowrap text-[12px] sm:text-[13px] md:text-[15px] lg:text-[16px]">
+              <span>
+                <span className="brand-wordmark-sub-initial">P</span>sicólogo &amp;
+              </span>
+              <span>
+                <span className="brand-wordmark-sub-initial">S</span>exólogo{' '}
+                <span className="brand-wordmark-sub-initial">C</span>línico
+              </span>
             </span>
           </span>
         </button>

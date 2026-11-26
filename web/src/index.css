@@ -1217,17 +1217,68 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   }
 }
 
+/* Wordmark editorial del encabezado — Monograma vertical AAF + subtítulo lateral */
+.brand-monogram {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 0.09em;
+  row-gap: 0;
+  font-family: 'Berkshire Swash', 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  color: var(--brand-wordmark-ink, var(--brand-text-color));
+  letter-spacing: 0.01em;
+  line-height: 0.94;
+}
+
+.brand-monogram-initial {
+  justify-self: end;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.brand-monogram-rest {
+  justify-self: start;
+}
+
+.brand-monogram-divider {
+  width: 1.5px;
+  align-self: stretch;
+  margin-block: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 65%, transparent) 22%,
+    color-mix(in srgb, var(--accent) 65%, transparent) 78%,
+    transparent 100%
+  );
+}
+
+.brand-wordmark-subtitle {
+  font-family: 'Dancing Script', 'Fraunces', Georgia, cursive;
+  font-weight: 600;
+  color: var(--brand-wordmark-ink, var(--brand-text-color));
+  letter-spacing: 0.015em;
+  line-height: 1.08;
+}
+
+.brand-wordmark-sub-initial {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ═══════════════════════════════════════════════════════════════════
  *  NAVBAR — BOTONERA ANALÓGICA CONTINUA (DESKTOP Y MÓVIL)
  * ═══════════════════════════════════════════════════════════════════ */
 .nav-rail-desktop {
   display: inline-flex;
   align-items: stretch;
-  gap: 2px;
-  padding: 3.5px;
-  border-radius: 1rem;
+  gap: 3px;
+  padding: 6px;
+  border-radius: 9999px;
   background: var(--nav-rail-bg);
-  border: 1px solid var(--nav-rail-border);
+  border: 1px solid var(--nav-bezel-border, var(--nav-rail-border));
   box-shadow: var(--nav-rail-shadow);
 }
 
@@ -1236,7 +1287,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   display: inline-block;
   overflow: hidden;
   padding: 0.48rem 0.86rem 0.54rem;
-  border-radius: 0.26rem;
+  border-radius: 7px;
   border: 1px solid var(--nav-key-border);
   background-image: var(--nav-key-grooves), var(--nav-key-bg);
   box-shadow: var(--nav-key-shadow);
@@ -1253,13 +1304,20 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 .nav-link-desktop:first-child {
-  border-top-left-radius: 0.76rem;
-  border-bottom-left-radius: 0.76rem;
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  padding-left: 1.25rem;
+}
+
+/* Botones centrales (Especialidades, Reseñas, Psicoeducación, Preguntas): esquinas finas y angulares para máxima continuidad horizontal */
+.nav-link-desktop:not(:first-child):not(:last-child) {
+  border-radius: 2px;
 }
 
 .nav-link-desktop:last-child {
-  border-top-right-radius: 0.76rem;
-  border-bottom-right-radius: 0.76rem;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  padding-right: 1.25rem;
 }
 
 @media (min-width: 1024px) {
@@ -1267,9 +1325,17 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
     padding: 0.5rem 1.05rem 0.56rem;
   }
 
+  .nav-link-desktop:first-child {
+    padding-left: 1.35rem;
+  }
+
+  .nav-link-desktop:last-child {
+    padding-right: 1.35rem;
+  }
+
   .nav-link-desktop.nav-key-cta {
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
+    padding-left: 1.15rem;
+    padding-right: 1.35rem;
   }
 }
 

@@ -23,6 +23,8 @@ html[data-theme="standard"] {
   --text-muted: #94a3b8;
   --text-inverse: #0f172a;
   --brand-text-color: #ffffff;
+  --brand-wordmark-ink: #F5EFE4;
+  --brand-subtitle-ink: #C8B99E;
 
   --accent: #FF4D4D; /* Rojo Coral */
   --accent-hover: #E63E3E;
@@ -99,27 +101,27 @@ html[data-theme="standard"] {
   --editorial-ivory: #F7F3EB;
   --editorial-ivory-muted: rgba(247, 243, 235, 0.78);
   --editorial-coral: #EE4B35;
-  --area-card-bg: rgba(255, 255, 255, 0.03);
-  --area-card-bg-hover: rgba(255, 255, 255, 0.045);
-  --area-card-border: rgba(247, 243, 235, 0.12);
+  --area-card-bg: rgba(15, 23, 42, 0.42);
+  --area-card-bg-hover: rgba(15, 23, 42, 0.52);
+  --area-card-border: #1e293b;
   --area-card-border-hover: rgba(238, 75, 53, 0.5);
-  --area-card-divider: rgba(247, 243, 235, 0.10);
-  --area-subcard-bg: rgba(255, 255, 255, 0.025);
-  --area-subcard-bg-hover: rgba(255, 255, 255, 0.055);
-  --area-subcard-border: rgba(247, 243, 235, 0.12);
+  --area-card-divider: rgba(148, 163, 184, 0.16);
+  --area-subcard-bg: rgba(20, 32, 56, 0.50);
+  --area-subcard-bg-hover: rgba(26, 41, 70, 0.66);
+  --area-subcard-border: #1e293b;
   --area-subcard-border-hover: rgba(238, 75, 53, 0.52);
-  --area-subcard-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  --area-subcard-shadow-hover: 0 16px 34px -14px rgba(0, 0, 0, 0.62), 0 6px 20px -8px rgba(238, 75, 53, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --area-subcard-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(148, 163, 184, 0.08);
+  --area-subcard-shadow-hover: 0 16px 34px -14px rgba(0, 0, 0, 0.62), 0 6px 20px -8px rgba(238, 75, 53, 0.26), inset 0 1px 0 rgba(148, 163, 184, 0.14);
   --area-subcard-subtitle: #FF7866;
   --area-subcard-cta: rgba(247, 243, 235, 0.5);
   --area-card-shadow-hover: 0 18px 40px -18px rgba(0, 0, 0, 0.60);
-  --area-tab-bg: rgba(255, 255, 255, 0.02);
-  --area-tab-bg-hover: rgba(255, 255, 255, 0.055);
-  --area-tab-border: rgba(247, 243, 235, 0.10);
+  --area-tab-bg: rgba(15, 23, 42, 0.45);
+  --area-tab-bg-hover: rgba(20, 32, 56, 0.65);
+  --area-tab-border: #1e293b;
   --area-tab-shadow: 0 2px 10px -6px rgba(0, 0, 0, 0.35);
   --area-tab-shadow-hover: 0 10px 24px -12px rgba(0, 0, 0, 0.50), 0 0 14px -6px rgba(238, 75, 53, 0.22);
   --area-tab-text-inactive: rgba(247, 243, 235, 0.70);
-  --area-tab-active-bg: rgba(238, 75, 53, 0.11);
+  --area-tab-active-bg: color-mix(in srgb, #EE4B35 15%, rgba(15, 23, 42, 0.78));
   --area-tab-active-border: #EE4B35;
   --area-tab-active-shadow: 0 10px 28px -10px rgba(238, 75, 53, 0.36), 0 4px 12px -6px rgba(0, 0, 0, 0.45);
 
@@ -162,20 +164,21 @@ html[data-theme="standard"] {
   --nav-active-color: #FF6B5B;
   --nav-active-glow: rgba(255, 107, 91, 0.40);
   --nav-border-scrolled: rgba(255, 107, 91, 0.24);
-  --nav-rail-bg: linear-gradient(180deg, rgba(8, 13, 26, 0.86) 0%, rgba(13, 21, 40, 0.84) 100%);
+  --nav-rail-bg: linear-gradient(180deg, #1A0608 0%, #2B0B0E 100%);
   --nav-rail-border: rgba(255, 107, 91, 0.26);
-  --nav-rail-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.62), 0 6px 20px -10px rgba(0, 0, 0, 0.55), 0 0 16px -8px rgba(255, 107, 91, 0.20);
+  --nav-bezel-border: rgba(238, 75, 53, 0.26);
+  --nav-rail-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.86), inset 0 -1px 1px rgba(238, 75, 53, 0.16), 0 1px 1px rgba(255, 255, 255, 0.04);
   --nav-key-grooves: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.022) 0px, rgba(255, 255, 255, 0.022) 1px, rgba(0, 0, 0, 0.065) 1px, rgba(0, 0, 0, 0.065) 3px);
   --nav-key-bg: linear-gradient(180deg, rgba(28, 39, 62, 0.90) 0%, rgba(16, 25, 43, 0.95) 78%, rgba(11, 18, 33, 0.98) 100%);
   --nav-key-border: rgba(247, 243, 235, 0.09);
   --nav-key-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 0 rgba(2, 6, 23, 0.78), 0 2px 4px rgba(0, 0, 0, 0.36);
   --nav-key-hover-bg: linear-gradient(180deg, rgba(37, 51, 78, 0.94) 0%, rgba(21, 32, 54, 0.97) 78%, rgba(14, 22, 40, 0.99) 100%);
-  --nav-key-hover-border: rgba(255, 107, 91, 0.38);
-  --nav-key-hover-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -2px 0 rgba(2, 6, 23, 0.82), 0 4px 10px -3px rgba(0, 0, 0, 0.48);
+  --nav-key-hover-border: rgba(238, 75, 53, 0.45);
+  --nav-key-hover-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -2px 0 rgba(2, 6, 23, 0.82), 0 0 8px rgba(238, 75, 53, 0.20), 0 4px 10px -3px rgba(0, 0, 0, 0.48);
   --nav-key-press-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
-  --nav-key-active-bg: linear-gradient(180deg, rgba(255, 107, 91, 0.22) 0%, rgba(214, 65, 51, 0.14) 76%, rgba(140, 34, 28, 0.24) 100%);
-  --nav-key-active-border: rgba(255, 107, 91, 0.56);
-  --nav-key-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 168, 158, 0.20), 0 0 14px -4px rgba(255, 107, 91, 0.36);
+  --nav-key-active-bg: linear-gradient(180deg, rgba(238, 75, 53, 0.22) 0%, rgba(214, 65, 51, 0.14) 76%, rgba(140, 34, 28, 0.24) 100%);
+  --nav-key-active-border: rgba(238, 75, 53, 0.9);
+  --nav-key-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 168, 158, 0.22), 0 0 10px rgba(238, 75, 53, 0.35);
   --nav-key-active-text: #FFF7F5;
   --nav-key-cta-bg: linear-gradient(180deg, #D4382A 0%, #C22F23 74%, #A82419 100%);
   --nav-key-cta-hover-bg: linear-gradient(180deg, #DC4032 0%, #CB3427 74%, #B2281C 100%);
@@ -212,6 +215,8 @@ html[data-theme="light"] {
   --text-muted: #526075;
   --text-inverse: #FFFFFF;
   --brand-text-color: #13233A;
+  --brand-wordmark-ink: #13233A;
+  --brand-subtitle-ink: #4E5D73;
 
   --accent: #C73326; /* Rojo Coral accesible WCAG AA (>= 5.1:1 en claro y con texto blanco) */
   --accent-hover: #A82419;
@@ -350,9 +355,10 @@ html[data-theme="light"] {
   --nav-active-color: #D64133;
   --nav-active-glow: rgba(255, 107, 91, 0.28);
   --nav-border-scrolled: rgba(255, 107, 91, 0.28);
-  --nav-rail-bg: linear-gradient(180deg, #EDE5D7 0%, #F4EEE3 100%);
+  --nav-rail-bg: linear-gradient(180deg, #E8DFD0 0%, #F1E9DC 100%);
   --nav-rail-border: rgba(255, 107, 91, 0.34);
-  --nav-rail-shadow: inset 0 2px 4px rgba(19, 35, 58, 0.08), 0 4px 14px -8px rgba(19, 35, 58, 0.12), 0 1px 0 rgba(255, 255, 255, 0.95);
+  --nav-bezel-border: rgba(19, 35, 58, 0.14);
+  --nav-rail-shadow: inset 0 2px 6px rgba(19, 35, 58, 0.16), inset 0 -1px 1px rgba(255, 255, 255, 0.88), 0 1px 2px rgba(255, 255, 255, 0.92);
   --nav-key-grooves: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0px, rgba(255, 255, 255, 0.34) 1px, rgba(19, 35, 58, 0.022) 1px, rgba(19, 35, 58, 0.022) 3px);
   --nav-key-bg: linear-gradient(180deg, #FFFFFF 0%, #FAF6F0 78%, #F2EBE0 100%);
   --nav-key-border: rgba(19, 35, 58, 0.12);

@@ -148,7 +148,7 @@ export function HowItWorksSection() {
         <div
           className="mb-5 overflow-hidden rounded-2xl border md:hidden"
           style={{
-            backgroundColor: 'var(--bg-card-solid)',
+            backgroundColor: 'var(--bg-card)',
             borderColor: 'var(--border-accent)',
             boxShadow: 'var(--shadow-card)',
           }}
@@ -166,11 +166,7 @@ export function HowItWorksSection() {
                 <div className="flex items-center gap-1.5">
                   <span
                     className="text-xs font-bold leading-snug"
-                    style={{
-                      color: plan.featured
-                        ? 'var(--accent-text)'
-                        : 'var(--text-primary)',
-                    }}
+                    style={{ color: 'var(--accent-text)' }}
                   >
                     {plan.label}
                   </span>
@@ -224,7 +220,7 @@ export function HowItWorksSection() {
                 borderWidth: plan.featured ? '1.5px' : '1px',
                 background: plan.featured
                   ? 'var(--faq-featured-bg)'
-                  : 'var(--bg-card-solid)',
+                  : 'var(--bg-card)',
                 boxShadow: plan.featured
                   ? 'var(--callout-shadow)'
                   : 'var(--shadow-card)',
@@ -234,11 +230,7 @@ export function HowItWorksSection() {
                 <div className="mb-2 flex items-center justify-between gap-2">
                   <span
                     className="text-xs font-bold uppercase tracking-wider"
-                    style={{
-                      color: plan.featured
-                        ? 'var(--accent-text)'
-                        : 'var(--text-muted)',
-                    }}
+                    style={{ color: 'var(--accent-text)' }}
                   >
                     {plan.label}
                   </span>
