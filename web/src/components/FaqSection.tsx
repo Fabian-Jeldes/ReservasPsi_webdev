@@ -6,6 +6,7 @@ import type { FaqCategory, FaqItem } from '../types/site'
 export function FaqSection() {
   const [activeCategoryId, setActiveCategoryId] = useState<string>('all')
   const [openItemKey, setOpenItemKey] = useState<string | null>(null)
+  const [showAllMobile, setShowAllMobile] = useState(false)
 
   const allItems = useMemo<FaqItem[]>(() => {
     return FAQ_DATA.flatMap((cat: FaqCategory) => cat.items)
@@ -17,6 +18,8 @@ export function FaqSection() {
     return found ? found.items : allItems
   }, [activeCategoryId, allItems])
 
+  const hiddenMobileCount = Math.max(0, visibleItems.length - 3)
+
   const toggleItem = (key: string) => {
     setOpenItemKey((prev) => (prev === key ? null : key))
   }
@@ -24,6 +27,16 @@ export function FaqSection() {
   const handleCategoryChange = (id: string) => {
     setActiveCategoryId(id)
     setOpenItemKey(null)
+    setShowAllMobile(false)
+  }
+
+  const toggleShowAllMobile = () => {
+    setShowAllMobile((prev) => {
+      if (prev && openItemKey !== null && Number(openItemKey) >= 3) {
+        setOpenItemKey(null)
+      }
+      return !prev
+    })
   }
 
   const filterTabs = useMemo(
@@ -110,8 +123,8 @@ export function FaqSection() {
           })}
         </div>
 
-        {/* Acordeón moderno con Fraunces SemiBold, viñeta interactiva y transición grid 0fr->1fr */}
-        <div className="space-y-4">
+        {/* Acordeón moderno (desktop: tarjetas | móvil <=768px: lista minimalista + revelación progresiva) */}
+        <div className={`faq-list space-y-4 ${showAllMobile ? 'show-all' : ''}`}>
           {visibleItems.map((item: FaqItem, idx: number) => {
             const itemKey = String(idx)
             const isOpen = openItemKey === itemKey
@@ -119,7 +132,9 @@ export function FaqSection() {
             return (
               <div
                 key={item.question}
-                className="bullet-reveal-card group overflow-hidden border transition-all duration-300"
+                className={`faq-item bullet-reveal-card group overflow-hidden border transition-all duration-300 ${
+                  isOpen ? 'is-open' : ''
+                }`}
                 style={{
                   borderRadius: 'var(--radius-card)',
                   borderColor: isOpen
@@ -145,12 +160,12 @@ export function FaqSection() {
                   type="button"
                   onClick={() => toggleItem(itemKey)}
                   aria-expanded={isOpen}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left transition-colors md:p-8"
+                  className="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left transition-colors md:p-8"
                 >
                   <div className="min-w-0 flex-1">
                     {item.badge && (
                       <span
-                        className="mb-2.5 inline-block rounded-full px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest"
+                        className="faq-badge mb-2.5 inline-block rounded-full px-3 py-0.5 text-[11px] font-bold uppercase tracking-widest"
                         style={{
                           backgroundColor: 'var(--accent-soft)',
                           color: 'var(--accent-text)',
@@ -162,7 +177,7 @@ export function FaqSection() {
                       </span>
                     )}
                     <h3
-                      className="bullet-reveal-title font-editorial text-xl leading-snug md:text-2xl"
+                      className="faq-question bullet-reveal-title font-editorial text-xl leading-snug md:text-2xl"
                       style={{
                         color: 'var(--text-primary)',
                         fontWeight: 600,
@@ -176,7 +191,7 @@ export function FaqSection() {
                   </div>
 
                   <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300"
+                    className="faq-chevron flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300"
                     style={{
                       borderColor: isOpen
                         ? 'var(--accent)'
@@ -204,7 +219,7 @@ export function FaqSection() {
                 >
                   <div className="overflow-hidden">
                     <div
-                      className="space-y-4 border-t px-6 pt-5 pb-7 text-base leading-[1.8] md:px-8 md:pb-8 md:text-lg"
+                      className="faq-answer-body space-y-4 border-t px-6 pt-5 pb-7 text-base leading-[1.8] md:px-8 md:pb-8 md:text-lg"
                       style={{
                         color: 'var(--text-secondary)',
                         borderColor: 'var(--border-primary)',
@@ -292,6 +307,20 @@ export function FaqSection() {
             )
           })}
         </div>
+
+        {/* Control de revelación progresiva (visible exclusivamente en móvil <= 768px) */}
+        {hiddenMobileCount > 0 && (
+          <button
+            type="button"
+            onClick={toggleShowAllMobile}
+            aria-expanded={showAllMobile}
+            className="faq-expand-btn"
+          >
+            {showAllMobile
+              ? '- Mostrar menos'
+              : `+ Ver todas las preguntas (${hiddenMobileCount} más)`}
+          </button>
+        )}
       </div>
     </section>
   )

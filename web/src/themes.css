@@ -222,6 +222,9 @@ html[data-theme="standard"] {
   /* Etiqueta del selector de tema */
   --theme-label-color: #A0ABC0;
   --theme-label-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+
+  /* Divisor minimalista de FAQ en móvil */
+  --faq-mobile-divider: rgba(255, 255, 255, 0.08);
 }
 
 
@@ -438,6 +441,9 @@ html[data-theme="light"] {
   /* Etiqueta del selector de tema (claro) */
   --theme-label-color: #4E5D73;
   --theme-label-shadow: 0 1px 4px rgba(251, 248, 243, 0.9);
+
+  /* Divisor minimalista de FAQ en móvil (claro) */
+  --faq-mobile-divider: rgba(19, 35, 58, 0.12);
 }
 
 

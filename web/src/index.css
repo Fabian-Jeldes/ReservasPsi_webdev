@@ -2094,3 +2094,110 @@ html[data-mobile-menu-open="true"] .global-theme-toggle {
     opacity: 0.45;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+ *  FAQ MÓVIL (<= 768px) — LISTA MINIMALISTA + REVELACIÓN PROGRESIVA
+ * ═══════════════════════════════════════════════════════════════════ */
+.faq-expand-btn {
+  display: none;
+}
+
+@keyframes faqMobileReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0 !important;
+  }
+
+  .faq-list > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+
+  .faq-item {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--faq-mobile-divider, rgba(255, 255, 255, 0.08)) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .faq-list:not(.show-all) .faq-item:nth-child(n + 4) {
+    display: none;
+  }
+
+  .faq-list.show-all .faq-item:nth-child(n + 4) {
+    animation: faqMobileReveal 280ms ease both;
+  }
+
+  .faq-trigger {
+    padding: 14px 4px !important;
+    gap: 0.75rem !important;
+  }
+
+  .faq-item:not(.is-open) .faq-badge {
+    display: none;
+  }
+
+  .faq-item.is-open .faq-badge {
+    margin-bottom: 0.35rem;
+    padding: 0.1rem 0.55rem;
+    font-size: 10px;
+  }
+
+  .faq-question {
+    font-size: 0.95rem !important;
+    line-height: 1.32 !important;
+    text-align: left;
+  }
+
+  .faq-chevron {
+    width: 24px !important;
+    height: 24px !important;
+    border: none !important;
+    background-color: transparent !important;
+  }
+
+  .faq-answer-body {
+    border-top: none !important;
+    padding: 0 4px 16px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .faq-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background-color: var(--accent-soft);
+    color: var(--accent-text);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 200ms ease, border-color 200ms ease, transform 150ms ease;
+  }
+
+  .faq-expand-btn:active {
+    transform: scale(0.98);
+  }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .faq-list.show-all .faq-item:nth-child(n + 4) {
+    animation: none !important;
+  }
+}
