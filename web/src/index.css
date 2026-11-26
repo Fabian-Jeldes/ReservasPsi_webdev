@@ -356,6 +356,25 @@ html[data-dev-accent="deep"] .andi-hero-accent {
   }
 }
 
+/* Filas de doodles de fondo: espejo horizontal en filas pares y desfase asimétrico orgánico */
+.bg-pattern-row {
+  position: relative;
+  --wm-flip: 1;
+}
+
+.bg-pattern-row:nth-of-type(even),
+.bg-pattern-row.is-flipped {
+  --wm-flip: -1;
+}
+
+/* Desfase horizontal irregular entre filas para romper la cuadrícula rígida sin dejar huecos laterales */
+.bg-pattern-row:nth-of-type(1) { margin-left: -1%; }
+.bg-pattern-row:nth-of-type(2) { margin-left: -6.5%; }
+.bg-pattern-row:nth-of-type(3) { margin-left: -3.2%; }
+.bg-pattern-row:nth-of-type(4) { margin-left: -8%; }
+.bg-pattern-row:nth-of-type(5) { margin-left: -4.5%; }
+.bg-pattern-row:nth-of-type(6) { margin-left: -2%; }
+
 .wm-row-track {
   display: flex;
   width: max-content;
@@ -391,23 +410,25 @@ html[data-dev-accent="deep"] .andi-hero-accent {
   will-change: transform;
 }
 
-/* Capa C: Pulso de escala y aumento de opacidad (+15% en cresta) */
+/* Capa C: Pulso de escala y aumento de opacidad (+15% en cresta) preservando espejo horizontal (--wm-flip) */
 @keyframes pulse-scale {
   0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(1);
+    transform: translate3d(0, 0, 0) scaleX(var(--wm-flip, 1)) rotate(var(--wm-rot, -16deg)) scale(1);
     opacity: 0.87;
   }
   32% {
-    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(1.15);
+    transform: translate3d(0, 0, 0) scaleX(var(--wm-flip, 1)) rotate(var(--wm-rot, -16deg)) scale(1.15);
     opacity: 1;
   }
   68% {
-    transform: translate3d(0, 0, 0) rotate(var(--wm-rot, -16deg)) scale(0.85);
+    transform: translate3d(0, 0, 0) scaleX(var(--wm-flip, 1)) rotate(var(--wm-rot, -16deg)) scale(0.85);
     opacity: 0.87;
   }
 }
 
 .watermark-icon {
+  transform-origin: center;
+  transform: scaleX(var(--wm-flip, 1)) rotate(var(--wm-rot, -16deg));
   animation: pulse-scale var(--wm-duration, 12s) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   animation-delay: var(--wm-delay, -3.5s);
   will-change: transform, opacity;
@@ -1287,12 +1308,12 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   display: inline-block;
   overflow: hidden;
   padding: 0.48rem 0.86rem 0.54rem;
-  border-radius: 7px;
-  border: 1px solid var(--nav-key-border);
-  background-image: var(--nav-key-grooves), var(--nav-key-bg);
-  box-shadow: var(--nav-key-shadow);
-  letter-spacing: 0.025em;
-  word-spacing: 0.22em;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  letter-spacing: normal;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   transform: translate3d(0, 0, 0);
@@ -1301,6 +1322,141 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
     border-color 200ms ease,
     box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Capa de texto estática y siempre legible por encima de la cavidad y cortinas */
+.nav-key-label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
+/* ── Visor mecánico 4+4 placas + haz de luz anticipatorio (integrado seamless al riel) ── */
+@keyframes armor-seam-spark {
+  0% {
+    opacity: 0;
+    transform: translate3d(-75%, -50%, 0);
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(75%, -50%, 0);
+  }
+}
+
+.nav-armor-plates {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  isolation: isolate;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  background: transparent;
+  box-shadow: none;
+  transition: box-shadow 220ms ease;
+}
+
+.nav-armor-plate {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Mitad superior: 4 lamas horizontales uniformes (encastre central seamless sin borde) */
+.nav-armor-plate-top {
+  top: 0;
+  background: var(--nav-armor-plate-top-bg);
+  border-bottom: none;
+}
+
+/* Mitad inferior: 4 lamas horizontales simétricas (encastre central seamless sin borde) */
+.nav-armor-plate-bottom {
+  bottom: 0;
+  background: var(--nav-armor-plate-bottom-bg);
+  border-top: none;
+}
+
+/* Haz de luz anticipatorio a lo largo de la hendidura central (50% altura), sobre placas y bajo el texto */
+.nav-armor-spark {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-75%, -50%, 0);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 24%,
+    #EE4B35 42%,
+    #FFFFFF 50%,
+    #EE4B35 58%,
+    transparent 76%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 4px #EE4B35);
+  will-change: transform, opacity;
+}
+
+.nav-link-desktop.is-sparking .nav-armor-spark {
+  animation: armor-seam-spark 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Apertura parcial controlada (visor mecánico ±7px): las 4+4 lamas permanecen visibles enmarcando el texto */
+.nav-link-desktop.is-curtain-open .nav-armor-plate-top {
+  transform: translate3d(0, -7px, 0);
+}
+
+.nav-link-desktop.is-curtain-open .nav-armor-plate-bottom {
+  transform: translate3d(0, 7px, 0);
+}
+
+.nav-link-desktop:hover .nav-armor-plate-top,
+.nav-link-desktop:focus-visible .nav-armor-plate-top {
+  background: var(--nav-armor-plate-hover-top-bg);
+}
+
+.nav-link-desktop:hover .nav-armor-plate-bottom,
+.nav-link-desktop:focus-visible .nav-armor-plate-bottom {
+  background: var(--nav-armor-plate-hover-bottom-bg);
+}
+
+/* Botón CTA "Agendar Cita": 4+4 lamas en rojo coral intenso integradas seamless al riel */
+.nav-link-desktop.nav-key-cta .nav-armor-plates {
+  background: transparent;
+}
+
+.nav-link-desktop.nav-key-cta .nav-armor-plate-top {
+  background: var(--nav-armor-plate-cta-top-bg);
+}
+
+.nav-link-desktop.nav-key-cta .nav-armor-plate-bottom {
+  background: var(--nav-armor-plate-cta-bottom-bg);
+}
+
+.nav-link-desktop.nav-key-cta:hover .nav-armor-plate-top,
+.nav-link-desktop.nav-key-cta:focus-visible .nav-armor-plate-top {
+  background: var(--nav-armor-plate-cta-hover-top-bg);
+}
+
+.nav-link-desktop.nav-key-cta:hover .nav-armor-plate-bottom,
+.nav-link-desktop.nav-key-cta:focus-visible .nav-armor-plate-bottom {
+  background: var(--nav-armor-plate-cta-hover-bottom-bg);
 }
 
 .nav-link-desktop:first-child {
@@ -1340,9 +1496,12 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 .nav-link-desktop .brand-initial {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
   color: color-mix(in srgb, var(--accent) 88%, var(--text-primary));
   font-weight: 700;
-  margin-right: 0.03em;
   transition: color 200ms ease;
 }
 
@@ -1350,6 +1509,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 .nav-link-desktop::after {
   content: '';
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
@@ -1369,10 +1529,8 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 .nav-link-desktop:focus-visible {
   z-index: 1;
   color: var(--text-primary);
-  background-image: var(--nav-key-grooves), var(--nav-key-hover-bg);
-  border-color: var(--nav-key-hover-border);
-  box-shadow: var(--nav-key-hover-shadow);
-  transform: translate3d(0, -0.5px, 0);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .nav-link-desktop:hover .brand-initial,
@@ -1382,13 +1540,12 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 .nav-link-desktop:hover::after,
 .nav-link-desktop:focus-visible::after {
-  opacity: 0.6;
-  transform: scaleX(0.55);
+  opacity: 0;
+  transform: scaleX(0);
 }
 
 .nav-link-desktop:active {
-  transform: translate3d(0, 1.5px, 0);
-  box-shadow: var(--nav-key-press-shadow);
+  transform: translate3d(0, 1px, 0);
 }
 
 /* Micro-ola muy lenta (ida y vuelta suave) sobre relieves y ranuras solo en el botón activo */
@@ -1404,6 +1561,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 .nav-link-desktop::before {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: 0;
   pointer-events: none;
   opacity: 0;
@@ -1437,15 +1595,21 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 .nav-link-desktop.is-active {
   z-index: 2;
   color: var(--nav-key-active-text);
-  background-image: var(--nav-key-grooves), var(--nav-key-active-bg);
-  border-color: var(--nav-key-active-border);
-  box-shadow: var(--nav-key-active-shadow);
-  transform: translate3d(0, 1px, 0);
+  border: 1px solid rgba(238, 75, 53, 0.95);
+  box-shadow:
+    0 0 10px rgba(238, 75, 53, 0.4),
+    inset 0 0 4px rgba(238, 75, 53, 0.2);
+  border-radius: 6px;
+  transform: translate3d(0, 0, 0);
+}
+
+.nav-link-desktop:first-child.is-active {
+  border-radius: 9999px 6px 6px 9999px;
 }
 
 .nav-link-desktop.is-active::before {
-  opacity: 1;
-  animation: navActiveGrooveWave 9.5s ease-in-out infinite;
+  opacity: 0;
+  animation: none;
 }
 
 .nav-link-desktop.is-active .brand-initial {
@@ -1453,16 +1617,9 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 .nav-link-desktop.is-active::after {
-  opacity: 1;
-  transform: scaleX(1);
-  background-image: linear-gradient(
-    90deg,
-    var(--nav-key-bar) 0%,
-    var(--nav-wave-bar-peak) 50%,
-    var(--nav-key-bar) 100%
-  );
-  background-size: 240% 100%;
-  animation: navActiveGrooveWave 9.5s ease-in-out infinite;
+  opacity: 0;
+  transform: scaleX(0);
+  animation: none;
 }
 
 /* Destello diagonal discreto con larga pausa + respiración cálida exclusiva para "Agendar Cita" */
@@ -1498,12 +1655,12 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 /* Tecla principal "Agendar Cita" integrada en la botonera analógica (estilo tecla roja REC) */
 .nav-link-desktop.nav-key-cta {
-  color: #ffffff;
-  background-image: var(--nav-key-grooves), var(--nav-key-cta-bg);
-  border-color: var(--nav-key-cta-border);
-  box-shadow: var(--nav-key-cta-shadow);
+  color: var(--btn-accent-text);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
   text-shadow: 0 1px 2px rgba(90, 16, 12, 0.45);
-  animation: navCtaWarmGlow 6.2s ease-in-out infinite;
+  animation: none;
 }
 
 /* Reflejo diagonal sutil y periódico, distinto a la micro-ola de la sección activa */
@@ -1535,12 +1692,10 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 .nav-link-desktop.nav-key-cta:hover,
 .nav-link-desktop.nav-key-cta:focus-visible {
-  color: #ffffff;
-  background-image: var(--nav-key-grooves), var(--nav-key-cta-hover-bg);
-  border-color: var(--nav-key-cta-border);
-  box-shadow: var(--nav-key-cta-hover-shadow);
-  transform: translate3d(0, -0.5px, 0);
-  animation-play-state: paused;
+  color: var(--btn-accent-text);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .nav-link-desktop.nav-key-cta:hover::after,
@@ -1571,12 +1726,165 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   }
 }
 
+/* Contenedor interno del drawer móvil con distribución equilibrada y scroll de seguridad (dvh) */
+.mobile-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 5.25rem 1.25rem 1.5rem;
+  box-sizing: border-box;
+  touch-action: pan-y;
+}
+
+.mobile-cta-wrap {
+  margin-top: clamp(20px, 3.2vh, 28px);
+}
+
+.mobile-menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(24px, 4vh, 36px);
+  padding-bottom: clamp(16px, 3vh, 24px);
+  width: 100%;
+}
+
+/* Ocultar el botón flotante global mientras el menú móvil está abierto para evitar duplicación/colisión */
+html[data-mobile-menu-open="true"] .global-theme-toggle {
+  display: none;
+}
+
 .nav-rail-mobile {
-  padding: 6px;
-  border-radius: 1.15rem;
-  background: var(--nav-rail-bg);
-  border: 1px solid var(--nav-rail-border);
-  box-shadow: var(--nav-rail-shadow);
+  position: relative;
+  overflow: visible;
+  gap: clamp(12px, 2.2vh, 18px);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Riel rojo hendido delgado con sangrado completo borde-a-borde (100vw) */
+.nav-rail-track {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background: var(--nav-mobile-track-bg);
+  border-top: 1px solid var(--nav-mobile-track-guide);
+  border-bottom: 1px solid var(--nav-mobile-track-guide);
+  box-shadow: var(--nav-mobile-track-shadow);
+}
+
+.nav-rail-track .nav-link-mobile {
+  z-index: 1;
+}
+
+/* Animación de entrada intercalada (Izq→Der y Der→Izq alternados, solo primera apertura) */
+@keyframes navMobileRailSlideIn {
+  0% {
+    transform: translate3d(var(--rail-from-x, -105vw), 0, 0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes navMobileLedDock {
+  0%, 55% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.nav-rail-mobile.animate-rails .nav-rail-track .nav-link-mobile {
+  animation: navMobileRailSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--rail-delay, 0.04s);
+  will-change: transform, opacity;
+}
+
+.nav-rail-mobile.animate-rails .nav-rail-track .nav-mobile-led {
+  animation: navMobileLedDock 0.24s ease-out both;
+  animation-delay: calc(var(--rail-delay, 0.04s) + 0.24s);
+}
+
+/* Direcciones alternadas + desfase secuencial de 0.06s entre botones */
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(odd) {
+  --rail-from-x: -105vw;
+}
+
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(even) {
+  --rail-from-x: 105vw;
+}
+
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(1) { --rail-delay: 0.04s; }
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(2) { --rail-delay: 0.10s; }
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(3) { --rail-delay: 0.16s; }
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(4) { --rail-delay: 0.22s; }
+.nav-rail-mobile.animate-rails .nav-rail-track:nth-child(5) { --rail-delay: 0.28s; }
+
+/* ── Selector de Tema: Etiqueta discreta + Destello Orbital 360° continuo ── */
+@keyframes orbit-theme-spark {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.theme-orb-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 310deg,
+    rgba(238, 75, 53, 0.4) 335deg,
+    #FF6B55 350deg,
+    #FFFFFF 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 1.5px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 1.5px)
+  );
+  animation: orbit-theme-spark 6s linear infinite;
+  will-change: transform;
+}
+
+.theme-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--theme-label-color, #A0ABC0);
+  text-shadow: var(--theme-label-shadow);
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.group:hover .theme-label {
+  color: var(--text-primary);
 }
 
 .nav-link-mobile {
@@ -1587,7 +1895,10 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
-  padding: 0.9rem 1.2rem;
+  min-height: 50px;
+  height: 52px;
+  padding: 0.75rem 1.25rem;
+  line-height: 1;
   border-radius: 0.72rem;
   border: 1px solid var(--nav-key-border);
   background-image: var(--nav-key-grooves), var(--nav-key-bg);
@@ -1646,9 +1957,12 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 }
 
 .nav-link-mobile .brand-initial {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
   color: color-mix(in srgb, var(--accent) 88%, var(--text-primary));
   font-weight: 700;
-  margin-right: 0.03em;
   transition: color 220ms ease;
 }
 
@@ -1709,7 +2023,7 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
 
 /* Tecla coral "Agendar Cita" integrada en el cierre de la botonera móvil */
 .nav-link-mobile.nav-mobile-cta {
-  color: #ffffff;
+  color: var(--btn-accent-text);
   background-image: var(--nav-key-grooves), var(--nav-key-cta-bg);
   border-color: var(--nav-key-cta-border);
   box-shadow: var(--nav-key-cta-shadow);
@@ -1755,5 +2069,28 @@ details[open].bullet-reveal-card:focus-visible .bullet-reveal-chevron {
   .nav-link-desktop.nav-key-cta::after {
     animation: none;
     background-image: none;
+  }
+
+  .nav-armor-plate {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .nav-armor-spark {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .nav-rail-mobile.animate-rails .nav-rail-track .nav-link-mobile,
+  .nav-rail-mobile.animate-rails .nav-rail-track .nav-mobile-led {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .theme-orb-btn::before {
+    animation: none !important;
+    opacity: 0.45;
   }
 }

@@ -53,12 +53,17 @@ function persistTheme(id: ThemeId) {
   themeListeners.forEach((listener) => listener())
 }
 
+type DevAccentToggleProps = {
+  /** Cuando es true, se renderiza en flujo normal (ej. footer del menú móvil) sin position: fixed */
+  inline?: boolean
+}
+
 /**
  * Selector entre el tema oscuro original (`standard`) y el tema claro (`light`).
  * Persiste en localStorage para mantener la elección al recargar, usando
  * useSyncExternalStore para evitar discrepancias de hidratación con el SSR.
  */
-export function DevAccentToggle() {
+export function DevAccentToggle({ inline = false }: DevAccentToggleProps) {
   const themeIndex = useSyncExternalStore(
     subscribeTheme,
     getClientThemeIndex,
@@ -70,6 +75,7 @@ export function DevAccentToggle() {
   const current = THEMES[themeIndex]
 
   useEffect(() => {
+    if (inline) return
     document.documentElement.dataset.theme = current.id
 
     if (current.id !== 'standard') {
@@ -79,7 +85,7 @@ export function DevAccentToggle() {
     return () => {
       document.documentElement.dataset.theme = 'standard'
     }
-  }, [current.id])
+  }, [current.id, inline])
 
   const selectTheme = (idx: number) => {
     const nextTheme = THEMES[idx]
@@ -98,8 +104,78 @@ export function DevAccentToggle() {
     )
   }
 
+  if (inline) {
+    return (
+      <div className="relative inline-flex flex-col items-center">
+        {expanded && (
+          <div
+            className="absolute bottom-full left-1/2 z-50 mb-2 flex -translate-x-1/2 flex-col gap-1 rounded-2xl border p-2 shadow-2xl backdrop-blur-xl"
+            style={{
+              backgroundColor: 'var(--bg-card-solid)',
+              borderColor: 'var(--border-accent)',
+              boxShadow: 'var(--shadow-card)',
+            }}
+          >
+            {THEMES.map((theme, idx) => {
+              const isSelected = idx === themeIndex
+              return (
+                <button
+                  key={theme.id}
+                  type="button"
+                  onClick={() => selectTheme(idx)}
+                  className="flex cursor-pointer items-center gap-3 whitespace-nowrap rounded-xl px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wide transition-all hover:scale-[1.02]"
+                  style={{
+                    color: isSelected
+                      ? 'var(--text-primary)'
+                      : 'var(--text-secondary)',
+                    backgroundColor: isSelected
+                      ? 'var(--accent-soft)'
+                      : 'transparent',
+                  }}
+                >
+                  {renderIcon(theme.id, isSelected)}
+                  <span>{theme.label}</span>
+                  {isSelected && (
+                    <span
+                      className="ml-auto text-[11px] font-black"
+                      style={{ color: 'var(--accent-text)' }}
+                    >
+                      ✓
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          className="group inline-flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0"
+          title="Cambiar entre modo oscuro y claro"
+          aria-label={`Cambiar tema: ${current.label}`}
+          aria-expanded={expanded}
+        >
+          <span
+            className="theme-orb-btn relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border shadow-lg backdrop-blur-xl transition-transform duration-200 group-hover:scale-105"
+            style={{
+              backgroundColor: 'var(--bg-card-solid)',
+              borderColor: 'var(--border-accent)',
+              color: 'var(--text-primary)',
+              boxShadow: 'var(--shadow-card)',
+            }}
+          >
+            {renderIcon(current.id, true)}
+          </span>
+          <span className="theme-label">Cambiar tema</span>
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <div className="fixed bottom-3 left-3 z-[200] flex flex-col items-start gap-2 md:bottom-4 md:left-4">
+    <div className="global-theme-toggle fixed bottom-3 left-3 z-[200] flex flex-col items-start gap-2 md:bottom-4 md:left-4">
       {/* Panel expandido (2 opciones: Oscuro y Claro) */}
       {expanded && (
         <div
@@ -143,23 +219,27 @@ export function DevAccentToggle() {
         </div>
       )}
 
-      {/* Botón principal (compacto circular en móvil, píldora en desktop) */}
+      {/* Botón circular con destello orbital 360° + etiqueta descriptiva */}
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
-        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border p-0 text-xs font-bold uppercase tracking-wide shadow-lg backdrop-blur-xl transition-all hover:scale-105 md:h-auto md:w-auto md:gap-2.5 md:px-4 md:py-2.5"
-        style={{
-          backgroundColor: 'var(--bg-card-solid)',
-          borderColor: 'var(--border-accent)',
-          color: 'var(--text-primary)',
-          boxShadow: 'var(--shadow-card)',
-        }}
+        className="group flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0"
         title="Cambiar entre modo oscuro y claro"
         aria-label={`Cambiar tema: ${current.label}`}
         aria-expanded={expanded}
       >
-        {renderIcon(current.id, true)}
-        <span className="hidden md:inline">{current.label}</span>
+        <span
+          className="theme-orb-btn relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border shadow-lg backdrop-blur-xl transition-transform duration-200 group-hover:scale-105"
+          style={{
+            backgroundColor: 'var(--bg-card-solid)',
+            borderColor: 'var(--border-accent)',
+            color: 'var(--text-primary)',
+            boxShadow: 'var(--shadow-card)',
+          }}
+        >
+          {renderIcon(current.id, true)}
+        </span>
+        <span className="theme-label">Cambiar tema</span>
       </button>
     </div>
   )

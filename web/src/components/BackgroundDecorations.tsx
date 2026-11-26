@@ -8,6 +8,7 @@ import fondo5 from '../assets/fondo5.svg'
 import fondo6 from '../assets/fondo6.svg'
 import fondo7 from '../assets/fondo7.svg'
 import fondo8 from '../assets/fondo8.svg'
+import fondo9 from '../assets/fondo9.svg'
 
 const FONDO_ICONS = [
   fondo1,
@@ -18,21 +19,22 @@ const FONDO_ICONS = [
   fondo6,
   fondo7,
   fondo8,
+  fondo9,
 ] as const
 
 /**
- * Permutaciones de los 8 iconos (fondo1..fondo8) por fila:
- * - Cada fila contiene exactamente los 8 iconos en igual proporción.
+ * Permutaciones de los 9 iconos (fondo1..fondo9) por fila:
+ * - Cada fila contiene exactamente los 9 iconos en igual proporción.
  * - Ningún icono se repite horizontalmente (ni siquiera al cerrar el ciclo infinito)
  *   ni coincide verticalmente con el icono de la fila superior/inferior.
  */
 const ROW_PERMUTATIONS: number[][] = [
-  [0, 3, 6, 1, 4, 7, 2, 5],
-  [2, 5, 0, 3, 6, 1, 4, 7],
-  [4, 7, 2, 5, 0, 3, 6, 1],
-  [6, 1, 4, 7, 2, 5, 0, 3],
-  [1, 4, 7, 2, 5, 0, 3, 6],
-  [3, 6, 1, 4, 7, 2, 5, 0],
+  [0, 3, 6, 8, 1, 4, 7, 2, 5],
+  [2, 5, 8, 1, 4, 7, 0, 6, 3],
+  [4, 7, 1, 3, 6, 0, 8, 5, 2],
+  [6, 8, 2, 5, 0, 3, 1, 7, 4],
+  [8, 1, 4, 7, 2, 5, 3, 0, 6],
+  [1, 4, 7, 0, 5, 8, 6, 3, 2],
 ]
 
 type RowIconItem = {
@@ -102,11 +104,11 @@ export function BackgroundDecorations() {
   )
 
   const rows = useMemo<WatermarkRow[]>(() => {
-    const rowDurations = [118, 134, 112, 140, 126, 130]
+    const rowDurations = [132, 150, 126, 156, 140, 145]
 
     return ROW_PERMUTATIONS.map((perm, r) => {
-      // Repetimos la permutación de 8 iconos 2 veces (16 iconos = 1 mitad) para cubrir >2560px
-      // y luego duplicamos esa secuencia completa (32 iconos en total) para el loop infinito -50% <-> 0%
+      // Repetimos la permutación de 9 iconos 2 veces (18 iconos = 1 mitad) para cubrir >2560px
+      // y luego duplicamos esa secuencia completa (36 iconos en total) para el loop infinito -50% <-> 0%
       const halfSequence = [...perm, ...perm]
 
       const baseItems: RowIconItem[] = halfSequence.map((iconIdx, c) => {
@@ -190,7 +192,9 @@ export function BackgroundDecorations() {
         {rows.map((row) => (
           <div
             key={row.rowIndex}
-            className="w-full overflow-visible py-2"
+            className={`bg-pattern-row w-full overflow-visible py-2 ${
+              row.isOddRowNumber ? 'is-odd-row' : 'is-even-row is-flipped'
+            }`}
           >
             {/* Capa A: Fila Horizontal con desplazamiento continuo (-50% <-> 0%) */}
             <div

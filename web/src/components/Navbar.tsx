@@ -5,6 +5,7 @@ import logoPsAndrei from '../assets/logo-psandrei.webp'
 import { useActiveNavSection, type NavSectionId } from '../hooks/useActiveNavSection'
 import { useFocusTrap } from '../hooks/useFocusTrap'
 import { prefetchRoute } from '../lib/route-loaders'
+import { DevAccentToggle } from '../dev/DevAccentToggle'
 
 type Props = {
   onLogoClick: () => void
@@ -23,8 +24,7 @@ const NAV_ITEMS: readonly NavItem[] = [
     to: '/sobre-mi',
     label: (
       <>
-        <span className="brand-initial">S</span>obre{' '}
-        <span className="brand-initial">M</span>í
+        <span className="brand-initial">S</span>obre <span className="brand-initial">M</span>í
       </>
     ),
   },
@@ -66,6 +66,14 @@ const NAV_ITEMS: readonly NavItem[] = [
   },
 ]
 
+const NAV_RAIL_BUTTON_COUNT = NAV_ITEMS.length + 1
+const NAV_CURTAIN_CYCLE_MS = 14000
+const NAV_CURTAIN_OPEN_BASE_MS = 5000
+const NAV_CURTAIN_SPARK_LEAD_MS = 350
+const NAV_CURTAIN_SPARK_DURATION_MS = 420
+const NAV_CURTAIN_CLOSE_BASE_MS = 11250
+const NAV_CURTAIN_STAGGER_MS = 150
+
 function easeOutSmooth(t: number): number {
   return 1 - Math.pow(1 - t, 3)
 }
@@ -77,6 +85,8 @@ function easeInOutSmooth(t: number): number {
 export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
+  const [railAnimCycle, setRailAnimCycle] = useState(0)
+  const [animateMobileRails, setAnimateMobileRails] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const { activeSection, selectSection } = useActiveNavSection()
@@ -229,6 +239,16 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
   const openMenu = () => {
     clearPendingAnimations()
     const wasAlreadyRendered = isRendered
+
+    // Ejecutar la animación de rieles en cada apertura (respetando reduced-motion)
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    setAnimateMobileRails(!prefersReducedMotion)
+    if (!prefersReducedMotion) {
+      setRailAnimCycle((c) => c + 1)
+    }
+
     if (!wasAlreadyRendered) {
       progressRef.current = 0
       setIsRendered(true)
@@ -369,7 +389,102 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
     onEscape: () => closeMenuWithAction(),
   })
 
+  const desktopBtnRefs = useRef<(HTMLElement | null)[]>([])
+  const railPausedRef = useRef<boolean>(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  // Reloj maestro de 14s para el riel desktop (chispa anticipatoria + visor mecánico bidireccional)
+  useEffect(() => {
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let frameId = 0
+    let lastNow = 0
+    let elapsedMs = 0
+    const sparkedInCycle = Array<boolean>(NAV_RAIL_BUTTON_COUNT).fill(false)
+
+    const resetDynamicClasses = () => {
+      for (let i = 0; i < NAV_RAIL_BUTTON_COUNT; i++) {
+        desktopBtnRefs.current[i]?.classList.remove('is-curtain-open', 'is-sparking')
+      }
+    }
+
+    const tick = (now: number) => {
+      if (motionMedia.matches) {
+        resetDynamicClasses()
+        frameId = 0
+        return
+      }
+
+      const dt = lastNow === 0 ? 0 : Math.min(100, now - lastNow)
+      lastNow = now
+
+      if (!railPausedRef.current) {
+        const prevElapsed = elapsedMs
+        elapsedMs = (elapsedMs + dt) % NAV_CURTAIN_CYCLE_MS
+        if (elapsedMs < prevElapsed) {
+          sparkedInCycle.fill(false)
+        }
+      }
+
+      for (let i = 0; i < NAV_RAIL_BUTTON_COUNT; i++) {
+        const el = desktopBtnRefs.current[i]
+        if (!el) continue
+
+        const openStart = NAV_CURTAIN_OPEN_BASE_MS + i * NAV_CURTAIN_STAGGER_MS
+        const sparkStart = openStart - NAV_CURTAIN_SPARK_LEAD_MS
+        const closeStart =
+          NAV_CURTAIN_CLOSE_BASE_MS +
+          (NAV_RAIL_BUTTON_COUNT - 1 - i) * NAV_CURTAIN_STAGGER_MS
+
+        const isWaveOpen = elapsedMs >= openStart && elapsedMs < closeStart
+
+        // Chispa anticipatoria ~0.35s antes de que inicie la apertura de cada botón
+        if (
+          elapsedMs >= sparkStart &&
+          elapsedMs < sparkStart + NAV_CURTAIN_SPARK_DURATION_MS &&
+          !sparkedInCycle[i]
+        ) {
+          sparkedInCycle[i] = true
+          if (!railPausedRef.current) {
+            el.classList.add('is-sparking')
+          }
+        } else if (
+          elapsedMs >= sparkStart + NAV_CURTAIN_SPARK_DURATION_MS ||
+          elapsedMs < sparkStart
+        ) {
+          if (el.classList.contains('is-sparking')) {
+            el.classList.remove('is-sparking')
+          }
+        }
+
+        el.classList.toggle('is-curtain-open', isWaveOpen)
+      }
+
+      frameId = requestAnimationFrame(tick)
+    }
+
+    const startIfAllowed = () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId)
+        frameId = 0
+      }
+      if (motionMedia.matches) {
+        resetDynamicClasses()
+        return
+      }
+      lastNow = 0
+      frameId = requestAnimationFrame(tick)
+    }
+
+    startIfAllowed()
+    motionMedia.addEventListener('change', startIfAllowed)
+
+    return () => {
+      motionMedia.removeEventListener('change', startIfAllowed)
+      if (frameId) {
+        cancelAnimationFrame(frameId)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -398,9 +513,19 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
     html.style.overflow = 'hidden'
     html.style.overscrollBehavior = 'none'
+    html.dataset.mobileMenuOpen = 'true'
     body.style.overflow = 'hidden'
 
     const blockScrollGesture = (event: Event) => {
+      const inner = drawerContentRef.current
+      if (
+        inner &&
+        event.target instanceof Node &&
+        inner.contains(event.target) &&
+        inner.scrollHeight > inner.clientHeight
+      ) {
+        return
+      }
       event.preventDefault()
     }
 
@@ -425,6 +550,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
     return () => {
       html.style.overflow = prevHtmlOverflow
       html.style.overscrollBehavior = prevHtmlOverscroll
+      delete html.dataset.mobileMenuOpen
       body.style.overflow = prevBodyOverflow
       window.removeEventListener('touchmove', blockScrollGesture)
       window.removeEventListener('wheel', blockScrollGesture)
@@ -488,7 +614,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               <span className="brand-monogram-rest">idalgo</span>
             </span>
             <span className="brand-monogram-divider shrink-0" aria-hidden="true" />
-            <span className="brand-wordmark-subtitle flex flex-col whitespace-nowrap text-[12px] sm:text-[13px] md:text-[15px] lg:text-[16px]">
+            <span className="brand-wordmark-subtitle flex flex-col whitespace-nowrap text-[13.5px] sm:text-[14.5px] md:text-[16.5px] lg:text-[18px]">
               <span>
                 <span className="brand-wordmark-sub-initial">P</span>sicólogo &amp;
               </span>
@@ -502,12 +628,23 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
 
         {/* Desktop Menu — Botonera analógica continua (5 teclas + tecla coral Agendar Cita) */}
         <div className="hidden items-center md:flex">
-          <div className="nav-rail-desktop text-[13px] font-medium lg:text-sm">
-            {NAV_ITEMS.map((item) => {
+          <div
+            className="nav-rail-desktop text-[13px] font-medium lg:text-sm"
+            onMouseEnter={() => {
+              railPausedRef.current = true
+            }}
+            onMouseLeave={() => {
+              railPausedRef.current = false
+            }}
+          >
+            {NAV_ITEMS.map((item, idx) => {
               const isActive = activeSection === item.id
               return (
                 <Link
                   key={item.id}
+                  ref={(el) => {
+                    desktopBtnRefs.current[idx] = el
+                  }}
                   to={item.to}
                   aria-current={isActive ? 'location' : undefined}
                   onMouseEnter={() => prefetchRoute(item.to)}
@@ -521,16 +658,29 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                     isActive ? 'is-active' : ''
                   }`}
                 >
-                  {item.label}
+                  <span className="nav-armor-plates" aria-hidden="true">
+                    <span className="nav-armor-plate nav-armor-plate-top" />
+                    <span className="nav-armor-plate nav-armor-plate-bottom" />
+                    <span className="nav-armor-spark" />
+                  </span>
+                  <span className="nav-key-label">{item.label}</span>
                 </Link>
               )
             })}
             <button
+              ref={(el) => {
+                desktopBtnRefs.current[NAV_ITEMS.length] = el
+              }}
               type="button"
               onClick={onAgendarClick}
               className="nav-link-desktop nav-key-cta cursor-pointer whitespace-nowrap font-bold"
             >
-              Agendar Cita
+              <span className="nav-armor-plates" aria-hidden="true">
+                <span className="nav-armor-plate nav-armor-plate-top" />
+                <span className="nav-armor-plate nav-armor-plate-bottom" />
+                <span className="nav-armor-spark" />
+              </span>
+              <span className="nav-key-label">Agendar Cita</span>
             </button>
           </div>
         </div>
@@ -616,7 +766,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
           {/* Contenido del taskbar recortado 1:1 por la curva de la línea roja */}
           <div
             ref={drawerContentRef}
-            className="absolute inset-0 z-30 flex flex-col justify-start px-5 pt-20 pb-6"
+            className="mobile-drawer-inner absolute inset-0 z-30"
             style={{
               clipPath: 'inset(0 0 0 100%)',
               opacity: 0,
@@ -634,31 +784,41 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               }}
             />
 
-            {/* Enlaces principales como teclas táctiles verticales con ADN de la botonera de escritorio */}
-            <div className="relative z-10 mx-auto mt-1 w-full max-w-md">
-              <div className="nav-rail-mobile flex flex-col gap-1.5">
+            {/* Bloque balanceado: 5 enlaces en rieles + botón Agendar Cita + pie Cambiar Tema */}
+            <div className="relative z-10 my-auto flex w-full flex-col">
+              <div
+                key={railAnimCycle}
+                className={`nav-rail-mobile flex flex-col ${
+                  animateMobileRails ? 'animate-rails' : ''
+                }`}
+              >
                 {NAV_ITEMS.map((item) => {
                   const isActive = activeSection === item.id
                   return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      aria-current={isActive ? 'location' : undefined}
-                      onFocus={() => prefetchRoute(item.to)}
-                      onTouchStart={() => prefetchRoute(item.to)}
-                      onClick={() => handleMobileNavSelect(item)}
-                      className={`nav-link-mobile cursor-pointer text-lg font-semibold sm:text-xl ${
-                        isActive ? 'is-active' : ''
-                      }`}
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
-                      <span className="nav-link-mobile-label">{item.label}</span>
-                      <span className="nav-mobile-led" aria-hidden="true" />
-                    </button>
+                    <div key={item.id} className="nav-rail-track">
+                      <div className="mx-auto w-full max-w-md px-5">
+                        <button
+                          type="button"
+                          aria-current={isActive ? 'location' : undefined}
+                          onFocus={() => prefetchRoute(item.to)}
+                          onTouchStart={() => prefetchRoute(item.to)}
+                          onClick={() => handleMobileNavSelect(item)}
+                          className={`nav-link-mobile cursor-pointer text-base font-semibold sm:text-lg ${
+                            isActive ? 'is-active' : ''
+                          }`}
+                          style={{ fontFamily: 'var(--font-heading)' }}
+                        >
+                          <span className="nav-link-mobile-label">{item.label}</span>
+                          <span className="nav-mobile-led" aria-hidden="true" />
+                        </button>
+                      </div>
+                    </div>
                   )
                 })}
+              </div>
 
-                {/* Tecla coral "Agendar Cita" integrada en la misma botonera vertical */}
+              {/* Exclusión estricta: "Agendar Cita" fijo sin rieles laterales extendidos */}
+              <div className="mobile-cta-wrap mx-auto w-full max-w-md">
                 <button
                   type="button"
                   onClick={() =>
@@ -669,12 +829,17 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
                       { durationMs: 260, overlapAt: 0.3 },
                     )
                   }
-                  className="nav-link-mobile nav-mobile-cta mt-1 cursor-pointer text-lg font-bold sm:text-xl"
+                  className="nav-link-mobile nav-mobile-cta cursor-pointer text-base font-bold sm:text-lg"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   <span className="nav-link-mobile-label">Agendar Cita</span>
                   <span className="nav-mobile-led nav-mobile-led-cta" aria-hidden="true" />
                 </button>
+              </div>
+
+              {/* Pie del menú móvil en flujo natural con equidistancia simétrica */}
+              <div className="mobile-menu-footer">
+                <DevAccentToggle inline />
               </div>
             </div>
           </div>

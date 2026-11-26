@@ -18,13 +18,13 @@ html[data-theme="standard"] {
   --bg-input: rgba(2, 6, 23, 0.5);
   --bg-section-alt: transparent;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
+  --text-primary: #F5EFE4;
+  --text-secondary: rgba(245, 239, 228, 0.82);
+  --text-muted: rgba(245, 239, 228, 0.64);
   --text-inverse: #0f172a;
-  --brand-text-color: #ffffff;
+  --brand-text-color: #F5EFE4;
   --brand-wordmark-ink: #F5EFE4;
-  --brand-subtitle-ink: #C8B99E;
+  --brand-subtitle-ink: #F5EFE4;
 
   --accent: #FF4D4D; /* Rojo Coral */
   --accent-hover: #E63E3E;
@@ -32,9 +32,9 @@ html[data-theme="standard"] {
   --accent-soft: rgba(255, 77, 77, 0.1);
   --accent-text: #FF6B6B;
   --accent-text-strong: #FF4D4D;
-  --btn-accent-bg: #C73326; /* Contraste 5.38:1 con #FFFFFF (WCAG AA) */
+  --btn-accent-bg: #C73326; /* Contraste 4.74:1 con #F5EFE4 (WCAG AA) */
   --btn-accent-hover: #D63B2D;
-  --btn-accent-text: #FFFFFF;
+  --btn-accent-text: #F5EFE4;
 
   --border-primary: rgba(30, 41, 59, 0.5);
   --border-card: #1e293b;
@@ -94,12 +94,12 @@ html[data-theme="standard"] {
   --callout-shadow: 0 14px 36px -12px rgba(255, 77, 77, 0.16), 0 4px 20px -4px rgba(0, 0, 0, 0.28);
   --callout-shadow-hover: 0 20px 44px -10px rgba(255, 77, 77, 0.32), 0 0 20px rgba(255, 77, 77, 0.18), 0 6px 22px -4px rgba(0, 0, 0, 0.38);
 
-  --faq-tab-active-text: #ffffff;
+  --faq-tab-active-text: #F5EFE4;
   --faq-featured-bg: linear-gradient(145deg, rgba(255, 77, 77, 0.14) 0%, rgba(15, 23, 42, 0.85) 100%);
 
   /* Áreas de Atención — Vertical Tabs en 2 Columnas */
-  --editorial-ivory: #F7F3EB;
-  --editorial-ivory-muted: rgba(247, 243, 235, 0.78);
+  --editorial-ivory: #F5EFE4;
+  --editorial-ivory-muted: rgba(245, 239, 228, 0.82);
   --editorial-coral: #EE4B35;
   --area-card-bg: rgba(15, 23, 42, 0.42);
   --area-card-bg-hover: rgba(15, 23, 42, 0.52);
@@ -113,14 +113,14 @@ html[data-theme="standard"] {
   --area-subcard-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(148, 163, 184, 0.08);
   --area-subcard-shadow-hover: 0 16px 34px -14px rgba(0, 0, 0, 0.62), 0 6px 20px -8px rgba(238, 75, 53, 0.26), inset 0 1px 0 rgba(148, 163, 184, 0.14);
   --area-subcard-subtitle: #FF7866;
-  --area-subcard-cta: rgba(247, 243, 235, 0.5);
+  --area-subcard-cta: rgba(245, 239, 228, 0.64);
   --area-card-shadow-hover: 0 18px 40px -18px rgba(0, 0, 0, 0.60);
   --area-tab-bg: rgba(15, 23, 42, 0.45);
   --area-tab-bg-hover: rgba(20, 32, 56, 0.65);
   --area-tab-border: #1e293b;
   --area-tab-shadow: 0 2px 10px -6px rgba(0, 0, 0, 0.35);
   --area-tab-shadow-hover: 0 10px 24px -12px rgba(0, 0, 0, 0.50), 0 0 14px -6px rgba(238, 75, 53, 0.22);
-  --area-tab-text-inactive: rgba(247, 243, 235, 0.70);
+  --area-tab-text-inactive: rgba(245, 239, 228, 0.74);
   --area-tab-active-bg: color-mix(in srgb, #EE4B35 15%, rgba(15, 23, 42, 0.78));
   --area-tab-active-border: #EE4B35;
   --area-tab-active-shadow: 0 10px 28px -10px rgba(238, 75, 53, 0.36), 0 4px 12px -6px rgba(0, 0, 0, 0.45);
@@ -133,21 +133,21 @@ html[data-theme="standard"] {
   --reviews-card-border-hover: rgba(238, 75, 53, 0.45);
   --reviews-card-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.45);
   --reviews-card-shadow-hover: 0 18px 46px -14px rgba(0, 0, 0, 0.55), 0 0 18px -6px rgba(238, 75, 53, 0.18);
-  --reviews-ink: #F7F3EB;
-  --reviews-ink-body: rgba(247, 243, 235, 0.85);
-  --reviews-ink-muted: rgba(247, 243, 235, 0.68);
+  --reviews-ink: #F5EFE4;
+  --reviews-ink-body: rgba(245, 239, 228, 0.85);
+  --reviews-ink-muted: rgba(245, 239, 228, 0.68);
   --reviews-accent: #FF6B5B;
   --reviews-accent-hover: #FF8275;
-  --reviews-dot-inactive: rgba(247, 243, 235, 0.26);
-  --reviews-nav-border: rgba(247, 243, 235, 0.22);
+  --reviews-dot-inactive: rgba(245, 239, 228, 0.26);
+  --reviews-nav-border: rgba(245, 239, 228, 0.22);
   --reviews-nav-bg: rgba(255, 255, 255, 0.03);
   --reviews-nav-bg-hover: rgba(238, 75, 53, 0.14);
 
   /* Barra de Respaldo Clínico (Trust Bar) */
-  --trust-bar-border: rgba(247, 243, 235, 0.10);
-  --trust-bar-label: rgba(247, 243, 235, 0.65);
-  --trust-bar-item: rgba(247, 243, 235, 0.72);
-  --trust-bar-item-hover: #F7F3EB;
+  --trust-bar-border: rgba(245, 239, 228, 0.10);
+  --trust-bar-label: rgba(245, 239, 228, 0.68);
+  --trust-bar-item: rgba(245, 239, 228, 0.76);
+  --trust-bar-item-hover: #F5EFE4;
   --trust-bar-underline: rgba(238, 75, 53, 0.70);
   --trust-bar-dot: rgba(238, 75, 53, 0.60);
 
@@ -179,7 +179,7 @@ html[data-theme="standard"] {
   --nav-key-active-bg: linear-gradient(180deg, rgba(238, 75, 53, 0.22) 0%, rgba(214, 65, 51, 0.14) 76%, rgba(140, 34, 28, 0.24) 100%);
   --nav-key-active-border: rgba(238, 75, 53, 0.9);
   --nav-key-active-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 168, 158, 0.22), 0 0 10px rgba(238, 75, 53, 0.35);
-  --nav-key-active-text: #FFF7F5;
+  --nav-key-active-text: #F5EFE4;
   --nav-key-cta-bg: linear-gradient(180deg, #D4382A 0%, #C22F23 74%, #A82419 100%);
   --nav-key-cta-hover-bg: linear-gradient(180deg, #DC4032 0%, #CB3427 74%, #B2281C 100%);
   --nav-key-cta-border: rgba(255, 178, 168, 0.45);
@@ -197,6 +197,31 @@ html[data-theme="standard"] {
   --nav-wave-sheen: rgba(255, 138, 124, 0.10);
   --nav-wave-core: rgba(255, 206, 198, 0.22);
   --nav-wave-bar-peak: #FFB2A8;
+
+  /* Placas mecánicas 4+4 tipo cortina (homogéneas y seamless en #131a29) */
+  --nav-armor-chassis: radial-gradient(ellipse 92% 82% at 50% 50%, #090203 0%, #150507 52%, #24090C 88%, #2B0B0E 100%);
+  --nav-armor-chassis-cta: radial-gradient(ellipse 92% 82% at 50% 50%, #1E0404 0%, #3E0A08 55%, #6B140E 100%);
+  --nav-armor-cavity-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.72), inset 0 -1px 4px rgba(43, 11, 14, 0.45);
+  --nav-armor-plate-top-bg: repeating-linear-gradient(to bottom, #131a29 0%, #131a29 calc(25% - 1px), rgba(255, 255, 255, 0.05) calc(25% - 1px), rgba(0, 0, 0, 0.7) 25%);
+  --nav-armor-plate-bottom-bg: repeating-linear-gradient(to top, #131a29 0%, #131a29 calc(25% - 1px), rgba(0, 0, 0, 0.7) calc(25% - 1px), rgba(255, 255, 255, 0.04) 25%);
+  --nav-armor-plate-hover-top-bg: repeating-linear-gradient(to bottom, #192438 0%, #192438 calc(25% - 1px), rgba(255, 255, 255, 0.09) calc(25% - 1px), rgba(0, 0, 0, 0.72) 25%);
+  --nav-armor-plate-hover-bottom-bg: repeating-linear-gradient(to top, #192438 0%, #192438 calc(25% - 1px), rgba(0, 0, 0, 0.72) calc(25% - 1px), rgba(255, 255, 255, 0.08) 25%);
+  --nav-armor-plate-active-top-bg: repeating-linear-gradient(to bottom, #241825 0%, #241825 calc(25% - 1px), rgba(238, 75, 53, 0.14) calc(25% - 1px), rgba(0, 0, 0, 0.72) 25%);
+  --nav-armor-plate-active-bottom-bg: repeating-linear-gradient(to top, #241825 0%, #241825 calc(25% - 1px), rgba(0, 0, 0, 0.72) calc(25% - 1px), rgba(238, 75, 53, 0.12) 25%);
+  --nav-armor-plate-cta-top-bg: repeating-linear-gradient(to bottom, #C22F23 0%, #C22F23 calc(25% - 1px), rgba(255, 224, 218, 0.14) calc(25% - 1px), rgba(65, 10, 8, 0.65) 25%);
+  --nav-armor-plate-cta-bottom-bg: repeating-linear-gradient(to top, #C22F23 0%, #C22F23 calc(25% - 1px), rgba(65, 10, 8, 0.65) calc(25% - 1px), rgba(255, 224, 218, 0.12) 25%);
+  --nav-armor-plate-cta-hover-top-bg: repeating-linear-gradient(to bottom, #CE3629 0%, #CE3629 calc(25% - 1px), rgba(255, 236, 232, 0.22) calc(25% - 1px), rgba(65, 10, 8, 0.65) 25%);
+  --nav-armor-plate-cta-hover-bottom-bg: repeating-linear-gradient(to top, #CE3629 0%, #CE3629 calc(25% - 1px), rgba(65, 10, 8, 0.65) calc(25% - 1px), rgba(255, 236, 232, 0.18) 25%);
+  --nav-armor-inner-hover: inset 0 0 0 1px rgba(238, 75, 53, 0.35);
+
+  /* Canales de riel extendidos del drawer móvil (bleed borde a borde) */
+  --nav-mobile-track-bg: rgba(45, 12, 16, 0.55);
+  --nav-mobile-track-guide: rgba(238, 75, 53, 0.25);
+  --nav-mobile-track-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(238, 75, 53, 0.15);
+
+  /* Etiqueta del selector de tema */
+  --theme-label-color: #A0ABC0;
+  --theme-label-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
 
@@ -388,6 +413,31 @@ html[data-theme="light"] {
   --nav-wave-sheen: rgba(255, 107, 91, 0.09);
   --nav-wave-core: rgba(255, 107, 91, 0.20);
   --nav-wave-bar-peak: #FFA399;
+
+  /* Placas mecánicas 4+4 tipo cortina (variante clara) */
+  --nav-armor-chassis: radial-gradient(ellipse 92% 82% at 50% 50%, #D7CBB8 0%, #E2D8C8 58%, #E8DFD0 100%);
+  --nav-armor-chassis-cta: radial-gradient(ellipse 92% 82% at 50% 50%, #240504 0%, #4A0D0A 55%, #751812 100%);
+  --nav-armor-cavity-shadow: inset 0 2px 5px rgba(19, 35, 58, 0.14);
+  --nav-armor-plate-top-bg: repeating-linear-gradient(to bottom, #FAF6F0 0%, #FAF6F0 calc(25% - 1px), rgba(255, 255, 255, 0.8) calc(25% - 1px), rgba(19, 35, 58, 0.10) 25%);
+  --nav-armor-plate-bottom-bg: repeating-linear-gradient(to top, #FAF6F0 0%, #FAF6F0 calc(25% - 1px), rgba(19, 35, 58, 0.10) calc(25% - 1px), rgba(255, 255, 255, 0.75) 25%);
+  --nav-armor-plate-hover-top-bg: repeating-linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF calc(25% - 1px), rgba(255, 255, 255, 0.9) calc(25% - 1px), rgba(19, 35, 58, 0.12) 25%);
+  --nav-armor-plate-hover-bottom-bg: repeating-linear-gradient(to top, #FFFFFF 0%, #FFFFFF calc(25% - 1px), rgba(19, 35, 58, 0.12) calc(25% - 1px), rgba(255, 255, 255, 0.85) 25%);
+  --nav-armor-plate-active-top-bg: repeating-linear-gradient(to bottom, #FDECE8 0%, #FDECE8 calc(25% - 1px), rgba(255, 255, 255, 0.65) calc(25% - 1px), rgba(199, 51, 38, 0.14) 25%);
+  --nav-armor-plate-active-bottom-bg: repeating-linear-gradient(to top, #FDECE8 0%, #FDECE8 calc(25% - 1px), rgba(199, 51, 38, 0.14) calc(25% - 1px), rgba(255, 255, 255, 0.6) 25%);
+  --nav-armor-plate-cta-top-bg: repeating-linear-gradient(to bottom, #C22F23 0%, #C22F23 calc(25% - 1px), rgba(255, 224, 218, 0.14) calc(25% - 1px), rgba(65, 10, 8, 0.65) 25%);
+  --nav-armor-plate-cta-bottom-bg: repeating-linear-gradient(to top, #C22F23 0%, #C22F23 calc(25% - 1px), rgba(65, 10, 8, 0.65) calc(25% - 1px), rgba(255, 224, 218, 0.12) 25%);
+  --nav-armor-plate-cta-hover-top-bg: repeating-linear-gradient(to bottom, #CE3629 0%, #CE3629 calc(25% - 1px), rgba(255, 236, 232, 0.22) calc(25% - 1px), rgba(65, 10, 8, 0.65) 25%);
+  --nav-armor-plate-cta-hover-bottom-bg: repeating-linear-gradient(to top, #CE3629 0%, #CE3629 calc(25% - 1px), rgba(65, 10, 8, 0.65) calc(25% - 1px), rgba(255, 236, 232, 0.18) 25%);
+  --nav-armor-inner-hover: inset 0 0 0 1px rgba(199, 51, 38, 0.32);
+
+  /* Canales de riel extendidos del drawer móvil (variante clara) */
+  --nav-mobile-track-bg: rgba(199, 51, 38, 0.08);
+  --nav-mobile-track-guide: rgba(199, 51, 38, 0.22);
+  --nav-mobile-track-shadow: inset 0 2px 5px rgba(19, 35, 58, 0.10), 0 0 8px rgba(199, 51, 38, 0.08);
+
+  /* Etiqueta del selector de tema (claro) */
+  --theme-label-color: #4E5D73;
+  --theme-label-shadow: 0 1px 4px rgba(251, 248, 243, 0.9);
 }
 
 
@@ -438,6 +488,10 @@ html[data-theme="light"] {
 
 /* Branding Initials utility */
 .brand-initial {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
   color: var(--accent);
   font-weight: 900;
 }
