@@ -614,7 +614,7 @@ export function Navbar({ onLogoClick, onAgendarClick }: Props) {
               <span className="brand-monogram-rest">idalgo</span>
             </span>
             <span className="brand-monogram-divider shrink-0" aria-hidden="true" />
-            <span className="brand-wordmark-subtitle flex flex-col whitespace-nowrap text-[13.5px] sm:text-[14.5px] md:text-[16.5px] lg:text-[18px]">
+            <span className="brand-wordmark-subtitle flex flex-col whitespace-nowrap text-[11px] sm:text-[11.5px] md:text-[12.5px] lg:text-[13px]">
               <span>
                 <span className="brand-wordmark-sub-initial">P</span>sicólogo &amp;
               </span>
